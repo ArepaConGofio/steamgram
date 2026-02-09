@@ -2,7 +2,7 @@ name: Documentation
 on:
   push:
     branches:
-      - docs
+      - documentation
 permissions:
   contents: read
   pages: write
