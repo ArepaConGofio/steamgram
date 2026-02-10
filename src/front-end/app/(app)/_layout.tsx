@@ -1,6 +1,7 @@
 import { AuthContext } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
-import { Redirect, Slot } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
+import { Redirect, Tabs } from "expo-router";
 import { useContext } from "react";
 
 export default function TabLayout() {
@@ -12,7 +13,10 @@ export default function TabLayout() {
 
   return (
     <ThemeProvider>
-      <Slot />
+      <Tabs>
+        <Tabs.Screen name="index" options={{ title: "Home", tabBarIcon: () => <FontAwesome size={28} name="home"/> }}/>
+        <Tabs.Screen name="explore" options={{ title: "Explore", tabBarIcon: () => <FontAwesome size={28} name="search"/> }}/>
+      </Tabs>
     </ThemeProvider>
   );
 }
