@@ -1,5 +1,8 @@
 import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Register() {
-    return <Text>Login works</Text>
+export default function Login() {
+    return <SafeAreaView>
+        <Text>Login works!</Text>
+    </SafeAreaView>
 }
