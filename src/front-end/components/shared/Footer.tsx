@@ -1,5 +1,6 @@
 import { usePathname } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
+import Navbar from "./Navbar";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -11,6 +12,8 @@ export default function Footer() {
       </View>
     );
   }
+
+  return <Navbar />;
 }
 
 const styles = StyleSheet.create({
