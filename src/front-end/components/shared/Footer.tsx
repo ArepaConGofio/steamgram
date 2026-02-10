@@ -1,31 +1,19 @@
-import { usePathname } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
-import Navbar from "./Navbar";
+import { Linking, StyleSheet, Text } from "react-native";
 
 export default function Footer() {
-  const pathname = usePathname();
-
-  if (pathname.includes("login") || pathname.includes("register")) {
-    return (
-      <View style={styles.footer}>
-        <Text style={styles.copyrightLabel}>ArepaConGofio © 2026</Text>
-      </View>
-    );
-  }
-
-  return <Navbar />;
+  return (
+    <Text style={styles.copyrightLabel}>
+      <Text style={styles.businessTitle} onPress={() => Linking.openURL("https://github.com/strSalazar-JesusLugo2002")}>ArepaConGofio</Text> © 2026
+    </Text>
+  );
 }
 
 const styles = StyleSheet.create({
-  footer: {
-    position: "fixed",
-    bottom: 0,
-    flex: 1,
-    width: "100%",
-    paddingVertical: 10,
-    alignItems: "center",
-  },
   copyrightLabel: {
     letterSpacing: 1,
+    textAlign: "center"
   },
+  businessTitle: {
+    textDecorationLine: "underline"
+  }
 });
