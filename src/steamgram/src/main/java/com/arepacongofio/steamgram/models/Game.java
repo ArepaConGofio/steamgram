@@ -1,5 +1,6 @@
 package com.arepacongofio.steamgram.models;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Game {
@@ -9,7 +10,9 @@ public class Game {
     String banner;
     String publisher;
     Developer developer;
-    String gender;
+    String genre;
+    
+    List<Review> reviews;
 
     public Game() {
     }
@@ -18,24 +21,24 @@ public class Game {
         this.id = id;
     }
 
-    public Game(String title, String description, String banner, String publisher, Developer developer, String gender) {
+    public Game(String title, String description, String banner, String publisher, Developer developer, String genre) {
         this.title = title;
         this.description = description;
         this.banner = banner;
         this.publisher = publisher;
         this.developer = developer;
-        this.gender = gender;
+        this.genre = genre;
     }
 
     public Game(Long id, String title, String description, String banner, String publisher, Developer developer,
-            String gender) {
+            String genre) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.banner = banner;
         this.publisher = publisher;
         this.developer = developer;
-        this.gender = gender;
+        this.genre = genre;
     }
 
     public Long getId() {
@@ -86,12 +89,12 @@ public class Game {
         this.developer = developer;
     }
 
-    public String getGender() {
-        return this.gender;
+    public String getGenre() {
+        return this.genre;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     @Override
@@ -119,7 +122,7 @@ public class Game {
                 ", banner='" + getBanner() + "'" +
                 ", publisher='" + getPublisher() + "'" +
                 ", developer='" + getDeveloper() + "'" +
-                ", gender='" + getGender() + "'" +
+                ", genre='" + getGenre() + "'" +
                 "}";
     }
 

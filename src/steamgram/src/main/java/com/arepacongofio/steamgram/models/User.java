@@ -1,35 +1,95 @@
 package com.arepacongofio.steamgram.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  * Class User
  */
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+
+    @Column(name = "name")
     String name;
+
+    @Column(name = "user")
     String user;
+
+    @Column(name = "password")
     String password;
+
+    @Column(name = "games")
+    @OneToMany(mappedBy = "User")
     List<Game> games;
+
+    @Column(name = "posts")
+    @OneToMany(mappedBy = "User")
     List<Post> posts;
+
+    @Column(name = "follows")
+    @OneToMany(mappedBy = "User")
     List<User> follows;
+
+    @Column(name = "followers")
+    @OneToMany(mappedBy = "User")
     List<User> followers;
 
+    @OneToMany(mappedBy = "User")
+    List<Review> reviews;
+
+    /**
+     * Empty constructor
+     */
     public User() {
     }
 
+    /**
+     * Constructor with only id for search
+     * @param id for user
+     */
     public User(Long id) {
         this.id = id;
     }
 
-    public User(String name, String user) {
+    /**
+     * Basic User constructor
+     * @param name from user
+     * @param user from user
+     * @param password from user
+     */
+    public User(String name, String user, String password) {
         this.name = name;
         this.user = user;
+        this.password = password;
+        this.followers = new ArrayList<>();
+        this.follows = new ArrayList<>();
+        this.games = new ArrayList<>();
+        this.posts = new ArrayList<>();
     }
 
+    /**
+     * Constructor with out id
+     * @param name from user
+     * @param user from user
+     * @param games from user
+     * @param posts from user
+     * @param follows from user
+     * @param followers from user
+     */
     public User(String name, String user, List<Game> games, List<Post> posts, List<User> follows,
             List<User> followers) {
         this.name = name;
@@ -40,6 +100,17 @@ public class User {
         this.followers = followers;
     }
 
+    /**
+     * complete constructor
+     * @param id from user
+     * @param name from user
+     * @param user from user
+     * @param password from user
+     * @param games from user
+     * @param posts from user
+     * @param follows from user
+     * @param followers from user
+     */
     public User(Long id, String name, String user, String password, List<Game> games, List<Post> posts,
             List<User> follows, List<User> followers) {
         this.id = id;
