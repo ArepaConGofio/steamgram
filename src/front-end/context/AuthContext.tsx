@@ -7,18 +7,14 @@ type AuthContextType = {
   logout: () => Promise<void>;
 };
 
-const AuthContext = createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   token: null,
   login: async () => ({}),
   register: async () => ({}),
   logout: async () => {},
 });
 
-export default function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState(null);
 
   const login = useCallback(async (username: string, password: string) => {

@@ -1,6 +1,6 @@
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
-import AuthProvider from "@/context/AuthContext";
+import { AuthProvider } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
 import { Slot } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
