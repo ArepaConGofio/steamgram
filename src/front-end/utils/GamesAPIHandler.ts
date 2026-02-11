@@ -1,7 +1,8 @@
 import { Game } from "@/models/Game";
 import { APIHandler } from "./APIHandler";
+import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
-export class GamesAPIHandler extends APIHandler {
+export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
     async getAllGames(): Promise<Game[]> {
         throw new Error("Not implemented")
     }

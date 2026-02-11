@@ -10,11 +10,17 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
     throw new Error("Not implemented");
   }
 
-  async searchUserByUsername(username: string, limit?: number): Promise<User[]> {
+  async searchUserByUsername(
+    username: string,
+    limit?: number
+  ): Promise<User[]> {
     throw new Error("Not implemented");
   }
 
-  async searchUserByNickname(nickname: string, limit?: number): Promise<User[]> {
+  async searchUserByNickname(
+    nickname: string,
+    limit?: number
+  ): Promise<User[]> {
     throw new Error("Not implemented");
   }
 

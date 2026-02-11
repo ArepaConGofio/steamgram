@@ -1,8 +1,9 @@
 import { Comment } from "@/models/Comment";
 import { LikePostResponse, Post, PostId } from "@/models/Post";
 import { APIHandler } from "./APIHandler";
+import { IPostsAPIHandler } from "./interfaces/IPostsAPIHandler";
 
-export class PostsAPIHandler extends APIHandler {
+export class PostsAPIHandler extends APIHandler implements IPostsAPIHandler {
   async getAllPosts(): Promise<Post[]> {
     throw new Error("Not implemented");
   }
