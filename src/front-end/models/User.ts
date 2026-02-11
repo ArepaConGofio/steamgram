@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
     id: number;
     username: string;
     email: string;
@@ -7,7 +7,7 @@ export interface User {
     nickname?: string;
 }
 
-export interface UserDetails extends User {
+export type UserDetails = User & {
     bio: string;
     gamesCount: number;
     followersCount: number;

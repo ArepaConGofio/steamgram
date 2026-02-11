@@ -1,6 +1,6 @@
 export type PostId = number;
 
-export interface Post {
+export type Post = {
     id: PostId;
     userId: number;
     gameId?: number;

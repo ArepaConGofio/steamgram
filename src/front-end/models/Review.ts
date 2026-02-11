@@ -1,4 +1,4 @@
-export interface Review {
+export type Review = {
     id: number;
     gameId: number;
     userId: number;

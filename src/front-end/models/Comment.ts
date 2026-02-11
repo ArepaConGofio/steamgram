@@ -1,6 +1,6 @@
 export type CommentId = number;
 
-export interface Comment {
+export type Comment = {
     id: CommentId;
     userId: number;
     postId: number;

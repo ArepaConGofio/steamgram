@@ -1,4 +1,4 @@
-export interface Game {
+export type Game = {
     id: string;
     steamId?: string;
     name: string;
