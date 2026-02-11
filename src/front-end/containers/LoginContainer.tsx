@@ -10,11 +10,13 @@ export default function LoginContainer() {
 
   const goToRegister = () => router.navigate("/register");
 
+  const submit = () => alert("Logged in! :D");
+
   return (
     <LoginForm
       getters={{ username, password }}
       setters={{ setUsername, setPassword }}
-      callbacks={{ goToRegister }}
+      callbacks={{ goToRegister, submit }}
     />
   );
 }

@@ -1,6 +1,5 @@
 import LabeledTextInput from "@/components/ui/TextInput";
 import { authFormStyles } from "@/styles/AuthFormStyles";
-import { globalStyles } from "@/styles/GlobalStyles";
 import { Text, TouchableOpacity, View } from "react-native";
 
 type LoginGetters = {
@@ -14,8 +13,9 @@ type LoginSetters = {
 };
 
 type LoginCallbacks = {
-    goToRegister: () => void
-}
+  goToRegister: () => void;
+  submit: () => void;
+};
 
 type Props = {
   getters: LoginGetters;
@@ -25,29 +25,29 @@ type Props = {
 
 export default function LoginForm({ getters, setters, callbacks }: Props) {
   return (
-      <View style={authFormStyles.formContainer}>
-        <Text style={globalStyles.title}>Login</Text>
-        <View style={authFormStyles.form}>
-          <LabeledTextInput
-            label="Username"
-            setter={setters.setUsername}
-            value={getters.username}
-          />
-          <LabeledTextInput
-            label="Password"
-            setter={setters.setPassword}
-            value={getters.password}
-          />
-          <TouchableOpacity style={authFormStyles.formSubmit}>
-            <Text style={authFormStyles.formSubmitLabel}>Register</Text>
-          </TouchableOpacity>
-        </View>
-        <Text
-          onPress={callbacks.goToRegister}
-          style={authFormStyles.toAltPage}
+    <View style={authFormStyles.formContainer}>
+      <Text style={authFormStyles.title}>Login</Text>
+      <View style={authFormStyles.form}>
+        <LabeledTextInput
+          label="Username"
+          setter={setters.setUsername}
+          value={getters.username}
+        />
+        <LabeledTextInput
+          label="Password"
+          setter={setters.setPassword}
+          value={getters.password}
+        />
+        <TouchableOpacity
+          style={authFormStyles.formSubmit}
+          onPress={callbacks.submit}
         >
-          No account? Sign up!
-        </Text>
+          <Text style={authFormStyles.formSubmitLabel}>Login</Text>
+        </TouchableOpacity>
       </View>
+      <Text onPress={callbacks.goToRegister} style={authFormStyles.toAltPage}>
+        No account? Sign up!
+      </Text>
+    </View>
   );
 }

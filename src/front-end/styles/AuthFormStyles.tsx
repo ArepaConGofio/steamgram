@@ -4,6 +4,11 @@ export const authFormStyles = StyleSheet.create({
   formContainer: {
     marginHorizontal: 30,
   },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+  },
   form: {
     borderWidth: 1,
     borderColor: "#D9C4BF",

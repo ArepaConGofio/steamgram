@@ -1,12 +1,13 @@
 import Footer from "@/components/shared/Footer";
+import Header from "@/components/shared/Header";
 import LoginContainer from "@/containers/LoginContainer";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Steamgram</Text>
+      <Header/>
       <LoginContainer />
       <Footer />
     </SafeAreaView>
