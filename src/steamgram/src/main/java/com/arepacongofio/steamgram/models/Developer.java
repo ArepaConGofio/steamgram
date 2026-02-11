@@ -3,16 +3,45 @@ package com.arepacongofio.steamgram.models;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 /**
  * class Developer
  */
+@Entity
+@Table(name = "developer")
 public class Developer{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
     List<User> users;
+    
+    @Column(name = "name")
     String name;
+
+    @Column(name = "password")
     String password;
+
+    @ManyToOne
+    @JoinColumn(name = "id_post")
     List <Post> posts;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_user")
     List <User> followers;
+
+    @ManyToOne
+    @JoinColumn(name = "id_game")
     List <Game> developedGames;
     
     /**
