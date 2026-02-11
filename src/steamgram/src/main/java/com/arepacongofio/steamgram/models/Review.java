@@ -1,6 +1,6 @@
 package com.arepacongofio.steamgram.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,49 +11,82 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
+/**
+ * Class review
+ */
 @Entity
 @Table(name = "review")
 public class Review {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    Integer id;
     
     @JoinColumn(name = "id_user")
-    Long idUser;
+    Integer idUser;
     
     @JoinColumn(name = "id_game")
-    Long idGame;
+    Integer idGame;
     
     @Column(name = "title")
     String title;
     
-    @Column()
+    @Column(name = "description")
     String description;
     
+    @Column(name = "rating")
     Integer rating;
     
-    Date createDate;
+    @Column(name = "create_date")
+    LocalDateTime createDate;
     
-    Date updateDate;
+    @Column(name = "update_date")
+    LocalDateTime updateDate;
 
+    /**
+     * Empty constructor
+     */
     public Review() {
     }
 
-    public Review(Long id) {
+    /**
+     * Constructor with only the id for search
+     * @param id from review
+     */
+    public Review(Integer id) {
         this.id = id;
     }
 
-    public Review(Long idUser, Long idGame, String title, String description, Integer rating) {
+    /**
+     * Basic constructor 
+     * @param idUser from review
+     * @param idGame from review
+     * @param title from review
+     * @param description from review
+     * @param rating from review
+     */
+    public Review(Integer idUser, Integer idGame, String title, String description, Integer rating) {
         this.idUser = idUser;
         this.idGame = idGame;
         this.title = title;
         this.description = description;
         this.rating = rating;
+        this.createDate = LocalDateTime.now();
     }
 
-    public Review(Long id, Long idUser, Long idGame, String title, String description, Integer rating, Date createDate,
-            Date updateDate) {
+    /**
+     * Completed constructor
+     * @param id from review
+     * @param idUser from review
+     * @param idGame from review
+     * @param title from review
+     * @param description from review
+     * @param rating from review
+     * @param createDate from review
+     * @param updateDate from review
+     */
+    public Review(Integer id, Integer idUser, Integer idGame, String title, String description, Integer rating, LocalDateTime createDate,
+            LocalDateTime updateDate) {
         this.id = id;
         this.idUser = idUser;
         this.idGame = idGame;
@@ -64,27 +97,31 @@ public class Review {
         this.updateDate = updateDate;
     }
 
-    public Long getId() {
+    /**
+     * Getters and Setters
+     */
+    
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getIdUser() {
+    public Integer getIdUser() {
         return this.idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public Long getIdGame() {
+    public Integer getIdGame() {
         return this.idGame;
     }
 
-    public void setIdGame(Long idGame) {
+    public void setIdGame(Integer idGame) {
         this.idGame = idGame;
     }
 
@@ -112,19 +149,19 @@ public class Review {
         this.rating = rating;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return this.createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return this.updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 

@@ -3,24 +3,65 @@ package com.arepacongofio.steamgram.models;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "game")
 public class Game {
-    Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer id;
+
+    @Column(name = "title")
     String title;
+
+    @Column(name = "description")
     String description;
+
+    @Column(name = "banner")
     String banner;
+
+    @Column(name = "publisher")
     String publisher;
+
+    @Column(name = "developer")
     Developer developer;
+
+    @Column(name = "genre")
     String genre;
     
+    @OneToMany(mappedBy = "Game")
     List<Review> reviews;
 
+    /**
+     * Empty constructor
+     */
     public Game() {
     }
 
-    public Game(Long id) {
+    /**
+     * Constructor with only the id for search
+     * @param id from Game
+     */
+    public Game(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Basic constructor
+     * @param title from Game
+     * @param description from Game
+     * @param banner from Game
+     * @param publisher from Game
+     * @param developer from Game
+     * @param genre from Game
+     */
     public Game(String title, String description, String banner, String publisher, Developer developer, String genre) {
         this.title = title;
         this.description = description;
@@ -30,7 +71,7 @@ public class Game {
         this.genre = genre;
     }
 
-    public Game(Long id, String title, String description, String banner, String publisher, Developer developer,
+    public Game(Integer id, String title, String description, String banner, String publisher, Developer developer,
             String genre) {
         this.id = id;
         this.title = title;
@@ -41,11 +82,11 @@ public class Game {
         this.genre = genre;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

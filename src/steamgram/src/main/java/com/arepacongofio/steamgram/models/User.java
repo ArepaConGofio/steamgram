@@ -16,12 +16,12 @@ import jakarta.persistence.Table;
  * Class User
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    Integer id;
 
     @Column(name = "name")
     String name;
@@ -58,10 +58,10 @@ public class User {
     }
 
     /**
-     * Constructor with only id for search
+     * Constructor with only the id for search
      * @param id for user
      */
-    public User(Long id) {
+    public User(Integer id) {
         this.id = id;
     }
 
@@ -111,7 +111,7 @@ public class User {
      * @param follows from user
      * @param followers from user
      */
-    public User(Long id, String name, String user, String password, List<Game> games, List<Post> posts,
+    public User(Integer id, String name, String user, String password, List<Game> games, List<Post> posts,
             List<User> follows, List<User> followers) {
         this.id = id;
         this.name = name;
@@ -123,11 +123,15 @@ public class User {
         this.followers = followers;
     }
 
-    public Long getId() {
+    /**
+     * Getters and Setters
+     */
+
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

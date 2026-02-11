@@ -1,62 +1,82 @@
 package com.arepacongofio.steamgram.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Like {
-    Long id;
-    Long idUser;
-    Long idPost;
-    Date date;
+    Integer id;
+    Integer idUser;
+    Integer idPost;
+    LocalDateTime date;
 
+    /**
+     * Empty constructor
+     */
     public Like() {
     }
 
-    public Like(Long id) {
+    /**
+     * Constructor with only the id for search
+     * @param id from Like
+     */
+    public Like(Integer id) {
         this.id = id;
     }
 
-    public Like(Long idUser, Long idPost) {
+    /**
+     * Basic constructor
+     * @param idUser from Like
+     * @param idPost from Like
+     */
+    public Like(Integer idUser, Integer idPost) {
         this.idUser = idUser;
         this.idPost = idPost;
+        this.date = LocalDateTime.now();
     }
 
-    public Like(Long id, Long idUser, Long idPost, Date date) {
+    /**
+     * 
+     * @param id
+     * @param idUser
+     * @param idPost
+     * @param date
+     */
+    public Like(Integer id, Integer idUser, Integer idPost, LocalDateTime date) {
         this.id = id;
         this.idUser = idUser;
         this.idPost = idPost;
         this.date = date;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getIdUser() {
+    public Integer getIdUser() {
         return this.idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public Long getIdPost() {
+    public Integer getIdPost() {
         return this.idPost;
     }
 
-    public void setIdPost(Long idPost) {
+    public void setIdPost(Integer idPost) {
         this.idPost = idPost;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

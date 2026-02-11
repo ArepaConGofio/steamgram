@@ -1,29 +1,29 @@
 package com.arepacongofio.steamgram.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Comment {
-    Long id;
-    Long idUser;
-    Long idPost;
+    Integer id;
+    Integer idUser;
+    Integer idPost;
     String text;
-    Date date;
+    LocalDateTime date;
 
     public Comment() {
     }
 
-    public Comment(Long id) {
+    public Comment(Integer id) {
         this.id = id;
     }
 
-    public Comment(Long idUser, Long idPost, String text) {
+    public Comment(Integer idUser, Integer idPost, String text) {
         this.idUser = idUser;
         this.idPost = idPost;
         this.text = text;
     }
 
-    public Comment(Long id, Long idUser, Long idPost, String text, Date date) {
+    public Comment(Integer id, Integer idUser, Integer idPost, String text, LocalDateTime date) {
         this.id = id;
         this.idUser = idUser;
         this.idPost = idPost;
@@ -31,27 +31,27 @@ public class Comment {
         this.date = date;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getIdUser() {
+    public Integer getIdUser() {
         return this.idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public Long getIdPost() {
+    public Integer getIdPost() {
         return this.idPost;
     }
 
-    public void setIdPost(Long idPost) {
+    public void setIdPost(Integer idPost) {
         this.idPost = idPost;
     }
 
@@ -63,11 +63,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Developer{
-    Long id;
+    Integer id;
     List<User> users;
     String name;
     String password;
@@ -16,7 +16,7 @@ public class Developer{
     public Developer() {
     }
 
-    public Developer(Long id) {
+    public Developer(Integer id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class Developer{
         this.developedGames = developedGames;
     }
 
-    public Developer(Long id, List<User> users, String name, String password, List<Post> posts, List<User> followers, List<Game> developedGames) {
+    public Developer(Integer id, List<User> users, String name, String password, List<Post> posts, List<User> followers, List<Game> developedGames) {
         this.id = id;
         this.users = users;
         this.name = name;
@@ -46,11 +46,11 @@ public class Developer{
         this.developedGames = developedGames;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
