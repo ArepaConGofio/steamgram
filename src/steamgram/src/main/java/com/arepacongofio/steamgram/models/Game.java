@@ -11,6 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+/**
+ * Class Game
+*/
 @Entity
 @Table(name = "game")
 public class Game {
@@ -72,14 +75,14 @@ public class Game {
     }
 
     /**
-     * 
-     * @param id
-     * @param title
-     * @param description
-     * @param banner
-     * @param publisher
-     * @param developer
-     * @param genre
+     * Complete constructor 
+     * @param id from Game
+     * @param title from Game
+     * @param description from Game
+     * @param banner from Game
+     * @param publisher from Game
+     * @param developer from Game
+     * @param genre from Game
      */
     public Game(Integer id, String title, String description, String banner, String publisher, Developer developer,
             String genre) {

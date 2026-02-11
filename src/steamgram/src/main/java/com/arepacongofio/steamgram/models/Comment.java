@@ -3,6 +3,9 @@ package com.arepacongofio.steamgram.models;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Class Comment
+ */
 public class Comment {
     Integer id;
     Integer idUser;
@@ -10,19 +13,40 @@ public class Comment {
     String text;
     LocalDateTime date;
 
+    /**
+     * Empty constructor
+     */
     public Comment() {
     }
 
+    /**
+     * Constructor with only the id for search 
+     * @param id from Comment
+     */
     public Comment(Integer id) {
         this.id = id;
     }
 
+    /**
+     * basic constructor
+     * @param idUser from Comment
+     * @param idPost from Comment
+     * @param text from Comment
+     */
     public Comment(Integer idUser, Integer idPost, String text) {
         this.idUser = idUser;
         this.idPost = idPost;
         this.text = text;
     }
 
+    /**
+     * Complete constructor
+     * @param id from Comment
+     * @param idUser from Comment
+     * @param idPost from Comment
+     * @param text from Comment
+     * @param date from Comment
+     */
     public Comment(Integer id, Integer idUser, Integer idPost, String text, LocalDateTime date) {
         this.id = id;
         this.idUser = idUser;

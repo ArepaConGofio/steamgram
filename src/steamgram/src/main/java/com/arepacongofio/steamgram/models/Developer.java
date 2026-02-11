@@ -3,6 +3,9 @@ package com.arepacongofio.steamgram.models;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * class Developer
+ */
 public class Developer{
     Integer id;
     List<User> users;
@@ -12,20 +15,41 @@ public class Developer{
     List <User> followers;
     List <Game> developedGames;
     
-
+    /**
+     * Empty constructor 
+     */
     public Developer() {
     }
 
+    /**
+     * Constructor only with the id for search
+     * @param id from Developer
+     */
     public Developer(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Basic constructor
+     * @param users from Developer
+     * @param name from Developer
+     * @param password from Developer
+     */
     public Developer(List<User> users, String name, String password) {
         this.users = users;
         this.name = name;
         this.password = password;
     }
 
+    /**
+     * Constructor with posts,followers and delveloped games
+     * @param users from Developer
+     * @param name from Developer
+     * @param password from Developer
+     * @param posts from Developer
+     * @param followers from Developer
+     * @param developedGames from Developer
+     */
     public Developer(List<User> users, String name, String password, List<Post> posts, List<User> followers,
             List<Game> developedGames) {
         this.users = users;
@@ -36,6 +60,16 @@ public class Developer{
         this.developedGames = developedGames;
     }
 
+    /**
+     * Complete constructor from Developer
+     * @param id from Developer
+     * @param users from Developer
+     * @param name from Developer
+     * @param password from Developer
+     * @param posts from Developer
+     * @param followers from Developer
+     * @param developedGames from Developer
+     */
     public Developer(Integer id, List<User> users, String name, String password, List<Post> posts, List<User> followers, List<Game> developedGames) {
         this.id = id;
         this.users = users;
