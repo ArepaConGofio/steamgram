@@ -14,8 +14,9 @@ export default function TabLayout() {
   return (
     <ThemeProvider>
       <Tabs>
-        <Tabs.Screen name="index" options={{ title: "Home", tabBarIcon: () => <FontAwesome size={28} name="home"/> }}/>
-        <Tabs.Screen name="explore" options={{ title: "Explore", tabBarIcon: () => <FontAwesome size={28} name="search"/> }}/>
+        <Tabs.Screen name="index" options={{ title: "Community", tabBarIcon: () => <FontAwesome size={24} name="gamepad"/> }}/>
+        <Tabs.Screen name="users" options={{ title: "My Profile", tabBarIcon: () => <FontAwesome size={24} name="user"/> }}/>
+        <Tabs.Screen name="explore" options={{ title: "Explore", tabBarIcon: () => <FontAwesome size={24} name="search"/> }}/>
       </Tabs>
     </ThemeProvider>
   );
