@@ -18,14 +18,19 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [token, setToken] = useState<string|null>(null);
-  const [user, setUser] = useState<User|null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const login = useCallback(async (username: string, password: string) => {
     // TODO: Implements real login
     if (username === "user" && password === "1234") {
-      setToken("token")
-      setUser({username: "user", email: "test@example.com", steamId: "76561199222266170"})
+      setToken("token");
+      setUser({
+        id: 1,
+        username: "user",
+        email: "test@example.com",
+        steamId: "76561199222266170",
+      });
       return true;
     }
     return false;
@@ -48,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       register,
       logout,
     }),
-    [login, logout, register, token, user],
+    [login, logout, register, token, user]
   );
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

@@ -1,5 +1,17 @@
 export interface User {
+    id: number;
     username: string;
     email: string;
+    avatarUrl?: string;
     steamId?: string;
+    nickname?: string;
+}
+
+export interface UserDetails extends User {
+    bio: string;
+    gamesCount: number;
+    followersCount: number;
+    followingCount: number;
+    reviewsCount: number;
+    postsCount: number;
 }
