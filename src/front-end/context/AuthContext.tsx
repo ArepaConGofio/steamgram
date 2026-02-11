@@ -15,10 +15,15 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState<string|null>(null);
 
   const login = useCallback(async (username: string, password: string) => {
-    throw new Error("Not implemented");
+    // TODO: Implements real login
+    if (username === "user" && password === "1234") {
+      setToken("token")
+      return true;
+    }
+    return false;
   }, []);
 
   const register = useCallback(async (username: string, password: string) => {

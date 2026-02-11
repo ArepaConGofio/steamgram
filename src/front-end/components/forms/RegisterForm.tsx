@@ -37,25 +37,31 @@ export default function RegisterForm({ getters, setters, callbacks }: Props) {
           setter={setters.setUsername}
           value={getters.username}
         />
-        <LabeledTextInput label="Email" setter={setters.setEmail} value={getters.email} />
+        <LabeledTextInput
+          label="Email"
+          setter={setters.setEmail}
+          value={getters.email}
+        />
         <LabeledTextInput
           label="Password"
           setter={setters.setPassword}
           value={getters.password}
+          isSecureEntry
         />
         <LabeledTextInput
           label="Repeat password"
           setter={setters.setRepeatedPassword}
           value={getters.repeatedPassword}
+          isSecureEntry
         />
-        <TouchableOpacity style={authFormStyles.formSubmit} onPress={callbacks.submit}>
+        <TouchableOpacity
+          style={authFormStyles.formSubmit}
+          onPress={callbacks.submit}
+        >
           <Text style={authFormStyles.formSubmitLabel}>Register</Text>
         </TouchableOpacity>
       </View>
-      <Text
-        onPress={callbacks.goToLogin}
-        style={authFormStyles.toAltPage}
-      >
+      <Text onPress={callbacks.goToLogin} style={authFormStyles.toAltPage}>
         Already have an account? Log in!
       </Text>
     </View>

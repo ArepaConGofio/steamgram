@@ -37,6 +37,7 @@ export default function LoginForm({ getters, setters, callbacks }: Props) {
           label="Password"
           setter={setters.setPassword}
           value={getters.password}
+          isSecureEntry
         />
         <TouchableOpacity
           style={authFormStyles.formSubmit}
