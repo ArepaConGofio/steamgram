@@ -24,10 +24,12 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     inputLabel: {
-        color: "#",
         fontWeight: "bold"
     },
     inputContainer: {
         marginVertical: 8
+    },
+    errorLabel: {
+        color: "red"
     }
 })
