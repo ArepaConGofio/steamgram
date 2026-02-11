@@ -71,6 +71,16 @@ public class Game {
         this.genre = genre;
     }
 
+    /**
+     * 
+     * @param id
+     * @param title
+     * @param description
+     * @param banner
+     * @param publisher
+     * @param developer
+     * @param genre
+     */
     public Game(Integer id, String title, String description, String banner, String publisher, Developer developer,
             String genre) {
         this.id = id;
