@@ -46,7 +46,8 @@ export default function UserProfile() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 20
   },
   title: {
     fontSize: 32,

@@ -28,6 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser({
         id: 1,
         username: "user",
+        nickname: "",
         email: "test@example.com",
         steamId: "76561199222266170",
       });
