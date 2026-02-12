@@ -1,5 +1,5 @@
 import { Slot } from "expo-router";
 
-export default function UserLayout() {
-    return <Slot/>
+export default function UsersLayout() {
+  return <Slot/>;
 }

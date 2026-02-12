@@ -1,5 +1,5 @@
+import Header from "@/components/shared/AuthTitle";
 import Footer from "@/components/shared/Footer";
-import Header from "@/components/shared/Header";
 import RegisterContainer from "@/containers/RegisterContainer";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
