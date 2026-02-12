@@ -1,0 +1,31 @@
+package com.arepacongofio.steamgram.domain;
+
+import java.util.List;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class DeveloperCreateRequest {
+
+    @NotBlank
+    String name;
+
+    @NotBlank
+    List<Integer> usersId;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Integer> getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(List<Integer> usersId) {
+        this.usersId = usersId;
+    }
+
+}
