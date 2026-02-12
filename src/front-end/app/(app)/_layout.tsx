@@ -1,3 +1,4 @@
+import generateHeader from "@/components/shared/Header";
 import { AuthContext } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
 import { FontAwesome } from "@expo/vector-icons";
@@ -14,9 +15,43 @@ export default function TabLayout() {
   return (
     <ThemeProvider>
       <Tabs>
-        <Tabs.Screen name="index" options={{ title: "Community", tabBarIcon: () => <FontAwesome size={24} name="gamepad"/> }}/>
-        <Tabs.Screen name="users" options={{ title: "My Profile", tabBarIcon: () => <FontAwesome size={24} name="user"/> }}/>
-        <Tabs.Screen name="explore" options={{ title: "Explore", tabBarIcon: () => <FontAwesome size={24} name="search"/> }}/>
+        <Tabs.Screen
+          name="index"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="community/index"
+          options={{
+            title: "Community",
+            header: (props) => generateHeader("Steamgram", props),
+            tabBarIcon: () => <FontAwesome size={24} name="home" />,
+          }}
+        />
+        <Tabs.Screen
+          name="explore/index"
+          options={{
+            title: "Explore",
+            header: (props) => generateHeader("Explore", props),
+            tabBarIcon: () => <FontAwesome size={24} name="search" />,
+          }}
+        />
+        <Tabs.Screen
+          name="games/index"
+          options={{
+            title: "Games",
+            header: (props) => generateHeader("Games", props),
+            tabBarIcon: () => <FontAwesome size={24} name="gamepad" />,
+          }}
+        />
+        <Tabs.Screen
+          name="users"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
       </Tabs>
     </ThemeProvider>
   );

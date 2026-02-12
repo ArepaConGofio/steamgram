@@ -1,12 +1,33 @@
-import { StyleSheet, Text } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { Header } from "@react-navigation/elements";
+import { useRouter } from "expo-router";
 
-export default function Header() {
-  return <Text style={styles.title}>Steamgram</Text>;
+function LeftCreateButton() {
+  return (
+    <FontAwesome name="plus" size={24} style={{ paddingHorizontal: 20 }} />
+  );
 }
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    textAlign: "center",
-  },
-});
+function RightUserButton() {
+  const router = useRouter();
+  return (
+    <FontAwesome
+      name="user"
+      size={24}
+      style={{ paddingHorizontal: 20 }}
+      onPress={() => router.navigate("/(app)/users")}
+    />
+  );
+}
+
+export default function generateHeader(title: string) {
+  return (
+    <Header
+      title={title}
+      headerShadowVisible={false}
+      headerTitleAlign="center"
+      headerLeft={(props) => LeftCreateButton()}
+      headerRight={(props) => RightUserButton()}
+    />
+  );
+}

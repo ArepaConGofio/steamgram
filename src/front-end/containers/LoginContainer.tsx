@@ -18,7 +18,7 @@ export default function LoginContainer() {
       alert("Invalid credentials");
       return
     }
-    router.navigate("/(app)/users/");
+    router.navigate("/(app)/community");
   };
 
   return (
