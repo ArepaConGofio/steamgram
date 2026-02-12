@@ -6,11 +6,13 @@ public class PostCreateRequest {
 
     @NotBlank
     Integer idUser;
+    
     @NotBlank
     Integer idGame;
 
     @NotBlank
     String title;
+
     String description;
     String attachment;
 
