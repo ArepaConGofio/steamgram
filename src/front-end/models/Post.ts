@@ -13,3 +13,19 @@ export type LikePostResponse = {
     gameId: number;
     isLiked: boolean;
 }
+
+export type PostCreationRequest = {
+    userId: number;
+    gameId: number;
+    title: string;
+    description?: string;
+    attachment?: string;
+}
+
+export type PostEditionRequest = {
+    userId: number;
+    postId: number;
+    newTitle?: string;
+    newDescription?: string;
+    newAttachment?: string;
+}

@@ -1,11 +1,32 @@
-import { Game } from "@/models/Game";
+import { Game, GameCreationRequest, GameId } from "@/models/Game";
+import { Review } from "@/models/Review";
 
 export interface IGamesAPIHandler {
-  getAllGames(): Promise<Game[]>;
+  /**
+   * Get all games. The query can be limited.
+   * @param limit - Max query results.
+   */
+  getAllGames(limit?: number): Promise<Game[]>;
 
-  getGameDetails(): Promise<Game | undefined>;
+  /**
+   * Get game details.
+   * @param gameId - Game identifier.
+   */
+  getGameDetails(gameId: GameId): Promise<Game | undefined>;
 
-  searchGamesByTitle(): Promise<Game[]>;
+  /**
+   * Search games by title. The query can be limited.
+   * @param title - Game title.
+   * @param limit - Max query results.
+   */
+  searchGamesByTitle(title: string, limit?: number): Promise<Game[]>;
 
-  createGame(): Promise<Game>;
+  /**
+   * Create a new game as developer.
+   * @param gameToCreate - Game creation request including name, cover url,
+   * description and optional Steam identifier and publisher name.
+   */
+  createGame(gameToCreate: GameCreationRequest): Promise<Game>;
+
+  reviewGame(review: Review): Promise<Review>;
 }

@@ -1,16 +1,52 @@
 import { Comment } from "@/models/Comment";
-import { LikePostResponse, Post, PostId } from "@/models/Post";
+import {
+  LikePostResponse,
+  Post,
+  PostCreationRequest,
+  PostEditionRequest,
+  PostId,
+} from "@/models/Post";
+import { UserId } from "@/models/User";
 
 export interface IPostsAPIHandler {
-  getAllPosts(): Promise<Post[]>;
+  /**
+   * Get all posts. The query can be limited.
+   * @param limit - Max query results.
+   */
+  getAllPosts(limit?: number): Promise<Post[]>;
 
-  getComments(): Promise<Comment[]>;
+  /**
+   * Get all post comments. The query can be limited.
+   * @param postId - Post identifier.
+   * @param limit - Max query results.
+   */
+  getComments(postId: PostId, limit?: number): Promise<Comment[]>;
 
-  createPost(): Promise<PostId>;
+  /**
+   * Create a new post.
+   * @param postToCreate - Request to create a post, including user,
+   * attached game, title, optional description and optional attachment.
+   */
+  createPost(postToCreate: PostCreationRequest): Promise<Post>;
 
-  editPost(): Promise<Post>;
+  /**
+   * Edit an existent post.
+   * @param postToEdit - Request to edit a post. Only changes values was implemented.
+   * The available values to change are title, description and attachment.
+   */
+  editPost(postToEdit: PostEditionRequest): Promise<Post>;
 
-  deletePost(): Promise<PostId>;
+  /**
+   * Delete an existent post.
+   * @param userId - User requesting.
+   * @param postId - Post identifier.
+   */
+  deletePost(userId: UserId, postId: PostId): Promise<boolean>;
 
-  likePost(): Promise<LikePostResponse>;
+  /**
+   * Like/dislike a post as user.
+   * @param userId - User requesting.
+   * @param postId - Post to like/dislike.
+   */
+  likePost(userId: UserId, postId: PostId): Promise<LikePostResponse>;
 }

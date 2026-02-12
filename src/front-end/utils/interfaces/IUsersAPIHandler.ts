@@ -1,7 +1,7 @@
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
-import { User, UserDetails } from "@/models/User";
+import { User, UserDetails, UserId } from "@/models/User";
 
 export interface IUsersAPIHandler {
   /**
@@ -28,40 +28,40 @@ export interface IUsersAPIHandler {
    * Get user details by ID.
    * @param userId - User identifier.
    */
-  getUserDetails(userId: number): Promise<UserDetails>;
+  getUserDetails(userId: UserId): Promise<UserDetails>;
 
   /**
    * Get user followers. The query can be limited.
    * @param userId - User identifier.
    * @param limit - Max query results.
    */
-  getFollowers(userId: number, limit?: number): Promise<User[]>;
+  getFollowers(userId: UserId, limit?: number): Promise<User[]>;
 
   /**
    * Get user followings. The query can be limited.
    * @param userId - User identifier.
    * @param limit - Max query results.
    */
-  getFollowings(userId: number, limit?: number): Promise<User[]>;
+  getFollowings(userId: UserId, limit?: number): Promise<User[]>;
 
   /**
    * Get user game list. The query can be limited.
    * @param userId - User identifier.
    * @param limit - Max query results.
    */
-  getLikedGames(userId: number, limit?: number): Promise<Game[]>;
+  getLikedGames(userId: UserId, limit?: number): Promise<Game[]>;
 
   /**
    * Get user posts. The query can be limited.
    * @param userId - User identifier.
    * @param limit - Max query results.
    */
-  getPosts(userId: number, limit?: number): Promise<Post[]>;
+  getPosts(userId: UserId, limit?: number): Promise<Post[]>;
 
   /**
    * Get user reviews. The query can be limited.
    * @param userId - User identifier.
    * @param limit - Max query results.
    */
-  getReviews(userId: number, limit?: number): Promise<Review[]>;
+  getReviews(userId: UserId, limit?: number): Promise<Review[]>;
 }

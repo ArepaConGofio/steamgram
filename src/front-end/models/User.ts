@@ -1,5 +1,7 @@
+export type UserId = number;
+
 export type User = {
-    id: number;
+    id: UserId;
     username: string;
     email: string;
     avatarUrl?: string;
