@@ -29,9 +29,6 @@ public class Developer{
     @Column(name = "name")
     String name;
 
-    @Column(name = "password")
-    String password;
-
     @ManyToOne
     @JoinColumn(name = "id_post")
     List <Post> posts;
@@ -67,7 +64,6 @@ public class Developer{
     public Developer(List<User> users, String name, String password) {
         this.users = users;
         this.name = name;
-        this.password = password;
     }
 
     /**
@@ -83,7 +79,6 @@ public class Developer{
             List<Game> developedGames) {
         this.users = users;
         this.name = name;
-        this.password = password;
         this.posts = posts;
         this.followers = followers;
         this.developedGames = developedGames;
@@ -103,7 +98,6 @@ public class Developer{
         this.id = id;
         this.users = users;
         this.name = name;
-        this.password = password;
         this.posts = posts;
         this.followers = followers;
         this.developedGames = developedGames;
@@ -131,14 +125,6 @@ public class Developer{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<Post> getPosts() {
@@ -187,7 +173,6 @@ public class Developer{
             " id='" + getId() + "'" +
             ", users='" + getUsers() + "'" +
             ", name='" + getName() + "'" +
-            ", password='" + getPassword() + "'" +
             ", posts='" + getPosts() + "'" +
             ", followers='" + getFollowers() + "'" +
             ", developedGames='" + getDevelopedGames() + "'" +
