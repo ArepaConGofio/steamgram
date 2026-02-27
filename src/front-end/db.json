@@ -2,38 +2,58 @@
     "users": [
         {
             "id": 1,
-            "username": "Skipper Harwell",
-            "email": "sharwell0@surveymonkey.com",
-            "nickname": "sharwell0",
-            "avatarUrl": null
+            "username": "Cassandra Galiford",
+            "email": "cgaliford0@bigcartel.com",
+            "nickname": "cgaliford0",
+            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
+            "postsCount": 63,
+            "followingCount": 38,
+            "followersCount": 61,
+            "reviewsCount": 48
         },
         {
             "id": 2,
-            "username": "Bernadette Drackford",
-            "email": "bdrackford1@jimdo.com",
-            "nickname": "bdrackford1",
-            "avatarUrl": "http://dummyimage.com/200x200.png/dddddd/000000"
+            "username": "Marissa Gillum",
+            "email": "mgillum1@opera.com",
+            "nickname": null,
+            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff",
+            "postsCount": 83,
+            "followingCount": 32,
+            "followersCount": 98,
+            "reviewsCount": 67
         },
         {
             "id": 3,
-            "username": "Hastings Dargue",
-            "email": "hdargue2@techcrunch.com",
+            "username": "Terencio Redbourn",
+            "email": "tredbourn2@usatoday.com",
             "nickname": null,
-            "avatarUrl": "http://dummyimage.com/200x200.png/dddddd/000000"
+            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
+            "postsCount": 19,
+            "followingCount": 22,
+            "followersCount": 21,
+            "reviewsCount": 90
         },
         {
             "id": 4,
-            "username": "Annemarie MacCroary",
-            "email": "amaccroary3@psu.edu",
-            "nickname": "amaccroary3",
-            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+            "username": "Jeane Swann",
+            "email": "jswann3@cisco.com",
+            "nickname": null,
+            "avatarUrl": null,
+            "postsCount": 53,
+            "followingCount": 58,
+            "followersCount": 70,
+            "reviewsCount": 96
         },
         {
             "id": 5,
-            "username": "Lily Dudderidge",
-            "email": "ldudderidge4@boston.com",
-            "nickname": "ldudderidge4",
-            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+            "username": "Jackie Talkington",
+            "email": "jtalkington4@cisco.com",
+            "nickname": null,
+            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
+            "postsCount": 65,
+            "followingCount": 39,
+            "followersCount": 49,
+            "reviewsCount": 69
         }
     ]
 }
