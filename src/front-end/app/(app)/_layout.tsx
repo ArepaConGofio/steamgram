@@ -25,7 +25,7 @@ export default function TabLayout() {
           name="community/index"
           options={{
             title: "Community",
-            header: (props) => generateHeader("Steamgram", props),
+            header: () => generateHeader("Steamgram"),
             tabBarIcon: () => <FontAwesome size={24} name="home" />,
           }}
         />
@@ -33,7 +33,7 @@ export default function TabLayout() {
           name="explore/index"
           options={{
             title: "Explore",
-            header: (props) => generateHeader("Explore", props),
+            header: () => generateHeader("Explore"),
             tabBarIcon: () => <FontAwesome size={24} name="search" />,
           }}
         />
@@ -41,7 +41,7 @@ export default function TabLayout() {
           name="games/index"
           options={{
             title: "Games",
-            header: (props) => generateHeader("Games", props),
+            header: () => generateHeader("Games"),
             tabBarIcon: () => <FontAwesome size={24} name="gamepad" />,
           }}
         />

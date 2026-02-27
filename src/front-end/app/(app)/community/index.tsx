@@ -1,5 +1,7 @@
+import { useRouter } from "expo-router";
 import { Text } from "react-native";
 
 export default function Index() {
-    return <Text>Community works!</Text>
+    const router = useRouter();
+    return <Text onPress={() => router.push("/users/2")}>Community works!</Text>
 }

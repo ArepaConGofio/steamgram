@@ -6,6 +6,10 @@ import { APIHandler } from "./APIHandler";
 import { IUsersAPIHandler } from "./interfaces/IUsersAPIHandler";
 
 export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
+  getUserDetails(userId: UserId): Promise<UserDetails> {
+    throw new Error("Method not implemented.");
+  }
+
   getAllUsers(limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
@@ -15,9 +19,11 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   searchUserByNickname(nickname: string, limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
-  getUserDetails(userId: UserId): Promise<UserDetails> {
-    throw new Error("Method not implemented.");
+
+  static async getUserDetails(userId: UserId): Promise<UserDetails> {
+    return this.makeRequest({ endpoint: `/users/${userId}` })
   }
+
   getFollowers(userId: UserId, limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }

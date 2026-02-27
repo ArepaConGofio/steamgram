@@ -5,7 +5,6 @@ export type User = {
     username: string;
     email: string;
     avatarUrl?: string;
-    steamId?: string;
     nickname?: string;
 }
 

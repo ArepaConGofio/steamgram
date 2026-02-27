@@ -30,7 +30,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         username: "user",
         nickname: "",
         email: "test@example.com",
-        steamId: "76561199222266170",
       });
       return true;
     }
