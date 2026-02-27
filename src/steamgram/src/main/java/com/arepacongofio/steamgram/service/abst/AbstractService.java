@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.arepacongofio.steamgram.service.interfaces.IService;
+import com.arepacongofio.steamgram.service.interfaces.generic.IGenericService;
 
-public class AbstractService<T,ID> implements IService<T,ID> {
+public class AbstractService<T,ID> implements IGenericService<T,ID> {
 
     JpaRepository<T,ID> repo;
     public AbstractService(JpaRepository<T,ID> repo){
