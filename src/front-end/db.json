@@ -2,58 +2,63 @@
     "users": [
         {
             "id": 1,
-            "username": "Cassandra Galiford",
-            "email": "cgaliford0@bigcartel.com",
-            "nickname": "cgaliford0",
-            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
-            "postsCount": 63,
-            "followingCount": 38,
-            "followersCount": 61,
-            "reviewsCount": 48
+            "username": "Helaina Clubbe",
+            "email": "hclubbe0@lulu.com",
+            "nickname": "hclubbe0",
+            "avatarUrl": "http://dummyimage.com/200x200.png/dddddd/000000",
+            "postsCount": 0,
+            "followingCount": 80,
+            "followersCount": 58,
+            "reviewsCount": 87,
+            "gamesCount": 4
         },
         {
             "id": 2,
-            "username": "Marissa Gillum",
-            "email": "mgillum1@opera.com",
-            "nickname": null,
-            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff",
-            "postsCount": 83,
-            "followingCount": 32,
-            "followersCount": 98,
-            "reviewsCount": 67
+            "username": "Johnathon Bloxsome",
+            "email": "jbloxsome1@fema.gov",
+            "nickname": "jbloxsome1",
+            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
+            "postsCount": 80,
+            "followingCount": 35,
+            "followersCount": 87,
+            "reviewsCount": 100,
+            "gamesCount": 71
         },
         {
             "id": 3,
-            "username": "Terencio Redbourn",
-            "email": "tredbourn2@usatoday.com",
+            "username": "Wallache McKea",
+            "email": "wmckea2@nba.com",
             "nickname": null,
-            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
-            "postsCount": 19,
-            "followingCount": 22,
-            "followersCount": 21,
-            "reviewsCount": 90
+            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff",
+            "postsCount": 92,
+            "followingCount": 26,
+            "followersCount": 32,
+            "reviewsCount": 56,
+            "gamesCount": 97
         },
         {
             "id": 4,
-            "username": "Jeane Swann",
-            "email": "jswann3@cisco.com",
-            "nickname": null,
-            "avatarUrl": null,
-            "postsCount": 53,
-            "followingCount": 58,
-            "followersCount": 70,
-            "reviewsCount": 96
+            "username": "Fran Brusby",
+            "email": "fbrusby3@nps.gov",
+            "nickname": "fbrusby3",
+            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
+            "postsCount": 61,
+            "followingCount": 43,
+            "followersCount": 74,
+            "reviewsCount": 44,
+            "gamesCount": 8
         },
         {
             "id": 5,
-            "username": "Jackie Talkington",
-            "email": "jtalkington4@cisco.com",
+            "username": "Titos Surridge",
+            "email": "tsurridge4@woothemes.com",
             "nickname": null,
             "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
-            "postsCount": 65,
-            "followingCount": 39,
-            "followersCount": 49,
-            "reviewsCount": 69
+            "postsCount": 32,
+            "followingCount": 76,
+            "followersCount": 9,
+            "reviewsCount": 10,
+            "gamesCount": 65
         }
     ]
 }
