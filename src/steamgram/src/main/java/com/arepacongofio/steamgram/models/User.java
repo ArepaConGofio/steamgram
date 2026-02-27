@@ -26,8 +26,8 @@ public class User {
     @Column(name = "name")
     String name;
 
-    @Column(name = "user")
-    String user;
+    @Column(name = "nickname")
+    String nickname;
 
     @Column(name = "email")
     String email;
@@ -76,7 +76,7 @@ public class User {
      */
     public User(String name, String user, String password) {
         this.name = name;
-        this.user = user;
+        this.nickname = user;
         this.password = password;
         this.followers = new ArrayList<>();
         this.follows = new ArrayList<>();
@@ -96,7 +96,7 @@ public class User {
     public User(String name, String user, List<Game> games, List<Post> posts, List<User> follows,
             List<User> followers) {
         this.name = name;
-        this.user = user;
+        this.nickname = user;
         this.games = games;
         this.posts = posts;
         this.follows = follows;
@@ -118,7 +118,7 @@ public class User {
             List<User> follows, List<User> followers) {
         this.id = id;
         this.name = name;
-        this.user = user;
+        this.nickname = user;
         this.password = password;
         this.games = games;
         this.posts = posts;
@@ -146,12 +146,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUser() {
-        return this.user;
+    public String getNickname() {
+        return this.nickname;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setNickname(String user) {
+        this.nickname = user;
     }
 
     public String getPassword() {
@@ -215,7 +215,7 @@ public class User {
         return "{" +
                 " id='" + getId() + "'" +
                 ", name='" + getName() + "'" +
-                ", user='" + getUser() + "'" +
+                ", user='" + getNickname() + "'" +
                 ", games='" + getGames() + "'" +
                 ", posts='" + getPosts() + "'" +
                 ", follows='" + getFollows() + "'" +
