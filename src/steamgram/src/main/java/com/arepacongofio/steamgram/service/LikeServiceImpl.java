@@ -1,7 +1,5 @@
 package com.arepacongofio.steamgram.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.arepacongofio.steamgram.models.Like;
