@@ -1,0 +1,39 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "Skipper Harwell",
+            "email": "sharwell0@surveymonkey.com",
+            "nickname": "sharwell0",
+            "avatarUrl": null
+        },
+        {
+            "id": 2,
+            "username": "Bernadette Drackford",
+            "email": "bdrackford1@jimdo.com",
+            "nickname": "bdrackford1",
+            "avatarUrl": "http://dummyimage.com/200x200.png/dddddd/000000"
+        },
+        {
+            "id": 3,
+            "username": "Hastings Dargue",
+            "email": "hdargue2@techcrunch.com",
+            "nickname": null,
+            "avatarUrl": "http://dummyimage.com/200x200.png/dddddd/000000"
+        },
+        {
+            "id": 4,
+            "username": "Annemarie MacCroary",
+            "email": "amaccroary3@psu.edu",
+            "nickname": "amaccroary3",
+            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+        },
+        {
+            "id": 5,
+            "username": "Lily Dudderidge",
+            "email": "ldudderidge4@boston.com",
+            "nickname": "ldudderidge4",
+            "avatarUrl": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+        }
+    ]
+}
