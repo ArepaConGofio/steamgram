@@ -59,6 +59,7 @@ export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    paddingHorizontal: 10,
   },
   innerContainer: {
     paddingHorizontal: 15,

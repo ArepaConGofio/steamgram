@@ -15,3 +15,7 @@ export type UserDetails = User & {
     reviewsCount: number;
     postsCount: number;
 }
+
+export type ContentType = "Games"|"Posts"|"Reviews";
+
+export type ProfileContentType = ContentType|"Following"|"Followers";

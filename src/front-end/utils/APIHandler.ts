@@ -1,10 +1,10 @@
 import { Constants } from "@/Constants";
 
 export enum HttpMethods {
-  GET,
-  POST,
-  PUT,
-  DELETE,
+  GET = "get",
+  POST = "post",
+  PUT = "put",
+  DELETE = "delete",
 }
 
 export type RequestData = {
@@ -26,18 +26,17 @@ export class APIHandler {
 
   static async makeRequest(requestData: RequestData) {
     const requestMethod = requestData.method ? requestData.method : HttpMethods.GET;
+    const requestUrl = Constants.API_URL + requestData.endpoint
     try {
-      const response = await fetch(Constants.API_URL + requestData.endpoint, {
+      const response = await fetch(requestUrl, {
         method: requestMethod.toString(),
         headers: this.generateHeaders(requestData.token),
         body: JSON.stringify(requestData.body),
       });
       return await response.json();
     } catch (error) {
-      console.error(
-        "ERROR: Something wrong happend while trying to fetch data",
-        error
-      );
+      const errorMsg = `ERROR: Something wrong happend while trying to fetch data in ${requestUrl}`;
+      console.error(errorMsg, error);
     }
   }
 }
