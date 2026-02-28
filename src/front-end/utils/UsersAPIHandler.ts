@@ -6,12 +6,22 @@ import { APIHandler } from "./APIHandler";
 import { IUsersAPIHandler } from "./interfaces/IUsersAPIHandler";
 
 export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
+  getUserDetailsById(userId: UserId): Promise<UserDetails> {
+    throw new Error("Method not implemented.");
+  }
+<<<<<<< HEAD
   getUserDetailsByUsername(username: string): Promise<UserDetails> {
     throw new Error("Method not implemented.");
   }
   getUserDetails(userId: UserId): Promise<UserDetails> {
     throw new Error("Method not implemented.");
   }
+=======
+  getUserDetails(userId: UserId): Promise<UserDetails> {
+    throw new Error("Method not implemented.");
+  }
+
+>>>>>>> eb2b2f552a2a2083cd8679cbc9e2484ba2795126
   getAllUsers(limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
@@ -21,25 +31,9 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   searchUserByNickname(nickname: string, limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
-  getUserDetailsById(userId: UserId): Promise<UserDetails> {
-    throw new Error("Method not implemented.");
-  }
-  
-  static async getUserDetailsByUsername(username: string): Promise<UserDetails> {
-    // TODO: Make real request to API
-    const mockUserData: UserDetails = {
-      id: 1,
-      username: username,
-      email: "test@mail.com",
-      followersCount: 10,
-      followingCount: 20,
-      gamesCount: 3,
-      postsCount: 5,
-      reviewsCount: 7
-    };
-    return new Promise(resolve => {
-      setTimeout(() => resolve(mockUserData), 1000)
-    });
+
+  static async getUserDetails(userId: UserId): Promise<UserDetails> {
+    return this.makeRequest({ endpoint: `/users/${userId}` })
   }
 
   getFollowers(userId: UserId, limit?: number): Promise<User[]> {

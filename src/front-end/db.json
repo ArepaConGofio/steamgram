@@ -1,0 +1,76 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "jdodds0",
+            "email": "clevey0@nba.com",
+            "nickname": null,
+            "avatarUrl": "http://dummyimage.com/200x200.png/dddddd/000000",
+            "postsCount": 52,
+            "followingCount": 1,
+            "followersCount": 83,
+            "reviewsCount": 98,
+            "gamesCount": 71
+        },
+        {
+            "id": 2,
+            "username": "churne1",
+            "email": "dbuckenhill1@sphinn.com",
+            "nickname": null,
+            "avatarUrl": "http://dummyimage.com/200x200.png/cc0000/ffffff",
+            "postsCount": 28,
+            "followingCount": 9,
+            "followersCount": 4,
+            "reviewsCount": 28,
+            "gamesCount": 2
+        },
+        {
+            "id": 3,
+            "username": "bhovee2",
+            "email": "jadcock2@mashable.com",
+            "nickname": null,
+            "avatarUrl": null,
+            "postsCount": 83,
+            "followingCount": 80,
+            "followersCount": 71,
+            "reviewsCount": 23,
+            "gamesCount": 76
+        },
+        {
+            "id": 4,
+            "username": "dabrahamowitcz3",
+            "email": "bgateley3@hhs.gov",
+            "nickname": null,
+            "avatarUrl": "http://dummyimage.com/200x200.png/ff4444/ffffff",
+            "postsCount": 44,
+            "followingCount": 88,
+            "followersCount": 70,
+            "reviewsCount": 46,
+            "gamesCount": 4
+        },
+        {
+            "id": 5,
+            "username": "iwoollends4",
+            "email": "jroath4@facebook.com",
+            "nickname": null,
+            "avatarUrl": null,
+            "postsCount": 73,
+            "followingCount": 4,
+            "followersCount": 93,
+            "reviewsCount": 59,
+            "gamesCount": 42
+        },
+        {
+            "id": 6,
+            "username": "user",
+            "email": "test@test.test",
+            "nickname": "TesterMan",
+            "avatarUrl": null,
+            "postsCount": 10,
+            "followingCount": 10,
+            "followersCount": 20,
+            "reviewsCount": 4,
+            "gamesCount": 10
+        }
+    ]
+}
