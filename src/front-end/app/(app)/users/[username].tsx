@@ -1,7 +1,10 @@
 import ProfileCard from "@/components/pages/users/ProfileCard";
+import LoadingIndicator from "@/components/ui/LoadingIndicator";
+import StaticErrorAlert from "@/components/ui/StaticAlert";
 import { AuthContext } from "@/context/AuthContext";
-import { User } from "@/models/User";
-import { Redirect, useLocalSearchParams } from "expo-router";
+import { UserDetails } from "@/models/User";
+import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
+import { useLocalSearchParams } from "expo-router";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,37 +12,32 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function UserProfile() {
   const { username } = useLocalSearchParams();
   const { user } = useContext(AuthContext);
-  const [targetUser, setTargetUser] = useState<User | null>(null);
+  const [data, setData] = useState<UserDetails>();
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  const getUserDetails = async () => {
+    UsersAPIHandler.getUserDetailsByUsername(username as string)
+    .then(value => setData(undefined))
+    .catch(exception => setError(exception))
+    .finally(() => setLoading(false))
+  }
 
   useEffect(() => {
-    if (username === user?.username) {
-      setTargetUser({
-        id: user.id,
-        username: user.username,
-        nickname: user.nickname,
-        email: user.email,
-      });
-    } else {
-      setTargetUser({
-        id: 1,
-        username: "Zekken2002",
-        nickname: "ElJesus",
-        email: "example@example.com",
-      });
-    }
-  }, [user, username]);
+    getUserDetails()
+  }, []);
 
-  if (targetUser == null) {
-    return <Redirect href={"/login"} />;
-  }
+  if (isLoading) return <LoadingIndicator category="Profile"/>
+
+  if (data == undefined || error != "") return <StaticErrorAlert message="No loaded"/>;
 
   return (
     <SafeAreaView style={styles.container}>
       <ProfileCard
-        username={targetUser.username}
-        nickname={targetUser.nickname}
-        avatarUrl={targetUser.avatarUrl}
-      />
+        username={data.username}
+        nickname={data.nickname}
+        avatarUrl={data.avatarUrl}
+      />  
     </SafeAreaView>
   );
 }

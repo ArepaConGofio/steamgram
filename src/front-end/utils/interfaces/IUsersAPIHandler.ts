@@ -28,7 +28,13 @@ export interface IUsersAPIHandler {
    * Get user details by ID.
    * @param userId - User identifier.
    */
-  getUserDetails(userId: UserId): Promise<UserDetails>;
+  getUserDetailsById(userId: UserId): Promise<UserDetails>;
+
+  /**
+   * Get user details by username.
+   * @param username - Username.
+   */
+  getUserDetailsByUsername(username: string): Promise<UserDetails>;
 
   /**
    * Get user followers. The query can be limited.

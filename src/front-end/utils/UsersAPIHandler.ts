@@ -6,6 +6,12 @@ import { APIHandler } from "./APIHandler";
 import { IUsersAPIHandler } from "./interfaces/IUsersAPIHandler";
 
 export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
+  getUserDetailsByUsername(username: string): Promise<UserDetails> {
+    throw new Error("Method not implemented.");
+  }
+  getUserDetails(userId: UserId): Promise<UserDetails> {
+    throw new Error("Method not implemented.");
+  }
   getAllUsers(limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
@@ -15,9 +21,27 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   searchUserByNickname(nickname: string, limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
-  getUserDetails(userId: UserId): Promise<UserDetails> {
+  getUserDetailsById(userId: UserId): Promise<UserDetails> {
     throw new Error("Method not implemented.");
   }
+  
+  static async getUserDetailsByUsername(username: string): Promise<UserDetails> {
+    // TODO: Make real request to API
+    const mockUserData: UserDetails = {
+      id: 1,
+      username: username,
+      email: "test@mail.com",
+      followersCount: 10,
+      followingCount: 20,
+      gamesCount: 3,
+      postsCount: 5,
+      reviewsCount: 7
+    };
+    return new Promise(resolve => {
+      setTimeout(() => resolve(mockUserData), 1000)
+    });
+  }
+
   getFollowers(userId: UserId, limit?: number): Promise<User[]> {
     throw new Error("Method not implemented.");
   }

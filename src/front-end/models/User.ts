@@ -10,7 +10,7 @@ export type User = {
 }
 
 export type UserDetails = User & {
-    bio: string;
+    bio?: string;
     gamesCount: number;
     followersCount: number;
     followingCount: number;
