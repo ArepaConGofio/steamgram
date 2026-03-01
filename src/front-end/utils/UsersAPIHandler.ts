@@ -23,18 +23,28 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
     throw new Error("Method not implemented.");
   }
   getFollowers(userId: UserId): Promise<User[]> {
-    throw new Error("Method not implemented.");
+    return new Promise(resolve => {
+      resolve([])
+    })
   }
   getFollowings(userId: UserId): Promise<User[]> {
-    throw new Error("Method not implemented.");
+    return new Promise(resolve => {
+      resolve([])
+    })
   }
   getLikedGames(userId: UserId): Promise<Game[]> {
-    throw new Error("Method not implemented.");
+    return new Promise(resolve => {
+      resolve([])
+    })
   }
   getPosts(userId: UserId): Promise<Post[]> {
-    throw new Error("Method not implemented.");
+    return new Promise(resolve => {
+      resolve([])
+    })
   }
   getReviews(userId: UserId): Promise<Review[]> {
-    throw new Error("Method not implemented.");
+    return new Promise(resolve => {
+      resolve([])
+    })
   }
 }

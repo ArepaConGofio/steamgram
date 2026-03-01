@@ -2,13 +2,13 @@ import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type Props = {
-    category: "Profile"|"Game"|"Post"
+    category?: "Profile"|"Game"|"Post"
 }
 
 export default function LoadingIndicator({ category }: Props) {
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.label}>Loading {category.toLowerCase()}</Text>
+            <Text style={styles.label}>Loading {category && category.toLowerCase()}</Text>
             <ActivityIndicator size="large"/>
         </SafeAreaView>
     )
