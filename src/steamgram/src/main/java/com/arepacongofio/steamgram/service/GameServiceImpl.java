@@ -3,7 +3,7 @@ package com.arepacongofio.steamgram.service;
 
 import org.springframework.stereotype.Service;
 
-import com.arepacongofio.steamgram.models.Game;
+import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.repository.GameJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 

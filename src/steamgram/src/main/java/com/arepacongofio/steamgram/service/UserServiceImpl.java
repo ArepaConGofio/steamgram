@@ -1,6 +1,6 @@
 package com.arepacongofio.steamgram.service;
 
-import com.arepacongofio.steamgram.models.User;
+import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.repository.UserJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 

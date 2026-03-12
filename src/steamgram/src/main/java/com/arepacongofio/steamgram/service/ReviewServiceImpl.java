@@ -1,6 +1,6 @@
 package com.arepacongofio.steamgram.service;
 
-import com.arepacongofio.steamgram.models.Review;
+import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.repository.ReviewJpaRepositpry;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 

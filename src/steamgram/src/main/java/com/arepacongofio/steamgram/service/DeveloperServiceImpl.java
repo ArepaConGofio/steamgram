@@ -2,8 +2,8 @@ package com.arepacongofio.steamgram.service;
 
 import org.springframework.stereotype.Service;
 
-import com.arepacongofio.steamgram.models.Developer;
-import com.arepacongofio.steamgram.models.Game;
+import com.arepacongofio.steamgram.entities.Developer;
+import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.repository.DeveloperJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
