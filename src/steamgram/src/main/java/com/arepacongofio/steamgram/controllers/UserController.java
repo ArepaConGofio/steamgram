@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
-import com.arepacongofio.steamgram.models.User;
+import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
