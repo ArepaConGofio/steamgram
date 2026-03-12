@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")
@@ -34,13 +36,13 @@ public class UserController implements IController<User, Integer> {
     }
 
     @Override
-    public ResponseEntity<User> findById(Integer id) {
+    public ResponseEntity<User> findById(@Valid @PathVariable Integer id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
     @Override
-    public ResponseEntity<User> save(User entity) {
+    public ResponseEntity<User> save(@Valid User entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
@@ -48,7 +50,7 @@ public class UserController implements IController<User, Integer> {
     @Override
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete User", description = "Delete an User by ID")
-    public ResponseEntity<Void> deleteById(Integer id) {
+    public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
