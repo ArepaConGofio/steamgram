@@ -1,5 +1,5 @@
 import { Comment } from "@/models/Comment";
-import { LikePostResponse, Post, PostCreationRequest, PostEditionRequest, PostId } from "@/models/Post";
+import { LikePostResponse, Post, PostCreationRequest, PostCreationResponse, PostEditionRequest, PostEditionResponse, PostId } from "@/models/Post";
 import { UserId } from "@/models/User";
 import { APIHandler } from "./APIHandler";
 import { IPostsAPIHandler } from "./interfaces/IPostsAPIHandler";
@@ -11,10 +11,10 @@ export class PostsAPIHandler extends APIHandler implements IPostsAPIHandler {
   getComments(postId: PostId, limit?: number): Promise<Comment[]> {
     throw new Error("Method not implemented.");
   }
-  createPost(postToCreate: PostCreationRequest): Promise<Post> {
+  createPost(postToCreate: PostCreationRequest): Promise<PostCreationResponse> {
     throw new Error("Method not implemented.");
   }
-  editPost(postToEdit: PostEditionRequest): Promise<Post> {
+  editPost(postToEdit: PostEditionRequest): Promise<PostEditionResponse> {
     throw new Error("Method not implemented.");
   }
   deletePost(userId: UserId, postId: PostId): Promise<boolean> {

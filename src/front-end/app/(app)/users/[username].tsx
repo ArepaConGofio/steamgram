@@ -26,7 +26,7 @@ export default function UserProfile() {
 
   if (isLoading) return <LoadingIndicator category="Profile" />
 
-  if (data == undefined || error != "") return <StaticErrorAlert message={error} />;
+  if (data === undefined || error !== "") return <StaticErrorAlert message={error} />;
 
   return <ProfileContainer user={data}/>
 }

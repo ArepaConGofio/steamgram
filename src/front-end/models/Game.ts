@@ -18,3 +18,9 @@ export type GameCreationRequest = {
   coverUrl: string;
   description: string;
 }
+
+export type GameCreationResponse = {
+  id: GameId;
+  name: string;
+  developerId: number;
+}
