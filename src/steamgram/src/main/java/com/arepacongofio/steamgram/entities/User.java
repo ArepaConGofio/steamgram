@@ -26,10 +26,10 @@ public class User {
     @Column(name = "name")
     String name;
 
-    @Column(name = "nickname")
+    @Column(name = "nickname",unique = true)
     String nickname;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     String email;
 
     @Column(name = "password")
