@@ -6,10 +6,10 @@ import com.arepacongofio.steamgram.service.abst.AbstractService;
 
 public class UserServiceImpl extends AbstractService<User, Integer >{
     
-    UserJpaRepository repository;
+    UserJpaRepository userRepository;
 
-    public UserServiceImpl(UserJpaRepository repository) {
-        super(repository);
+    public UserServiceImpl(UserJpaRepository userRepository) {
+        super(userRepository);
     }
     
 }

@@ -10,10 +10,10 @@ import com.arepacongofio.steamgram.service.abst.AbstractService;
 @Service
 public class PostServiceImpl extends AbstractService<Post,Integer> {
 
-    PostJpaRepository repository;
+    PostJpaRepository postRepository;
     
-    public PostServiceImpl(PostJpaRepository repository) {
-        super(repository);
+    public PostServiceImpl(PostJpaRepository postRepository) {
+        super(postRepository);
     }
     
 }

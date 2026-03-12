@@ -10,9 +10,9 @@ import com.arepacongofio.steamgram.service.abst.AbstractService;
 @Service
 public class GameServiceImpl extends AbstractService<Game,Integer> {
 
-    GameJpaRepository repository;
+    GameJpaRepository gameRepository;
 
-    public GameServiceImpl(GameJpaRepository repository){
-        super(repository);
+    public GameServiceImpl(GameJpaRepository gameRepository){
+        super(gameRepository);
     } 
 }

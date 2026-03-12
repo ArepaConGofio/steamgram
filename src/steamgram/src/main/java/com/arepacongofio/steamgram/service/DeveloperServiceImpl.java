@@ -11,10 +11,10 @@ import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 @Service
 public class DeveloperServiceImpl extends AbstractService<Developer,Integer> implements IDeveloperService {
 
-    DeveloperJpaRepository repository;
+    DeveloperJpaRepository developerRepository;
 
-    public DeveloperServiceImpl(DeveloperJpaRepository repository) {
-        super(repository);
+    public DeveloperServiceImpl(DeveloperJpaRepository developerRepository) {
+        super(developerRepository);
     }
 
     @Override

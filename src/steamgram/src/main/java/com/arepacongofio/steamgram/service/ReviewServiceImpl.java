@@ -6,10 +6,10 @@ import com.arepacongofio.steamgram.service.abst.AbstractService;
 
 public class ReviewServiceImpl extends AbstractService<Review,Integer> {
 
-    ReviewJpaRepositpry repository;
+    ReviewJpaRepositpry reviewRepository;
 
-    public ReviewServiceImpl(ReviewJpaRepositpry repository) {
-        super(repository);
+    public ReviewServiceImpl(ReviewJpaRepositpry reviewRepository) {
+        super(reviewRepository);
     }
     
 }

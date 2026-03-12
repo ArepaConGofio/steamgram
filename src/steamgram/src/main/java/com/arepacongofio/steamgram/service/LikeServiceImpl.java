@@ -9,10 +9,10 @@ import com.arepacongofio.steamgram.service.abst.AbstractService;
 @Service
 public class LikeServiceImpl extends AbstractService<Like,Integer>{
 
-    LikeJpaRepository repository;
+    LikeJpaRepository likeRepository;
 
-    public LikeServiceImpl(LikeJpaRepository repository){
-        super(repository);
+    public LikeServiceImpl(LikeJpaRepository likeRepository){
+        super(likeRepository);
     }
     
 }

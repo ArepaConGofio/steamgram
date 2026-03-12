@@ -9,9 +9,9 @@ import com.arepacongofio.steamgram.service.abst.AbstractService;
 @Service                                                                
 public class CommentServiceImpl extends AbstractService<Comment,Integer>{
 
-    CommentJpaRepository repository;
+    CommentJpaRepository commentRepository;
     
-    public CommentServiceImpl(CommentJpaRepository repository){
-        super(repository);
+    public CommentServiceImpl(CommentJpaRepository commentRepository){
+        super(commentRepository);
     }    
 }
