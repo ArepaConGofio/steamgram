@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 
 /**
  * Class User
@@ -30,6 +31,7 @@ public class User {
     String nickname;
 
     @Column(name = "email", unique = true)
+    @Email
     String email;
 
     @Column(name = "password")

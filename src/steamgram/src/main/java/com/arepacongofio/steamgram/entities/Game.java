@@ -27,7 +27,7 @@ public class Game {
     @Column(name = "description")
     String description;
 
-    @Column(name = "banner")
+    @Column(name = "banner", nullable = true)
     String banner;
 
     @Column(name = "publisher")
