@@ -12,4 +12,8 @@ export type Comment = {
 
 export type CommentCreationRequest = Omit<Comment, "id">
 
+export type CommentCreationResponse = Comment;
+
 export type CommentEditionRequest = Comment;
+
+export type CommentEditionResponse = Comment;

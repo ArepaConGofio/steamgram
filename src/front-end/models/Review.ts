@@ -7,6 +7,11 @@ export type Review = {
     id: ReviewId;
     gameId: GameId;
     userId: UserId;
-    content: string;
+    title: string;
+    description?: string;
     rating: number;
 }
+
+export type ReviewCreationRequest = Omit<Review, "id">
+
+export type ReviewCreationResponse = Review;

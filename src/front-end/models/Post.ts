@@ -22,6 +22,8 @@ export type PostCreationRequest = {
     attachment?: string;
 }
 
+export type PostCreationResponse = Post;
+
 export type PostEditionRequest = {
     userId: number;
     postId: number;
@@ -29,3 +31,5 @@ export type PostEditionRequest = {
     newDescription?: string;
     newAttachment?: string;
 }
+
+export type PostEditionResponse = Post;
