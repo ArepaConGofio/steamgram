@@ -7,7 +7,7 @@ import { ProfileContentType, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import LikedGame from "./LikedGame";
+import GameItem from "./GameItem";
 import PostItem from "./PostItem";
 import ProfileCard from "./ProfileCard";
 import Stats from "./Stats";
@@ -31,16 +31,19 @@ export default function ProfileContent({ user, contentTab, selectContentTab, isL
         if (!data) return <StaticErrorAlert message={`Error trying to get ${contentTab.toLowerCase()} items.`}/>
         switch (contentTab) {
             case "Games":
-                return <FlatList data={data as Game[]} 
-                renderItem={({item}) => <LikedGame game={item}/>} 
+                return <FlatList key={"games"}
+                data={data as Game[]} 
+                renderItem={({item}) => <GameItem game={item}/>} 
                 keyExtractor={item => item.id.toString()}
-                ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
+                numColumns={3}
+                contentContainerStyle={{ alignItems: "center", rowGap: 20 }}/>
             case "Followers":
                 return <Text>Followers</Text>
             case "Following":
                 return <Text>Following</Text>
             case "Posts":
-                return <FlatList data={data as Post[]}
+                return <FlatList key={"posts"}
+                data={data as Post[]}
                 renderItem={({item}) => <PostItem post={item}/>}
                 keyExtractor={item => item.id.toString()}
                 ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
