@@ -40,9 +40,8 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   async getPosts(userId: UserId): Promise<Post[]> {
     return await APIHandler.makeRequest({ endpoint: `/posts?userId=${userId}` })
   }
-  getReviews(userId: UserId): Promise<Review[]> {
-    return new Promise(resolve => {
-      resolve([])
-    })
+  
+  async getReviews(userId: UserId): Promise<Review[]> {
+    return await APIHandler.makeRequest({ endpoint: `/reviews?userId=${userId}` })
   }
 }

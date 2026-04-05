@@ -3,6 +3,7 @@ import StaticErrorAlert from "@/components/ui/StaticAlert";
 import { ContentItems } from "@/containers/ProfileContainer";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
+import { Review } from "@/models/Review";
 import { ProfileContentType, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
@@ -10,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import GameItem from "./GameItem";
 import PostItem from "./PostItem";
 import ProfileCard from "./ProfileCard";
+import ReviewItem from "./ReviewItem";
 import Stats from "./Stats";
 
 type Props = {
@@ -48,7 +50,11 @@ export default function ProfileContent({ user, contentTab, selectContentTab, isL
                 keyExtractor={item => item.id.toString()}
                 ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
             case "Reviews":
-                return <Text>Reviews</Text>
+                return <FlatList key={"reviews"}
+                data={data as Review[]}
+                renderItem={({item}) => <ReviewItem review={item} isOnProfile/>}
+                keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
         }
     }
 
