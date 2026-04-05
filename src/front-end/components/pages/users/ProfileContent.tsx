@@ -1,10 +1,12 @@
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import StaticErrorAlert from "@/components/ui/StaticAlert";
 import { ContentItems } from "@/containers/ProfileContainer";
+import { Game } from "@/models/Game";
 import { ProfileContentType, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import LikedGame from "./LikedGame";
 import ProfileCard from "./ProfileCard";
 import Stats from "./Stats";
 
@@ -17,11 +19,20 @@ type Props = {
 }
 
 export default function ProfileContent({ user, contentTab, selectContentTab, isLoading, data }: Props) {
+    /**
+     * Construye el listado de contenido según el tipo de contenido
+     * que se desea mirar.
+     * @param data - Items a generar.
+     * @returns Un FlatList con los elementos a mostrar. 
+     */
     function buildDataComponents(data: ContentItems) {
         if (!data) return <StaticErrorAlert message={`Error trying to get ${contentTab.toLowerCase()} items.`}/>
         switch (contentTab) {
             case "Games":
-                return <Text>Games</Text>
+                return <FlatList data={data as Game[]} 
+                renderItem={({item}) => <LikedGame game={item}/>} 
+                keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
             case "Followers":
                 return <Text>Followers</Text>
             case "Following":
@@ -61,9 +72,8 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     contentContainer: {
-        backgroundColor: "#ffe7db",
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: "#ffe7db",
+        padding: 15,
     }
 });

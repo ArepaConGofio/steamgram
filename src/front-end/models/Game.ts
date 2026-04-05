@@ -8,6 +8,7 @@ export type Game = {
   name: string;
   coverUrl: string;
   description: string;
+  likesCount: number;
 };
 
 export type GameCreationRequest = {

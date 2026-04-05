@@ -23,14 +23,19 @@ export default function ProfileContainer({ user }: Props) {
         switch (currentTab) {
             case "Games":
                 query = api.getLikedGames(user.id);
+                break;
             case "Followers":
                 query = api.getFollowers(user.id);
+                break;
             case "Following":
                 query = api.getFollowings(user.id);
+                break;
             case "Posts":
                 query = api.getPosts(user.id);
+                break;
             case "Reviews":
                 query = api.getReviews(user.id);
+                break;
         }
         return await query;
     }
@@ -38,7 +43,9 @@ export default function ProfileContainer({ user }: Props) {
     useEffect(() => {
         setLoading(true);
         loadDataFromCategory()
-        .then(value => setContent(value))
+        .then(value => {
+            setContent(value);
+        })
         .catch(reason => {
             console.error(reason);
             setContent(null);

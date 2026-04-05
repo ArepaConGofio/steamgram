@@ -32,10 +32,9 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
       resolve([])
     })
   }
-  getLikedGames(userId: UserId): Promise<Game[]> {
-    return new Promise(resolve => {
-      resolve([])
-    })
+  async getLikedGames(userId: UserId): Promise<Game[]> {
+    const games = await APIHandler.makeRequest({ endpoint: `/games` });
+    return games;
   }
   getPosts(userId: UserId): Promise<Post[]> {
     return new Promise(resolve => {
