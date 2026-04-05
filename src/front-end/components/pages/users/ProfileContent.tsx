@@ -2,11 +2,13 @@ import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import StaticErrorAlert from "@/components/ui/StaticAlert";
 import { ContentItems } from "@/containers/ProfileContainer";
 import { Game } from "@/models/Game";
+import { Post } from "@/models/Post";
 import { ProfileContentType, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LikedGame from "./LikedGame";
+import PostItem from "./PostItem";
 import ProfileCard from "./ProfileCard";
 import Stats from "./Stats";
 
@@ -38,7 +40,10 @@ export default function ProfileContent({ user, contentTab, selectContentTab, isL
             case "Following":
                 return <Text>Following</Text>
             case "Posts":
-                return <Text>Posts</Text>
+                return <FlatList data={data as Post[]}
+                renderItem={({item}) => <PostItem post={item}/>}
+                keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
             case "Reviews":
                 return <Text>Reviews</Text>
         }

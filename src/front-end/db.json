@@ -124,5 +124,107 @@
             "description": "Couscous salad with cucumbers, tomatoes, feta, and olives, ready to eat.",
             "likesCount": 66
         }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "userId": 1,
+            "author": "lhuccaby0",
+            "gameId": 1,
+            "gameTitle": "Nutritional Yeast",
+            "title": "Virtual 3rd generation capacity",
+            "description": "Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
+            "likesCount": 10
+        },
+        {
+            "id": 2,
+            "userId": 2,
+            "author": "riacobini1",
+            "gameId": 2,
+            "gameTitle": "Chunky Knit Sweater",
+            "title": "Grass-roots zero administration capability",
+            "description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+            "likesCount": 20
+        },
+        {
+            "id": 3,
+            "userId": 6,
+            "author": "user",
+            "gameId": 3,
+            "gameTitle": "Organic Quinoa Salad",
+            "title": "Distributed contextually-based hierarchy",
+            "description": "Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.",
+            "likesCount": 38
+        },
+        {
+            "id": 4,
+            "userId": 4,
+            "author": "rzanussii3",
+            "gameId": 4,
+            "gameTitle": "Safety Pin Dispenser",
+            "title": "Distributed value-added installation",
+            "description": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.",
+            "likesCount": 71
+        },
+        {
+            "id": 5,
+            "userId": 5,
+            "author": "rkensett4",
+            "gameId": 5,
+            "gameTitle": "Compact Shoe Rack",
+            "title": "Re-contextualized exuding time-frame",
+            "description": "Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.",
+            "likesCount": 15
+        },
+        {
+            "id": 6,
+            "userId": 6,
+            "author": "user",
+            "gameId": 6,
+            "gameTitle": "Plant-Based Meal Prep Containers",
+            "title": "Quality-focused actuating ability",
+            "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.",
+            "likesCount": 46
+        },
+        {
+            "id": 7,
+            "userId": 7,
+            "author": "gburdytt6",
+            "gameId": 7,
+            "gameTitle": "Sun-Dried Tomatoes",
+            "title": "Organized scalable pricing structure",
+            "description": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
+            "likesCount": 13
+        },
+        {
+            "id": 8,
+            "userId": 6,
+            "author": "user",
+            "gameId": 8,
+            "gameTitle": "Sun Protection Clothing",
+            "title": "Reverse-engineered multi-state Graphic Interface",
+            "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo.",
+            "likesCount": 57
+        },
+        {
+            "id": 9,
+            "userId": 9,
+            "author": "gmyton8",
+            "gameId": 9,
+            "gameTitle": "Portable Hammock Swing",
+            "title": "Face to face radical groupware",
+            "description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
+            "likesCount": 11
+        },
+        {
+            "id": 10,
+            "userId": 10,
+            "author": "mhaylor9",
+            "gameId": 10,
+            "gameTitle": "Smartphone Camera Lens Kit",
+            "title": "Enterprise-wide responsive toolset",
+            "description": "Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+            "likesCount": 90
+        }
     ]
 }
