@@ -22,15 +22,13 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   searchUserByNickname(nickname: string): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
-  getFollowers(userId: UserId): Promise<User[]> {
-    return new Promise(resolve => {
-      resolve([])
-    })
+
+  async getFollowers(userId: UserId): Promise<User[]> {
+    return await APIHandler.makeRequest({ endpoint: `/users` });
   }
-  getFollowings(userId: UserId): Promise<User[]> {
-    return new Promise(resolve => {
-      resolve([])
-    })
+
+  async getFollowings(userId: UserId): Promise<User[]> {
+    return await APIHandler.makeRequest({ endpoint: `/users?id=1` });
   }
   
   async getLikedGames(userId: UserId): Promise<Game[]> {

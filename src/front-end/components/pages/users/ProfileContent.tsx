@@ -4,10 +4,11 @@ import { ContentItems } from "@/containers/ProfileContainer";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
-import { ProfileContentType, UserDetails } from "@/models/User";
+import { ProfileContentType, User, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import FollowerItem from "./FollowerItem";
 import GameItem from "./GameItem";
 import PostItem from "./PostItem";
 import ProfileCard from "./ProfileCard";
@@ -40,9 +41,12 @@ export default function ProfileContent({ user, contentTab, selectContentTab, isL
                 numColumns={3}
                 contentContainerStyle={{ alignItems: "center", rowGap: 20 }}/>
             case "Followers":
-                return <Text>Followers</Text>
             case "Following":
-                return <Text>Following</Text>
+                return <FlatList key={"users"}
+                data={data as User[]}
+                renderItem={({item}) => <FollowerItem follower={item}/>}
+                keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
             case "Posts":
                 return <FlatList key={"posts"}
                 data={data as Post[]}
