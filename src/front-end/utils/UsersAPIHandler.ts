@@ -6,31 +6,40 @@ import { APIHandler } from "./APIHandler";
 import { IUsersAPIHandler } from "./interfaces/IUsersAPIHandler";
 
 export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
-  getAllUsers(limit?: number): Promise<User[]> {
+  getAllUsers(): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
-  searchUserByUsername(username: string, limit?: number): Promise<User[]> {
+  async getUserDetailsByUsername(username: string): Promise<UserDetails> {
+    const users = await APIHandler.makeRequest({ endpoint: `/users?username=${username}` });
+    if (!users || users[0].username != username) {
+      throw new Error("ERROR: User not found");
+    }
+    return users[0];
+  }
+  searchUserByUsername(username: string): Promise<User[]> {
+    throw new Error("Method not implemented.")
+  }
+  searchUserByNickname(nickname: string): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
-  searchUserByNickname(nickname: string, limit?: number): Promise<User[]> {
-    throw new Error("Method not implemented.");
+
+  async getFollowers(userId: UserId): Promise<User[]> {
+    return await APIHandler.makeRequest({ endpoint: `/users` });
   }
-  getUserDetails(userId: UserId): Promise<UserDetails> {
-    throw new Error("Method not implemented.");
+
+  async getFollowings(userId: UserId): Promise<User[]> {
+    return await APIHandler.makeRequest({ endpoint: `/users?id=1` });
   }
-  getFollowers(userId: UserId, limit?: number): Promise<User[]> {
-    throw new Error("Method not implemented.");
+  
+  async getLikedGames(userId: UserId): Promise<Game[]> {
+    return await APIHandler.makeRequest({ endpoint: `/games` });
   }
-  getFollowings(userId: UserId, limit?: number): Promise<User[]> {
-    throw new Error("Method not implemented.");
+
+  async getPosts(userId: UserId): Promise<Post[]> {
+    return await APIHandler.makeRequest({ endpoint: `/posts?userId=${userId}` })
   }
-  getLikedGames(userId: UserId, limit?: number): Promise<Game[]> {
-    throw new Error("Method not implemented.");
-  }
-  getPosts(userId: UserId, limit?: number): Promise<Post[]> {
-    throw new Error("Method not implemented.");
-  }
-  getReviews(userId: UserId, limit?: number): Promise<Review[]> {
-    throw new Error("Method not implemented.");
+  
+  async getReviews(userId: UserId): Promise<Review[]> {
+    return await APIHandler.makeRequest({ endpoint: `/reviews?userId=${userId}` })
   }
 }

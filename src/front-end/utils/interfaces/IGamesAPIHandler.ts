@@ -1,4 +1,4 @@
-import { Game, GameCreationRequest, GameId } from "@/models/Game";
+import { Game, GameCreationRequest, GameCreationResponse, GameId } from "@/models/Game";
 import { Review } from "@/models/Review";
 
 export interface IGamesAPIHandler {
@@ -26,7 +26,7 @@ export interface IGamesAPIHandler {
    * @param gameToCreate - Game creation request including name, cover url,
    * description and optional Steam identifier and publisher name.
    */
-  createGame(gameToCreate: GameCreationRequest): Promise<Game>;
+  createGame(gameToCreate: GameCreationRequest): Promise<GameCreationResponse>;
 
   reviewGame(review: Review): Promise<Review>;
 }

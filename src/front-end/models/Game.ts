@@ -8,6 +8,7 @@ export type Game = {
   name: string;
   coverUrl: string;
   description: string;
+  likesCount: number;
 };
 
 export type GameCreationRequest = {
@@ -17,4 +18,10 @@ export type GameCreationRequest = {
   steamId?: string;
   coverUrl: string;
   description: string;
+}
+
+export type GameCreationResponse = {
+  id: GameId;
+  name: string;
+  developerId: number;
 }

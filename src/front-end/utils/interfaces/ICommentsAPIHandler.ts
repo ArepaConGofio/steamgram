@@ -1,4 +1,4 @@
-import { Comment, CommentCreationRequest, CommentEditionRequest, CommentId } from "@/models/Comment";
+import { CommentCreationRequest, CommentCreationResponse, CommentEditionRequest, CommentEditionResponse, CommentId } from "@/models/Comment";
 import { UserId } from "@/models/User";
 
 export interface ICommentsAPIHandler {
@@ -7,13 +7,13 @@ export interface ICommentsAPIHandler {
    * @param commentToCreate - Comment creation request including post identifier,
    * user identifier and content.
    */
-  createComment(commentToCreate: CommentCreationRequest): Promise<CommentId>;
+  createComment(commentToCreate: CommentCreationRequest): Promise<CommentCreationResponse>;
 
   /**
    * Edit an existent comment.
    * @param commentToEdit - Comment edition request.
    */
-  editComment(commentToEdit: CommentEditionRequest): Promise<Comment>;
+  editComment(commentToEdit: CommentEditionRequest): Promise<CommentEditionResponse>;
 
   /**
    * Delete an existent comment by identifier.

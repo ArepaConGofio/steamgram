@@ -3,9 +3,12 @@ export type PostId = number;
 export type Post = {
     id: PostId;
     userId: number;
-    gameId?: number;
+    author: string;
+    gameId: number;
+    gameTitle: string;
     title: string;
     description: string;
+    likesCount: number
 }
 
 export type LikePostResponse = {
@@ -22,6 +25,8 @@ export type PostCreationRequest = {
     attachment?: string;
 }
 
+export type PostCreationResponse = Post;
+
 export type PostEditionRequest = {
     userId: number;
     postId: number;
@@ -29,3 +34,5 @@ export type PostEditionRequest = {
     newDescription?: string;
     newAttachment?: string;
 }
+
+export type PostEditionResponse = Post;
