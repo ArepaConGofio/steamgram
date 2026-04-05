@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
     },
     likesCount: {
         flexDirection: "row",
+        borderBlockColor: "black",
+        borderWidth: 1,
+        borderRadius: 20,
+        padding: 5
     },
     likeCountLabel: {
         marginLeft: 5
