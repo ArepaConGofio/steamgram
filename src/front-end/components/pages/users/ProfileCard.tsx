@@ -1,10 +1,9 @@
 import IconButton from "@/components/ui/IconButton";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { AuthContext } from "@/context/AuthContext";
 import { FontAwesome } from "@expo/vector-icons";
 import { Redirect } from "expo-router";
 import { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 type Props = {
   username: string;
@@ -17,9 +16,10 @@ export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
 
   if (!user) return <Redirect href={"/login"} />;
 
+
   return (
     <View style={styles.container}>
-      <ImagePlaceholder width={100} height={100} color="#000000" />
+      <Image width={100} height={100} src={avatarUrl} alt={`{username} profile photo`} />
       <View style={styles.innerContainer}>
         {nickname && <Text style={styles.nicknameLabel}>{nickname}</Text>}
         <Text

@@ -87,7 +87,7 @@ export default function ProfileContent({ user, contentTab, selectContentTab, isL
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingVertical: 10,
+        paddingTop: -5
     },
     contentContainer: {
         flex: 1,

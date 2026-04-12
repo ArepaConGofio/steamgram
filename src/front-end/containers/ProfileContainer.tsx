@@ -4,6 +4,7 @@ import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { ProfileContentType, User, UserDetails } from "@/models/User";
 import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
+import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -16,6 +17,8 @@ export default function ProfileContainer({ user }: Props) {
     const [currentTab, setCurrentTab] = useState<ProfileContentType>("Games");
     const [content, setContent] = useState<ContentItems>(null);
     const [isLoading, setLoading] = useState(true);
+    const navigation = useNavigation();
+    navigation.setOptions({ title: user.username })
 
     async function loadDataFromCategory() {
         const api = new UsersAPIHandler();
