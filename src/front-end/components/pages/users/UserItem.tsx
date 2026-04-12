@@ -1,21 +1,25 @@
 import { User } from "@/models/User";
 import { AntDesign } from "@expo/vector-icons";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
-    follower: User;
+    user: User;
 }
 
-export default function FollowerItem({ follower }: Props) {
+export default function UserItem({ user }: Props) {
+    const router = useRouter();
+
+
     return (
         <View style={styles.container}>
-            <View style={styles.leftContainer}>
-                <Image width={75} height={75} src={follower.avatarUrl}/>
+            <Pressable style={styles.leftContainer} onPress={() => router.navigate(`/(app)/users/${user.username}`)}>
+                <Image width={75} height={75} src={user.avatarUrl}/>
                 <View>
-                    {follower.nickname && <Text style={styles.mainLabel}>{follower.nickname}</Text>}
-                    <Text style={follower.nickname ? styles.secondaryLabel : styles.mainLabel}>@{follower.username}</Text>
+                    {user.nickname && <Text style={styles.mainLabel}>{user.nickname}</Text>}
+                    <Text style={user.nickname ? styles.secondaryLabel : styles.mainLabel}>@{user.username}</Text>
                 </View>
-            </View>
+            </Pressable>
             <View style={styles.rightContainer}>
                 <AntDesign name="heart" size={24}/>
                 <AntDesign name="message" size={24}/>

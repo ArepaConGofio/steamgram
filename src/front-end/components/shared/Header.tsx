@@ -15,7 +15,7 @@ function RightUserButton() {
       name="user"
       size={24}
       style={{ paddingHorizontal: 20 }}
-      onPress={() => router.navigate("/(app)/users")}
+      onPress={() => router.push("/(app)/users")}
     />
   );
 }
