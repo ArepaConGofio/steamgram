@@ -18,19 +18,13 @@ export default function TabLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            href: null,
-          }}
-        />
-        <Tabs.Screen
-          name="community/index"
-          options={{
             title: "Community",
-            header: () => generateHeader("Steamgram"),
+            header: () => generateHeader("Community"),
             tabBarIcon: () => <FontAwesome size={24} name="home" />,
           }}
         />
         <Tabs.Screen
-          name="explore/index"
+          name="explore"
           options={{
             title: "Explore",
             header: () => generateHeader("Explore"),
@@ -38,18 +32,11 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="games/index"
+          name="games"
           options={{
             title: "Games",
             header: () => generateHeader("Games"),
             tabBarIcon: () => <FontAwesome size={24} name="gamepad" />,
-          }}
-        />
-        <Tabs.Screen
-          name="users"
-          options={{
-            href: null,
-            headerShown: false,
           }}
         />
       </Tabs>
