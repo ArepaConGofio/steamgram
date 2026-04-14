@@ -16,7 +16,7 @@ export default function UserProfile() {
     const api = new UsersAPIHandler();
     api.getUserDetailsByUsername(username as string)
       .then(value => setData(value))
-      .catch(reason => setError(reason))
+      .catch(reason => setError(reason.message))
       .finally(() => setLoading(false));
   }
 

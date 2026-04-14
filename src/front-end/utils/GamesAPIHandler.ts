@@ -4,9 +4,10 @@ import { APIHandler } from "./APIHandler";
 import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
 export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
-  getAllGames(limit?: number): Promise<Game[]> {
-    throw new Error("Method not implemented.");
+  async getAllGames(limit?: number): Promise<Game[]> {
+    return await APIHandler.makeRequest({ endpoint: `/games` });
   }
+  
   getGameDetails(gameId: GameId): Promise<Game | undefined> {
     throw new Error("Method not implemented.");
   }

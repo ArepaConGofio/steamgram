@@ -11,7 +11,7 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   }
   async getUserDetailsByUsername(username: string): Promise<UserDetails> {
     const users = await APIHandler.makeRequest({ endpoint: `/users?username=${username}` });
-    if (!users || users[0].username != username) {
+    if (!users || users[0].username !== username) {
       throw new Error("ERROR: User not found");
     }
     return users[0];

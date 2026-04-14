@@ -2,7 +2,7 @@ import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type Props = {
-    category?: "Profile"|"Game"|"Post"
+    category?: "Profile"|"Game"|"Post"|"Games"
 }
 
 export default function LoadingIndicator({ category }: Props) {
