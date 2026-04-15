@@ -4,6 +4,7 @@ import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { ProfileContentType, User, UserDetails } from "@/models/User";
 import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
+import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 export type ContentItems = Game[] | User[] | Post[] | Review[] | null;
 
 export default function UserDetailsContainer({ user }: Props) {
+    const navigation = useNavigation();
     const [currentTab, setCurrentTab] = useState<ProfileContentType>("Games");
     const [content, setContent] = useState<ContentItems>(null);
     const [isLoading, setLoading] = useState(true);
@@ -39,6 +41,10 @@ export default function UserDetailsContainer({ user }: Props) {
         }
         return await query;
     }
+
+    useEffect(() => {
+        navigation.setOptions({ title: user.username })
+    }, [navigation, user.username])
 
     useEffect(() => {
         setLoading(true);

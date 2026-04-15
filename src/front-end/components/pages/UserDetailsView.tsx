@@ -5,8 +5,7 @@ import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { ProfileContentType, User, UserDetails } from "@/models/User";
-import { useNavigation } from "expo-router";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GameItem from "../views/games/GameItem";
@@ -25,7 +24,6 @@ type Props = {
 }
 
 export default function UserDetailsView({ user, contentTab, selectContentTab, isLoading, data }: Props) {
-    const navigation = useNavigation();
     
     /**
      * Construye el listado de contenido según el tipo de contenido
@@ -64,10 +62,6 @@ export default function UserDetailsView({ user, contentTab, selectContentTab, is
                 ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
         }
     }
-
-    useEffect(() => {
-        navigation.setOptions({ title: user.username })
-    }, [navigation, user.username])
 
     return (
         <SafeAreaView style={styles.container}>

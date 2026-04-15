@@ -7,14 +7,14 @@ import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 
 export default function UserDetailsPage() {
-  const { username } = useLocalSearchParams();
+  const { username } = useLocalSearchParams<{ username: string }>();
   const [data, setData] = useState<UserDetails>();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const api = new UsersAPIHandler();
-    api.getUserDetailsByUsername(username as string)
+    api.getUserDetailsByUsername(username)
       .then(value => setData(value))
       .catch(reason => setError(reason.message))
       .finally(() => setLoading(false));

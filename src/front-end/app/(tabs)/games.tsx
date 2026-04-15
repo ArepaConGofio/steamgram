@@ -10,16 +10,12 @@ export default function GamesPage() {
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState<string>("");
 
-    const fetchGames = () => {
+    useEffect(() => {
         const api = new GamesAPIHandler();
         api.getAllGames()
         .then(value => setData(value))
         .catch(reason => setError(reason.message))
         .finally(() => setLoading(false))
-    }
-
-    useEffect(() => {
-        fetchGames()
     }, [])
 
     if (isLoading) return <LoadingIndicator category="Games" />
