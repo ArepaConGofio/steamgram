@@ -27,7 +27,7 @@ type Props = {
   callbacks: RegisterCallbacks;
 };
 
-export default function RegisterForm({ getters, setters, callbacks }: Props) {
+export default function RegisterView({ getters, setters, callbacks }: Props) {
   return (
     <View style={authFormStyles.formContainer}>
       <Text style={authFormStyles.title}>Register</Text>

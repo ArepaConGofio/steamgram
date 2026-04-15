@@ -5,7 +5,7 @@ import { Game } from "@/models/Game";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { useEffect, useState } from "react";
 
-export default function Games() {
+export default function GamesPage() {
     const [data, setData] = useState<Game[]>([]);
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState<string>("");

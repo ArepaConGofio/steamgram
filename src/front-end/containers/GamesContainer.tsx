@@ -1,4 +1,4 @@
-import GamesCatalogue from "@/components/pages/games/GamesCatalogue";
+import GamesView from "@/components/pages/GamesView";
 import { Game } from "@/models/Game";
 
 type Props = {
@@ -6,5 +6,5 @@ type Props = {
 }
 
 export default function GamesContainer({ games }: Props) {
-        return <GamesCatalogue games={games}/>
+    return <GamesView games={games}/>
 }

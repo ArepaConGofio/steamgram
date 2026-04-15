@@ -1,12 +1,12 @@
 import { Game } from "@/models/Game"
 import { FlatList, StyleSheet, View } from "react-native"
-import GameItem from "./GameItem"
+import GameItem from "../views/games/GameItem"
 
 type Props = {
     games: Game[]
 }
 
-export default function GamesCatalogue({ games }: Props) {
+export default function GamesView({ games }: Props) {
     return (
         <View style={styles.container}>
             <FlatList key={"games"}
@@ -23,10 +23,9 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         marginTop: 20,
-        rowGap: 10
     },
     subcontainer: {
-        alignItems: "stretch",
-        rowGap: 20
+        alignItems: "flex-start",
+        rowGap: 20,
     }
 });

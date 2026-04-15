@@ -9,6 +9,7 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   getAllUsers(): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
+
   async getUserDetailsByUsername(username: string): Promise<UserDetails> {
     const users = await APIHandler.makeRequest({ endpoint: `/users?username=${username}` });
     if (!users || users[0].username !== username) {
@@ -16,6 +17,7 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
     }
     return users[0];
   }
+
   searchUserByUsername(username: string): Promise<User[]> {
     throw new Error("Method not implemented.")
   }

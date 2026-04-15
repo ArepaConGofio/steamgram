@@ -1,4 +1,4 @@
-import ProfileContent from "@/components/pages/users/ProfileContent";
+import UserDetailsView from "@/components/pages/UserDetailsView";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
@@ -12,7 +12,7 @@ type Props = {
 
 export type ContentItems = Game[] | User[] | Post[] | Review[] | null;
 
-export default function ProfileContainer({ user }: Props) {
+export default function UserDetailsContainer({ user }: Props) {
     const [currentTab, setCurrentTab] = useState<ProfileContentType>("Games");
     const [content, setContent] = useState<ContentItems>(null);
     const [isLoading, setLoading] = useState(true);
@@ -53,5 +53,5 @@ export default function ProfileContainer({ user }: Props) {
         .finally(() => setLoading(false));
     }, [currentTab])
 
-    return <ProfileContent user={user} selectContentTab={setCurrentTab} contentTab={currentTab} data={content} isLoading={isLoading}/>
+    return <UserDetailsView user={user} selectContentTab={setCurrentTab} contentTab={currentTab} data={content} isLoading={isLoading}/>
 }

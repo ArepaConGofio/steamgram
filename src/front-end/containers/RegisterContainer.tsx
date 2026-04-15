@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/forms/RegisterForm";
+import RegisterView from "@/components/pages/Auth/RegisterView";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ export default function RegisterContainer() {
   const submit = () => alert("Account created! :D");
 
   return (
-    <RegisterForm
+    <RegisterView
       getters={{ username, email, password, repeatedPassword }}
       setters={{ setUsername, setEmail, setPassword, setRepeatedPassword }}
       callbacks={{ goToLogin, submit }}

@@ -8,9 +8,15 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
     return await APIHandler.makeRequest({ endpoint: `/games` });
   }
   
-  getGameDetails(gameId: GameId): Promise<Game | undefined> {
-    throw new Error("Method not implemented.");
+  async getGameDetails(gameId: GameId): Promise<Game | undefined> {
+    const games = await APIHandler.makeRequest({ endpoint: `/games?id=${gameId}` })
+    const game = games[0];
+    if (game == undefined || game == null) {
+      throw new Error("ERROR: Game not found")
+    }
+    return game;
   }
+
   searchGamesByTitle(title: string, limit?: number): Promise<Game[]> {
     throw new Error("Method not implemented.");
   }

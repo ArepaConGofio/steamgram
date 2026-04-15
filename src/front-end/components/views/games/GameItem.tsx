@@ -22,12 +22,13 @@ export default function GameItem({ game }: Props) {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
+        marginHorizontal: 5
     },
     title: {
         fontSize: 16
     },
     image: {
         resizeMode: "cover",
-        marginHorizontal: 10
+
     }
 })

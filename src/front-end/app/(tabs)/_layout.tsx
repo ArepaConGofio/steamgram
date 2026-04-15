@@ -1,4 +1,4 @@
-import generateHeader from "@/components/shared/Header";
+import generateHeader from "@/components/views/shared/Header";
 import { AuthContext } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
 import { FontAwesome } from "@expo/vector-icons";
