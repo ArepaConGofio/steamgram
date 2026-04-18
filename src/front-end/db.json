@@ -77,52 +77,16 @@
         {
             "id": 1,
             "steamId": null,
-            "developerId": 1,
-            "publisher": "Braun-Ziemann",
-            "name": "Zamit",
-            "coverUrl": "http://dummyimage.com/197x100.png/cc0000/ffffff",
-            "description": "Maintain freshness and dispense cereal easily.",
-            "likesCount": 85
-        },
-        {
-            "id": 2,
-            "steamId": null,
-            "developerId": 2,
-            "publisher": "Swift Inc",
-            "name": "Otcom",
-            "coverUrl": "http://dummyimage.com/249x100.png/ff4444/ffffff",
-            "description": "Refreshing sparkling water with cucumber and lime flavor.",
-            "likesCount": 77
-        },
-        {
-            "id": 3,
-            "steamId": "6522b98b-7b32-4d8b-9b36-8ea7bd63754d",
-            "developerId": 3,
-            "publisher": "Tromp, Klocko and Hane",
-            "name": "Domainer",
-            "coverUrl": "http://dummyimage.com/219x100.png/5fa2dd/ffffff",
-            "description": "Savory, roasted nuts seasoned with garlic and parmesan.",
-            "likesCount": 59
-        },
-        {
-            "id": 4,
-            "steamId": null,
-            "developerId": 4,
-            "publisher": "Bailey, Haag and Rutherford",
-            "name": "Vagram",
-            "coverUrl": "http://dummyimage.com/141x100.png/cc0000/ffffff",
-            "description": "Automated litter box that cleans itself after each use.",
-            "likesCount": 4
-        },
-        {
-            "id": 5,
-            "steamId": "4810ef5b-dd37-415f-b169-86be4b8ca4ea",
-            "developerId": 5,
-            "publisher": "Miller-Casper",
-            "name": "Viva",
-            "coverUrl": "http://dummyimage.com/124x100.png/cc0000/ffffff",
-            "description": "Couscous salad with cucumbers, tomatoes, feta, and olives, ready to eat.",
-            "likesCount": 66
+            "igdbId": "250616",
+            "developerId": "953",
+            "developerName": "Arrowhead Game Studios",
+            "name": "Helldivers 2",
+            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/coabbf.webp",
+            "artworkUrl": "https://images.igdb.com/igdb/image/upload/t_720p/ar4176.webp",
+            "description": "The Galaxy’s Last Line of Offence. Enlist in the Helldivers and join the fight for freedom across a hostile galaxy in a fast, frantic, and ferocious third-person shooter.",
+            "genres": [ "shooter", "tactical" ],
+            "platforms": [ "PC (Microsoft Windows)" , "Playstation 5", "Xbox Series X|S" ],
+            "likesCount": 123
         }
     ],
     "posts": [

@@ -3,11 +3,13 @@ export type GameId = number;
 export type Game = {
   id: GameId;
   steamId?: string;
+  igdbId?: string;
   developerId?: number
-  publisher?: string;
+  developerName?: string;
   name: string;
-  coverUrl: string;
-  description: string;
+  coverUrl?: string;
+  artworkUrl?: string;
+  description?: string;
   likesCount: number;
 };
 
