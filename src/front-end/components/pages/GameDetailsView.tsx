@@ -1,17 +1,23 @@
 import { Game } from "@/models/Game";
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
-import ImageCarousel from "../ui/ImageCaraousel";
+import { ImageStyle, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import ImageCarousel from "../ui/ImageCarousel";
 
 type Props = {
     game: Game;
 }
 
 export default function GameDetailsView({ game }: Props) {
-    const screenDimensions = useWindowDimensions();
+    const screenWidth = useWindowDimensions().width;
+    let screenshotsWidth = screenWidth;
+    let screenshotsStyle: ImageStyle = { borderRadius: 20 }
+    if (game.screenshots.length > 1) {
+        screenshotsWidth = screenWidth / 1.2;
+    } 
+    
     
     return (
         <View style={styles.container}>
-            <ImageCarousel urls={game.screenshots} width={screenDimensions.width / 1.2} imageStyle={{ borderRadius: 20}}/>
+            <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder/>
             <View style={styles.descriptionContainer}>
                 <Text style={styles.descriptionLabel}>Description</Text>
                 <Text style={styles.description}>{game.description}</Text>
@@ -23,9 +29,6 @@ export default function GameDetailsView({ game }: Props) {
 const styles = StyleSheet.create({
     container: {
         
-    },
-    banner: {
-        backgroundColor: "gray"
     },
     title: {
         backgroundColor: "#ffffff9a",

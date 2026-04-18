@@ -137,7 +137,9 @@
             "developerName": "Playground Games",
             "name": "Forza Horizon 5",
             "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3ofx.webp",
-            "screenshots": [],
+            "screenshots": [
+                "https://images.igdb.com/igdb/image/upload/t_720p/scahho.webp"
+            ],
             "description": "Your Ultimate Horizon Adventure awaits! Explore the vibrant and ever-evolving open-world landscapes of Mexico with limitless, fun driving action in hundreds of the world’s greatest cars.",
             "genres": [
                 "Racing"
