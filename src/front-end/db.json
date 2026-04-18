@@ -82,11 +82,106 @@
             "developerName": "Arrowhead Game Studios",
             "name": "Helldivers 2",
             "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/coabbf.webp",
-            "artworkUrl": "https://images.igdb.com/igdb/image/upload/t_720p/ar4176.webp",
+            "screenshots": [],
             "description": "The Galaxy’s Last Line of Offence. Enlist in the Helldivers and join the fight for freedom across a hostile galaxy in a fast, frantic, and ferocious third-person shooter.",
-            "genres": [ "shooter", "tactical" ],
-            "platforms": [ "PC (Microsoft Windows)" , "Playstation 5", "Xbox Series X|S" ],
-            "likesCount": 123
+            "genres": [
+                "shooter",
+                "tactical"
+            ],
+            "platforms": [
+                "PC (Microsoft Windows)",
+                "Playstation 5",
+                "Xbox Series X|S"
+            ],
+            "likesCount": 123,
+            "reviewsCount": 241,
+            "averageIgdbScore": 8.2,
+            "averageSteamgramScore": 5
+        },
+        {
+            "id": 2,
+            "steamId": null,
+            "igdbId": "339608",
+            "developerId": "62954",
+            "developerName": "Coldblood",
+            "name": "Neverway",
+            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9nlq.webp",
+            "screenshots": [
+                "https://images.igdb.com/igdb/image/upload/t_720p/scw8ep.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/scw8eq.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/scw8er.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/scw8es.webp"
+            ],
+            "description": "After quitting her dead-end job, Fiona starts over on a farm and becomes the immortal herald of a dead god. Make friends, fight through horrors and pay your debt in this nightmarish life sim RPG.",
+            "genres": [
+                "RPG",
+                "Adventure",
+                "Indie"
+            ],
+            "platforms": [
+                "Linux",
+                "Mac",
+                "Nintendo Switch",
+                "PC (Microsoft Windows)"
+            ],
+            "likesCount": 100,
+            "reviewsCount": 0,
+            "averageIgdbScore": 0,
+            "averageSteamgramScore": 0
+        },
+        {
+            "id": 3,
+            "steamId": null,
+            "igdbId": "141503",
+            "developerId": "1432",
+            "developerName": "Playground Games",
+            "name": "Forza Horizon 5",
+            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3ofx.webp",
+            "screenshots": [],
+            "description": "Your Ultimate Horizon Adventure awaits! Explore the vibrant and ever-evolving open-world landscapes of Mexico with limitless, fun driving action in hundreds of the world’s greatest cars.",
+            "genres": [
+                "Racing"
+            ],
+            "platforms": [
+                "PC (Microsoft Windows)",
+                "PlayStation 5",
+                "Xbox One",
+                "Xbox Series X|S"
+            ],
+            "likesCount": 1,
+            "reviewsCount": 1,
+            "averageIgdbScore": 10,
+            "averageSteamgramScore": 5
+        },
+        {
+            "id": 4,
+            "steamId": null,
+            "igdbId": "139295",
+            "developerId": "28376",
+            "developerName": "Nikita Kryukov",
+            "name": "Milk Inside a Bag of Milk Inside a Bag of Milk",
+            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co66n4.webp",
+            "screenshots": [
+                "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5u.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5v.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5w.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5x.webp",
+                "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5y.webp"
+            ],
+            "description": "A short story about what sort of challenges everyday little things can be. Help the girl buy milk, be the first not to disappoint her.",
+            "genres": [
+                "Adventure", "Indie", "Visual Novel"
+            ],
+            "platforms": [
+                "PC (Microsoft Windows)",
+                "Linux",
+                "Mac",
+                "Nintendo Switch"
+            ],
+            "likesCount": 100,
+            "reviewsCount": 132,
+            "averageIgdbScore": 3,
+            "averageSteamgramScore": 5
         }
     ],
     "posts": [

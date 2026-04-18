@@ -13,7 +13,7 @@ export default function GamesView({ games }: Props) {
             data={games.sort((a, b) => a.name.localeCompare(b.name))} 
             renderItem={({item}) => <GameItem game={item}/>} 
             keyExtractor={item => item.id.toString()}
-            numColumns={4}
+            numColumns={3}
             contentContainerStyle={styles.subcontainer}/>
         </View>
     )

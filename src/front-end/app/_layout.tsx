@@ -10,7 +10,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }}/>
         <Stack.Screen name="(app)/users/index" options={{ headerShown: false }}/>
         <Stack.Screen name="(app)/users/[username]" options={{ headerShadowVisible: false, headerTitleAlign: "center"  }}/>
-        <Stack.Screen name="(app)/games/[gameId]" options={{ headerShown: false }}/> 
+        <Stack.Screen name="(app)/games/[gameId]" options={{ headerShadowVisible: false, headerTitleAlign: "center" }}/> 
       </Stack>
     </AuthProvider>
   );

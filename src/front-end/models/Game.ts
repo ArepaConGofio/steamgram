@@ -8,7 +8,7 @@ export type Game = {
   developerName?: string;
   name: string;
   coverUrl?: string;
-  artworkUrl?: string;
+  screenshots: string[];
   description?: string;
   likesCount: number;
 };
