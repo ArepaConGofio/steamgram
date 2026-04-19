@@ -1,9 +1,11 @@
 import { Game } from "@/models/Game";
-import { Image, ImageStyle, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { Image, ImageStyle, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import ImageCarousel from "../ui/ImageCarousel";
 
 type Props = {
     game: Game;
+    content: "reviews"|"posts";
+    onTabPress: () => void;
 }
 
 
@@ -11,7 +13,7 @@ const GENRE_COLORS = [
     "#F5A1C3", "#A2BDF4", "#43ca8b", "#FAD062", "#fa9b64"
 ];
 
-export default function GameDetailsView({ game }: Props) {
+export default function GameDetailsView({ game, content, onTabPress }: Props) {
 
     const SCREEN_WIDTH = useWindowDimensions().width;
     let screenshotsWidth = SCREEN_WIDTH;
@@ -47,8 +49,18 @@ export default function GameDetailsView({ game }: Props) {
                     ))}
                 </View>
                 <Text style={styles.subtitle}>Gallery</Text>
-                <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder />
-                
+                <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder />   
+                <View style={styles.tabsContainer}>
+                    <Pressable style={[styles.tab, content == "reviews" && { borderBottomWidth: 3 }]} onPress={onTabPress}>
+                        <Text style={styles.tabLabel}>Reviews</Text>
+                    </Pressable>
+                    <Pressable style={[styles.tab, content == "posts" && { borderBottomWidth: 3 }]} onPress={onTabPress}>
+                        <Text style={styles.tabLabel}>Posts</Text>
+                    </Pressable>
+                </View>
+                <View style={styles.tabView}>
+
+                </View>
             </ScrollView>
         </View>
     );
@@ -102,4 +114,22 @@ const styles = StyleSheet.create({
         padding: 5,
         paddingHorizontal: 10,
     },
+    tabsContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 25,
+    },
+    tab: {
+        flex: 1,
+        alignItems: "center",
+        borderBottomColor: "black",
+        borderBottomWidth: 1, 
+    },
+    tabLabel: {
+        fontSize: 18
+    },
+    tabView: {
+        margin: 20
+    },
+    
 })
