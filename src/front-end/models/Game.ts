@@ -10,7 +10,12 @@ export type Game = {
   coverUrl?: string;
   screenshots: string[];
   description?: string;
+  genres: string[];
+  platforms: string[]
   likesCount: number;
+  reviewsCount: number,
+  averageIgdbScore: number;
+  averageSteamgramScore: number;
 };
 
 export type GameCreationRequest = {
