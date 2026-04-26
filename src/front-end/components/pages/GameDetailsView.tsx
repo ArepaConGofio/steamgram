@@ -1,11 +1,12 @@
+import { ContentTabs } from "@/containers/GameDetailsContainer";
 import { Game } from "@/models/Game";
 import { Image, ImageStyle, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import ImageCarousel from "../ui/ImageCarousel";
 
 type Props = {
     game: Game;
-    content: "reviews"|"posts";
-    onTabPress: () => void;
+    content: ContentTabs;
+    goToTab: (tab: ContentTabs) => void;
 }
 
 
@@ -13,7 +14,7 @@ const GENRE_COLORS = [
     "#F5A1C3", "#A2BDF4", "#43ca8b", "#FAD062", "#fa9b64"
 ];
 
-export default function GameDetailsView({ game, content, onTabPress }: Props) {
+export default function GameDetailsView({ game, content, goToTab }: Props) {
 
     const SCREEN_WIDTH = useWindowDimensions().width;
     let screenshotsWidth = SCREEN_WIDTH;
@@ -51,10 +52,10 @@ export default function GameDetailsView({ game, content, onTabPress }: Props) {
                 <Text style={styles.subtitle}>Gallery</Text>
                 <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder />   
                 <View style={styles.tabsContainer}>
-                    <Pressable style={[styles.tab, content == "reviews" && { borderBottomWidth: 3 }]} onPress={onTabPress}>
+                    <Pressable style={[styles.tab, content == "reviews" && { borderBottomWidth: 3 }]} onPress={() => goToTab("posts")}>
                         <Text style={styles.tabLabel}>Reviews</Text>
                     </Pressable>
-                    <Pressable style={[styles.tab, content == "posts" && { borderBottomWidth: 3 }]} onPress={onTabPress}>
+                    <Pressable style={[styles.tab, content == "posts" && { borderBottomWidth: 3 }]} onPress={() => goToTab("reviews")}>
                         <Text style={styles.tabLabel}>Posts</Text>
                     </Pressable>
                 </View>
@@ -131,5 +132,4 @@ const styles = StyleSheet.create({
     tabView: {
         margin: 20
     },
-    
 })
