@@ -1,11 +1,18 @@
 import { ContentTabs } from "@/containers/GameDetailsContainer";
 import { Game } from "@/models/Game";
-import { Image, ImageStyle, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { Post } from "@/models/Post";
+import { Review } from "@/models/Review";
+import { FlatList, Image, ImageStyle, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import ImageCarousel from "../ui/ImageCarousel";
+import NewPostForm from "../views/games/NewPostForm";
+import NewReviewForm from "../views/games/NewReviewForm";
+import PostItem from "../views/users/PostItem";
+import ReviewItem from "../views/users/ReviewItem";
 
 type Props = {
     game: Game;
     content: ContentTabs;
+    contentData: unknown[];
     goToTab: (tab: ContentTabs) => void;
 }
 
@@ -14,7 +21,7 @@ const GENRE_COLORS = [
     "#F5A1C3", "#A2BDF4", "#43ca8b", "#FAD062", "#fa9b64"
 ];
 
-export default function GameDetailsView({ game, content, goToTab }: Props) {
+export default function GameDetailsView({ game, content, contentData, goToTab }: Props) {
 
     const SCREEN_WIDTH = useWindowDimensions().width;
     let screenshotsWidth = SCREEN_WIDTH;
@@ -25,6 +32,17 @@ export default function GameDetailsView({ game, content, goToTab }: Props) {
     const coverSize = SCREEN_WIDTH / 3;
 
     const randomGenreColor = () => GENRE_COLORS[Math.floor(Math.random() * GENRE_COLORS.length)]
+
+    const generateDataList = () => {
+        return <FlatList data={contentData}
+        renderItem={({item, index}) => content == "posts" 
+                    ? <PostItem post={item as Post} key={index}/> 
+                    : <ReviewItem review={item as Review} key={index}/>
+                    }
+        contentContainerStyle={{ marginVertical: 25 }}
+        ItemSeparatorComponent={() => <View style={{ margin: 10 }}/>}
+        scrollEnabled={false}/>
+    }
 
     return (
         <View style={styles.container}>
@@ -52,15 +70,16 @@ export default function GameDetailsView({ game, content, goToTab }: Props) {
                 <Text style={styles.subtitle}>Gallery</Text>
                 <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder />   
                 <View style={styles.tabsContainer}>
-                    <Pressable style={[styles.tab, content == "reviews" && { borderBottomWidth: 3 }]} onPress={() => goToTab("posts")}>
-                        <Text style={styles.tabLabel}>Reviews</Text>
-                    </Pressable>
                     <Pressable style={[styles.tab, content == "posts" && { borderBottomWidth: 3 }]} onPress={() => goToTab("reviews")}>
                         <Text style={styles.tabLabel}>Posts</Text>
                     </Pressable>
+                    <Pressable style={[styles.tab, content == "reviews" && { borderBottomWidth: 3 }]} onPress={() => goToTab("posts")}>
+                        <Text style={styles.tabLabel}>Reviews</Text>
+                    </Pressable>
                 </View>
                 <View style={styles.tabView}>
-
+                    { content == "posts" ? <NewPostForm/> : <NewReviewForm/> }
+                    { generateDataList() }
                 </View>
             </ScrollView>
         </View>

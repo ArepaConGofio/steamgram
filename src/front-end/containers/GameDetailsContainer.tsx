@@ -1,5 +1,6 @@
 import GameDetailsView from "@/components/pages/GameDetailsView";
 import { Game } from "@/models/Game";
+import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ export type ContentTabs = "reviews"|"posts";
 export default function GameDetailsContainer({ game }: Props) {
     const navigation = useNavigation();
     const [contentTab, setContentTab] = useState<ContentTabs>("reviews");
+    const [data, setData] = useState<unknown[]>([]);
 
     const generateRightHeaderButton = () => {
         // TODO: Implements logic of red heart when you liked it and be pressable to toggle like.
@@ -27,5 +29,20 @@ export default function GameDetailsContainer({ game }: Props) {
         navigation.setOptions({ title: game.name, headerRight: generateRightHeaderButton });
     }, [navigation, game.name])
 
-    return <GameDetailsView game={game} content={contentTab} goToTab={toggleTab}/>
+    useEffect(() => {
+        let query;
+        const api = new GamesAPIHandler();
+        switch (contentTab) {
+            case "reviews":
+                query = api.getGameReviews;
+                break;
+            case "posts":
+                query = api.getGamePosts;
+                break;
+        }
+        query(game.id)
+        .then(value => setData(value))
+    }, [contentTab])
+
+    return <GameDetailsView game={game} content={contentTab} goToTab={toggleTab} contentData={data}/>
 }

@@ -1,17 +1,24 @@
 import { Post } from "@/models/Post";
 import { AntDesign } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
     post: Post;
 }
 
 export default function PostItem({ post }: Props) {
+    const router = useRouter();
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.authorLabel}>@{post.author}</Text>
-                <Text style={styles.gameTitleLabel}>{post.gameTitle}</Text>
+                <Pressable onPress={() => router.replace(`/(app)/users/${post.author}`)}>
+                    <Text style={styles.authorLabel}>@{post.author}</Text>
+                </Pressable>
+                <Pressable onPress={() => router.replace(`/(app)/games/${post.gameId}`)}>
+                    <Text style={styles.gameTitleLabel}>{post.gameTitle}</Text>
+                </Pressable>
             </View>
             <Text style={styles.title}>{post.title}</Text>
             <Text style={styles.container}>{post.description}</Text>

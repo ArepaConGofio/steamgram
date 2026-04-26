@@ -1,9 +1,11 @@
 import { Game, GameCreationRequest, GameCreationResponse, GameId } from "@/models/Game";
+import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { APIHandler } from "./APIHandler";
 import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
 export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
+
   async getAllGames(limit?: number): Promise<Game[]> {
     return await APIHandler.makeRequest({ endpoint: `/games` });
   }
@@ -26,4 +28,13 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
   reviewGame(review: Review): Promise<Review> {
     throw new Error("Method not implemented.");
   }
+  
+  async getGameReviews(gameId: GameId): Promise<Review[]> {
+    return await APIHandler.makeRequest({ endpoint: `/reviews?gameId=${gameId}` })
+  }
+
+  async getGamePosts(gameId: GameId): Promise<Post[]> {
+    return await APIHandler.makeRequest({ endpoint: `/posts?gameId=${gameId}` })
+  }
+  
 }
