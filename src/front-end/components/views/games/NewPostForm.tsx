@@ -9,7 +9,7 @@ export default function NewPostForm() {
         <View>
             <Modal
           animationType="fade"
-          backdropColor={"#0000000c"}
+          backdropColor={"#000000ac"}
           visible={modalVisible}
           onRequestClose={() => setModalVisible(!modalVisible)}>
           <View style={styles.centeredView}>
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   modalView: {
     margin: 20,

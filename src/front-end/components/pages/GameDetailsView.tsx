@@ -117,11 +117,11 @@ const styles = StyleSheet.create({
     },
     badgeContainer: {
         paddingHorizontal: 15,
-        paddingBottom: 15,
+        marginBottom: 15,
         flexDirection: "row",
         columnGap: 10,
         rowGap: 5,
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
     subtitle: {
         fontSize: 18,
@@ -130,9 +130,11 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     badge: {
-        borderRadius: 10,
+        borderRadius: 15,
         padding: 5,
         paddingHorizontal: 10,
+        textAlign: "center",
+        textAlignVertical: "center"
     },
     tabsContainer: {
         flexDirection: "row",
