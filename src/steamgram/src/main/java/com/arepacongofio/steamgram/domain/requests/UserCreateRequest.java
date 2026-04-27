@@ -1,5 +1,6 @@
-package com.arepacongofio.steamgram.domain;
+package com.arepacongofio.steamgram.domain.requests;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class UserCreateRequest {
@@ -8,9 +9,10 @@ public class UserCreateRequest {
     String name;
 
     @NotBlank
-    String user;
+    String nickname;
 
     @NotBlank
+    @Email
     String email;
 
     @NotBlank
@@ -20,8 +22,8 @@ public class UserCreateRequest {
         return name;
     }
 
-    public String getUser() {
-        return user;
+    public String getNickname() {
+        return nickname;
     }
 
     public String getEmail() {
@@ -36,8 +38,8 @@ public class UserCreateRequest {
         this.name = name;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void setEmail(String email) {

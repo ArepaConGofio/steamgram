@@ -1,4 +1,4 @@
-package com.arepacongofio.steamgram.domain;
+package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
 

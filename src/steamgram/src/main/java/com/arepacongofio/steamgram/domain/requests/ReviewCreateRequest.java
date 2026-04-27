@@ -1,31 +1,28 @@
-package com.arepacongofio.steamgram.domain;
+package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class ReviewResponse {
-
+public class ReviewCreateRequest {
+    
     @NotBlank
-    Integer id;
-
+    Integer idUser;
+    
     @NotBlank
     Integer idGame;
 
     @NotBlank
-    Integer idUSer;
-
-    @NotBlank
     String title;
 
-    Integer description;
+    String description;
 
     Integer rating;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     public Integer getIdGame() {
@@ -36,14 +33,6 @@ public class ReviewResponse {
         this.idGame = idGame;
     }
 
-    public Integer getIdUSer() {
-        return idUSer;
-    }
-
-    public void setIdUSer(Integer idUSer) {
-        this.idUSer = idUSer;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -52,11 +41,11 @@ public class ReviewResponse {
         this.title = title;
     }
 
-    public Integer getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Integer description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

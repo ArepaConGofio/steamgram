@@ -1,13 +1,15 @@
-package com.arepacongofio.steamgram.domain;
+package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LikeCreateRequest {
+public class CommentCreateRequest {
 
     @NotBlank
     Integer idUser;
     @NotBlank
     Integer idPost;
+
+    String text;
 
     public Integer getIdUser() {
         return idUser;
@@ -23,6 +25,14 @@ public class LikeCreateRequest {
 
     public void setIdPost(Integer idPost) {
         this.idPost = idPost;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
 }
