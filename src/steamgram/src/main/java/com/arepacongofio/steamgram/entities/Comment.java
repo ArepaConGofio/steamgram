@@ -62,6 +62,7 @@ public class Comment {
         this.idUser = idUser;
         this.idPost = idPost;
         this.text = text;
+        this.date = LocalDateTime.now();
     }
 
     /**
@@ -72,12 +73,13 @@ public class Comment {
      * @param text from Comment
      * @param date from Comment
      */
-    public Comment(Integer id, Integer idUser, Integer idPost, String text, LocalDateTime date) {
+    public Comment(Integer id, Integer idUser, Integer idPost, String text) {
         this.id = id;
         this.idUser = idUser;
         this.idPost = idPost;
         this.text = text;
-        this.date = date;
+        this.date = LocalDateTime.now();
+
     }
 
     public Integer getId() {

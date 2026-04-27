@@ -100,7 +100,7 @@ public class Post {
      * @param publicationDate from Post
      */
     public Post(Integer id, Integer idUser, Integer idGame, String title, String description, String attachment,
-            List<Like> likes, List<Comment> comments, LocalDateTime publicationDate) {
+            List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.idUser = idUser;
         this.idGame = idGame;
@@ -109,7 +109,7 @@ public class Post {
         this.attachment = attachment;
         this.likes = likes;
         this.comments = comments;
-        this.publicationDate = publicationDate;
+        this.publicationDate = LocalDateTime.now();
     }
 
     /**

@@ -11,12 +11,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 /**
  * Class like
  */
 @Entity
 @Table(name = "like")
 public class Like {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -40,6 +42,7 @@ public class Like {
 
     /**
      * Constructor with only the id for search
+     * 
      * @param id from Like
      */
     public Like(Integer id) {
@@ -48,6 +51,7 @@ public class Like {
 
     /**
      * Basic constructor
+     * 
      * @param idUser from Like
      * @param idPost from Like
      */
@@ -58,17 +62,18 @@ public class Like {
     }
 
     /**
+     * Complete constructor
      * 
      * @param id
      * @param idUser
      * @param idPost
      * @param date
      */
-    public Like(Integer id, Integer idUser, Integer idPost, LocalDateTime date) {
+    public Like(Integer id, Integer idUser, Integer idPost) {
         this.id = id;
         this.idUser = idUser;
         this.idPost = idPost;
-        this.date = date;
+        this.date = LocalDateTime.now();
     }
 
     public Integer getId() {

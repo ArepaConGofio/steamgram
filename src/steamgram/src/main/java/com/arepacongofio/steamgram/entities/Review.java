@@ -75,7 +75,7 @@ public class Review {
     }
 
     /**
-     * Completed constructor
+     * Update constructor
      * @param id from review
      * @param idUser from review
      * @param idGame from review
@@ -85,7 +85,7 @@ public class Review {
      * @param createDate from review
      * @param updateDate from review
      */
-    public Review(Integer id, Integer idUser, Integer idGame, String title, String description, Integer rating, LocalDateTime createDate,
+    public Review(Integer id, Integer idUser, Integer idGame, String title, String description, Integer rating,
             LocalDateTime updateDate) {
         this.id = id;
         this.idUser = idUser;
@@ -93,8 +93,7 @@ public class Review {
         this.title = title;
         this.description = description;
         this.rating = rating;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
+        this.updateDate = LocalDateTime.now();
     }
 
     /**
