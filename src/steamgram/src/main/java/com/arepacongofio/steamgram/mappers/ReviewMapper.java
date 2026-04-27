@@ -2,8 +2,8 @@ package com.arepacongofio.steamgram.mappers;
 
 import org.mapstruct.Mapper;
 
-import com.arepacongofio.steamgram.domain.ReviewCreateRequest;
-import com.arepacongofio.steamgram.domain.ReviewResponse;
+import com.arepacongofio.steamgram.domain.responses.ReviewResponse;
+import com.arepacongofio.steamgram.domain.requests.ReviewCreateRequest;
 import com.arepacongofio.steamgram.entities.Review;
 
 @Mapper
