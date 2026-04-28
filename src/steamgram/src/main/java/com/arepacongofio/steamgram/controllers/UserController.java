@@ -38,7 +38,7 @@ public class UserController implements IController<UserResponse,UserCreateReques
     @GetMapping("/users/")
     @Operation(summary = "List users", description = "Lists all users")
     public ResponseEntity<List<UserResponse>> findAll(@RequestParam int page, @RequestParam(value = "10") int pageSize) {
-        return ResponseEntity.ok(userMapper.toResponseList(userService.findAll(PageRequest.of(page, pageSize)).getContent()));
+        return ResponseEntity.ok(userMapper.toResponseList(userService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class UserController implements IController<UserResponse,UserCreateReques
         if (!userService.deleteById(id)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().build(); 
+        return ResponseEntity.ok().build();
     }
 
 }

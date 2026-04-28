@@ -1,7 +1,8 @@
 package com.arepacongofio.steamgram.service.interfaces.generic;
 
 
-import org.springframework.data.domain.Page;
+import java.util.List;
+
 import org.springframework.data.domain.Pageable;
 
 
@@ -11,7 +12,7 @@ public interface IGenericService<T,K> {
      * Devuelve todas las entities almacenadas.
      * @return lista con todas las entities
      */
-    Page<T> findAll(Pageable pageable);
+    List<T> findAll(Pageable pageable);
 
     /**
      * Metodo que indica si existe una entity con el id dado.

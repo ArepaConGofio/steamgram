@@ -1,6 +1,7 @@
 package com.arepacongofio.steamgram.service.abst;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,8 +16,8 @@ public class AbstractService<T, K> implements IGenericService<T, K> {
     }
 
     @Override
-    public Page<T> findAll(Pageable pageable) {
-        return repo.findAll(pageable);
+    public List<T> findAll(Pageable pageable) {
+        return repo.findAll(pageable).getContent();
     }
 
     @Override
