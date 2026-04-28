@@ -78,7 +78,7 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     </Pressable>
                 </View>
                 <View style={styles.tabView}>
-                    { content == "posts" ? <NewPostForm/> : <NewReviewForm/> }
+                    { content == "posts" ? <NewPostForm gameId={game.id}/> : <NewReviewForm/> }
                     { generateDataList() }
                 </View>
             </ScrollView>

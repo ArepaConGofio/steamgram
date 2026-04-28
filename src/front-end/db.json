@@ -65,7 +65,7 @@
             "username": "user",
             "email": "test@test.test",
             "nickname": "TesterMan",
-            "avatarUrl": null,
+            "avatarUrl": "https://imgs.search.brave.com/ZcgrGo_jYyk29kHWCBgXG71omh3LFkQST9QToD0e1_E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbWVt/ZS1wcm9maWxlLXBp/Y3R1cmUtM3QxZDFj/dGo1YnlydDNucy5q/cGc",
             "postsCount": 10,
             "followingCount": 10,
             "followersCount": 20,

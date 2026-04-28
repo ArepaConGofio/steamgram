@@ -1,34 +1,98 @@
-import { AntDesign } from "@expo/vector-icons";
-import { useState } from "react";
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { AuthContext } from "@/context/AuthContext";
+import { Game, GameId } from "@/models/Game";
+import { Post } from "@/models/Post";
+import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useContext, useEffect, useState } from "react";
+import { Alert, Image, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-export default function NewPostForm() {
+type Props = {
+  gameId: GameId;
+  existingPost?: Post
+}
+
+export default function NewPostForm({ existingPost, gameId }: Props) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [currentGame, setCurrentGame] = useState<Game>();
 
-    return (
-        <View>
-            <Modal
-          animationType="fade"
-          backdropColor={"#000000ac"}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(!modalVisible)}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
+  const { user } = useContext(AuthContext);
+
+  if (existingPost) {
+    setTitle(existingPost.description);
+    setDescription(existingPost.description);
+  }
+
+  useEffect(() => {
+    const gameApi = new GamesAPIHandler();
+    gameApi.getGameDetails(gameId)
+    .then(value => setCurrentGame(value))
+    .catch(reason => Alert.alert("Error", reason))
+  }, [existingPost])
+
+  return (
+    <View>
+      <Modal
+        animationType="fade"
+        backdropColor={"#000000ac"}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(!modalVisible)}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+
+            <View style={styles.modalHeader}>
+              <View style={styles.itemContainer}>
+                <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover}/>
+                <Text style={styles.itemLabel}>{currentGame?.name}</Text>
+              </View>
+              <View style={{ flexDirection: "row", columnGap: 10 }}>
+                <Pressable onPress={() => Alert.alert("Ayuda", "Soporta markdown")}>
+                  <MaterialIcons name="help" size={20} />
+                </Pressable>
+                <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                  <MaterialIcons name="close" size={20} />
+                </Pressable>
+              </View>
+            </View>
+
+            <View style={styles.modalBody}>
+              <TextInput placeholder="Express thyself!" maxLength={30}
+              style={styles.postTitle}/>
+
+              <TextInput editable multiline style={styles.postDescription}
+                placeholder="What do you think about this masterpiece? :D" 
+                maxLength={2000} value={description} onChangeText={setDescription}/>
+            </View>
+
+            <View style={styles.modalActions}>
+              <View style={styles.buttonGroup}>
+                <Pressable onPress={() => Alert.alert("Insertando imagen")}>
+                  <MaterialIcons name="image" size={20}/>
+                </Pressable>
+              </View>
+              <View style={styles.buttonGroup}>
+                <Text style={{ color: "gray" }}>{description.length}/2000</Text>
+                {existingPost ? (
+                  <Pressable onPress={() => Alert.prompt("Editando")}>
+                    <MaterialIcons name="edit" size={20} />
+                  </Pressable>
+                ) : (
+                  <Pressable onPress={() => Alert.prompt("Enviando")}>
+                    <MaterialIcons name="send" size={20} />
+                  </Pressable>
+                )}
+              </View>
             </View>
           </View>
-        </Modal>
-            <Pressable onPress={() => setModalVisible(true)} style={styles.button}>
-                <AntDesign name="plus" size={20}/>
-                <Text>Publish a new post!</Text>
-            </Pressable>
         </View>
-    );
+      </Modal>
+      <Pressable onPress={() => setModalVisible(true)} style={styles.button}>
+        <MaterialIcons name="add" size={20} />
+        <Text>Publish a new post!</Text>
+      </Pressable>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -37,11 +101,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   modalView: {
+    flex: 0.85,
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
+    padding: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -50,6 +114,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    rowGap: 10
+  },
+  modalHeader: {
+    rowGap: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
+    paddingBottom: 10
+  },
+  modalBody: {
+    flex: 1,
+  },
+  modalActions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    columnGap: 15
   },
   button: {
     borderRadius: 20,
@@ -62,6 +144,10 @@ const styles = StyleSheet.create({
     elevation: 2,
     flexDirection: "row",
     columnGap: 10
+  },
+  buttonGroup: { 
+    flexDirection: "row", 
+    columnGap: 10 
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
@@ -77,5 +163,22 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  itemContainer: {
+    flexDirection: "row",
+    columnGap: 10,
+    alignItems: "center"
+  },
+  itemLabel: {
+    fontSize: 18,
+    textAlignVertical: "center"
+  },
+  postTitle: {
+    fontSize: 20
+  },
+  postDescription: {
+  },
+  gameCover: {
+    borderRadius: 10
   },
 });
