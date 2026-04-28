@@ -2,17 +2,19 @@ package com.arepacongofio.steamgram.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
-import com.arepacongofio.steamgram.domain.UserCreateRequest;
-import com.arepacongofio.steamgram.domain.UserResponse;
+import com.arepacongofio.steamgram.domain.responses.UserResponse;
+import com.arepacongofio.steamgram.domain.requests.UserCreateRequest;
 import com.arepacongofio.steamgram.mappers.UserMapper;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
@@ -35,8 +37,8 @@ public class UserController implements IController<UserResponse,UserCreateReques
     @Override
     @GetMapping("/users/")
     @Operation(summary = "List users", description = "Lists all users")
-    public ResponseEntity<List<UserResponse>> findAll() {
-        return ResponseEntity.ok(userMapper.toResponseList(userService.findAll()));
+    public ResponseEntity<List<UserResponse>> findAll(@RequestParam int page, @RequestParam(value = "10") int pageSize) {
+        return ResponseEntity.ok(userMapper.toResponseList(userService.findAll(PageRequest.of(page, pageSize)).getContent()));
     }
 
     @Override
@@ -61,7 +63,7 @@ public class UserController implements IController<UserResponse,UserCreateReques
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete User", description = "Delete an User by ID")
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
-        if (userService.deleteById(id) == false) {
+        if (!userService.deleteById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().build(); 
