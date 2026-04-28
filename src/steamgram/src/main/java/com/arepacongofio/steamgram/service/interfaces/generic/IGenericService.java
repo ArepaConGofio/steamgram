@@ -1,28 +1,31 @@
 package com.arepacongofio.steamgram.service.interfaces.generic;
 
-import java.util.List;
 
-public interface IGenericService<T,ID> {
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+
+public interface IGenericService<T,K> {
     
     /**
      * Devuelve todas las entities almacenadas.
      * @return lista con todas las entities
      */
-    List<T> findAll();
+    Page<T> findAll(Pageable pageable);
 
     /**
      * Metodo que indica si existe una entity con el id dado.
      * @param id identificador unico de la entity
      * @return true si existe una entity con ese id, false en caso contrario
      */
-    boolean existsById(ID id);
+    boolean existsById(K id);
 
     /**
      * Metodo que busca una entity por su id.
      * @param id identificador unico de la entity
      * @return la entity encontrada, o null si no existe
      */
-    T findById(ID id);
+    T findById(K id);
 
     /**
      * Inserta o actualiza una entity.
@@ -39,5 +42,5 @@ public interface IGenericService<T,ID> {
      * @param id identificador unico de la entity
      * @return true si se borro la entity, false si no existia
      */
-    boolean deleteById(ID id);
+    boolean deleteById(K id);
 }
