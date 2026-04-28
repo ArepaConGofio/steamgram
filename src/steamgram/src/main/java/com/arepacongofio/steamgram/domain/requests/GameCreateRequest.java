@@ -1,5 +1,7 @@
 package com.arepacongofio.steamgram.domain.requests;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
 
 public class GameCreateRequest {
@@ -15,7 +17,7 @@ public class GameCreateRequest {
     @NotBlank
     Integer developerId;
 
-    String genre;
+    List<String> genre;
 
     public String getTitle() {
         return title;
@@ -57,11 +59,11 @@ public class GameCreateRequest {
         this.developerId = developerId;
     }
 
-    public String getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(List<String> genre) {
         this.genre = genre;
     }
 

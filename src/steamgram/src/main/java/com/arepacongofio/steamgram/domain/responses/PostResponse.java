@@ -18,8 +18,6 @@ public class PostResponse {
     
     String description;
     
-    String attachment;
-
     public Integer getId() {
         return id;
     }
@@ -60,13 +58,4 @@ public class PostResponse {
         this.description = description;
     }
 
-    public String getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
-    }
-
-    
 }

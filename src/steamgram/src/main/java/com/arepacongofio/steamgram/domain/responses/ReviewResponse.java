@@ -11,7 +11,7 @@ public class ReviewResponse {
     Integer idGame;
 
     @NotBlank
-    Integer idUSer;
+    Integer idUser;
 
     @NotBlank
     String title;
@@ -36,12 +36,12 @@ public class ReviewResponse {
         this.idGame = idGame;
     }
 
-    public Integer getIdUSer() {
-        return idUSer;
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public void setIdUSer(Integer idUSer) {
-        this.idUSer = idUSer;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     public String getTitle() {
