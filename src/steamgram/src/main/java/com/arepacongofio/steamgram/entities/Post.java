@@ -26,28 +26,25 @@ public class Post {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name="id_user")
+    @JoinColumn(name = "id_user")
     Integer idUser;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_game")
     Integer idGame;
-    
+
     @Column(name = "title")
     String title;
-    
+
     @Column(name = "description")
     String description;
-    
-    @Column(name = "attachment", nullable = true )
-    String attachment;
-    
+
     @OneToMany(mappedBy = "Post")
     List<Like> likes;
-    
+
     @OneToMany(mappedBy = "Post")
     List<Comment> comments;
-    
+
     @Column(name = "publicationDate")
     LocalDateTime publicationDate;
 
@@ -75,12 +72,11 @@ public class Post {
      * @param description from Post
      * @param attachment  from Post
      */
-    public Post(Integer idUser, Integer idGame, String title, String description, String attachment) {
+    public Post(Integer idUser, Integer idGame, String title, String description) {
         this.idUser = idUser;
         this.idGame = idGame;
         this.title = title;
         this.description = description;
-        this.attachment = attachment;
         this.likes = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.publicationDate = LocalDateTime.now();
@@ -99,14 +95,13 @@ public class Post {
      * @param comments        from Post
      * @param publicationDate from Post
      */
-    public Post(Integer id, Integer idUser, Integer idGame, String title, String description, String attachment,
+    public Post(Integer id, Integer idUser, Integer idGame, String title, String description,
             List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.idUser = idUser;
         this.idGame = idGame;
         this.title = title;
         this.description = description;
-        this.attachment = attachment;
         this.likes = likes;
         this.comments = comments;
         this.publicationDate = LocalDateTime.now();
@@ -154,14 +149,6 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getAttachment() {
-        return this.attachment;
-    }
-
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
     }
 
     public List<Like> getLikes() {
@@ -212,7 +199,6 @@ public class Post {
                 ", idGame='" + getIdGame() + "'" +
                 ", title='" + getTitle() + "'" +
                 ", description='" + getDescription() + "'" +
-                ", attachment='" + getAttachment() + "'" +
                 ", likes='" + getLikes() + "'" +
                 ", comments='" + getComments() + "'" +
                 ", publicationDate='" + getPublicationDate() + "'" +

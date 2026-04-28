@@ -34,6 +34,7 @@ public class Review {
     @Column(name = "description")
     String description;
     
+    //maximo 5
     @Column(name = "rating")
     Integer rating;
     

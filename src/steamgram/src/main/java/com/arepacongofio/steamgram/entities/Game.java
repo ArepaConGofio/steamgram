@@ -13,13 +13,16 @@ import jakarta.persistence.Table;
 
 /**
  * Class Game
-*/
+ */
 @Entity
 @Table(name = "game")
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
+
+    @Column(name = "id_igdb")
+    Integer idIgdb;
 
     @Column(name = "title")
     String title;
@@ -30,17 +33,20 @@ public class Game {
     @Column(name = "banner", nullable = true)
     String banner;
 
-    @Column(name = "publisher")
-    String publisher;
-
     @Column(name = "developer")
     Developer developer;
 
     @Column(name = "genre")
-    String genre;
-    
+    List<String> genres;
+
     @OneToMany(mappedBy = "Game")
     List<Review> reviews;
+
+    @Column(name = "screenshots")
+    List<String> screenshots;
+
+    @Column(name = "plataforms")
+    List<String> plataforms;
 
     /**
      * Empty constructor
@@ -50,6 +56,7 @@ public class Game {
 
     /**
      * Constructor with only the id for search
+     * 
      * @param id from Game
      */
     public Game(Integer id) {
@@ -58,41 +65,48 @@ public class Game {
 
     /**
      * Basic constructor
-     * @param title from Game
+     * 
+     * @param title       from Game
      * @param description from Game
-     * @param banner from Game
-     * @param publisher from Game
-     * @param developer from Game
-     * @param genre from Game
+     * @param banner      from Game
+     * @param publisher   from Game
+     * @param developer   from Game
+     * @param genre       from Game
      */
-    public Game(String title, String description, String banner, String publisher, Developer developer, String genre) {
+    public Game(Integer idIgdb, String title, String description, String banner, Developer developer,
+            List<String> genre, List<String> screenshots, List<String> plataforms) {
+        this.idIgdb = idIgdb;
         this.title = title;
         this.description = description;
         this.banner = banner;
-        this.publisher = publisher;
         this.developer = developer;
-        this.genre = genre;
+        this.genres = genre;
+        this.screenshots = screenshots;
+        this.plataforms = plataforms;
     }
 
     /**
-     * Complete constructor 
-     * @param id from Game
-     * @param title from Game
+     * Complete constructor
+     * 
+     * @param id          from Game
+     * @param title       from Game
      * @param description from Game
-     * @param banner from Game
-     * @param publisher from Game
-     * @param developer from Game
-     * @param genre from Game
+     * @param banner      from Game
+     * @param publisher   from Game
+     * @param developer   from Game
+     * @param genre       from Game
      */
-    public Game(Integer id, String title, String description, String banner, String publisher, Developer developer,
-            String genre) {
+    public Game(Integer id, Integer idIgdb, String title, String description, String banner, Developer developer,
+            List<String> genre, List<String> screenshots, List<String> plataforms) {
         this.id = id;
+        this.idIgdb = idIgdb;
         this.title = title;
         this.description = description;
         this.banner = banner;
-        this.publisher = publisher;
         this.developer = developer;
-        this.genre = genre;
+        this.genres = genre;
+        this.screenshots = screenshots;
+        this.plataforms = plataforms;
     }
 
     public Integer getId() {
@@ -127,14 +141,6 @@ public class Game {
         this.banner = banner;
     }
 
-    public String getPublisher() {
-        return this.publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
     public Developer getDeveloper() {
         return this.developer;
     }
@@ -143,12 +149,12 @@ public class Game {
         this.developer = developer;
     }
 
-    public String getGenre() {
-        return this.genre;
+    public List<String> getGenres() {
+        return this.genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenres(List<String> genre) {
+        this.genres = genre;
     }
 
     @Override
@@ -174,9 +180,8 @@ public class Game {
                 ", title='" + getTitle() + "'" +
                 ", description='" + getDescription() + "'" +
                 ", banner='" + getBanner() + "'" +
-                ", publisher='" + getPublisher() + "'" +
                 ", developer='" + getDeveloper() + "'" +
-                ", genre='" + getGenre() + "'" +
+                ", genre='" + getGenres() + "'" +
                 "}";
     }
 
