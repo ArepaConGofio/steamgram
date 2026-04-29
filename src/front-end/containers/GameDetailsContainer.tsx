@@ -13,7 +13,7 @@ export type ContentTabs = "reviews"|"posts";
 
 export default function GameDetailsContainer({ game }: Props) {
     const navigation = useNavigation();
-    const [contentTab, setContentTab] = useState<ContentTabs>("reviews");
+    const [contentTab, setContentTab] = useState<ContentTabs>("posts");
     const [data, setData] = useState<unknown[]>([]);
 
     const generateRightHeaderButton = () => {

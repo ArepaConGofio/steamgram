@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (username === "user" && password === "1234") {
       setToken("token");
       setUser({
-        id: 1,
+        id: 6,
         username: "user",
         nickname: "",
         email: "test@example.com",

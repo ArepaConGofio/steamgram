@@ -2,6 +2,7 @@ import { Post } from "@/models/Post";
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import Markdown from 'react-native-markdown-display';
 
 type Props = {
     post: Post;
@@ -21,14 +22,39 @@ export default function PostItem({ post }: Props) {
                 </Pressable>
             </View>
             <Text style={styles.title}>{post.title}</Text>
-            <Text style={styles.container}>{post.description}</Text>
-            <View style={styles.likesCount}>
-                <AntDesign name="heart" size={16}/>
-                <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
+            
+            <Markdown key="pistacho" style={markdownStyle}>{post.description}</Markdown>
+
+            <View style={styles.bottomContainer}>
+                <View style={{ flexDirection: "row"}}>
+                    <AntDesign name="heart" size={16}/>
+                    <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
+                </View>
             </View>
         </View>
     )
 }
+
+const markdownStyle = StyleSheet.create({
+    heading1: {
+        fontSize: 20,
+    },
+    heading2: {
+        fontSize: 18,
+    },
+    heading3: {
+        fontSize: 17
+    },
+    heading4: {
+        fontSize: 16
+    },
+    heading5: {
+        fontSize: 15
+    },
+    heading6: {
+        fontSize: 16
+    }
+})
 
 const styles = StyleSheet.create({
     container: {
@@ -52,9 +78,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
     },
-    description: {
-
-    },
     likesCount: {
         flexDirection: "row",
         borderBlockColor: "black",
@@ -64,5 +87,9 @@ const styles = StyleSheet.create({
     },
     likeCountLabel: {
         marginLeft: 5
+    },
+    bottomContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between"
     }
 })

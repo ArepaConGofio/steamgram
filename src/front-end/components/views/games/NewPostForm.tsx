@@ -2,6 +2,7 @@ import { AuthContext } from "@/context/AuthContext";
 import { Game, GameId } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
+import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
 import { Alert, Image, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
@@ -12,16 +13,33 @@ type Props = {
 }
 
 export default function NewPostForm({ existingPost, gameId }: Props) {
+  const { user } = useContext(AuthContext)
   const [modalVisible, setModalVisible] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(existingPost ? existingPost.title : "");
+  const [description, setDescription] = useState(existingPost ? existingPost.description : "");
+  const [imageUrl, setImageUrl] = useState("");
   const [currentGame, setCurrentGame] = useState<Game>();
+  const [imagePromptVisible, setImagePromptVisible] = useState<boolean>(false);
 
-  const { user } = useContext(AuthContext);
+  const addImage = () => {
+    setDescription(description + `![image](${imageUrl})`);
+    setImageUrl("");
+  }
 
-  if (existingPost) {
-    setTitle(existingPost.description);
-    setDescription(existingPost.description);
+  const sendPost = () => {
+    var json = JSON.stringify(description);
+    if (user == null) {
+      console.error("ERROR: The user is null while trying send the post");
+      return;
+    }
+    const api = new PostsAPIHandler();
+    if (existingPost?.id) {
+      api.editPost({ postId: existingPost.id, userId: user.id, newDescription: json, newTitle: title })
+      .catch(reason => console.error("ERROR: Something bad happen trying edit the post", reason));
+    } else {
+      api.createPost({ gameId: gameId, title: title, userId: user.id, description: json })
+      .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
+    }
   }
 
   useEffect(() => {
@@ -58,27 +76,36 @@ export default function NewPostForm({ existingPost, gameId }: Props) {
 
             <View style={styles.modalBody}>
               <TextInput placeholder="Express thyself!" maxLength={30}
-              style={styles.postTitle}/>
+              style={styles.postTitle} onChangeText={setTitle} value={title}/>
 
               <TextInput editable multiline style={styles.postDescription}
                 placeholder="What do you think about this masterpiece? :D" 
                 maxLength={2000} value={description} onChangeText={setDescription}/>
             </View>
 
+            <View style={[styles.imageInput, { display: imagePromptVisible ? "flex" : "none" }]}>
+              <TextInput placeholder="Inserte el enlace de la imagen..." 
+              style={{ flex: 0.8 }}
+              onChangeText={setImageUrl} value={imageUrl}/>
+              <Pressable style={{ flex: 0.1 }} onPress={addImage}>
+                <MaterialIcons name="add" size={30}/>
+              </Pressable>
+            </View>
+
             <View style={styles.modalActions}>
               <View style={styles.buttonGroup}>
-                <Pressable onPress={() => Alert.alert("Insertando imagen")}>
+                <Pressable onPress={() => setImagePromptVisible(!imagePromptVisible)}>
                   <MaterialIcons name="image" size={20}/>
                 </Pressable>
               </View>
               <View style={styles.buttonGroup}>
                 <Text style={{ color: "gray" }}>{description.length}/2000</Text>
                 {existingPost ? (
-                  <Pressable onPress={() => Alert.prompt("Editando")}>
+                  <Pressable onPress={sendPost}>
                     <MaterialIcons name="edit" size={20} />
                   </Pressable>
                 ) : (
-                  <Pressable onPress={() => Alert.prompt("Enviando")}>
+                  <Pressable onPress={sendPost}>
                     <MaterialIcons name="send" size={20} />
                   </Pressable>
                 )}
@@ -181,4 +208,13 @@ const styles = StyleSheet.create({
   gameCover: {
     borderRadius: 10
   },
+  imageInput: {
+    borderTopColor: "gray",
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: "gray",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  }
 });

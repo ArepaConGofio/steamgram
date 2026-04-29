@@ -10,7 +10,7 @@ export enum HttpMethods {
 export type RequestData = {
   endpoint: string;
   method?: HttpMethods;
-  body?: BodyInit | null;
+  body?: BodyInit | null | any;
   token?: string;
 };
 

@@ -36,12 +36,13 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
     const generateDataList = () => {
         return <FlatList data={contentData}
         renderItem={({item, index}) => content == "posts" 
-                    ? <PostItem post={item as Post} key={index}/> 
-                    : <ReviewItem review={item as Review} key={index}/>
+                    ? <PostItem post={item as Post}/> 
+                    : <ReviewItem review={item as Review}/>
                     }
         contentContainerStyle={{ marginVertical: 25 }}
         ItemSeparatorComponent={() => <View style={{ margin: 10 }}/>}
-        scrollEnabled={false}/>
+        scrollEnabled={false}
+        keyExtractor={(_, index) => index.toString()}/>
     }
 
     return (
