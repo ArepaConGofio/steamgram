@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.responses.UserResponse;
-import com.arepacongofio.steamgram.domain.requests.UserCreateRequest;
+import com.arepacongofio.steamgram.domain.requests.UserRequest;
 import com.arepacongofio.steamgram.mappers.UserMapper;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/user")
 @Tag(name = "User", description = "Complete user management")
-public class UserController implements IController<UserResponse,UserCreateRequest, Integer> {
+public class UserController implements IController<UserResponse,UserRequest, Integer> {
 
     private final IUserService userService;
     private final UserMapper userMapper;
@@ -57,7 +57,7 @@ public class UserController implements IController<UserResponse,UserCreateReques
     @Override
     @PostMapping
     @Operation(summary = "Save a User", description = "Save a User")
-    public ResponseEntity<UserResponse> save(@Valid @RequestBody UserCreateRequest user) {
+    public ResponseEntity<UserResponse> save(@Valid @RequestBody UserRequest user) {
         return ResponseEntity.ok(userService.createUser(user));
     }
 

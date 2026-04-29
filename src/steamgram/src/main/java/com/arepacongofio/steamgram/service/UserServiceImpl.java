@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.arepacongofio.steamgram.domain.requests.UserCreateRequest;
+import com.arepacongofio.steamgram.domain.requests.UserRequest;
 import com.arepacongofio.steamgram.domain.responses.UserResponse;
 import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.mappers.UserMapper;
@@ -30,13 +30,10 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
     }
 
     @Transactional
-    public UserResponse createUser(UserCreateRequest request) {
+    public UserResponse createUser(UserRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Error: El email it's already in use.");
-        }
-        if (userRepository.existsByNickname(request.getNickname())) {
-            throw new IllegalArgumentException("Error: El nickname it's already in use.");
+        if (userRepository.existsByEmail(request.getEmail()) && userRepository.existsByNickname(request.getNickname())) {
+            return null;
         }
 
         String encodedPassword = passwordEncoder.encode(request.getPassword());
