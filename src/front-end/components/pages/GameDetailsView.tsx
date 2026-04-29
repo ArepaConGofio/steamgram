@@ -16,7 +16,6 @@ type Props = {
     goToTab: (tab: ContentTabs) => void;
 }
 
-
 const GENRE_COLORS = [
     "#F5A1C3", "#A2BDF4", "#43ca8b", "#FAD062", "#fa9b64"
 ];
@@ -79,7 +78,7 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     </Pressable>
                 </View>
                 <View style={styles.tabView}>
-                    { content == "posts" ? <NewPostForm gameId={game.id}/> : <NewReviewForm/> }
+                    { content == "posts" ? <NewPostForm gameId={game.id}/> : <NewReviewForm gameId={game.id}/> }
                     { generateDataList() }
                 </View>
             </ScrollView>

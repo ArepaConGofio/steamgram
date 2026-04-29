@@ -1,6 +1,5 @@
 import { AuthContext } from "@/context/AuthContext";
 import { Game, GameId } from "@/models/Game";
-import { Post } from "@/models/Post";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -9,14 +8,13 @@ import { Alert, Image, Modal, Pressable, StyleSheet, Text, TextInput, View } fro
 
 type Props = {
   gameId: GameId;
-  existingPost?: Post
 }
 
-export default function NewPostForm({ existingPost, gameId }: Props) {
+export default function NewPostForm({ gameId }: Props) {
   const { user } = useContext(AuthContext)
   const [modalVisible, setModalVisible] = useState(false);
-  const [title, setTitle] = useState(existingPost ? existingPost.title : "");
-  const [description, setDescription] = useState(existingPost ? existingPost.description : "");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [currentGame, setCurrentGame] = useState<Game>();
   const [imagePromptVisible, setImagePromptVisible] = useState<boolean>(false);
@@ -27,27 +25,34 @@ export default function NewPostForm({ existingPost, gameId }: Props) {
   }
 
   const sendPost = () => {
+    if (user == null) return;
     var json = JSON.stringify(description);
+    const api = new PostsAPIHandler();
+    api.createPost({ gameId: gameId, title: title, userId: user.id, description: json })
+    .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
+  }
+
+  const askForSend = () => {
     if (user == null) {
       console.error("ERROR: The user is null while trying send the post");
       return;
     }
-    const api = new PostsAPIHandler();
-    if (existingPost?.id) {
-      api.editPost({ postId: existingPost.id, userId: user.id, newDescription: json, newTitle: title })
-      .catch(reason => console.error("ERROR: Something bad happen trying edit the post", reason));
-    } else {
-      api.createPost({ gameId: gameId, title: title, userId: user.id, description: json })
-      .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
+        if (title.length == 0 || description.length == 0) {
+      Alert.alert("Warning", "The content is required")
+      return;
     }
+    Alert.alert("Posting", `You are posting about ${currentGame?.name}. Do you want to continue?`, [
+      { text: "Yeah", onPress: () => sendPost() },
+      { text: "Nope" }
+    ])
   }
 
   useEffect(() => {
     const gameApi = new GamesAPIHandler();
     gameApi.getGameDetails(gameId)
-    .then(value => setCurrentGame(value))
-    .catch(reason => Alert.alert("Error", reason))
-  }, [existingPost])
+      .then(value => setCurrentGame(value))
+      .catch(reason => Alert.alert("Error", reason))
+  }, [gameId])
 
   return (
     <View>
@@ -61,54 +66,43 @@ export default function NewPostForm({ existingPost, gameId }: Props) {
 
             <View style={styles.modalHeader}>
               <View style={styles.itemContainer}>
-                <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover}/>
+                <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover} />
                 <Text style={styles.itemLabel}>{currentGame?.name}</Text>
               </View>
-              <View style={{ flexDirection: "row", columnGap: 10 }}>
-                <Pressable onPress={() => Alert.alert("Ayuda", "Soporta markdown")}>
-                  <MaterialIcons name="help" size={20} />
-                </Pressable>
-                <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <MaterialIcons name="close" size={20} />
-                </Pressable>
-              </View>
+              <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                <MaterialIcons name="close" size={20} />
+              </Pressable>
             </View>
 
             <View style={styles.modalBody}>
               <TextInput placeholder="Express thyself!" maxLength={30}
-              style={styles.postTitle} onChangeText={setTitle} value={title}/>
+                style={styles.postTitle} onChangeText={setTitle} value={title} />
 
               <TextInput editable multiline style={styles.postDescription}
-                placeholder="What do you think about this masterpiece? :D" 
-                maxLength={2000} value={description} onChangeText={setDescription}/>
+                placeholder="What do you think about this masterpiece? :D"
+                maxLength={2000} value={description} onChangeText={setDescription} />
             </View>
 
             <View style={[styles.imageInput, { display: imagePromptVisible ? "flex" : "none" }]}>
-              <TextInput placeholder="Inserte el enlace de la imagen..." 
-              style={{ flex: 0.8 }}
-              onChangeText={setImageUrl} value={imageUrl}/>
+              <TextInput placeholder="Inserte el enlace de la imagen..."
+                style={{ flex: 0.8 }}
+                onChangeText={setImageUrl} value={imageUrl} />
               <Pressable style={{ flex: 0.1 }} onPress={addImage}>
-                <MaterialIcons name="add" size={30}/>
+                <MaterialIcons name="add" size={30} />
               </Pressable>
             </View>
 
             <View style={styles.modalActions}>
               <View style={styles.buttonGroup}>
                 <Pressable onPress={() => setImagePromptVisible(!imagePromptVisible)}>
-                  <MaterialIcons name="image" size={20}/>
+                  <MaterialIcons name="image" size={20} />
                 </Pressable>
               </View>
               <View style={styles.buttonGroup}>
                 <Text style={{ color: "gray" }}>{description.length}/2000</Text>
-                {existingPost ? (
-                  <Pressable onPress={sendPost}>
-                    <MaterialIcons name="edit" size={20} />
-                  </Pressable>
-                ) : (
-                  <Pressable onPress={sendPost}>
-                    <MaterialIcons name="send" size={20} />
-                  </Pressable>
-                )}
+                <Pressable onPress={askForSend}>
+                  <MaterialIcons name="send" size={20} />
+                </Pressable>
               </View>
             </View>
           </View>
@@ -172,9 +166,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     columnGap: 10
   },
-  buttonGroup: { 
-    flexDirection: "row", 
-    columnGap: 10 
+  buttonGroup: {
+    flexDirection: "row",
+    columnGap: 10
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
