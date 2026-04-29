@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,22 +28,23 @@ import jakarta.validation.Valid;
 @Tag(name = "User", description = "Complete user management")
 public class UserController implements IController<UserResponse,UserCreateRequest, Integer> {
 
-    IUserService userService;
-    UserMapper userMapper;
+    private final IUserService userService;
+    private final UserMapper userMapper;
     
-    public UserController(IUserService userService) {
+    public UserController(IUserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @Override
-    @GetMapping("/users/")
+    @GetMapping
     @Operation(summary = "List users", description = "Lists all users")
-    public ResponseEntity<List<UserResponse>> findAll(@RequestParam int page, @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<UserResponse>> findAll(@RequestParam int page, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(userMapper.toResponseList(userService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Find a User by their Id", description = "Find a User by their Id")
     public ResponseEntity<UserResponse> findById(@Valid @PathVariable Integer id) {
         UserResponse response = userMapper.toResponse(userService.findById(id));
@@ -55,12 +57,12 @@ public class UserController implements IController<UserResponse,UserCreateReques
     @Override
     @PostMapping
     @Operation(summary = "Save a User", description = "Save a User")
-    public ResponseEntity<UserResponse> save(@Valid UserCreateRequest user) {
-        return ResponseEntity.ok(userMapper.toResponse(userService.save(userMapper.toEntity(user))));
+    public ResponseEntity<UserResponse> save(@Valid @RequestBody UserCreateRequest user) {
+        return ResponseEntity.ok(userService.createUser(user));
     }
 
     @Override
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete User", description = "Delete an User by ID")
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         if (!userService.deleteById(id)) {
