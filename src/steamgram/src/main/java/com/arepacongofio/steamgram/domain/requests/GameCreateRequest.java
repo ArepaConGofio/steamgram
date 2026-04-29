@@ -17,7 +17,7 @@ public class GameCreateRequest {
     @NotBlank
     Integer developerId;
 
-    List<String> genre;
+    List<String> genres;
 
     public String getTitle() {
         return title;
@@ -59,12 +59,12 @@ public class GameCreateRequest {
         this.developerId = developerId;
     }
 
-    public List<String> getGenre() {
-        return genre;
+    public List<String> getGenres() {
+        return genres;
     }
 
-    public void setGenre(List<String> genre) {
-        this.genre = genre;
+    public void setGenres(List<String> genre) {
+        this.genres = genre;
     }
 
 }

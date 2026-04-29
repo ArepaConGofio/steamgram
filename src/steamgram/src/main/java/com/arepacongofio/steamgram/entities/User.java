@@ -27,7 +27,7 @@ public class User {
     @Column(name = "name")
     String name;
 
-    @Column(name = "nickname",unique = true)
+    @Column(name = "nickname", unique = true)
     String nickname;
 
     @Column(name = "email", unique = true)
@@ -64,6 +64,7 @@ public class User {
 
     /**
      * Constructor with only the id for search
+     * 
      * @param id for user
      */
     public User(Integer id) {
@@ -72,8 +73,9 @@ public class User {
 
     /**
      * Basic User constructor
-     * @param name from user
-     * @param user from user
+     * 
+     * @param name     from user
+     * @param user     from user
      * @param password from user
      */
     public User(String name, String user, String password) {
@@ -88,11 +90,12 @@ public class User {
 
     /**
      * Constructor with out id
-     * @param name from user
-     * @param user from user
-     * @param games from user
-     * @param posts from user
-     * @param follows from user
+     * 
+     * @param name      from user
+     * @param user      from user
+     * @param games     from user
+     * @param posts     from user
+     * @param follows   from user
      * @param followers from user
      */
     public User(String name, String user, List<Game> games, List<Post> posts, List<User> follows,
@@ -107,13 +110,14 @@ public class User {
 
     /**
      * complete constructor
-     * @param id from user
-     * @param name from user
-     * @param user from user
-     * @param password from user
-     * @param games from user
-     * @param posts from user
-     * @param follows from user
+     * 
+     * @param id        from user
+     * @param name      from user
+     * @param user      from user
+     * @param password  from user
+     * @param games     from user
+     * @param posts     from user
+     * @param follows   from user
      * @param followers from user
      */
     public User(Integer id, String name, String user, String password, List<Game> games, List<Post> posts,
@@ -194,6 +198,22 @@ public class User {
 
     public void setFollowers(List<User> followers) {
         this.followers = followers;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     @Override
