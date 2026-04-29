@@ -2,7 +2,7 @@ package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LikeCreateRequest {
+public class LikeCreatRequest {
 
     @NotBlank
     Integer idUser;

@@ -2,8 +2,8 @@ package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class PostCreateRequest {
-
+public class ReviewRequest {
+    
     @NotBlank
     Integer idUser;
     
@@ -14,7 +14,8 @@ public class PostCreateRequest {
     String title;
 
     String description;
-    String attachment;
+
+    Integer rating;
 
     public Integer getIdUser() {
         return idUser;
@@ -48,12 +49,13 @@ public class PostCreateRequest {
         this.description = description;
     }
 
-    public String getAttachment() {
-        return attachment;
+    public Integer getRating() {
+        return rating;
     }
 
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
+    
 }

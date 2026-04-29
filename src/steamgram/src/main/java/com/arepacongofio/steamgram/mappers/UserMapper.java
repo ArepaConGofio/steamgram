@@ -5,7 +5,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.arepacongofio.steamgram.domain.requests.UserCreateRequest;
+import com.arepacongofio.steamgram.domain.requests.UserRequest;
 import com.arepacongofio.steamgram.domain.responses.UserResponse;
 import com.arepacongofio.steamgram.entities.User;
 
@@ -18,7 +18,7 @@ public interface UserMapper {
     @Mapping(target = "follows", ignore = true)
     @Mapping(target = "reviews", ignore = true)
     @Mapping(target = "posts", ignore = true)
-    User toEntity(UserCreateRequest user);
+    User toEntity(UserRequest user);
 
     @Mapping(source = "games", target = "gamesCount")
     @Mapping(source = "followers", target = "followersCount")

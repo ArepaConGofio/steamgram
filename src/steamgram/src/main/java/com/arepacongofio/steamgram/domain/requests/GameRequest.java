@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class GameCreateRequest {
+public class GameRequest {
     @NotBlank
     String title;
 

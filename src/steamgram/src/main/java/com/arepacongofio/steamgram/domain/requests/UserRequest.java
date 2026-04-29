@@ -3,7 +3,7 @@ package com.arepacongofio.steamgram.domain.requests;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class UserCreateRequest {
+public class UserRequest {
     
     @NotBlank
     String name;

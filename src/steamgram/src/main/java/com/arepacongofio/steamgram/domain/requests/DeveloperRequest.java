@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class DeveloperCreateRequest {
+public class DeveloperRequest {
 
     @NotBlank
     String name;

@@ -2,7 +2,7 @@ package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class CommentCreateRequest {
+public class CommentRequest {
 
     @NotBlank
     Integer idUser;
