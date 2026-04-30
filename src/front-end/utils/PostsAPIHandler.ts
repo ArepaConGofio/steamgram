@@ -5,9 +5,11 @@ import { APIHandler } from "./APIHandler";
 import { IPostsAPIHandler } from "./interfaces/IPostsAPIHandler";
 
 export class PostsAPIHandler extends APIHandler implements IPostsAPIHandler {
-  getAllPosts(limit?: number): Promise<Post[]> {
-    throw new Error("Method not implemented.");
+
+  async getAllPosts(limit?: number): Promise<Post[]> {
+    return await APIHandler.makeRequest({ endpoint: "/posts" }); 
   }
+
   getComments(postId: PostId, limit?: number): Promise<Comment[]> {
     throw new Error("Method not implemented.");
   }
