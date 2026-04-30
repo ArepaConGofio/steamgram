@@ -22,7 +22,6 @@ export type PostCreationRequest = {
     gameId: number;
     title: string;
     description?: string;
-    attachment?: string;
 }
 
 export type PostCreationResponse = Post;

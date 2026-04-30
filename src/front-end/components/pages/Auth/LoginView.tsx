@@ -23,7 +23,7 @@ type Props = {
   callbacks: LoginCallbacks;
 };
 
-export default function LoginForm({ getters, setters, callbacks }: Props) {
+export default function LoginView({ getters, setters, callbacks }: Props) {
   return (
     <View style={authFormStyles.formContainer}>
       <Text style={authFormStyles.title}>Login</Text>

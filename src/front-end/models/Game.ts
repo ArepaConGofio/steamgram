@@ -3,12 +3,19 @@ export type GameId = number;
 export type Game = {
   id: GameId;
   steamId?: string;
+  igdbId?: string;
   developerId?: number
-  publisher?: string;
+  developerName?: string;
   name: string;
-  coverUrl: string;
-  description: string;
+  coverUrl?: string;
+  screenshots: string[];
+  description?: string;
+  genres: string[];
+  platforms: string[]
   likesCount: number;
+  reviewsCount: number,
+  averageIgdbScore: number;
+  averageSteamgramScore: number;
 };
 
 export type GameCreationRequest = {

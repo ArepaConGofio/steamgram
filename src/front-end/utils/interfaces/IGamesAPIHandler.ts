@@ -1,4 +1,5 @@
 import { Game, GameCreationRequest, GameCreationResponse, GameId } from "@/models/Game";
+import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 
 export interface IGamesAPIHandler {
@@ -29,4 +30,8 @@ export interface IGamesAPIHandler {
   createGame(gameToCreate: GameCreationRequest): Promise<GameCreationResponse>;
 
   reviewGame(review: Review): Promise<Review>;
+
+  getGameReviews(gameId: GameId): Promise<Review[]>;
+
+  getGamePosts(gameId: GameId): Promise<Post[]>
 }

@@ -1,4 +1,4 @@
-import LoginForm from "@/components/forms/LoginForm";
+import LoginView from "@/components/pages/Auth/LoginView";
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
@@ -22,7 +22,7 @@ export default function LoginContainer() {
   };
 
   return (
-    <LoginForm
+    <LoginView
       getters={{ username, password }}
       setters={{ setUsername, setPassword }}
       callbacks={{ goToRegister, submit }}

@@ -9,6 +9,8 @@ type Props = {
 export default function StaticErrorAlert({ title, message }: Props) {
     if (!title) title = "Something happend!"
 
+    if (typeof(message) != "string") return;
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.subcontainer}>

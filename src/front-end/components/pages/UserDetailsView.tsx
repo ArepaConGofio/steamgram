@@ -1,6 +1,6 @@
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import StaticErrorAlert from "@/components/ui/StaticAlert";
-import { ContentItems } from "@/containers/ProfileContainer";
+import { ContentItems } from "@/containers/UserDetailsContainer";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
@@ -8,12 +8,12 @@ import { ProfileContentType, User, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import GameItem from "./GameItem";
-import PostItem from "./PostItem";
-import ProfileCard from "./ProfileCard";
-import ReviewItem from "./ReviewItem";
-import Stats from "./Stats";
-import UserItem from "./UserItem";
+import GameItem from "../views/games/GameItem";
+import PostItem from "../views/users/PostItem";
+import ProfileCard from "../views/users/ProfileCard";
+import ReviewItem from "../views/users/ReviewItem";
+import Stats from "../views/users/Stats";
+import UserItem from "../views/users/UserItem";
 
 type Props = {
     user: UserDetails,
@@ -23,7 +23,8 @@ type Props = {
     data: ContentItems
 }
 
-export default function ProfileContent({ user, contentTab, selectContentTab, isLoading, data }: Props) {
+export default function UserDetailsView({ user, contentTab, selectContentTab, isLoading, data }: Props) {
+    
     /**
      * Construye el listado de contenido según el tipo de contenido
      * que se desea mirar.

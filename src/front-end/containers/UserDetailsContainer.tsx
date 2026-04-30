@@ -1,4 +1,4 @@
-import ProfileContent from "@/components/pages/users/ProfileContent";
+import UserDetailsView from "@/components/pages/UserDetailsView";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
@@ -13,12 +13,11 @@ type Props = {
 
 export type ContentItems = Game[] | User[] | Post[] | Review[] | null;
 
-export default function ProfileContainer({ user }: Props) {
+export default function UserDetailsContainer({ user }: Props) {
+    const navigation = useNavigation();
     const [currentTab, setCurrentTab] = useState<ProfileContentType>("Games");
     const [content, setContent] = useState<ContentItems>(null);
     const [isLoading, setLoading] = useState(true);
-    const navigation = useNavigation();
-    navigation.setOptions({ title: user.username })
 
     async function loadDataFromCategory() {
         const api = new UsersAPIHandler();
@@ -44,6 +43,10 @@ export default function ProfileContainer({ user }: Props) {
     }
 
     useEffect(() => {
+        navigation.setOptions({ title: user.username })
+    }, [navigation, user.username])
+
+    useEffect(() => {
         setLoading(true);
         loadDataFromCategory()
         .then(value => {
@@ -56,5 +59,5 @@ export default function ProfileContainer({ user }: Props) {
         .finally(() => setLoading(false));
     }, [currentTab])
 
-    return <ProfileContent user={user} selectContentTab={setCurrentTab} contentTab={currentTab} data={content} isLoading={isLoading}/>
+    return <UserDetailsView user={user} selectContentTab={setCurrentTab} contentTab={currentTab} data={content} isLoading={isLoading}/>
 }

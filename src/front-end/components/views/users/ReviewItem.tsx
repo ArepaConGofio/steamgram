@@ -1,6 +1,7 @@
 import { Review } from "@/models/Review";
 import { AntDesign } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
     review: Review;
@@ -8,6 +9,8 @@ type Props = {
 }
 
 export default function ReviewItem({ review, isOnProfile }: Props) {
+    const router = useRouter();
+
     function generateRatingStars(rating: number) {
         return Array.from(Array(rating)).map((_, index) => <AntDesign key={index} name="star" size={16}/>)
     }
@@ -20,8 +23,12 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
                     <Text style={styles.mainLabel}>{review.gameTitle}</Text>
                 : 
                     <View>
-                        <Text style={styles.mainLabel}>@{review.author}</Text>
-                        <Text style={styles.gameSubtitleLabel}>{review.gameTitle}</Text>
+                        <Pressable onPress={() => router.replace(`/(app)/users/${review.author}`)}>
+                            <Text style={styles.mainLabel}>@{review.author}</Text>
+                        </Pressable>
+                        <Pressable onPress={() => router.replace(`/(app)/games/${review.gameId}`)}>
+                            <Text style={styles.gameSubtitleLabel}>{review.gameTitle}</Text>
+                        </Pressable>
                     </View>
                 }
                 <View style={styles.starsContainer}>
