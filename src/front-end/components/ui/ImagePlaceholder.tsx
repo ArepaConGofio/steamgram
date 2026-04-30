@@ -10,7 +10,7 @@ export default function ImagePlaceholder({ width, height, color }: Props) {
     return <View style={[{
         width: width, height: height, backgroundColor: color
     }, styles.container]}>
-        <Text style={styles.label}>Hi, i'm a fucking placeholder</Text>
+        <Text style={styles.label}>Hi, i'm a useless placeholder</Text>
     </View>
 }
 
