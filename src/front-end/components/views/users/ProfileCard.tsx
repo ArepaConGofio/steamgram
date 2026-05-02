@@ -1,7 +1,7 @@
 import IconButton from "@/components/ui/IconButton";
 import { AuthContext } from "@/context/AuthContext";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Redirect } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import { useContext } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
@@ -13,6 +13,7 @@ type Props = {
 
 export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
   const { user } = useContext(AuthContext);
+  const router = useRouter();
 
   if (!user) return <Redirect href={"/login"} />;
 
@@ -34,7 +35,7 @@ export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
             <IconButton
               label="Edit"
               icon={() => <MaterialIcons name="edit" size={20} />}
-              callback={() => alert("Editing profile")}
+              callback={() => router.navigate(`/(app)/users/${user.username}/edit`)}
             />
           ) : (
             <IconButton

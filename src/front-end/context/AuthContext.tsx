@@ -28,7 +28,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser({
         id: 6,
         username: "user",
-        nickname: "",
+        nickname: "TesterMan",
+        avatarUrl: "https://imgs.search.brave.com/ZcgrGo_jYyk29kHWCBgXG71omh3LFkQST9QToD0e1_E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbWVt/ZS1wcm9maWxlLXBp/Y3R1cmUtM3QxZDFj/dGo1YnlydDNucy5q/cGc",
         email: "test@example.com",
       });
       return true;
