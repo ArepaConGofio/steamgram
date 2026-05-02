@@ -7,9 +7,10 @@ type Props = {
     avatar?: string; 
     setAvatar: (avatar: string) => void;
     saveChanges: () => void;
+    deleteAccount: () => void;
 };
 
-export default function UserSettingsView({ nickname, setNickname, avatar, setAvatar, saveChanges}: Props) {
+export default function UserSettingsView({ nickname, setNickname, avatar, setAvatar, saveChanges, deleteAccount }: Props) {
     return (
         <View style={styles.container}>
             <View style={styles.subcontainer}>
@@ -34,7 +35,7 @@ export default function UserSettingsView({ nickname, setNickname, avatar, setAva
             <View style={[styles.subcontainer, styles.dangerZone]}>
                 <Text style={styles.optionTitle}>Delete your account</Text>
                 <Text>This will remove all your data from the server.</Text>
-                <TouchableOpacity style={[styles.button, { borderColor: "red" }]}>
+                <TouchableOpacity style={[styles.button, { borderColor: "red" }]} onPress={deleteAccount}>
                     <MaterialIcons name="delete" size={24} />
                     <Text>Delete account</Text>
                 </TouchableOpacity>
