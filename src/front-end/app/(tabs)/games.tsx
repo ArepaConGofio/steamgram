@@ -12,6 +12,7 @@ export default function GamesPage() {
 
     useEffect(() => {
         const api = new GamesAPIHandler();
+        // TODO: Change to user games!
         api.getAllGames()
         .then(value => setData(value))
         .catch(reason => setError(reason.message))

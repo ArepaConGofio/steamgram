@@ -33,8 +33,8 @@ export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
         <View style={styles.actionsContainer}>
           {user.username === username ? (
             <IconButton
-              label="Edit"
-              icon={() => <MaterialIcons name="edit" size={20} />}
+              label="Settings"
+              icon={() => <MaterialIcons name="settings" size={20} />}
               callback={() => router.navigate(`/(app)/users/${user.username}/edit`)}
             />
           ) : (

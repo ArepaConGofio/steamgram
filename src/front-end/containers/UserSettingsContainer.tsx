@@ -15,6 +15,7 @@ export default function UserSettingContainer() {
     const setAvatar = (avatar: string) => _setAvatar(avatar);
 
     const saveChanges = () => {
+        // TODO: Profile edit logic...
         Alert.alert("Changes saved", `Yes, is saved`)
     }
 

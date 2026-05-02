@@ -1,5 +1,5 @@
 import { Game } from "@/models/Game"
-import { FlatList, StyleSheet, View } from "react-native"
+import { FlatList, StyleSheet, Text, View } from "react-native"
 import GameGalleryItem from "../views/games/GameGalleryItem"
 
 type Props = {
@@ -7,6 +7,12 @@ type Props = {
 }
 
 export default function GamesView({ games }: Props) {
+    const _renderEmptyComponent = () => {
+        return <Text style={{
+            textAlign: "center", fontWeight: "bold", fontSize: 18
+        }}>No games saved. Look your favourites in the explorer! :D</Text>
+    }
+
     return (
         <View style={styles.container}>
             <FlatList key={"games"}
@@ -14,7 +20,8 @@ export default function GamesView({ games }: Props) {
             renderItem={({item}) => <GameGalleryItem game={item}/>} 
             keyExtractor={item => item.id.toString()}
             numColumns={3}
-            contentContainerStyle={styles.subcontainer}/>
+            contentContainerStyle={styles.subcontainer}
+            ListEmptyComponent={_renderEmptyComponent}/>
         </View>
     )
 }

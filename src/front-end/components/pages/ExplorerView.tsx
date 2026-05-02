@@ -17,6 +17,12 @@ type Props = {
 
 export default function ExplorerView({ query, setQuery, onSearch, data, setType, searchType }: Props) {
 
+    const _renderEmptyListComponent = () => {
+        return <Text style={{
+            textAlign: "center", fontSize: 18
+        }}>No results. Search something or reload!</Text>
+    }
+
     const generateDataList = () => {
         return <FlatList data={data}
             renderItem={({ item }) => searchType == "games"
@@ -26,7 +32,9 @@ export default function ExplorerView({ query, setQuery, onSearch, data, setType,
             ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
             contentContainerStyle={{ marginVertical: 20 }}
             keyExtractor={(_, index) => index.toString()} 
-            scrollEnabled={false}/>
+            scrollEnabled={false}
+            ListEmptyComponent={_renderEmptyListComponent}
+            />
     }
 
     return (
