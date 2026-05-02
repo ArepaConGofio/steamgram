@@ -31,7 +31,7 @@ export default function ExplorerView({ query, setQuery, onSearch, data, setType,
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Explore</Text>
-            <Text style={styles.subtitle}>Search your games, developers or another users!</Text>
+            <Text style={styles.subtitle}>Search games or other users!</Text>
             <View style={styles.searchBox}>
                 <TextInput value={query} onChangeText={setQuery} placeholder="Follow your heart! <3"
                     style={styles.searchInput} onSubmitEditing={onSearch} />
