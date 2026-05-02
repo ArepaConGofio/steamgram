@@ -1,5 +1,5 @@
 import { ProfileContentType } from "@/models/User";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type ItemProps = {
     onSelect: () => void,
@@ -10,10 +10,10 @@ type ItemProps = {
 
 function StatItem({ onSelect, name, count, selected }: ItemProps) {
     return (
-        <Pressable onPress={onSelect} style={[styles.itemContainer, selected && styles.itemSelected]}>
+        <TouchableOpacity onPress={onSelect} style={[styles.itemContainer, selected && styles.itemSelected]}>
             <Text style={styles.itemCount}>{count}</Text>
             <Text style={styles.itemLabel}>{name}</Text>
-        </Pressable>
+        </TouchableOpacity>
     )
 }
 

@@ -4,7 +4,7 @@ import { ReviewCreationRequest } from "@/models/Review";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
-import { Alert, Image, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 type Props = {
   gameId: GameId
@@ -47,9 +47,9 @@ export default function NewReviewForm({ gameId }: Props) {
   const generateStarButtons = () => {
     return (
       [1, 2, 3, 4, 5].map((value) => (
-        <Pressable key={value} onPress={() => setRating(value)}>
+        <TouchableOpacity key={value} onPress={() => setRating(value)}>
           <MaterialIcons name={rating >= value ? "star" : "star-outline"} size={24}/>
-        </Pressable>
+        </TouchableOpacity>
       ))
     )
   }
@@ -76,9 +76,9 @@ export default function NewReviewForm({ gameId }: Props) {
                 <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover} />
                 <Text style={styles.itemLabel}>{currentGame?.name}</Text>
               </View>
-              <Pressable onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <MaterialIcons name="close" size={20} />
-              </Pressable>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.modalBody}>
@@ -96,18 +96,18 @@ export default function NewReviewForm({ gameId }: Props) {
               </View>
               <View style={styles.buttonGroup}>
                 <Text style={{ color: "gray" }}>{description.length}/200</Text>
-                <Pressable onPress={askForSend}>
+                <TouchableOpacity onPress={askForSend}>
                   <MaterialIcons name="send" size={20} />
-                </Pressable>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
         </View>
       </Modal>
-      <Pressable onPress={() => setModalVisible(true)} style={styles.button}>
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.button}>
         <AntDesign name="plus" size={20} />
         <Text>Write a review!</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }

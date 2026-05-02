@@ -1,7 +1,7 @@
 import { Review } from "@/models/Review";
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
     review: Review;
@@ -23,12 +23,12 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
                     <Text style={styles.mainLabel}>{review.gameTitle}</Text>
                 : 
                     <View>
-                        <Pressable onPress={() => router.replace(`/(app)/users/${review.author}`)}>
+                        <TouchableOpacity onPress={() => router.navigate(`/(app)/users/${review.author}`)}>
                             <Text style={styles.mainLabel}>@{review.author}</Text>
-                        </Pressable>
-                        <Pressable onPress={() => router.replace(`/(app)/games/${review.gameId}`)}>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => router.navigate(`/(app)/games/${review.gameId}`)}>
                             <Text style={styles.gameSubtitleLabel}>{review.gameTitle}</Text>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
                 }
                 <View style={styles.starsContainer}>
