@@ -17,8 +17,8 @@ export default function GameDetailsContainer({ game }: Props) {
     const [data, setData] = useState<unknown[]>([]);
 
     const generateRightHeaderButton = () => {
-        // TODO: Implements logic of red heart when you liked it and be pressable to toggle like.
-        return <MaterialCommunityIcons name="heart" size={24}/>
+        // TODO: Implements saved toggle logic
+        return <MaterialCommunityIcons name="plus" size={24}/>
     }
 
     const toggleTab = (tab: ContentTabs) => {
