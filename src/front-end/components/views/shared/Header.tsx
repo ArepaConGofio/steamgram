@@ -3,7 +3,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Header } from "@react-navigation/elements";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
   title: string;
@@ -14,6 +14,16 @@ export default function MyHeader({ title }: Props) {
   const router = useRouter();
   const { logout } = useContext(AuthContext);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
+
+  const onLogoutPress = () => {
+    setMenuVisible(false);
+    logout()
+  }
+
+  const onUserProfilePress = () => {
+    setMenuVisible(false);
+    router.navigate("/(app)/users/")
+  }
 
   return (
     <View style={styles.container}>
@@ -31,14 +41,14 @@ export default function MyHeader({ title }: Props) {
         )}
       />
       <View style={[styles.actions, { display: menuVisible ? "flex" : "none" }]}>
-        <Pressable style={styles.action} onPress={() => router.navigate("/(app)/users/")}>
+        <TouchableOpacity style={styles.action} onPress={onUserProfilePress}>
           <Text style={{ fontWeight: "bold" }}>My profile</Text>
           <MaterialIcons name="person" size={24} />
-        </Pressable>
-        <Pressable style={styles.action} onPress={logout}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.action} onPress={onLogoutPress}>
           <Text style={{ fontWeight: "bold" }}>Log out</Text>
           <MaterialIcons name="logout" size={24} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   )

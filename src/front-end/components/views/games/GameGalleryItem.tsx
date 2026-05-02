@@ -6,7 +6,7 @@ type Props = {
     game: Game
 }
 
-export default function GameItem({ game }: Props) {
+export default function GameGalleryItem({ game }: Props) {
     const router = useRouter()
     const width = useWindowDimensions().width / 4;
 
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     },
     image: {
         resizeMode: "cover",
-
+        borderRadius: 10,
+        elevation: 3,
     }
 })

@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     cover: {
-        borderRadius: 10
+        borderRadius: 10,
+        elevation: 3,
     },
     subcontainer: {
         padding: 10,
