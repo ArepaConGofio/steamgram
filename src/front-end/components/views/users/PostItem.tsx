@@ -1,5 +1,5 @@
 import { Post } from "@/models/Post";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Markdown from 'react-native-markdown-display';
@@ -27,7 +27,7 @@ export default function PostItem({ post }: Props) {
 
             <View style={styles.bottomContainer}>
                 <View style={{ flexDirection: "row"}}>
-                    <AntDesign name="heart" size={16}/>
+                    <MaterialCommunityIcons name="heart" size={16}/>
                     <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
                 </View>
             </View>

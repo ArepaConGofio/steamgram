@@ -1,5 +1,5 @@
 import { Review } from "@/models/Review";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -12,7 +12,7 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
     const router = useRouter();
 
     function generateRatingStars(rating: number) {
-        return Array.from(Array(rating)).map((_, index) => <AntDesign key={index} name="star" size={16}/>)
+        return Array.from(Array(rating)).map((_, index) => <MaterialIcons key={index} name="star" size={16}/>)
     }
 
     return (

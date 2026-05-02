@@ -1,7 +1,7 @@
 import { default as MyHeader } from "@/components/views/shared/Header";
 import { AuthContext } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
-import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
 import { useContext } from "react";
 
@@ -20,7 +20,7 @@ export default function TabLayout() {
           options={{
             title: "Community",
             header: () => <MyHeader title="Community"/>,
-            tabBarIcon: () => <FontAwesome size={24} name="home" />,
+            tabBarIcon: () => <MaterialIcons size={24} name="home" />,
           }}
         />
         <Tabs.Screen
@@ -28,7 +28,7 @@ export default function TabLayout() {
           options={{
             title: "Explore",
             header: () => <MyHeader title="Explore"/>,
-            tabBarIcon: () => <FontAwesome size={24} name="search" />,
+            tabBarIcon: () => <MaterialIcons size={24} name="search" />,
           }}
         />
         <Tabs.Screen
@@ -36,7 +36,7 @@ export default function TabLayout() {
           options={{
             title: "Games",
             header: () => <MyHeader title="Games"/>,
-            tabBarIcon: () => <FontAwesome size={24} name="gamepad" />,
+            tabBarIcon: () => <MaterialIcons size={24} name="gamepad" />,
           }}
         />
       </Tabs>

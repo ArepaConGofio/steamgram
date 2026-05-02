@@ -2,7 +2,7 @@ import { AuthContext } from "@/context/AuthContext";
 import { Game, GameId } from "@/models/Game";
 import { ReviewCreationRequest } from "@/models/Review";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
 import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -105,7 +105,7 @@ export default function NewReviewForm({ gameId }: Props) {
         </View>
       </Modal>
       <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.button}>
-        <AntDesign name="plus" size={20} />
+        <MaterialIcons name="add" size={20} />
         <Text>Write a review!</Text>
       </TouchableOpacity>
     </View>
