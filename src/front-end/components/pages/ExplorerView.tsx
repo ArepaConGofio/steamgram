@@ -2,7 +2,7 @@ import { SearchType } from "@/containers/ExplorerContainer";
 import { Game } from "@/models/Game";
 import { User } from "@/models/User";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import GameExploreResult from "../views/explorer/GameExploreResult";
 import UserExploreResult from "../views/explorer/UserExploreResult";
 
@@ -23,13 +23,14 @@ export default function ExplorerView({ query, setQuery, onSearch, data, setType,
                 ? <GameExploreResult game={item as Game} />
                 : <UserExploreResult user={item as User} />
             }
-            contentContainerStyle={{ marginVertical: 25 }}
             ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
-            keyExtractor={(_, index) => index.toString()} />
+            contentContainerStyle={{ marginVertical: 20 }}
+            keyExtractor={(_, index) => index.toString()} 
+            scrollEnabled={false}/>
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Explore</Text>
             <Text style={styles.subtitle}>Search games or other users!</Text>
             <View style={styles.searchBox}>
@@ -48,27 +49,30 @@ export default function ExplorerView({ query, setQuery, onSearch, data, setType,
                 </Pressable>
             </View>
             <View>
-                {generateDataList()}
+                { generateDataList() }
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         margin: 20,
-        rowGap: 10
+        rowGap: 10,
     },
     title: {
         fontSize: 32,
         fontWeight: "bold",
-        textAlign: "center"
+        textAlign: "center",
+        marginBottom: 10,
     },
     subtitle: {
         fontSize: 18,
-        textAlign: "center"
+        textAlign: "center",
+        marginBottom: 10,
     },
     searchBox: {
+        marginBottom: 10,
         flexDirection: "row",
         justifyContent: "space-between",
         backgroundColor: "white",

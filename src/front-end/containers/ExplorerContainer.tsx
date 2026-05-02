@@ -38,7 +38,7 @@ export default function ExplorerContainer() {
             usersApi.searchUserByNickname(query)
                 .then(result => setResult(...[result]))
                 .catch(reason => Alert.alert("Error", reason))
-                
+
         }
     }
 
