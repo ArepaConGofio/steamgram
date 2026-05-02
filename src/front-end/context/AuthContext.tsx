@@ -41,7 +41,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
-    throw new Error("Not implemented");
+    setToken(null);
+    setUser(null);
   }, []);
 
   const contextValue = useMemo(
