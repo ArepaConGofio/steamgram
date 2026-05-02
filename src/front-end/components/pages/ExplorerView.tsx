@@ -3,8 +3,8 @@ import { Game } from "@/models/Game";
 import { User } from "@/models/User";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import GameExploreResult from "../views/explorer/GameExploreResult";
-import UserExploreResult from "../views/explorer/UserExploreResult";
+import GameListItem from "../views/games/GameListItem";
+import UserListItem from "../views/users/UserListItem";
 
 type Props = {
     query: string;
@@ -20,8 +20,8 @@ export default function ExplorerView({ query, setQuery, onSearch, data, setType,
     const generateDataList = () => {
         return <FlatList data={data}
             renderItem={({ item }) => searchType == "games"
-                ? <GameExploreResult game={item as Game} />
-                : <UserExploreResult user={item as User} />
+                ? <GameListItem game={item as Game} />
+                : <UserListItem user={item as User} />
             }
             ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
             contentContainerStyle={{ marginVertical: 20 }}

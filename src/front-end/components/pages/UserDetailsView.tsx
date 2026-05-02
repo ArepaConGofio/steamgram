@@ -8,12 +8,12 @@ import { ProfileContentType, User, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import GameItem from "../views/games/GameItem";
+import GameListItem from "../views/games/GameListItem";
 import PostItem from "../views/users/PostItem";
 import ProfileCard from "../views/users/ProfileCard";
 import ReviewItem from "../views/users/ReviewItem";
 import Stats from "../views/users/Stats";
-import UserItem from "../views/users/UserItem";
+import UserListItem from "../views/users/UserListItem";
 
 type Props = {
     user: UserDetails,
@@ -37,15 +37,14 @@ export default function UserDetailsView({ user, contentTab, selectContentTab, is
             case "Games":
                 return <FlatList key={"games"}
                 data={data as Game[]} 
-                renderItem={({item}) => <GameItem game={item}/>} 
-                keyExtractor={item => item.id.toString()}
-                numColumns={3}
-                contentContainerStyle={{ alignItems: "center", rowGap: 20 }}/>
+                renderItem={({item}) => <GameListItem game={item}/>} 
+                ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}
+                keyExtractor={item => item.id.toString()}/>
             case "Followers":
             case "Following":
                 return <FlatList key={"users"}
                 data={data as User[]}
-                renderItem={({item}) => <UserItem user={item}/>}
+                renderItem={({item}) => <UserListItem user={item}/>}
                 keyExtractor={item => item.id.toString()}
                 ItemSeparatorComponent={_ => <View style={{ margin: 10 }}/>}/>
             case "Posts":

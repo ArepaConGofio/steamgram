@@ -17,17 +17,16 @@ export default function IconButton({ label, icon, callback }: Props) {
 
 const styles = StyleSheet.create({
     button: {
-        flex: 1,
-        backgroundColor: "#115554",
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
-        borderColor: "#ffffff",
-        height: 32
+        borderColor: "#000",
+        borderWidth: 1,
+        height: 32,
+        paddingLeft: 10,
+        borderRadius: 10
     },
     buttonLabel: {
         fontSize: 16,
         marginLeft: 5,
-        color: "#fff"
     }
 })
