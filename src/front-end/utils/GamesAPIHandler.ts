@@ -1,4 +1,4 @@
-import { Game, GameCreationRequest, GameCreationResponse, GameId } from "@/models/Game";
+import { Game, GameId } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { APIHandler } from "./APIHandler";
@@ -19,12 +19,10 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
     return game;
   }
 
-  searchGamesByTitle(title: string, limit?: number): Promise<Game[]> {
-    throw new Error("Method not implemented.");
+  async searchGamesByTitle(title: string, limit?: number): Promise<Game[]> {
+    return await APIHandler.makeRequest({ endpoint: `/games?name:contains=${title}` })
   }
-  createGame(gameToCreate: GameCreationRequest): Promise<GameCreationResponse> {
-    throw new Error("Method not implemented.");
-  }
+
   reviewGame(review: Review): Promise<Review> {
     throw new Error("Method not implemented.");
   }

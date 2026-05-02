@@ -1,5 +1,5 @@
-import { Text } from "react-native";
+import ExplorerContainer from "@/containers/ExplorerContainer";
 
 export default function ExplorePage() {
-    return <Text>Explore works!</Text>
+    return <ExplorerContainer/>
 }

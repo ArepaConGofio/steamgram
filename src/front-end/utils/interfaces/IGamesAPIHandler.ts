@@ -1,4 +1,4 @@
-import { Game, GameCreationRequest, GameCreationResponse, GameId } from "@/models/Game";
+import { Game, GameId } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 
@@ -21,13 +21,6 @@ export interface IGamesAPIHandler {
    * @param limit - Max query results.
    */
   searchGamesByTitle(title: string, limit?: number): Promise<Game[]>;
-
-  /**
-   * Create a new game as developer.
-   * @param gameToCreate - Game creation request including name, cover url,
-   * description and optional Steam identifier and publisher name.
-   */
-  createGame(gameToCreate: GameCreationRequest): Promise<GameCreationResponse>;
 
   reviewGame(review: Review): Promise<Review>;
 

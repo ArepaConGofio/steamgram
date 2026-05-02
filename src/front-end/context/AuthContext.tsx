@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(async (username: string, password: string) => {
     // TODO: Implements real login
-    if (username === "user" && password === "1234") {
+    if (true) {
       setToken("token");
       setUser({
         id: 6,
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       return true;
     }
-    return false;
+    // return false;
   }, []);
 
   const register = useCallback(async (username: string, password: string) => {

@@ -5,11 +5,6 @@ import { User, UserDetails, UserId } from "@/models/User";
 
 export interface IUsersAPIHandler {
   /**
-   * Get all users. The query can be limited.
-   */
-  getAllUsers(): Promise<User[]>;
-
-  /**
    * Search users by username. The query can be limited.
    * @param username - Username
    */
