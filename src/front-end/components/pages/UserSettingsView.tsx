@@ -1,26 +1,32 @@
-import { AuthContext } from "@/context/AuthContext";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useContext } from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function UserSettingsView() {
-    const { user } = useContext(AuthContext);
+type Props = {
+    nickname?: string;
+    setNickname: (nickname: string) => void;
+    avatar?: string; 
+    setAvatar: (avatar: string) => void;
+    saveChanges: () => void;
+};
 
+export default function UserSettingsView({ nickname, setNickname, avatar, setAvatar, saveChanges}: Props) {
     return (
         <View style={styles.container}>
             <View style={styles.subcontainer}>
                 <Text style={styles.optionTitle}>Change nickname</Text>
-                <TextInput placeholder="Be wonderful, be you!" style={styles.optionInput} />
+                <TextInput placeholder="Be wonderful, be you!" style={styles.optionInput} value={nickname}
+                onChangeText={setNickname} onSubmitEditing={saveChanges}/>
             </View>
 
             <View style={styles.subcontainer}>
                 <Text style={styles.optionTitle}>Change your profile avatar</Text>
-                <Image src={user?.avatarUrl} width={100} height={100} style={styles.avatar}/>
-                <TextInput placeholder="Insert the image url" style={styles.optionInput} />
+                <Image src={avatar} width={100} height={100} style={styles.avatar}/>
+                <TextInput placeholder="Insert the image url" style={styles.optionInput} value={avatar}
+                onChangeText={setAvatar} onSubmitEditing={saveChanges}/>
                 <Text style={{ color: "gray", textAlign: "center" }}>To add an image, you need to upload an url from web.</Text>
             </View>
 
-            <TouchableOpacity style={[styles.button, { borderColor: "green" }]}>
+            <TouchableOpacity style={[styles.button, { borderColor: "green" }]} onPress={saveChanges}>
                 <MaterialIcons name="save" size={24} />
                 <Text>Save changes</Text>
             </TouchableOpacity>
