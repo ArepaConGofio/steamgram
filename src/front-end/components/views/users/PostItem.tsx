@@ -1,5 +1,6 @@
 import { AuthContext } from "@/context/AuthContext";
 import { Post } from "@/models/Post";
+import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useContext } from "react";
@@ -12,12 +13,22 @@ type Props = {
 
 export default function PostItem({ post }: Props) {
     const router = useRouter();
+    const api = new PostsAPIHandler();
     const { user } = useContext(AuthContext);
 
     const onAuthorPress = () => router.navigate(`/(app)/users/${post.author}`);
     const onGamePress = () => router.navigate(`/(app)/games/${post.gameId}`);
-    const onEditPress = () => Alert.alert("Editing");
-    const onDeletePress = () => Alert.alert("Deleting");
+
+    const onDeletePress = () => {
+        // TODO: Implement post deleting logic
+        if (!user) return;
+        Alert.alert("Deleting post")
+        /*
+        api.deletePost(user?.id, post.id)
+        .then(value => Alert.alert(value ? "Post deleted" : "Error deleting post"))
+        .catch(reason => Alert.alert("Error", reason))
+        */
+    };
 
     return (
         <View style={styles.container}>
@@ -44,14 +55,9 @@ export default function PostItem({ post }: Props) {
                     <MaterialCommunityIcons name="heart" size={24}/>
                     <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
                 </View>
-                <View style={{flexDirection: "row", columnGap: 10, display: post.userId == user?.id ? "flex" : "none"}}>
-                    <TouchableOpacity onPress={onEditPress}>
-                        <MaterialIcons name="edit" size={24}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onDeletePress}>
-                        <MaterialIcons name="delete" size={24}/>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity onPress={onDeletePress} style={{ display: post.userId == user?.id ? "flex" : "none" }}>
+                    <MaterialIcons name="delete" size={24}/>
+                </TouchableOpacity>
             </View>
         </View>
     )

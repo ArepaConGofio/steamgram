@@ -1,22 +1,22 @@
 import { AuthContext } from "@/context/AuthContext";
-import { Game, GameId } from "@/models/Game";
-import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
+import { Game } from "@/models/Game";
 import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 type Props = {
-  gameId: GameId;
+  game: Game;
+  buttonComponent: ReactNode
 }
 
-export default function NewPostForm({ gameId }: Props) {
+export default function PostForm({ game, buttonComponent }: Props) {
+  const api = new PostsAPIHandler();
   const { user } = useContext(AuthContext)
   const [modalVisible, setModalVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [currentGame, setCurrentGame] = useState<Game>();
   const [imagePromptVisible, setImagePromptVisible] = useState<boolean>(false);
 
   const addImage = () => {
@@ -27,9 +27,8 @@ export default function NewPostForm({ gameId }: Props) {
   const sendPost = () => {
     if (user == null) return;
     var json = JSON.stringify(description);
-    const api = new PostsAPIHandler();
-    api.createPost({ gameId: gameId, title: title, userId: user.id, description: json })
-    .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
+    api.createPost({ gameId: game.id, title: title, userId: user.id, description: json })
+      .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
   }
 
   const askForSend = () => {
@@ -37,22 +36,15 @@ export default function NewPostForm({ gameId }: Props) {
       console.error("ERROR: The user is null while trying send the post");
       return;
     }
-        if (title.length == 0 || description.length == 0) {
+    if (title.length == 0 || description.length == 0) {
       Alert.alert("Warning", "The content is required")
       return;
     }
-    Alert.alert("Posting", `You are posting about ${currentGame?.name}. Do you want to continue?`, [
-      { text: "Yeah", onPress: () => sendPost() },
+    Alert.alert("Posting", `You are posting about ${game.name}. Do you want to continue?`, [
+      { text: "Yeah", onPress: sendPost },
       { text: "Nope" }
     ])
   }
-
-  useEffect(() => {
-    const gameApi = new GamesAPIHandler();
-    gameApi.getGameDetails(gameId)
-      .then(value => setCurrentGame(value))
-      .catch(reason => Alert.alert("Error", reason))
-  }, [gameId])
 
   return (
     <View>
@@ -66,8 +58,8 @@ export default function NewPostForm({ gameId }: Props) {
 
             <View style={styles.modalHeader}>
               <View style={styles.itemContainer}>
-                <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover} />
-                <Text style={styles.itemLabel}>{currentGame?.name}</Text>
+                <Image src={game.coverUrl} height={50} width={50} style={styles.gameCover} />
+                <Text style={styles.itemLabel}>{game.name}</Text>
               </View>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <MaterialIcons name="close" size={20} />
@@ -108,9 +100,8 @@ export default function NewPostForm({ gameId }: Props) {
           </View>
         </View>
       </Modal>
-      <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.button}>
-        <MaterialIcons name="add" size={20} />
-        <Text>Publish a new post!</Text>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        {buttonComponent}
       </TouchableOpacity>
     </View>
   );
@@ -154,27 +145,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     columnGap: 15
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    borderColor: "#000",
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    elevation: 2,
-    flexDirection: "row",
-    columnGap: 10
-  },
   buttonGroup: {
     flexDirection: "row",
     columnGap: 10
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
   },
   textStyle: {
     color: 'white',

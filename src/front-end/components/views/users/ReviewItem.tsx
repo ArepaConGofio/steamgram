@@ -1,5 +1,6 @@
 import { AuthContext } from "@/context/AuthContext";
 import { Review } from "@/models/Review";
+import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useContext } from "react";
@@ -12,6 +13,7 @@ type Props = {
 
 export default function ReviewItem({ review, isOnProfile }: Props) {
     const router = useRouter();
+    const api = new GamesAPIHandler();
     const { user } = useContext(AuthContext);
 
     function generateRatingStars(rating: number) {
@@ -20,7 +22,15 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
         ))
     }
 
-    const onDeletePress = () => Alert.alert("Deleting review");
+    const onDeletePress = () => {
+        // TODO: Implement review deleting logic
+        Alert.alert("Deleting review")
+        /*
+        api.deleteReview(review.id)
+        .then(value => Alert.alert(value ? "Review deleted" : "Error deleting review"))
+        .catch(reason => Alert.alert("Error", reason))
+        */
+    }
 
     return (
         <View style={styles.container}>
