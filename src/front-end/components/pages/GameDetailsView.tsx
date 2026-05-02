@@ -34,14 +34,14 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
 
     const generateDataList = () => {
         return <FlatList data={contentData}
-        renderItem={({item, index}) => content == "posts" 
-                    ? <PostItem post={item as Post}/> 
-                    : <ReviewItem review={item as Review}/>
-                    }
-        contentContainerStyle={{ marginVertical: 25 }}
-        ItemSeparatorComponent={() => <View style={{ margin: 10 }}/>}
-        scrollEnabled={false}
-        keyExtractor={(_, index) => index.toString()}/>
+            renderItem={({ item }) => content == "posts"
+                ? <PostItem post={item as Post} />
+                : <ReviewItem review={item as Review} />
+            }
+            contentContainerStyle={{ marginVertical: 25 }}
+            ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
+            scrollEnabled={false}
+            keyExtractor={(_, index) => index.toString()} />
     }
 
     return (
@@ -68,7 +68,7 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     ))}
                 </View>
                 <Text style={styles.subtitle}>Gallery</Text>
-                <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder />   
+                <ImageCarousel urls={game.screenshots} width={screenshotsWidth} imageStyle={screenshotsStyle} showPlaceholder />
                 <View style={styles.tabsContainer}>
                     <Pressable style={[styles.tab, content == "posts" && { borderBottomWidth: 3 }]} onPress={() => goToTab("reviews")}>
                         <Text style={styles.tabLabel}>Posts</Text>
@@ -78,8 +78,8 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     </Pressable>
                 </View>
                 <View style={styles.tabView}>
-                    { content == "posts" ? <NewPostForm gameId={game.id}/> : <NewReviewForm gameId={game.id}/> }
-                    { generateDataList() }
+                    {content == "posts" ? <NewPostForm gameId={game.id} /> : <NewReviewForm gameId={game.id} />}
+                    {generateDataList()}
                 </View>
             </ScrollView>
         </View>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         borderBottomColor: "black",
-        borderBottomWidth: 1, 
+        borderBottomWidth: 1,
     },
     tabLabel: {
         fontSize: 18
