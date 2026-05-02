@@ -25,15 +25,13 @@ export default function ExplorerContainer() {
     }
 
     const search = () => {
-        if (queryType == "games") {
+        setResult([]);
 
+        if (queryType == "games") {
             gamesApi.searchGamesByTitle(query)
                 .then(result => setResult(result))
                 .catch(reason => Alert.alert("Error", reason))
-
         } else {
-
-            setResult([]);
             usersApi.searchUserByUsername(query)
                 .then(result => setResult(...[result]))
                 .catch(reason => Alert.alert("Error", reason))
@@ -53,7 +51,11 @@ export default function ExplorerContainer() {
         if (length > 1 && length % 3 == 0) {
             search();
         }
-    }, [query, queryType])
+    }, [query]);
+
+    useEffect(() => {
+        setResult([]);
+    }, [queryType]);
 
     return <ExplorerView query={query} setQuery={setSearchText} onSearch={search} data={result} setType={setSearchType} searchType={queryType} />
 }
