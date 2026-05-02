@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from "react-native";
 
-export default function Header() {
+export default function AuthTitle() {
   return <Text style={styles.title}>Steamgram</Text>;
 }
 

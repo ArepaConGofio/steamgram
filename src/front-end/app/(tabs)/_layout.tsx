@@ -1,4 +1,4 @@
-import generateHeader from "@/components/views/shared/Header";
+import { default as MyHeader } from "@/components/views/shared/Header";
 import { AuthContext } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
 import { FontAwesome } from "@expo/vector-icons";
@@ -19,7 +19,7 @@ export default function TabLayout() {
           name="index"
           options={{
             title: "Community",
-            header: () => generateHeader("Community"),
+            header: () => <MyHeader title="Community"/>,
             tabBarIcon: () => <FontAwesome size={24} name="home" />,
           }}
         />
@@ -27,7 +27,7 @@ export default function TabLayout() {
           name="explore"
           options={{
             title: "Explore",
-            header: () => generateHeader("Explore"),
+            header: () => <MyHeader title="Explore"/>,
             tabBarIcon: () => <FontAwesome size={24} name="search" />,
           }}
         />
@@ -35,7 +35,7 @@ export default function TabLayout() {
           name="games"
           options={{
             title: "Games",
-            header: () => generateHeader("Games"),
+            header: () => <MyHeader title="Games"/>,
             tabBarIcon: () => <FontAwesome size={24} name="gamepad" />,
           }}
         />
