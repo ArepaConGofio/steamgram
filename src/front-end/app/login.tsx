@@ -1,4 +1,4 @@
-import Header from "@/components/views/shared/AuthTitle";
+import AuthTitle from "@/components/views/shared/AuthTitle";
 import Footer from "@/components/views/shared/Footer";
 import LoginContainer from "@/containers/LoginContainer";
 import { StyleSheet } from "react-native";
@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function LoginPage() {
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <AuthTitle/>
       <LoginContainer />
       <Footer />
     </SafeAreaView>

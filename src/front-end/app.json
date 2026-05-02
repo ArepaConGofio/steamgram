@@ -27,6 +27,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "expo-local-authentication",
       "expo-router",
       [
         "expo-splash-screen",
@@ -39,7 +40,7 @@
             "backgroundColor": "#000000"
           }
         }
-      ],
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

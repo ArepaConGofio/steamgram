@@ -1,7 +1,7 @@
 import GameDetailsView from "@/components/pages/GameDetailsView";
 import { Game } from "@/models/Game";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 
@@ -17,8 +17,8 @@ export default function GameDetailsContainer({ game }: Props) {
     const [data, setData] = useState<unknown[]>([]);
 
     const generateRightHeaderButton = () => {
-        // TODO: Implements logic of red heart when you liked it and be pressable to toggle like.
-        return <AntDesign name="heart" size={24}/>
+        // TODO: Implements saved toggle logic
+        return <MaterialCommunityIcons name="plus" size={24}/>
     }
 
     const toggleTab = (tab: ContentTabs) => {

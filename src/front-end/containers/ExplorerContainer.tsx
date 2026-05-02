@@ -48,7 +48,7 @@ export default function ExplorerContainer() {
             setResult([]);
             return;
         }
-        if (length > 1 && length % 3 == 0) {
+        if (length > 3) {
             search();
         }
     }, [query]);

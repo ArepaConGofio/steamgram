@@ -1,7 +1,7 @@
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FlatList, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import PostItem from "../views/users/PostItem";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 export default function PostsView({ data, games, filter, filterSetter }: Props) {  
     function renderGameItem(item: Game) {
         return (
-            <Pressable onPress={() => filterSetter(filter == item ? undefined : item)}>
+            <TouchableOpacity onPress={() => filterSetter(filter == item ? undefined : item)}>
                 <View style={[
                     { alignItems: "center", width: 125, padding: 10 },
                     filter == item && { backgroundColor: "lightgray" }
@@ -25,7 +25,7 @@ export default function PostsView({ data, games, filter, filterSetter }: Props) 
                     }}/>
                     <Text style={{ fontSize: 15, textAlign: "center" }} numberOfLines={2}>{item.name}</Text>
                 </View>
-            </Pressable>
+            </TouchableOpacity>
         )
     }
 

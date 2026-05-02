@@ -4,7 +4,7 @@ import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
-import { Alert, Image, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 type Props = {
   gameId: GameId;
@@ -69,9 +69,9 @@ export default function NewPostForm({ gameId }: Props) {
                 <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover} />
                 <Text style={styles.itemLabel}>{currentGame?.name}</Text>
               </View>
-              <Pressable onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <MaterialIcons name="close" size={20} />
-              </Pressable>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.modalBody}>
@@ -87,31 +87,31 @@ export default function NewPostForm({ gameId }: Props) {
               <TextInput placeholder="Inserte el enlace de la imagen..."
                 style={{ flex: 0.8 }}
                 onChangeText={setImageUrl} value={imageUrl} />
-              <Pressable style={{ flex: 0.1 }} onPress={addImage}>
+              <TouchableOpacity style={{ flex: 0.1 }} onPress={addImage}>
                 <MaterialIcons name="add" size={30} />
-              </Pressable>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.modalActions}>
               <View style={styles.buttonGroup}>
-                <Pressable onPress={() => setImagePromptVisible(!imagePromptVisible)}>
+                <TouchableOpacity onPress={() => setImagePromptVisible(!imagePromptVisible)}>
                   <MaterialIcons name="image" size={20} />
-                </Pressable>
+                </TouchableOpacity>
               </View>
               <View style={styles.buttonGroup}>
                 <Text style={{ color: "gray" }}>{description.length}/2000</Text>
-                <Pressable onPress={askForSend}>
+                <TouchableOpacity onPress={askForSend}>
                   <MaterialIcons name="send" size={20} />
-                </Pressable>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
         </View>
       </Modal>
-      <Pressable onPress={() => setModalVisible(true)} style={styles.button}>
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.button}>
         <MaterialIcons name="add" size={20} />
         <Text>Publish a new post!</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }

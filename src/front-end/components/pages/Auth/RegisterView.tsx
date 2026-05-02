@@ -35,23 +35,33 @@ export default function RegisterView({ getters, setters, callbacks }: Props) {
         <LabeledTextInput
           label="Username"
           setter={setters.setUsername}
+          placeholder="Insert your username here!"
+          value={getters.username}
+        />
+        <LabeledTextInput
+          label="Nickname"
+          setter={setters.setUsername}
+          placeholder="This is what other users will see (optional)"
           value={getters.username}
         />
         <LabeledTextInput
           label="Email"
           setter={setters.setEmail}
+          placeholder="Insert your email here!"
           value={getters.email}
         />
         <LabeledTextInput
           label="Password"
           setter={setters.setPassword}
           value={getters.password}
+          placeholder="The password must be minimun 8 characters..."
           isSecureEntry
         />
         <LabeledTextInput
           label="Repeat password"
           setter={setters.setRepeatedPassword}
           value={getters.repeatedPassword}
+          placeholder="Repeat the password!"
           isSecureEntry
         />
         <TouchableOpacity

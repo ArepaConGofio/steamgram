@@ -1,7 +1,7 @@
 import IconButton from "@/components/ui/IconButton";
 import { AuthContext } from "@/context/AuthContext";
-import { FontAwesome } from "@expo/vector-icons";
-import { Redirect } from "expo-router";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Redirect, useRouter } from "expo-router";
 import { useContext } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
@@ -13,13 +13,14 @@ type Props = {
 
 export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
   const { user } = useContext(AuthContext);
+  const router = useRouter();
 
   if (!user) return <Redirect href={"/login"} />;
 
 
   return (
     <View style={styles.container}>
-      <Image width={100} height={100} src={avatarUrl} alt={`{username} profile photo`} />
+      <Image width={100} height={100} src={avatarUrl} alt={`${username} profile photo`} style={styles.avatar} />
       <View style={styles.innerContainer}>
         {nickname && <Text style={styles.nicknameLabel}>{nickname}</Text>}
         <Text
@@ -31,22 +32,15 @@ export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
         </Text>
         <View style={styles.actionsContainer}>
           {user.username === username ? (
-            <>
-              <IconButton
-                label="Create"
-                icon={() => <FontAwesome name="plus" color="#ffffff" />}
-                callback={() => alert("Creating something")}
-              />
-              <IconButton
-                label="Edit"
-                icon={() => <FontAwesome name="edit" color="#ffffff" />}
-                callback={() => alert("Editing profile")}
-              />
-            </>
+            <IconButton
+              label="Settings"
+              icon={() => <MaterialIcons name="settings" size={20} />}
+              callback={() => router.navigate(`/(app)/users/${user.username}/edit`)}
+            />
           ) : (
             <IconButton
               label="Follow"
-              icon={() => <FontAwesome name="user" color="#ffffff" />}
+              icon={() => <MaterialIcons name="person" size={20}/>}
               callback={() => alert("Following person")}
             />
           )}
@@ -65,10 +59,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   actionsContainer: {
-    flexDirection: "row",
     flex: 1,
-    justifyContent: "center",
-    alignItems: "flex-end",
+    justifyContent: "flex-end",
     width: "100%",
   },
   usernameSecondaryLabel: {
@@ -81,4 +73,8 @@ const styles = StyleSheet.create({
   nicknameLabel: {
     fontSize: 24,
   },
+  avatar: {
+    backgroundColor: "gray",
+    borderRadius: 100
+  }
 });

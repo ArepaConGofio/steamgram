@@ -1,7 +1,7 @@
 import { Post } from "@/models/Post";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Markdown from 'react-native-markdown-display';
 
 type Props = {
@@ -14,12 +14,12 @@ export default function PostItem({ post }: Props) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Pressable onPress={() => router.replace(`/(app)/users/${post.author}`)}>
+                <TouchableOpacity onPress={() => router.navigate(`/(app)/users/${post.author}`)}>
                     <Text style={styles.authorLabel}>@{post.author}</Text>
-                </Pressable>
-                <Pressable onPress={() => router.replace(`/(app)/games/${post.gameId}`)}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => router.navigate(`/(app)/games/${post.gameId}`)}>
                     <Text style={styles.gameTitleLabel}>{post.gameTitle}</Text>
-                </Pressable>
+                </TouchableOpacity>
             </View>
             <Text style={styles.title}>{post.title}</Text>
             
@@ -27,7 +27,7 @@ export default function PostItem({ post }: Props) {
 
             <View style={styles.bottomContainer}>
                 <View style={{ flexDirection: "row"}}>
-                    <AntDesign name="heart" size={16}/>
+                    <MaterialCommunityIcons name="heart" size={16}/>
                     <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
                 </View>
             </View>
