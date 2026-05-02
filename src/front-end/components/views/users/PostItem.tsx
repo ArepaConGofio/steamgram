@@ -1,7 +1,9 @@
+import { AuthContext } from "@/context/AuthContext";
 import { Post } from "@/models/Post";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useContext } from "react";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Markdown from 'react-native-markdown-display';
 
 type Props = {
@@ -10,25 +12,45 @@ type Props = {
 
 export default function PostItem({ post }: Props) {
     const router = useRouter();
+    const { user } = useContext(AuthContext);
+
+    const onAuthorPress = () => router.navigate(`/(app)/users/${post.author}`);
+    const onGamePress = () => router.navigate(`/(app)/games/${post.gameId}`);
+    const onEditPress = () => Alert.alert("Editing");
+    const onDeletePress = () => Alert.alert("Deleting");
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => router.navigate(`/(app)/users/${post.author}`)}>
-                    <Text style={styles.authorLabel}>@{post.author}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => router.navigate(`/(app)/games/${post.gameId}`)}>
-                    <Text style={styles.gameTitleLabel}>{post.gameTitle}</Text>
-                </TouchableOpacity>
+                <View style={styles.headerLeft}>
+                    <TouchableOpacity onPress={onAuthorPress}>
+                        <Text style={styles.authorLabel}>@{post.author}</Text>
+                    </TouchableOpacity>
+                    {/* TODO: Implement post creation date */}
+                    <Text style={{ color: "gray" }}>{post.creationDate ? post.creationDate : "01-01-2000"}</Text>
+                </View>
+                <View style={styles.headerRight}>
+                    <TouchableOpacity onPress={onGamePress}>
+                        <Text style={styles.gameTitleLabel}>Game: {post.gameTitle}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
             <Text style={styles.title}>{post.title}</Text>
             
-            <Markdown key="pistacho" style={markdownStyle}>{post.description}</Markdown>
+            <Markdown style={markdownStyle}>{post.description}</Markdown>
 
             <View style={styles.bottomContainer}>
-                <View style={{ flexDirection: "row"}}>
-                    <MaterialCommunityIcons name="heart" size={16}/>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <MaterialCommunityIcons name="heart" size={24}/>
                     <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
+                </View>
+                <View style={{flexDirection: "row", columnGap: 10, display: post.userId == user?.id ? "flex" : "none"}}>
+                    <TouchableOpacity onPress={onEditPress}>
+                        <MaterialIcons name="edit" size={24}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={onDeletePress}>
+                        <MaterialIcons name="delete" size={24}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -66,6 +88,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 15,
+    },
+    headerLeft: {
+        
+    },
+    headerRight: {
+        justifyContent: "center"
     },
     gameTitleLabel: {
         color: "gray",
