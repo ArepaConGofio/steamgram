@@ -1,6 +1,6 @@
 import { Game, GameId } from "@/models/Game";
 import { Post } from "@/models/Post";
-import { Review } from "@/models/Review";
+import { Review, ReviewId } from "@/models/Review";
 import { APIHandler } from "./APIHandler";
 import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
@@ -24,6 +24,10 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
   }
 
   reviewGame(review: Review): Promise<Review> {
+    throw new Error("Method not implemented.");
+  }
+
+  deleteReview(reviewId: ReviewId): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
   

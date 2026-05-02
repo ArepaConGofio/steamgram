@@ -3,8 +3,7 @@ import {
   LikePostResponse,
   Post,
   PostCreationRequest,
-  PostEditionRequest,
-  PostId,
+  PostId
 } from "@/models/Post";
 import { UserId } from "@/models/User";
 
@@ -28,13 +27,6 @@ export interface IPostsAPIHandler {
    * attached game, title, optional description and optional attachment.
    */
   createPost(postToCreate: PostCreationRequest): Promise<Post>;
-
-  /**
-   * Edit an existent post.
-   * @param postToEdit - Request to edit a post. Only changes values was implemented.
-   * The available values to change are title, description and attachment.
-   */
-  editPost(postToEdit: PostEditionRequest): Promise<Post>;
 
   /**
    * Delete an existent post.

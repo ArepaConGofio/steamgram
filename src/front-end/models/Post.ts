@@ -8,7 +8,8 @@ export type Post = {
     gameTitle: string;
     title: string;
     description: string;
-    likesCount: number
+    likesCount: number;
+    creationDate: string;
 }
 
 export type LikePostResponse = {

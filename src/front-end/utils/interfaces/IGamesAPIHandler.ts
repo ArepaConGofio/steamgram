@@ -1,6 +1,6 @@
 import { Game, GameId } from "@/models/Game";
 import { Post } from "@/models/Post";
-import { Review } from "@/models/Review";
+import { Review, ReviewId } from "@/models/Review";
 
 export interface IGamesAPIHandler {
   /**
@@ -23,6 +23,8 @@ export interface IGamesAPIHandler {
   searchGamesByTitle(title: string, limit?: number): Promise<Game[]>;
 
   reviewGame(review: Review): Promise<Review>;
+
+  deleteReview(reviewId: ReviewId): Promise<boolean>
 
   getGameReviews(gameId: GameId): Promise<Review[]>;
 

@@ -1,7 +1,10 @@
+import { AuthContext } from "@/context/AuthContext";
 import { Review } from "@/models/Review";
+import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useContext } from "react";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
     review: Review;
@@ -10,9 +13,23 @@ type Props = {
 
 export default function ReviewItem({ review, isOnProfile }: Props) {
     const router = useRouter();
+    const api = new GamesAPIHandler();
+    const { user } = useContext(AuthContext);
 
     function generateRatingStars(rating: number) {
-        return Array.from(Array(rating)).map((_, index) => <MaterialIcons key={index} name="star" size={16}/>)
+        return [1,2,3,4,5].map(value => (
+            <MaterialIcons key={value} name={value <= rating ? "star" : "star-outline"} size={24}/>
+        ))
+    }
+
+    const onDeletePress = () => {
+        // TODO: Implement review deleting logic
+        Alert.alert("Deleting review")
+        /*
+        api.deleteReview(review.id)
+        .then(value => Alert.alert(value ? "Review deleted" : "Error deleting review"))
+        .catch(reason => Alert.alert("Error", reason))
+        */
     }
 
     return (
@@ -31,12 +48,18 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
                         </TouchableOpacity>
                     </View>
                 }
-                <View style={styles.starsContainer}>
-                    {generateRatingStars(review.rating)}
-                </View>
+
             </View>
             <Text style={styles.title}>{review.title}</Text>
             <Text>{review.description}</Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <View style={styles.starsContainer}>
+                    {generateRatingStars(review.rating)}
+                </View>
+                <TouchableOpacity onPress={onDeletePress} style={{ display: review.userId == user?.id ? "flex" : "none" }}>
+                    <MaterialIcons name="delete" size={24}/>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -45,7 +68,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
         padding: 15,
-        borderRadius: 20
+        borderRadius: 20,
+        rowGap: 10
     },
     header: {
         flexDirection: "row",
@@ -69,6 +93,5 @@ const styles = StyleSheet.create({
     },
     starsContainer: {
         flexDirection: "row",
-        justifyContent: "center"
     }
 })
