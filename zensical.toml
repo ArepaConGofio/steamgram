@@ -14,7 +14,7 @@ site_author = "JesusLugo2002 and strSalazar"
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
 # Read more: https://zensical.org/docs/setup/basics/#site_url
-#site_url = "https://www.example.com/"
+site_url = "https://arepacongofio.github.io/steamgram"
 repo_url = "https://github.com/ArepaConGofio/steamgram"
 repo_name = "ArepaConGofio/steamgram"
 
