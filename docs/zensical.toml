@@ -15,6 +15,8 @@ site_author = "JesusLugo2002 and strSalazar"
 # documentation you should set this.
 # Read more: https://zensical.org/docs/setup/basics/#site_url
 #site_url = "https://www.example.com/"
+repo_url = "https://github.com/ArepaConGofio/steamgram"
+repo_name = "ArepaConGofio/steamgram"
 
 copyright = """
 Copyright &copy; 2026 JesusLugo2002 and strSalazar
@@ -27,9 +29,29 @@ Copyright &copy; 2026 JesusLugo2002 and strSalazar
 # can be defined using TOML syntax.
 #
 # Read more: https://zensical.org/docs/setup/navigation/
-# nav = [
-#   { "Get started" = "index.md" },
-# ]
+nav = [
+    { "Home" = "index.md" },
+    { "Sobre nosotros" = [
+        "about/what.md",
+        "about/who.md",
+        "about/why.md",
+        "about/how.md",
+        "about/license.md"
+    ]},
+    { "Instalación y uso" = [
+        "get_started/requirements.md",
+        "get_started/installation.md"
+    ]},
+    { "Arquitectura y diseño" = [
+        "design/flow.md",
+        "design/structure.md",
+        "design/design.md",
+    ]},
+    { "API" = [
+        "api/reference.md"
+    ]},
+    { "El futuro" = "future/our-future.md" }
+]
 
 # With the "extra_css" option you can add your own CSS styling to customize
 # your Zensical project according to your needs. You can add any number of
@@ -193,7 +215,7 @@ features = [
     # When tabs are enabled, top-level sections are rendered in a menu layer
     # below the header for viewports above 1220px, but remain as-is on mobile.
     # https://zensical.org/docs/setup/navigation/#navigation-tabs
-    #"navigation.tabs",
+    "navigation.tabs",
 
     # When sticky tabs are enabled, navigation tabs will lock below the header
     # and always remain visible when scrolling down.
