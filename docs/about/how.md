@@ -1,5 +1,5 @@
 ---
-icon: lucide/cog
+icon: lucide/git-fork
 ---
 
 # Desarrollo del proyecto

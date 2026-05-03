@@ -1,5 +1,5 @@
 ---
-icon: lucide/app-window
+icon: lucide/gamepad-directional
 ---
 
 # ¿Qué es Steamgram?

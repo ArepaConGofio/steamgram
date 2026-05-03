@@ -1,5 +1,5 @@
 ---
-icon: lucide/app-window
+icon: lucide/wrench
 ---
 
 # Requisitos
