@@ -30,8 +30,9 @@ public class CommentController implements IController<CommentResponse, CommentRe
     ICommentService commentService;
     CommentMapper commentMapper;
 
-    public CommentController(ICommentService commentService) {
+    public CommentController(ICommentService commentService, CommentMapper commentMapper) {
         this.commentService = commentService;
+        this.commentMapper = commentMapper;
     }
 
     @Override
