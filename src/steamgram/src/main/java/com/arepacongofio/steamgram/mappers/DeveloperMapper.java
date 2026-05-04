@@ -12,7 +12,7 @@ import com.arepacongofio.steamgram.entities.Developer;
 @Mapper(componentModel = "spring")
 public interface DeveloperMapper {
 
-    //es posible que no se use
+    // es posible que no se use
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "users", ignore = true)

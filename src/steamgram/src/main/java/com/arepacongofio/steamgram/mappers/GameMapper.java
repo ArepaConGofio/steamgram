@@ -8,16 +8,18 @@ import org.mapstruct.Mapping;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameCreationResponse;
 import com.arepacongofio.steamgram.entities.Game;
+import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { IDeveloperService.class })
 public interface GameMapper {
+
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "developer", ignore = true)
+    @Mapping(target = "developer", source = "developerId")
     Game toEntity(GameRequest game);
 
-    @Mapping(target = "idDeveloper", ignore = true)
+    @Mapping(target = "idDeveloper", source = "developer.id")
     @Mapping(target = "name", source = "title")
-    GameCreationResponse toResponse( Game game);
+    GameCreationResponse toResponse(Game game);
 
     List<GameCreationResponse> toResponseList(List<Game> games);
 }
