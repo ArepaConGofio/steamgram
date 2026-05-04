@@ -3,6 +3,7 @@ package com.arepacongofio.steamgram.domain.requests;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class GameRequest {
     @NotBlank
@@ -14,7 +15,7 @@ public class GameRequest {
     @NotBlank
     String publisher;
 
-    @NotBlank
+    @NotNull
     Integer developerId;
 
     List<String> genres;

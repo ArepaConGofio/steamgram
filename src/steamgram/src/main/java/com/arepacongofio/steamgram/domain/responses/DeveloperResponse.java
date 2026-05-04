@@ -1,7 +1,7 @@
 package com.arepacongofio.steamgram.domain.responses;
 
 public class DeveloperResponse {
-    
+
     private Integer id;
     private String name;
 

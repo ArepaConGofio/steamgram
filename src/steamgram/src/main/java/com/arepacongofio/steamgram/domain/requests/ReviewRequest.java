@@ -1,13 +1,14 @@
 package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ReviewRequest {
-    
-    @NotBlank
+
+    @NotNull
     Integer idUser;
-    
-    @NotBlank
+
+    @NotNull
     Integer idGame;
 
     @NotBlank

@@ -1,12 +1,13 @@
 package com.arepacongofio.steamgram.domain.requests;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class LikeRequest {
 
-    @NotBlank
+    @NotNull
     Integer idUser;
-    @NotBlank
+
+    @NotNull
     Integer idPost;
 
     public Integer getIdUser() {

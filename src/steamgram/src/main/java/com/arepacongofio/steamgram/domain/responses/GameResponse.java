@@ -1,15 +1,16 @@
 package com.arepacongofio.steamgram.domain.responses;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class GameResponse {
 
-    @NotBlank
+    @NotNull
     Integer idGame;
 
     String idSteam;
 
-    @NotBlank
+    @NotNull
     Integer idDeveloper;
 
     String publisher;

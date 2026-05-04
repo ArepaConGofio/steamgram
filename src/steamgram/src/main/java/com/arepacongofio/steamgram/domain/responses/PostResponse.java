@@ -1,18 +1,25 @@
 package com.arepacongofio.steamgram.domain.responses;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class PostResponse {
-    
-    @NotBlank
+
+    @NotNull
     Integer id;
-    
-    @NotBlank
+
+    @NotNull
     Integer idUser;
+
+    @NotNull
+    Integer idGame;
+
+    @NotBlank
+    String nicknameUser;
     
     @NotBlank
-    Integer idGame;
-    
+    String gameTitle;
+
     @NotBlank
     String title;
     
@@ -56,6 +63,22 @@ public class PostResponse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getNicknameUser() {
+        return nicknameUser;
+    }
+
+    public void setNicknameUser(String nicknameUser) {
+        this.nicknameUser = nicknameUser;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
+    }
+
+    public void setGameTitle(String gameTitle) {
+        this.gameTitle = gameTitle;
     }
 
 }

@@ -1,22 +1,30 @@
 package com.arepacongofio.steamgram.domain.responses;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ReviewResponse {
 
-    @NotBlank
+    @NotNull
     Integer id;
 
-    @NotBlank
+    @NotNull
     Integer idGame;
 
-    @NotBlank
+    @NotNull
     Integer idUser;
 
     @NotBlank
+    String nicknameUser;
+
+    @NotBlank
+    String gameName;
+    
+    @NotBlank
     String title;
 
-    Integer description;
+    @NotBlank
+    String description;
 
     Integer rating;
 
@@ -52,11 +60,11 @@ public class ReviewResponse {
         this.title = title;
     }
 
-    public Integer getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Integer description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -66,6 +74,22 @@ public class ReviewResponse {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public String getNicknameUser() {
+        return nicknameUser;
+    }
+
+    public void setNicknameUser(String nicknameUser) {
+        this.nicknameUser = nicknameUser;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     

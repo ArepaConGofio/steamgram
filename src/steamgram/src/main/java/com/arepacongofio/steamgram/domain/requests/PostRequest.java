@@ -1,19 +1,21 @@
 package com.arepacongofio.steamgram.domain.requests;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class PostRequest {
 
-    @NotBlank
+    @NotNull
     Integer idUser;
-    
-    @NotBlank
+
+    @NotNull
     Integer idGame;
 
     @NotBlank
     String title;
 
     String description;
+
     String attachment;
 
     public Integer getIdUser() {
