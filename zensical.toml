@@ -30,7 +30,6 @@ Copyright &copy; 2026 ArepaConGofio
 #
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
-    { "Home" = "index.md" },
     { "Sobre nosotros" = [
         "about/what.md",
         "about/who.md",
@@ -42,15 +41,14 @@ nav = [
         "get_started/requirements.md",
         "get_started/installation.md"
     ]},
-    { "Arquitectura y diseño" = [
-        "design/flow.md",
-        "design/structure.md",
+    { "Diseño" = [
+        "design/use-cases.md",
         "design/design.md",
     ]},
-    { "API" = [
-        "api/reference.md"
-    ]},
-    { "El futuro" = "future/our-future.md" }
+    { "Arquitectura" = [
+        "architecture/auth-flow.md",
+        "architecture/structure.md"
+    ]}
 ]
 
 # With the "extra_css" option you can add your own CSS styling to customize
@@ -311,3 +309,14 @@ link = "https://github.com/ArepaConGofio"
 [project.markdown_extensions.attr_list]
 [project.markdown_extensions.md_in_html]
 [project.markdown_extensions.pymdownx.blocks.caption]
+
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.snippets]
+[project.markdown_extensions.pymdownx.superfences]
+
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.pymdownx.details]
