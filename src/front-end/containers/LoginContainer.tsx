@@ -13,7 +13,7 @@ export default function LoginContainer() {
   const goToRegister = () => router.navigate("/register");
 
   const submit = async () => {
-    const isLogged = await login(username, password);
+    const isLogged = await login({ username, password });
     if (!isLogged) {
       alert("Invalid credentials");
       return

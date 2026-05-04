@@ -7,6 +7,7 @@ type RegisterGetters = {
   email: string;
   password: string;
   repeatedPassword: string;
+  nickname: string;
 };
 
 type RegisterSetters = {
@@ -14,6 +15,7 @@ type RegisterSetters = {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   setRepeatedPassword: React.Dispatch<React.SetStateAction<string>>;
+  setNickname: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type RegisterCallbacks = {
@@ -40,9 +42,9 @@ export default function RegisterView({ getters, setters, callbacks }: Props) {
         />
         <LabeledTextInput
           label="Nickname"
-          setter={setters.setUsername}
+          setter={setters.setNickname}
           placeholder="This is what other users will see (optional)"
-          value={getters.username}
+          value={getters.nickname}
         />
         <LabeledTextInput
           label="Email"
