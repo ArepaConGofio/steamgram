@@ -18,7 +18,7 @@ Una ventaja clave de React Native es que permite un desarrollo más eficiente y 
 
 ## Estructura de carpetas
 
-``` bash
+``` bash title="src/frontend/..."
 .
 ├── app/                 # Pantallas/rutas de la aplicación                    
 ├── assets/              # Recursos de la aplicación
@@ -77,7 +77,7 @@ export default function RegisterPage() {
 }
 ```
 
-### Componente de contenedor
+### RegisterContainer
 
 Como se mencionó anteriormente, los contenedores son los componentes que poseen la lógica. Aquí implementamos esas funciones que se ejecutarán en la página de registro. Nuevamente, para mantener la convención, añadimos de sufijo la palabra **Container**.
 
@@ -123,7 +123,7 @@ export default function RegisterContainer() {
 
 Como se puede ver, en **RegisterContainer** no hay nada relacionado con el componente visual ni elementos de interfaz, en cambio, establecemos aqui las variables del formulario de registro, la función de enviar datos y la de redirección al *Login* cuando se selecciona la opción de "¿Ya tienes una cuenta? ¡Inicia sesión!".
 
-### Componente de presentación
+### RegisterView
 
 Este es el componente principal, visual, que usamos para mostrar una pantalla. Por convención, le añadimos de sufijo **View**. En este caso, **RegisterView** pilla todos los datos provenientes del contenedor y los muestra bajo una estructura y un estilo establecido en el fichero.
 
