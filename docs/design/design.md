@@ -57,12 +57,12 @@ Una de las primeras implementaciones fue el uso de `returnKeyType` y `onSubmitEd
 ```
 
 <figure>
-    ![Teclado Next]()
+    ![Teclado Next](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/design/keyboard1.jpeg){ width="500" }
     <figcaption>Teclado con `returnKeyType="next"`</figcaption>
 </figure>
 
 <figure>
-    ![Teclado Done]()
+    ![Teclado Done](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/design/keyboard2.jpeg){ width="500" }
     <figcaption>Teclado con `returnKeyType="done"`</figcaption>
 </figure>
 
@@ -105,7 +105,7 @@ export default function GameDetailsPage() {
 Y con minimalista no nos referimos a todo blanco y simple, si no a remover lo innecesario. Procuramos mostrar en pantalla aquello estrictamente necesario para el usuario, sin mostrar información de más.
 
 <figure>
-    ![Diseño minimalista]()
+    ![Diseño minimalista](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/design/overview.jpeg){ width="500" }
     <figcaption>Un vistazo al diseño de la pantalla de comunidad</figcaption>
 </figure>
 
@@ -114,7 +114,7 @@ Y con minimalista no nos referimos a todo blanco y simple, si no a remover lo in
 Mostrar los enlaces *clickables* con una linea por debajo del texto es un estándar de navegación en la web. Nosotros lo aplicamos también, y gracias a ello podemos ver, como en este ejemplo, es fácil de identificar cuales elementos son interactuables y cuáles no.
 
 <figure>
-    ![Post]()
+    ![Post](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/design/hyperlinks.jpeg){ width="500" }
     <figcaption>Elementos clickables de un post</figcaption>
 </figure>
 
@@ -123,11 +123,11 @@ Mostrar los enlaces *clickables* con una linea por debajo del texto es un están
 Ante diferentes acciones, como todos nos podemos equivocar y se nos puede resbalar el movil, añadimos mensajes de confirmación y advertencias para asegurarnos de que el usuario esté realizando esa acción por voluntad propia y no de la gravedad. A continuación unos ejemplos.
 
 <figure>
-    ![Confirmación para subir un post]()
+    ![Confirmación para subir un post](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/design/warning1.jpeg){ width="500" }
     <figcaption>Elementos clickables de un post</figcaption>
 </figure>
 
 <figure>
-    ![Advertencia antes de eliminar la cuenta]()
+    ![Advertencia antes de eliminar la cuenta](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/design/warning2.jpeg){ width="500" }
     <figcaption>Advertencia antes de eliminar la cuenta (pensándolo bien, ¿por qué querrías abandonar esta maravillosa aplicación? :c)</figcaption>
 </figure>
