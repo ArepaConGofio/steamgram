@@ -45,7 +45,7 @@ nav = [
         "design/auth-flow.md",
         "design/front-structure.md",
         "design/back-structure.md",
-        "design/communication.md",
+        "design/workflow.md",
         "design/design.md",
     ]},
 ]
