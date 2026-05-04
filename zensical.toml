@@ -30,7 +30,6 @@ Copyright &copy; 2026 ArepaConGofio
 #
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
-    { "Home" = "index.md" },
     { "Sobre nosotros" = [
         "about/what.md",
         "about/who.md",
@@ -42,15 +41,13 @@ nav = [
         "get_started/requirements.md",
         "get_started/installation.md"
     ]},
-    { "Arquitectura y diseño" = [
+    { "Diseño" = [
         "design/flow.md",
-        "design/structure.md",
         "design/design.md",
     ]},
-    { "API" = [
-        "api/reference.md"
-    ]},
-    { "El futuro" = "future/our-future.md" }
+    { "Arquitectura" = [
+        "architecture/structure.md"
+    ]}
 ]
 
 # With the "extra_css" option you can add your own CSS styling to customize
