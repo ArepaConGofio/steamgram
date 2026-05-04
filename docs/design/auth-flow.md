@@ -2,7 +2,7 @@
 icon: lucide/lock
 ---
 
-# Flujo de autenticación y registro
+# Sobre autenticación y credenciales
 
 Para que un usuario pueda autenticarse en la aplicación debe enviar sus credenciales a través del *front-end*, hacia el *back-end*, donde alli se resolverá y devolverá una respuesta de confirmación con un *token* de acceso en caso de haber sido autenticado, o una respuesta *Not authenticated* en caso de no haberlo sido.
 
@@ -101,9 +101,14 @@ Una vez tenemos una cuenta registrada en Steamgram, podemos iniciar sesión con 
 
     El *back-end* maneja las contraseñas hasheadas para lograr una mayor seguridad en su almacenamiento y gestión.
 
+
 ## Almacenamiento y uso del token de acceso
 
 El *token* de acceso proporcionado por el *back-end* es almacenado en el dispositivo haciendo uso del paquete [SecureStore](https://docs.expo.dev/versions/latest/sdk/securestore/) de Expo, una librería que nos proporciona una forma segura de encriptar y almacenar información en formato clave-valor.
+
+### Rutas protegidas
+
+La aplicación, a excepción de las pantallas de inicio de sesión y registro, está totalmente protegidas para *guards* de autenticación. Esto le prohibe la entrada a aquellos usuarios no autenticados en la aplicación. Esto se ha logrado haciendo uso de la estructura de React Native y su forma de gestionar las pantallas por medio del `_layout.tsx` en el directorio `app/`, en donde colocamos una pequeña clausula guarda en la que comprueba que exista un usuario y un *token* de acceso establecido.
 
 ## Eliminación de la cuenta
 
