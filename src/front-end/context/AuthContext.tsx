@@ -1,11 +1,14 @@
+import { LoginRequest, RegisterRequest } from "@/models/Auth";
 import { User } from "@/models/User";
+import { ValidationService } from "@/services/ValidationService";
+import { AuthAPIHandler } from "@/utils/AuthAPIHandler";
 import React, { createContext, useCallback, useMemo, useState } from "react";
 
 type AuthContextType = {
   token: string | null;
   user: User | null;
-  login: (username: string, password: string) => Promise<unknown>;
-  register: (username: string, password: string) => Promise<unknown>;
+  login: (credentials: LoginRequest) => Promise<unknown>;
+  register: (credentials: RegisterRequest) => Promise<unknown>;
   logout: () => Promise<void>;
 };
 
@@ -21,24 +24,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
-  const login = useCallback(async (username: string, password: string) => {
-    // TODO: Implements real login
-    if (true) {
-      setToken("token");
-      setUser({
-        id: 6,
-        username: "user",
-        nickname: "TesterMan",
-        avatarUrl: "https://imgs.search.brave.com/ZcgrGo_jYyk29kHWCBgXG71omh3LFkQST9QToD0e1_E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbWVt/ZS1wcm9maWxlLXBp/Y3R1cmUtM3QxZDFj/dGo1YnlydDNucy5q/cGc",
-        email: "test@example.com",
-      });
-      return true;
+  const login = useCallback(async (credentials: LoginRequest) => {
+    const authAPI = new AuthAPIHandler();
+    const response = await authAPI.login(credentials);
+    if (!response.isValid || !response.token || !response.user ) {
+      return { isValid: false, message: "Something wrong happend trying login... Try again later." };
     }
-    // return false;
+
+    setToken(response.token);
+    setUser(response.user);
+    return { isValid: true, token: response.token };
   }, []);
 
-  const register = useCallback(async (username: string, password: string) => {
-    throw new Error("Not implemented");
+  const register = useCallback(async (credentials: RegisterRequest) => {
+    const usernameValidation = await ValidationService.isUsernameAvailable(credentials.username);
+    if (!usernameValidation.isValid) return usernameValidation;
+    const emailValidation = ValidationService.validateEmail(credentials.email);
+    if (!emailValidation.isValid) return emailValidation;
+    const passwordValidation = ValidationService.validatePassword(credentials.password, credentials.repeatedPassword);
+    if (!passwordValidation.isValid) return passwordValidation;
+
+    const authAPI = new AuthAPIHandler();
+    const registerResponse = await authAPI.register(credentials);
+    if (!registerResponse.isValid) {
+      return { isValid: false, message: "Something wrong happend trying to register. Please, try again later..." }
+    }
+    return await login({ username: credentials.username, password: credentials.password });
   }, []);
 
   const logout = useCallback(async () => {
