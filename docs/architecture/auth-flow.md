@@ -116,6 +116,6 @@ Esta opción aprovecha una nueva característica: el uso de la huella. Gracias a
     Si el dispositivo no es compatible para el uso de la huella o no hay huellas registradas, se tendrá que hacer uso de la clave PIN.
 
 <figure markdown="span">
-    ![Ejemplo del uso de huella](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/docs/documentation/assets/fingerprint-example.png)
+    ![Ejemplo del uso de huella](https://raw.githubusercontent.com/ArepaConGofio/steamgram/refs/heads/documentation/assets/fingerprint-example.png)
     <figcaption>Huella requerida para eliminar la cuenta.</figcaption>
 </figure>
