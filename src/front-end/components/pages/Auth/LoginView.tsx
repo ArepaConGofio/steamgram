@@ -1,6 +1,6 @@
-import LabeledTextInput from "@/components/ui/TextInput";
 import { authFormStyles } from "@/styles/AuthFormStyles";
-import { Text, TouchableOpacity, View } from "react-native";
+import { useRef } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 type LoginGetters = {
   username: string;
@@ -24,21 +24,33 @@ type Props = {
 };
 
 export default function LoginView({ getters, setters, callbacks }: Props) {
+  const input2Ref = useRef<TextInput>(null);
+
   return (
     <View style={authFormStyles.formContainer}>
       <Text style={authFormStyles.title}>Login</Text>
       <View style={authFormStyles.form}>
-        <LabeledTextInput
-          label="Username"
-          setter={setters.setUsername}
+
+        <Text style={styles.inputLabel}>Username</Text>
+        <TextInput
+          style={styles.input}
           value={getters.username}
-        />
-        <LabeledTextInput
-          label="Password"
-          setter={setters.setPassword}
+          onChangeText={setters.setUsername}
+          placeholder="Insert your username..."
+          returnKeyType="next"
+          onSubmitEditing={() => { input2Ref.current?.focus() }} 
+          submitBehavior="submit"/>
+
+        <Text style={styles.inputLabel}>Password</Text>
+        <TextInput
+          ref={input2Ref}
+          style={styles.input}
           value={getters.password}
-          isSecureEntry
-        />
+          onChangeText={setters.setPassword}
+          placeholder="Insert your password..."
+          returnKeyType="done"
+          onSubmitEditing={callbacks.submit} />
+
         <TouchableOpacity
           style={authFormStyles.formSubmit}
           onPress={callbacks.submit}
@@ -52,3 +64,19 @@ export default function LoginView({ getters, setters, callbacks }: Props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    borderColor: "#D9C4BF",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginVertical: 5,
+    paddingHorizontal: 10,
+  },
+  inputLabel: {
+    fontWeight: "bold",
+  },
+  inputContainer: {
+    marginVertical: 8,
+  }
+});

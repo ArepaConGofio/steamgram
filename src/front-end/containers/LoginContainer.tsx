@@ -1,7 +1,9 @@
 import LoginView from "@/components/pages/Auth/LoginView";
 import { AuthContext } from "@/context/AuthContext";
+import { ValidationResult } from "@/services/ValidationService";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
+import { Alert } from "react-native";
 
 export default function LoginContainer() {
   const router = useRouter();
@@ -13,10 +15,10 @@ export default function LoginContainer() {
   const goToRegister = () => router.navigate("/register");
 
   const submit = async () => {
-    const isLogged = await login({ username, password });
-    if (!isLogged) {
-      alert("Invalid credentials");
-      return
+    const loginResponse = await login({ username, password }) as ValidationResult;
+    if (!loginResponse.isValid) {
+      Alert.alert("Error", loginResponse.message)
+      return;
     }
     router.replace("/");
   };
