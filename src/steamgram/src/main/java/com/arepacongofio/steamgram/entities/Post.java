@@ -26,12 +26,12 @@ public class Post {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    Integer idUser;
+    @JoinColumn(name = "users")
+    User user;
 
     @ManyToOne
-    @JoinColumn(name = "id_game")
-    Integer idGame;
+    @JoinColumn(name = "game")
+    Game game;
 
     @Column(name = "title")
     String title;
@@ -39,10 +39,10 @@ public class Post {
     @Column(name = "description")
     String description;
 
-    @OneToMany(mappedBy = "Post")
+    @OneToMany(mappedBy = "post")
     List<Like> likes;
 
-    @OneToMany(mappedBy = "Post")
+    @OneToMany(mappedBy = "post")
     List<Comment> comments;
 
     @Column(name = "publicationDate")
@@ -66,15 +66,15 @@ public class Post {
     /**
      * Basic constructor from Post
      * 
-     * @param idUser      from Post
+     * @param user      from Post
      * @param idGame      from Post
      * @param title       from Post
      * @param description from Post
      * @param attachment  from Post
      */
-    public Post(Integer idUser, Integer idGame, String title, String description) {
-        this.idUser = idUser;
-        this.idGame = idGame;
+    public Post(User user, Game game, String title, String description) {
+        this.user = user;
+        this.game = game;
         this.title = title;
         this.description = description;
         this.likes = new ArrayList<>();
@@ -86,7 +86,7 @@ public class Post {
      * Complete constructor
      * 
      * @param id              from Post
-     * @param idUser          from Post
+     * @param user          from Post
      * @param idGame          from Post
      * @param title           from Post
      * @param description     from Post
@@ -95,11 +95,11 @@ public class Post {
      * @param comments        from Post
      * @param publicationDate from Post
      */
-    public Post(Integer id, Integer idUser, Integer idGame, String title, String description,
+    public Post(Integer id, User user, Game game, String title, String description,
             List<Like> likes, List<Comment> comments) {
         this.id = id;
-        this.idUser = idUser;
-        this.idGame = idGame;
+        this.user = user;
+        this.game = game;
         this.title = title;
         this.description = description;
         this.likes = likes;
@@ -119,20 +119,20 @@ public class Post {
         this.id = id;
     }
 
-    public Integer getIdUser() {
-        return this.idUser;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getIdGame() {
-        return this.idGame;
+    public Game getGame() {
+        return this.game;
     }
 
-    public void setIdGame(Integer idGame) {
-        this.idGame = idGame;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public String getTitle() {
@@ -195,8 +195,8 @@ public class Post {
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +
-                ", idUser='" + getIdUser() + "'" +
-                ", idGame='" + getIdGame() + "'" +
+                ", user='" + getUser() + "'" +
+                ", game='" + getGame() + "'" +
                 ", title='" + getTitle() + "'" +
                 ", description='" + getDescription() + "'" +
                 ", likes='" + getLikes() + "'" +

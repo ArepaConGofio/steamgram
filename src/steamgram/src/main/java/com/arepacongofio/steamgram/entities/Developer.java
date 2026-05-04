@@ -23,22 +23,22 @@ public class Developer{
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "developer_users")
     List<User> users;
     
     @Column(name = "name")
     String name;
 
     @ManyToOne
-    @JoinColumn(name = "id_post")
+    @JoinColumn(name = "developer_posts")
     List <Post> posts;
     
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "developer_followers")
     List <User> followers;
 
     @ManyToOne
-    @JoinColumn(name = "id_game")
+    @JoinColumn(name = "developer_games")
     List <Game> developedGames;
     
     /**

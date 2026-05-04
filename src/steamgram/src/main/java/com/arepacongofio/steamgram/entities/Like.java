@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
  * Class like
  */
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 public class Like {
 
     @Id
@@ -24,12 +24,12 @@ public class Like {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    Integer idUser;
+    @JoinColumn(name = "users")
+    User user;
 
     @ManyToOne
     @JoinColumn(name = "id_post")
-    Integer idPost;
+    Post post;
 
     @Column(name = "date")
     LocalDateTime date;
@@ -52,12 +52,12 @@ public class Like {
     /**
      * Basic constructor
      * 
-     * @param idUser from Like
-     * @param idPost from Like
+     * @param user from Like
+     * @param post from Like
      */
-    public Like(Integer idUser, Integer idPost) {
-        this.idUser = idUser;
-        this.idPost = idPost;
+    public Like(User user, Post post) {
+        this.user = user;
+        this.post = post;
         this.date = LocalDateTime.now();
     }
 
@@ -65,14 +65,14 @@ public class Like {
      * Complete constructor
      * 
      * @param id
-     * @param idUser
-     * @param idPost
+     * @param user
+     * @param post
      * @param date
      */
-    public Like(Integer id, Integer idUser, Integer idPost) {
+    public Like(Integer id, User user, Post post) {
         this.id = id;
-        this.idUser = idUser;
-        this.idPost = idPost;
+        this.user = user;
+        this.post = post;
         this.date = LocalDateTime.now();
     }
 
@@ -84,20 +84,20 @@ public class Like {
         this.id = id;
     }
 
-    public Integer getIdUser() {
-        return this.idUser;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getIdPost() {
-        return this.idPost;
+    public Post getPost() {
+        return this.post;
     }
 
-    public void setIdPost(Integer idPost) {
-        this.idPost = idPost;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public LocalDateTime getDate() {
@@ -128,8 +128,8 @@ public class Like {
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +
-                ", idUser='" + getIdUser() + "'" +
-                ", idPost='" + getIdPost() + "'" +
+                ", idUser='" + getUser() + "'" +
+                ", idPost='" + getPost() + "'" +
                 ", date='" + getDate() + "'" +
                 "}";
     }

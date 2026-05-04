@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -17,7 +20,7 @@ import jakarta.validation.constraints.Email;
  * Class User
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -37,23 +40,29 @@ public class User {
     @Column(name = "password")
     String password;
 
-    @Column(name = "games")
-    @OneToMany(mappedBy = "User")
+    @ManyToMany
+    @JoinTable(
+        name = "user_games",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
     List<Game> games;
 
-    @Column(name = "posts")
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user")
     List<Post> posts;
 
-    @Column(name = "follows")
-    @OneToMany(mappedBy = "User")
+    @ManyToMany
+    @JoinTable(
+        name = "user_follows",
+        joinColumns = @JoinColumn(name = "follower_id"),
+        inverseJoinColumns = @JoinColumn(name = "following_id")
+    )
     List<User> follows;
 
-    @Column(name = "followers")
-    @OneToMany(mappedBy = "User")
+    @ManyToMany(mappedBy = "follows")
     List<User> followers;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user")
     List<Review> reviews;
 
     /**

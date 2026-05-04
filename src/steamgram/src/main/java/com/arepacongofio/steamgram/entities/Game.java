@@ -3,11 +3,15 @@ package com.arepacongofio.steamgram.entities;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -33,19 +37,26 @@ public class Game {
     @Column(name = "banner", nullable = true)
     String banner;
 
-    @Column(name = "developer")
+    @ManyToOne
+    @JoinColumn(name = "id_developer")
     Developer developer;
 
+    @ElementCollection
+    @CollectionTable(name = "game_genres", joinColumns = @JoinColumn(name = "game_id"))
     @Column(name = "genre")
     List<String> genres;
 
-    @OneToMany(mappedBy = "Game")
+    @OneToMany(mappedBy = "game")
     List<Review> reviews;
 
-    @Column(name = "screenshots")
+    @ElementCollection
+    @CollectionTable(name = "game_screenshots", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "screenshot")
     List<String> screenshots;
 
-    @Column(name = "plataforms")
+    @ElementCollection
+    @CollectionTable(name = "game_plataforms", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "plataform")
     List<String> plataforms;
 
     /**

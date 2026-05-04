@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -22,11 +23,13 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     
-    @JoinColumn(name = "id_user")
-    Integer idUser;
+    @ManyToOne
+    @JoinColumn(name = "users")
+    User user;
     
-    @JoinColumn(name = "id_game")
-    Integer idGame;
+    @ManyToOne
+    @JoinColumn(name = "game")
+    Game game;
     
     @Column(name = "title")
     String title;
@@ -60,15 +63,15 @@ public class Review {
 
     /**
      * Basic constructor 
-     * @param idUser from review
-     * @param idGame from review
+     * @param user from review
+     * @param game from review
      * @param title from review
      * @param description from review
      * @param rating from review
      */
-    public Review(Integer idUser, Integer idGame, String title, String description, Integer rating) {
-        this.idUser = idUser;
-        this.idGame = idGame;
+    public Review(User user, Game game, String title, String description, Integer rating) {
+        this.user = user;
+        this.game = game;
         this.title = title;
         this.description = description;
         this.rating = rating;
@@ -78,19 +81,19 @@ public class Review {
     /**
      * Update constructor
      * @param id from review
-     * @param idUser from review
-     * @param idGame from review
+     * @param user from review
+     * @param game from review
      * @param title from review
      * @param description from review
      * @param rating from review
      * @param createDate from review
      * @param updateDate from review
      */
-    public Review(Integer id, Integer idUser, Integer idGame, String title, String description, Integer rating,
+    public Review(Integer id, User user, Game game, String title, String description, Integer rating,
             LocalDateTime updateDate) {
         this.id = id;
-        this.idUser = idUser;
-        this.idGame = idGame;
+        this.user = user;
+        this.game = game;
         this.title = title;
         this.description = description;
         this.rating = rating;
@@ -109,20 +112,20 @@ public class Review {
         this.id = id;
     }
 
-    public Integer getIdUser() {
-        return this.idUser;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getIdGame() {
-        return this.idGame;
+    public Game getGame() {
+        return this.game;
     }
 
-    public void setIdGame(Integer idGame) {
-        this.idGame = idGame;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public String getTitle() {
@@ -185,8 +188,8 @@ public class Review {
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +
-                ", idUser='" + getIdUser() + "'" +
-                ", idGame='" + getIdGame() + "'" +
+                ", user='" + getUser().getNickname() + "'" +
+                ", game='" + getGame().getTitle() + "'" +
                 ", title='" + getTitle() + "'" +
                 ", description='" + getDescription() + "'" +
                 ", rating='" + getRating() + "'" +

@@ -25,12 +25,12 @@ public class Comment {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    Integer idUser;
+    @JoinColumn(name = "users")
+    User user;
 
     @ManyToOne
-    @JoinColumn(name = "id_post")
-    Integer idPost;
+    @JoinColumn(name = "post")
+    Post post;
     
     @Column(name = "text")
     String text;
@@ -54,13 +54,13 @@ public class Comment {
 
     /**
      * basic constructor
-     * @param idUser from Comment
-     * @param idPost from Comment
+     * @param user from Comment
+     * @param post from Comment
      * @param text from Comment
      */
-    public Comment(Integer idUser, Integer idPost, String text) {
-        this.idUser = idUser;
-        this.idPost = idPost;
+    public Comment(User user, Post post, String text) {
+        this.user = user;
+        this.post = post;
         this.text = text;
         this.date = LocalDateTime.now();
     }
@@ -68,15 +68,15 @@ public class Comment {
     /**
      * Complete constructor
      * @param id from Comment
-     * @param idUser from Comment
-     * @param idPost from Comment
+     * @param user from Comment
+     * @param post from Comment
      * @param text from Comment
      * @param date from Comment
      */
-    public Comment(Integer id, Integer idUser, Integer idPost, String text) {
+    public Comment(Integer id, User user, Post post, String text) {
         this.id = id;
-        this.idUser = idUser;
-        this.idPost = idPost;
+        this.user = user;
+        this.post = post;
         this.text = text;
         this.date = LocalDateTime.now();
 
@@ -90,20 +90,20 @@ public class Comment {
         this.id = id;
     }
 
-    public Integer getIdUser() {
-        return this.idUser;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getIdPost() {
-        return this.idPost;
+    public Post getPost() {
+        return this.post;
     }
 
-    public void setIdPost(Integer idPost) {
-        this.idPost = idPost;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public String getText() {
@@ -142,8 +142,8 @@ public class Comment {
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", idUser='" + getIdUser() + "'" +
-            ", idPost='" + getIdPost() + "'" +
+            ", user='" + getUser().getNickname() + "'" +
+            ", post='" + getPost().getTitle() + "'" +
             ", text='" + getText() + "'" +
             ", date='" + getDate() + "'" +
             "}";
