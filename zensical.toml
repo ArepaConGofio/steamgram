@@ -41,14 +41,13 @@ nav = [
         "get_started/requirements.md",
         "get_started/installation.md"
     ]},
-    { "Diseño" = [
-        "design/use-cases.md",
+    { "Arquitectura y diseño" = [
+        "design/auth-flow.md",
+        "design/front-structure.md",
+        "design/back-structure.md",
+        "design/communication.md",
         "design/design.md",
     ]},
-    { "Arquitectura" = [
-        "architecture/auth-flow.md",
-        "architecture/structure.md"
-    ]}
 ]
 
 # With the "extra_css" option you can add your own CSS styling to customize
