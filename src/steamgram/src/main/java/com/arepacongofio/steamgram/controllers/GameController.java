@@ -20,6 +20,8 @@ import com.arepacongofio.steamgram.mappers.GameMapper;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -39,13 +41,23 @@ public class GameController implements IController<GameCreationResponse, GameReq
     @Override
     @GetMapping
     @Operation(summary = "List games", description = "Lists all games")
-    public ResponseEntity<List<GameCreationResponse>> findAll(@RequestParam int page, @RequestParam(defaultValue = "10") int pageSize) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Games listed successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<GameCreationResponse>> findAll(@RequestParam(value = "0") int page,
+            @RequestParam(value = "10") int pageSize) {
         return ResponseEntity.ok(gameMapper.toResponseList(gameService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Find a Game by its Id", description = "Find a Game by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Game found successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<GameCreationResponse> findById(@Valid @PathVariable Integer id) {
         com.arepacongofio.steamgram.entities.Game game = gameService.findById(id);
         if (game == null) {
@@ -57,6 +69,10 @@ public class GameController implements IController<GameCreationResponse, GameReq
     @Override
     @PostMapping
     @Operation(summary = "Save a Game", description = "Save a Game")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Game saved successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<GameCreationResponse> save(@Valid @RequestBody GameRequest gameRequest) {
         return ResponseEntity.ok(gameMapper.toResponse(gameService.save(gameMapper.toEntity(gameRequest))));
     }
@@ -64,6 +80,11 @@ public class GameController implements IController<GameCreationResponse, GameReq
     @Override
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Game", description = "Delete a Game by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "G ame deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         if (!gameService.deleteById(id)) {
             return ResponseEntity.notFound().build();

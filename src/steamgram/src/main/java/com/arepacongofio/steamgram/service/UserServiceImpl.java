@@ -32,7 +32,7 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
     @Transactional
     public UserResponse createUser(UserRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail()) && userRepository.existsByNickname(request.getNickname())) {
+        if (userRepository.existsByEmail(request.getEmail()) || userRepository.existsByNickname(request.getNickname())) {
             return null;
         }
 

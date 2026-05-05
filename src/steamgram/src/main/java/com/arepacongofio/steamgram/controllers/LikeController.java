@@ -20,6 +20,8 @@ import com.arepacongofio.steamgram.mappers.LikeMapper;
 import com.arepacongofio.steamgram.service.interfaces.ILikeService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -39,13 +41,23 @@ public class LikeController implements IController<LikeResponse, LikeRequest, In
     @Override
     @GetMapping
     @Operation(summary = "List likes", description = "Lists all likes")
-    public ResponseEntity<List<LikeResponse>> findAll(@RequestParam int page, @RequestParam(defaultValue = "10") int pageSize) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Likes listed successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<LikeResponse>> findAll(@RequestParam(value = "0") int page,
+            @RequestParam(value = "10") int pageSize) {
         return ResponseEntity.ok(likeMapper.toResponseList(likeService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Find a Like by its Id", description = "Find a Like by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Like found successfully"),
+            @ApiResponse(responseCode = "404", description = "Like not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<LikeResponse> findById(@Valid @PathVariable Integer id) {
         com.arepacongofio.steamgram.entities.Like like = likeService.findById(id);
         if (like == null) {
@@ -57,6 +69,10 @@ public class LikeController implements IController<LikeResponse, LikeRequest, In
     @Override
     @PostMapping
     @Operation(summary = "Save a Like", description = "Save a Like")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Like saved successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<LikeResponse> save(@Valid @RequestBody LikeRequest likeRequest) {
         return ResponseEntity.ok(likeMapper.toResponse(likeService.save(likeMapper.toEntity(likeRequest))));
     }
@@ -64,6 +80,11 @@ public class LikeController implements IController<LikeResponse, LikeRequest, In
     @Override
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Like", description = "Delete a Like by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Like deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Like not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         if (!likeService.deleteById(id)) {
             return ResponseEntity.notFound().build();

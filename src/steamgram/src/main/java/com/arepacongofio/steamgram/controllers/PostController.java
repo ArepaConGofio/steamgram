@@ -20,6 +20,8 @@ import com.arepacongofio.steamgram.mappers.PostMapper;
 import com.arepacongofio.steamgram.service.interfaces.IPostService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -39,13 +41,22 @@ public class PostController implements IController<PostResponse, PostRequest, In
     @Override
     @GetMapping
     @Operation(summary = "List posts", description = "Lists all posts")
-    public ResponseEntity<List<PostResponse>> findAll(@RequestParam int page, @RequestParam(defaultValue = "10") int pageSize) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Posts listed successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<PostResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
         return ResponseEntity.ok(postMapper.toResponseList(postService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Find a Post by its Id", description = "Find a Post by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Post found successfully"),
+            @ApiResponse(responseCode = "404", description = "Post not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<PostResponse> findById(@Valid @PathVariable Integer id) {
         com.arepacongofio.steamgram.entities.Post post = postService.findById(id);
         if (post == null) {
@@ -57,6 +68,10 @@ public class PostController implements IController<PostResponse, PostRequest, In
     @Override
     @PostMapping
     @Operation(summary = "Save a Post", description = "Save a Post")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Post saved successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<PostResponse> save(@Valid @RequestBody PostRequest postRequest) {
         return ResponseEntity.ok(postMapper.toResponse(postService.save(postMapper.toEntity(postRequest))));
     }
@@ -64,6 +79,11 @@ public class PostController implements IController<PostResponse, PostRequest, In
     @Override
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Post", description = "Delete a Post by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Post deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Post not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         if (!postService.deleteById(id)) {
             return ResponseEntity.notFound().build();

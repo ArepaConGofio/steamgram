@@ -20,6 +20,8 @@ import com.arepacongofio.steamgram.mappers.ReviewMapper;
 import com.arepacongofio.steamgram.service.interfaces.IReviewService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -39,13 +41,22 @@ public class ReviewController implements IController<ReviewResponse, ReviewReque
     @Override
     @GetMapping
     @Operation(summary = "List reviews", description = "Lists all reviews")
-    public ResponseEntity<List<ReviewResponse>> findAll(@RequestParam int page, @RequestParam(defaultValue = "10") int pageSize) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Reviews listed successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<ReviewResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
         return ResponseEntity.ok(reviewMapper.toResponseList(reviewService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Find a Review by its Id", description = "Find a Review by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Review found successfully"),
+            @ApiResponse(responseCode = "404", description = "Review not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<ReviewResponse> findById(@Valid @PathVariable Integer id) {
         com.arepacongofio.steamgram.entities.Review review = reviewService.findById(id);
         if (review == null) {
@@ -57,6 +68,10 @@ public class ReviewController implements IController<ReviewResponse, ReviewReque
     @Override
     @PostMapping
     @Operation(summary = "Save a Review", description = "Save a Review")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Review saved successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<ReviewResponse> save(@Valid @RequestBody ReviewRequest reviewRequest) {
         return ResponseEntity.ok(reviewMapper.toResponse(reviewService.save(reviewMapper.toEntity(reviewRequest))));
     }
@@ -64,6 +79,11 @@ public class ReviewController implements IController<ReviewResponse, ReviewReque
     @Override
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Review", description = "Delete a Review by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Review deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Review not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         if (!reviewService.deleteById(id)) {
             return ResponseEntity.notFound().build();

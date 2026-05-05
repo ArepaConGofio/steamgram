@@ -14,6 +14,8 @@ import com.arepacongofio.steamgram.securization.config.JwtService;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -36,6 +38,10 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Login", description = "Returns a JWT token")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Login successful"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest req) {
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword()));
@@ -45,6 +51,11 @@ public class AuthController {
 
     @PostMapping("/register")
     @Operation(summary = "Register", description = "Creates a new user and returns their data")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "409", description = "User already exists")
+    })
     public ResponseEntity<UserResponse> register(@Valid @RequestBody UserRequest req) {
         UserResponse created = userService.createUser(req);
         if (created == null) {

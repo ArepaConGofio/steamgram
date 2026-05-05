@@ -20,6 +20,8 @@ import com.arepacongofio.steamgram.mappers.UserMapper;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -39,13 +41,22 @@ public class UserController implements IController<UserResponse,UserRequest, Int
     @Override
     @GetMapping
     @Operation(summary = "List users", description = "Lists all users")
-    public ResponseEntity<List<UserResponse>> findAll(@RequestParam int page, @RequestParam(defaultValue = "10") int pageSize) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Users listed successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<UserResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
         return ResponseEntity.ok(userMapper.toResponseList(userService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Find a User by their Id", description = "Find a User by their Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User found successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<UserResponse> findById(@Valid @PathVariable Integer id) {
         UserResponse response = userMapper.toResponse(userService.findById(id));
         if (response == null) {
@@ -57,6 +68,10 @@ public class UserController implements IController<UserResponse,UserRequest, Int
     @Override
     @PostMapping
     @Operation(summary = "Save a User", description = "Save a User")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User saved successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<UserResponse> save(@Valid @RequestBody UserRequest user) {
         return ResponseEntity.ok(userService.createUser(user));
     }
@@ -64,6 +79,11 @@ public class UserController implements IController<UserResponse,UserRequest, Int
     @Override
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete User", description = "Delete an User by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<Void> deleteById(@Valid @PathVariable Integer id) {
         if (!userService.deleteById(id)) {
             return ResponseEntity.notFound().build();
