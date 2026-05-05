@@ -45,6 +45,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
 
+    @Column(name = "avatar_url", nullable = true)
+    String avatarUrl;
+
+
+
     @ManyToMany
     @JoinTable(name = "user_games", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "game_id"))
     List<Game> games;
@@ -229,6 +234,14 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }   
+    
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
     @Override
     public boolean equals(Object o) {
