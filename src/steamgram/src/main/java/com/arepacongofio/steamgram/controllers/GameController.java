@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameGeneralResponse;
+import com.arepacongofio.steamgram.entities.Game;
+import com.arepacongofio.steamgram.entities.Post;
+import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.mappers.GameMapper;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
 
@@ -90,5 +93,33 @@ public class GameController implements IController<GameGeneralResponse, GameRequ
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    @Operation(summary = "Get game posts", description = "Get game posts by ID")
+    public ResponseEntity<List<Post>> getGamePosts(@Valid @PathVariable Integer id) {
+        return ResponseEntity.ok(gameService.getGamePosts(new Game(id)));
+    }
+
+    @GetMapping("/{id}/reviews")
+    @Operation(summary = "Get game reviews", description = "Get game reviews by ID")
+    public ResponseEntity<List<Review>> getGameReviews(@Valid @PathVariable Integer id) {
+        return ResponseEntity.ok(gameService.getGameReviews(new Game(id)));
+    }
+
+    @GetMapping("/find")
+    @Operation(summary = "Find game by title", description = "Find game by title")
+    public ResponseEntity<List<Game>> findGameByTitle(@Valid @PathVariable String title) {
+        return ResponseEntity.ok(gameService.findIgdbGamesByTitle(title));
+    }
+
+    @GetMapping("/igdb/{id}")
+    @Operation(summary = "Find a Game by its IGDB Id", description = "Find a Game by its IGDB Id")
+    public ResponseEntity<GameGeneralResponse> getByIgdbId(@Valid @PathVariable String id) {
+        com.arepacongofio.steamgram.entities.Game game = gameService.getGameByIgdbId(id);
+        if (game == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 }

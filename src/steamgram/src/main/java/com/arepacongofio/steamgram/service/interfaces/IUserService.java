@@ -14,6 +14,7 @@ import com.arepacongofio.steamgram.service.interfaces.generic.IGenericService;
 public interface IUserService extends IGenericService<User, Integer> {
 
     public UserResponse createUser(UserRequest request);
+    
     public UserResponse editUser(UserEditRequest request);
     public List<User> findUserByName(String nickname, String name);
     public Boolean checkExistsByName(String nickname);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
+import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.repository.GameJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
@@ -27,7 +28,7 @@ public class GameServiceImpl extends AbstractService<Game,Integer> implements IG
     }
 
     @Override
-    public List<Post> getGameReviews(Game game) {
+    public List<Review> getGameReviews(Game game) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getGameReviews'");
     }
@@ -42,5 +43,11 @@ public class GameServiceImpl extends AbstractService<Game,Integer> implements IG
     public Game saveGameIntoProfile(Game game, User user) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveGameIntoProfile'");
+    }
+
+    @Override
+    public Game getGameByIgdbId(String igdbId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getGameByIgdbId'");
     } 
 }
