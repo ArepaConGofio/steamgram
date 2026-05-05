@@ -1,4 +1,4 @@
-package com.arepacongofio.steamgram.config;
+package com.arepacongofio.steamgram.securization.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

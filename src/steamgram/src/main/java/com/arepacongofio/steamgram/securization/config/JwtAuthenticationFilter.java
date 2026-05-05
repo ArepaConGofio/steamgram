@@ -1,4 +1,4 @@
-package com.arepacongofio.steamgram.config;
+package com.arepacongofio.steamgram.securization.config;
 
 
 import io.jsonwebtoken.Claims;
@@ -10,8 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,11 +21,9 @@ import java.util.List;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
+    public JwtAuthenticationFilter(JwtService jwtService) {
         this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -44,17 +41,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Claims claims = jwtService.parseClaims(token);
             String username = claims.getSubject();
             @SuppressWarnings("unchecked")
-            List<String> roles = (List<String>) claims.get("roles", List.class);
-
-            UserDetails user = userDetailsService.loadUserByUsername(username);
+            List<String> roles = claims.get("roles", List.class);
 
             var authorities = roles.stream()
                     .map(SimpleGrantedAuthority::new)
                     .toList();
 
-            var auth = new UsernamePasswordAuthenticationToken(user.getUsername(), null, authorities);
+            var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(auth);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            SecurityContextHolder.clearContext();
+            // We can also log the exception here: System.err.println("Invalid JWT token: " + e.getMessage());
         }
 
         filterChain.doFilter(request, response);
