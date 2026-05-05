@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
-import com.arepacongofio.steamgram.domain.responses.GameCreationResponse;
+import com.arepacongofio.steamgram.domain.responses.GameGeneralResponse;
 import com.arepacongofio.steamgram.mappers.GameMapper;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
 
@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/game")
 @Tag(name = "Game", description = "Complete game management")
-public class GameController implements IController<GameCreationResponse, GameRequest, Integer> {
+public class GameController implements IController<GameGeneralResponse, GameRequest, Integer> {
 
     private final IGameService gameService;
     private final GameMapper gameMapper;
@@ -45,9 +45,9 @@ public class GameController implements IController<GameCreationResponse, GameReq
             @ApiResponse(responseCode = "201", description = "Games listed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<GameCreationResponse>> findAll(@RequestParam(value = "0") int page,
+    public ResponseEntity<List<GameGeneralResponse>> findAll(@RequestParam(value = "0") int page,
             @RequestParam(value = "10") int pageSize) {
-        return ResponseEntity.ok(gameMapper.toResponseList(gameService.findAll(PageRequest.of(page, pageSize))));
+        return ResponseEntity.ok(gameMapper.toDetailsResponseList(gameService.findAll(PageRequest.of(page, pageSize))));
     }
 
     @Override
@@ -58,12 +58,12 @@ public class GameController implements IController<GameCreationResponse, GameReq
             @ApiResponse(responseCode = "404", description = "Game not found"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<GameCreationResponse> findById(@Valid @PathVariable Integer id) {
+    public ResponseEntity<GameGeneralResponse> findById(@Valid @PathVariable Integer id) {
         com.arepacongofio.steamgram.entities.Game game = gameService.findById(id);
         if (game == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(gameMapper.toResponse(game));
+        return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 
     @Override
@@ -73,8 +73,8 @@ public class GameController implements IController<GameCreationResponse, GameReq
             @ApiResponse(responseCode = "201", description = "Game saved successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<GameCreationResponse> save(@Valid @RequestBody GameRequest gameRequest) {
-        return ResponseEntity.ok(gameMapper.toResponse(gameService.save(gameMapper.toEntity(gameRequest))));
+    public ResponseEntity<GameGeneralResponse> save(@Valid @RequestBody GameRequest gameRequest) {
+        return ResponseEntity.ok(gameMapper.toDetailsResponse(gameService.save(gameMapper.toEntity(gameRequest))));
     }
 
     @Override

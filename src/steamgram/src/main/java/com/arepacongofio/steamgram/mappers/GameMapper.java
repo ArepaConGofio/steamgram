@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameCreationResponse;
+import com.arepacongofio.steamgram.domain.responses.GameGeneralResponse;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 
@@ -21,5 +22,9 @@ public interface GameMapper {
     @Mapping(target = "name", source = "title")
     GameCreationResponse toResponse(Game game);
 
+    GameGeneralResponse toDetailsResponse(Game game);
+
     List<GameCreationResponse> toResponseList(List<Game> games);
+
+    List<GameGeneralResponse> toDetailsResponseList(List<Game> games);
 }
