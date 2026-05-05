@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.arepacongofio.steamgram.domain.requests.SaveGameRequest;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.entities.Review;
@@ -40,7 +41,7 @@ public class GameServiceImpl extends AbstractService<Game,Integer> implements IG
     }
 
     @Override
-    public Game saveGameIntoProfile(Game game, User user) {
+    public Game saveGameIntoProfile(SaveGameRequest request) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveGameIntoProfile'");
     }

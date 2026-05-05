@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
+import com.arepacongofio.steamgram.domain.requests.SaveGameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameGeneralResponse;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
@@ -114,12 +115,18 @@ public class GameController implements IController<GameGeneralResponse, GameRequ
     }
 
     @GetMapping("/igdb/{id}")
-    @Operation(summary = "Find a Game by its IGDB Id", description = "Find a Game by its IGDB Id")
+    @Operation(summary = "Get a Game by its IGDB Id", description = "Get a Game by its IGDB Id")
     public ResponseEntity<GameGeneralResponse> getByIgdbId(@Valid @PathVariable String id) {
         com.arepacongofio.steamgram.entities.Game game = gameService.getGameByIgdbId(id);
         if (game == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
+    }
+
+    @PostMapping("/save/")
+    @Operation(summary = "Save a game into personal library", description = "Save/release a game into/from personal library")
+    public ResponseEntity<GameGeneralResponse> toggleSaveGame(@Valid @RequestBody SaveGameRequest request) {
+        return ResponseEntity.ok(gameMapper.toDetailsResponse(gameService.saveGameIntoProfile(request)));
     }
 }
