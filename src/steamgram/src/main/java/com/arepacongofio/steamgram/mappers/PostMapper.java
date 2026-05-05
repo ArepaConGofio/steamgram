@@ -14,6 +14,7 @@ import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 @Mapper(componentModel = "spring", uses = { IUserService.class, IGameService.class, IPostService.class })
 public interface PostMapper {
+    
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "likes", ignore = true)
     @Mapping(target = "comments", ignore = true)

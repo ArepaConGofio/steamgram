@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,24 +41,19 @@ public class User {
 
     @Column(name = "password")
     String password;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 
     @ManyToMany
-    @JoinTable(
-        name = "user_games",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "game_id")
-    )
+    @JoinTable(name = "user_games", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "game_id"))
     List<Game> games;
 
     @OneToMany(mappedBy = "user")
     List<Post> posts;
 
     @ManyToMany
-    @JoinTable(
-        name = "user_follows",
-        joinColumns = @JoinColumn(name = "follower_id"),
-        inverseJoinColumns = @JoinColumn(name = "following_id")
-    )
+    @JoinTable(name = "user_follows", joinColumns = @JoinColumn(name = "follower_id"), inverseJoinColumns = @JoinColumn(name = "following_id"))
     List<User> follows;
 
     @ManyToMany(mappedBy = "follows")
@@ -224,6 +221,14 @@ public class User {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }   
 
     @Override
     public boolean equals(Object o) {

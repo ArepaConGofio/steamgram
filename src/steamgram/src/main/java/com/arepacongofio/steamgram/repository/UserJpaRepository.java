@@ -6,7 +6,14 @@ import org.springframework.stereotype.Repository;
 import com.arepacongofio.steamgram.entities.User;
 
 @Repository
-public interface UserJpaRepository extends JpaRepository<User,Integer>{
+public interface UserJpaRepository extends JpaRepository<User, Integer> {
+
+    /**
+     * Busca a un usuario por su nickname
+     * @param nickname del usuario
+     * @return User
+     */
+    User findByNickname(String nickname);
     
     /**
      * Comprueba si existe un usuario por su email
