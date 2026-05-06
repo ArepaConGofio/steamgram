@@ -49,8 +49,7 @@ public class GameController implements IController<GameGeneralResponse, GameRequ
             @ApiResponse(responseCode = "201", description = "Games listed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<GameGeneralResponse>> findAll(@RequestParam(value = "0") int page,
-            @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<GameGeneralResponse>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(gameMapper.toDetailsResponseList(gameService.findAll(PageRequest.of(page, pageSize))));
     }
 
@@ -96,26 +95,46 @@ public class GameController implements IController<GameGeneralResponse, GameRequ
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}/posts")
+    @GetMapping("posts/{id}")
     @Operation(summary = "Get game posts", description = "Get game posts by ID")
-    public ResponseEntity<List<Post>> getGamePosts(@Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(gameService.getGamePosts(new Game(id)));
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Posts listed successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<Post>> getGamePosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize, @Valid @PathVariable Integer id) {
+        return ResponseEntity.ok(gameService.getGamePosts(PageRequest.of(page, pageSize), id));
     }
 
-    @GetMapping("/{id}/reviews")
+    @GetMapping("reviews/{id}")
     @Operation(summary = "Get game reviews", description = "Get game reviews by ID")
-    public ResponseEntity<List<Review>> getGameReviews(@Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(gameService.getGameReviews(new Game(id)));
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Reviews listed successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<Review>> getGameReviews(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize, @Valid @PathVariable Integer id) {
+        return ResponseEntity.ok(gameService.getGameReviews(PageRequest.of(page, pageSize), id));
     }
 
-    @GetMapping("/find")
+    @GetMapping("/findByTitle/{title}")
     @Operation(summary = "Find game by title", description = "Find game by title")
-    public ResponseEntity<List<Game>> findGameByTitle(@Valid @PathVariable String title) {
-        return ResponseEntity.ok(gameService.findIgdbGamesByTitle(title));
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Games listed successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<List<Game>> findGameByTitle(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize, @Valid @PathVariable String title) {
+        return ResponseEntity.ok(gameService.findIgdbGamesByTitle(PageRequest.of(page, pageSize), title));
     }
 
     @GetMapping("/igdb/{id}")
     @Operation(summary = "Get a Game by its IGDB Id", description = "Get a Game by its IGDB Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Game found successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<GameGeneralResponse> getByIgdbId(@Valid @PathVariable String id) {
         com.arepacongofio.steamgram.entities.Game game = gameService.getGameByIgdbId(id);
         if (game == null) {
@@ -126,6 +145,11 @@ public class GameController implements IController<GameGeneralResponse, GameRequ
 
     @PostMapping("/save/")
     @Operation(summary = "Save a game into personal library", description = "Save/release a game into/from personal library")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Game saved successfully"),
+            @ApiResponse(responseCode = "404", description = "Game not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
     public ResponseEntity<GameGeneralResponse> toggleSaveGame(@Valid @RequestBody SaveGameRequest request) {
         return ResponseEntity.ok(gameMapper.toDetailsResponse(gameService.saveGameIntoProfile(request)));
     }

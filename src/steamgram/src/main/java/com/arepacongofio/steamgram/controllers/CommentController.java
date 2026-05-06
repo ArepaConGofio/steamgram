@@ -47,7 +47,7 @@ public class CommentController implements IController<CommentResponse, CommentRe
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<CommentResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<CommentResponse>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity
                 .ok(commentMapper.toResponseList(commentService.findAll(PageRequest.of(page, pageSize))));
     }

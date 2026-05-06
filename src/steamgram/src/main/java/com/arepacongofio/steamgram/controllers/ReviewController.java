@@ -45,7 +45,7 @@ public class ReviewController implements IController<ReviewResponse, ReviewReque
             @ApiResponse(responseCode = "201", description = "Reviews listed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<ReviewResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<ReviewResponse>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(reviewMapper.toResponseList(reviewService.findAll(PageRequest.of(page, pageSize))));
     }
 

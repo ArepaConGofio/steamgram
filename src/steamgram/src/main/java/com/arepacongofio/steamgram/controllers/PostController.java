@@ -45,7 +45,7 @@ public class PostController implements IController<PostResponse, PostRequest, In
             @ApiResponse(responseCode = "201", description = "Posts listed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<PostResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<PostResponse>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(postMapper.toResponseList(postService.findAll(PageRequest.of(page, pageSize))));
     }
 

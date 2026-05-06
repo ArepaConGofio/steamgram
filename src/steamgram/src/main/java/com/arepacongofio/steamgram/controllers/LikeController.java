@@ -45,8 +45,8 @@ public class LikeController implements IController<LikeResponse, LikeRequest, In
             @ApiResponse(responseCode = "201", description = "Likes listed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<LikeResponse>> findAll(@RequestParam(value = "0") int page,
-            @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<LikeResponse>> findAll(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(likeMapper.toResponseList(likeService.findAll(PageRequest.of(page, pageSize))));
     }
 

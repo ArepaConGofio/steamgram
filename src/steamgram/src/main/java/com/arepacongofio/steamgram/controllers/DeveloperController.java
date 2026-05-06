@@ -45,7 +45,7 @@ public class DeveloperController implements IController<DeveloperResponse, Devel
             @ApiResponse(responseCode = "201", description = "Developers listed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<DeveloperResponse>> findAll(@RequestParam(value = "0") int page, @RequestParam(value = "10") int pageSize) {
+    public ResponseEntity<List<DeveloperResponse>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(developerMapper.toResponseList(developerService.findAll(PageRequest.of(page, pageSize))));
     }
 
