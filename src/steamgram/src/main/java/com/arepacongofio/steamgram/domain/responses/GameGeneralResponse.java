@@ -33,9 +33,6 @@ public class GameGeneralResponse {
     List<String> platforms;
 
     @NotNull
-    Integer likesCount;
-
-    @NotNull
     Integer reviewsCount;
 
     public Integer getId() {
@@ -116,14 +113,6 @@ public class GameGeneralResponse {
 
     public void setPlatforms(List<String> platforms) {
         this.platforms = platforms;
-    }
-
-    public Integer getLikesCount() {
-        return likesCount;
-    }
-
-    public void setLikesCount(Integer likesCount) {
-        this.likesCount = likesCount;
     }
 
     public Integer getReviewsCount() {
