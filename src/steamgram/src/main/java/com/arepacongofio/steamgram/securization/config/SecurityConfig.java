@@ -17,7 +17,8 @@ import org.springframework.http.HttpStatus;
 
 @Configuration
 @EnableMethodSecurity
-@EnableConfigurationProperties(AppSecurityProperties.class)public class SecurityConfig {
+@EnableConfigurationProperties(AppSecurityProperties.class)
+public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {

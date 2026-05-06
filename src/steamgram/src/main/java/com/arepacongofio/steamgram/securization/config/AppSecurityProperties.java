@@ -140,11 +140,9 @@ public class AppSecurityProperties {
 
     public static class RolePermissions {
         private boolean canCreate;
-        private boolean canEditOwnDraftOrRejected;
+        private boolean canEditOwnDraft;
         private boolean canEditAny;
-        private boolean canSubmitForApproval;
-        private boolean canApprove;
-        private boolean canReject;
+        private boolean canSubmit;
         private boolean canDelete;
 
         public boolean isCanCreate() {
@@ -155,12 +153,12 @@ public class AppSecurityProperties {
             this.canCreate = canCreate;
         }
 
-        public boolean isCanEditOwnDraftOrRejected() {
-            return canEditOwnDraftOrRejected;
+        public boolean isCanEditOwnDraft() {
+            return canEditOwnDraft;
         }
 
-        public void setCanEditOwnDraftOrRejected(boolean canEditOwnDraftOrRejected) {
-            this.canEditOwnDraftOrRejected = canEditOwnDraftOrRejected;
+        public void setCanEditOwnDraft(boolean canEditOwnDraft) {
+            this.canEditOwnDraft = canEditOwnDraft;
         }
 
         public boolean isCanEditAny() {
@@ -171,28 +169,12 @@ public class AppSecurityProperties {
             this.canEditAny = canEditAny;
         }
 
-        public boolean isCanSubmitForApproval() {
-            return canSubmitForApproval;
+        public boolean isCanSubmit() {
+            return canSubmit;
         }
 
-        public void setCanSubmitForApproval(boolean canSubmitForApproval) {
-            this.canSubmitForApproval = canSubmitForApproval;
-        }
-
-        public boolean isCanApprove() {
-            return canApprove;
-        }
-
-        public void setCanApprove(boolean canApprove) {
-            this.canApprove = canApprove;
-        }
-
-        public boolean isCanReject() {
-            return canReject;
-        }
-
-        public void setCanReject(boolean canReject) {
-            this.canReject = canReject;
+        public void setCanSubmit(boolean canSubmit) {
+            this.canSubmit = canSubmit;
         }
 
         public boolean isCanDelete() {
