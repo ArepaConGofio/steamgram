@@ -48,8 +48,6 @@ public class User {
     @Column(name = "avatar_url", nullable = true)
     String avatarUrl;
 
-
-
     @ManyToMany
     @JoinTable(name = "user_games", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "game_id"))
     List<Game> games;

@@ -13,7 +13,7 @@ import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 @Mapper(componentModel = "spring", uses = { IUserService.class, IPostService.class })
 public interface LikeMapper {
-    
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "date", ignore = true)
     @Mapping(target = "user", source = "idUser")
