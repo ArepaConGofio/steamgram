@@ -1,25 +1,29 @@
 import { Constants } from "@/Constants";
+import * as SecureStore from 'expo-secure-store';
 
 export enum HttpMethods {
   GET = "get",
   POST = "post",
   PUT = "put",
   DELETE = "delete",
+  PATCH = "patch"
 }
 
 export type RequestData = {
   endpoint: string;
   method?: HttpMethods;
   body?: BodyInit | null | any;
-  token?: string|null;
+  token?: boolean;
 };
 
 export class APIHandler {
-  private static generateHeaders(token?: string|null): Headers {
+  private static async generateHeaders(withToken: boolean): Promise<Headers> {
     const headers = new Headers();
     headers.set("Content-Type", "application/json");
-    if (token) {
-      headers.set("Authorization", token);
+    if (withToken) {
+      const token = await SecureStore.getItemAsync("token");
+      console.log(token)
+      headers.set("Authorization", token ? `Bearer ${token}` : "");
     }
     return headers;
   }
@@ -29,15 +33,16 @@ export class APIHandler {
     const requestUrl = Constants.API_URL + requestData.endpoint
     const options = {
         method: requestMethod.toString(),
-        headers: this.generateHeaders(requestData.token),
+        headers: await this.generateHeaders(requestData.token ? true : false),
         body: JSON.stringify(requestData.body),
     }
     try {
       const response = await fetch(requestUrl, options);
-      console.log(response)
+      console.log(response.ok, response.status, response.url)
       if (response.ok) {
         return await response.json();
       }
+      console.error(response)
     } catch (error) {
       const errorMsg = `ERROR: Something wrong happend while trying to fetch data in ${requestUrl}`;
       console.error(errorMsg, error);

@@ -1,5 +1,4 @@
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
-import StaticErrorAlert from "@/components/ui/StaticAlert";
 import PostsContainer from "@/containers/PostsContainer";
 import { AuthContext } from "@/context/AuthContext";
 import { Game } from "@/models/Game";
@@ -14,26 +13,23 @@ export default function CommunityPage() {
   const [games, setGames] = useState<Game[]>([]);
   const [isLoadingPosts, setLoadingPosts] = useState(true);
   const [isLoadingGames, setLoadingGames] = useState(true);
-  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const api = new PostsAPIHandler();
     api.getAllPosts()
-      .then(value => setPosts(value))
-      .catch(reason => setError(reason.message))
+      .then(setPosts)
+      .catch(console.error)
       .finally(() => setLoadingPosts(false))
 
     if (user == null) return;
     const userApi = new UsersAPIHandler();
     userApi.getLikedGames(user?.id)
-      .then(value => setGames(value))
-      .catch(reason => setError(reason.message))
+      .then(setGames)
+      .catch(console.error)
       .finally(() => setLoadingGames(false))
   }, [])
 
   if (isLoadingPosts || isLoadingGames) return <LoadingIndicator category="Posts" />
-
-  if (posts === undefined || error !== "" || games === undefined) return <StaticErrorAlert message={error} />;
 
   return <PostsContainer posts={posts} games={games} />
 }

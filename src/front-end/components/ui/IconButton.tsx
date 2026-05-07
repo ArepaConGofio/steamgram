@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         borderColor: "#000",
         borderWidth: 1,
         height: 32,
-        paddingLeft: 10,
+        paddingHorizontal: 10,
         borderRadius: 10
     },
     buttonLabel: {

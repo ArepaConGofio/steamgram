@@ -19,3 +19,9 @@ export type UserDetails = User & {
 export type ContentType = "Games"|"Posts"|"Reviews";
 
 export type ProfileContentType = ContentType|"Following"|"Followers";
+
+export type UserEditRequest = {
+    id: UserId;
+    name?: string;
+    avatarUrl?: string;
+}

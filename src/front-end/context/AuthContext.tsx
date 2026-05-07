@@ -2,26 +2,27 @@ import { LoginRequest, RegisterRequest } from "@/models/Auth";
 import { User } from "@/models/User";
 import { ValidationService } from "@/services/ValidationService";
 import { AuthAPIHandler } from "@/utils/AuthAPIHandler";
+import { router } from "expo-router";
+import * as SecureStore from 'expo-secure-store';
 import React, { createContext, useCallback, useMemo, useState } from "react";
 
 type AuthContextType = {
-  token: string | null;
-  user: User | null;
+  user: User | null; 
+  editUser: (user: User) => void;
   login: (credentials: LoginRequest) => Promise<unknown>;
   register: (credentials: RegisterRequest) => Promise<unknown>;
   logout: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType>({
-  token: null,
   user: null,
+  editUser: () => ({}),
   login: async () => ({}),
   register: async () => ({}),
   logout: async () => {},
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
   const login = useCallback(async (credentials: LoginRequest) => {
@@ -31,10 +32,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const authAPI = new AuthAPIHandler();
     const response = await authAPI.login(credentials);
-    if (!response.isValid || !response.token ) {
+    if (!response.isValid || !response.token || !response.user ) {
       return { isValid: false, message: "Something wrong happend trying login: " + response.message };
     }
-    setToken(response.token);
+    setUser(response.user);
+    await SecureStore.setItemAsync("token", response.token)
     return { isValid: true, token: response.token };
   }, []);
 
@@ -54,21 +56,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return await login({ username: credentials.username, password: credentials.password });
   }, []);
 
+  const editUser = useCallback((user: User) => {
+    setUser(user);
+  }, [])
+
   const logout = useCallback(async () => {
-    setToken(null);
+    await SecureStore.deleteItemAsync("token")
     setUser(null);
+    router.replace("/login")
   }, []);
 
   const contextValue = useMemo(
     () => ({
-      token,
       user,
-      setToken,
+      editUser,
       login,
       register,
       logout,
     }),
-    [login, logout, register, token, user]
+    [login, logout, register, user]
   );
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

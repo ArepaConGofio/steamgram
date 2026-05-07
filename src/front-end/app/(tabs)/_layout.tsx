@@ -1,16 +1,21 @@
 import { default as MyHeader } from "@/components/views/shared/Header";
-import { AuthContext } from "@/context/AuthContext";
 import ThemeProvider from "@/context/ThemeContext";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Redirect, Tabs } from "expo-router";
-import { useContext } from "react";
+import { Tabs, useRouter } from "expo-router";
+import * as SecureStore from 'expo-secure-store';
+import { useEffect } from "react";
 
 export default function TabLayout() {
-  const { token } = useContext(AuthContext);
+  const router = useRouter();
 
-  if (token == null) {
-    return <Redirect href={"/login"} />;
-  }
+  useEffect(() => {
+    SecureStore.getItemAsync("token")
+      .then(value => {
+        if (value == null) {
+          router.replace("/login")
+        }
+      });
+  }, []);
 
   return (
     <ThemeProvider>
@@ -19,7 +24,7 @@ export default function TabLayout() {
           name="index"
           options={{
             title: "Community",
-            header: () => <MyHeader title="Community"/>,
+            header: () => <MyHeader title="Community" />,
             tabBarIcon: () => <MaterialIcons size={24} name="home" />,
           }}
         />
@@ -27,7 +32,7 @@ export default function TabLayout() {
           name="explore"
           options={{
             title: "Explore",
-            header: () => <MyHeader title="Explore"/>,
+            header: () => <MyHeader title="Explore" />,
             tabBarIcon: () => <MaterialIcons size={24} name="search" />,
           }}
         />
@@ -35,7 +40,7 @@ export default function TabLayout() {
           name="games"
           options={{
             title: "Games",
-            header: () => <MyHeader title="Games"/>,
+            header: () => <MyHeader title="Games" />,
             tabBarIcon: () => <MaterialIcons size={24} name="gamepad" />,
           }}
         />

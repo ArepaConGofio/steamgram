@@ -1,7 +1,5 @@
-import { AuthContext } from "@/context/AuthContext";
 import { AuthResponse, LoginRequest, RegisterRequest } from "@/models/Auth";
 import { UserId } from "@/models/User";
-import { useContext } from "react";
 import { APIHandler, HttpMethods } from "./APIHandler";
 import { IAuthApiHandler } from "./interfaces/IAuthApiHandler";
 
@@ -15,7 +13,13 @@ export class AuthAPIHandler extends APIHandler implements IAuthApiHandler {
         if (response == null) {
             return { isValid: false, message: "The user not exists!" }
         }
-        return { isValid: true, token: response.token }
+        return { isValid: true, token: response.token, user: {
+            id: response.user.id,
+            email: response.user.email,
+            username: response.user.nickname,
+            nickname: response.user.name,
+            avatarUrl: response.user.avatarUrl
+        }}
     }
 
     async register(credentials: RegisterRequest): Promise<AuthResponse> {
@@ -36,11 +40,10 @@ export class AuthAPIHandler extends APIHandler implements IAuthApiHandler {
     }
 
     async deleteAccount(id: UserId): Promise<void> {
-        const { token } = useContext(AuthContext);
         await APIHandler.makeRequest({
             endpoint: `/user/${id}`,
             method: HttpMethods.DELETE,
-            token: token
+            token: true
         })
     }
 

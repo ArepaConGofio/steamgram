@@ -1,5 +1,7 @@
 import UserSettingsView from "@/components/pages/UserSettingsView";
 import { AuthContext } from "@/context/AuthContext";
+import { AuthAPIHandler } from "@/utils/AuthAPIHandler";
+import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
 import * as LocalAuthentication from 'expo-local-authentication';
 import { useNavigation } from "expo-router";
 import { useContext, useEffect, useState } from "react";
@@ -7,16 +9,18 @@ import { Alert } from "react-native";
 
 export default function UserSettingContainer() {
     const navigation = useNavigation();
-    const { user } = useContext(AuthContext);
+    const userAPI = new UsersAPIHandler();
+    const authAPI = new AuthAPIHandler();
+    const { user, editUser, logout } = useContext(AuthContext);
     const [nickname, _setNickname] = useState<string | undefined>(user?.nickname);
     const [avatar, _setAvatar] = useState<string | undefined>(user?.avatarUrl);
 
     const setNickname = (nickname: string) => _setNickname(nickname);
     const setAvatar = (avatar: string) => _setAvatar(avatar);
 
-    const saveChanges = () => {
-        // TODO: Profile edit logic...
-        Alert.alert("Changes saved", `Yes, is saved`)
+    const saveChanges = async () => {
+        if (!user) return;
+        await userAPI.editUser({ id: user.id, name: nickname, avatarUrl: avatar })
     }
 
     const askForDelete = () => {
@@ -27,6 +31,9 @@ export default function UserSettingContainer() {
     }
 
     const deleteAccount = async () => {
+        if (!user) {
+            return;
+        }
         const canAuth = await LocalAuthentication.hasHardwareAsync();
         if (canAuth) {
             const authResult = await LocalAuthentication.authenticateAsync({
@@ -36,8 +43,9 @@ export default function UserSettingContainer() {
                 return;
             }
         }
-        // TODO: Account deleting logic...
-        Alert.alert("Account deleted")
+        Alert.alert("Bye bye :c", "Account deleted");
+        await authAPI.deleteAccount(user.id)
+        logout();
     }
 
     useEffect(() => {
