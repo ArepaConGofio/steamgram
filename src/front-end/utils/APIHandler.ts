@@ -11,11 +11,11 @@ export type RequestData = {
   endpoint: string;
   method?: HttpMethods;
   body?: BodyInit | null | any;
-  token?: string;
+  token?: string|null;
 };
 
 export class APIHandler {
-  private static generateHeaders(token?: string): Headers {
+  private static generateHeaders(token?: string|null): Headers {
     const headers = new Headers();
     headers.set("Content-Type", "application/json");
     if (token) {

@@ -18,6 +18,11 @@ export type LikePostResponse = {
     isLiked: boolean;
 }
 
+export type LikeRequest = {
+    userId: number;
+    gameId: number;
+}
+
 export type PostCreationRequest = {
     userId: number;
     gameId: number;

@@ -1,45 +1,72 @@
+import { AuthContext } from "@/context/AuthContext";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { User, UserDetails, UserId } from "@/models/User";
+import { useContext } from "react";
 import { APIHandler } from "./APIHandler";
 import { IUsersAPIHandler } from "./interfaces/IUsersAPIHandler";
 
 export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
   
   async getUserDetailsByUsername(username: string): Promise<UserDetails> {
-    const users = await APIHandler.makeRequest({ endpoint: `/users?username=${username}` });
-    if (!users || users[0].username !== username) {
+    const { token } = useContext(AuthContext);
+    const user = await APIHandler.makeRequest({ 
+      endpoint: `/user/get/${username}`,
+      token: token
+    });
+    if (!user) {
       throw new Error("ERROR: User not found");
     }
-    return users[0];
+    return user;
   }
 
-  async searchUserByUsername(username: string): Promise<User[]> {
-    return await APIHandler.makeRequest({ endpoint: `/users?username:contains=${username}` });
+  async searchUserByNames(username: string, nickname: string): Promise<User[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/user/find`,
+      body: { username, nickname },
+      token: token
+    });    
   }
 
-  async searchUserByNickname(nickname: string): Promise<User[]> {
-    return await APIHandler.makeRequest({ endpoint: `/users?nickname:contains=${nickname}` });
+  async getFollowers(id: UserId): Promise<User[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/user/${id}/followers`,
+      token: token
+    });  
   }
 
-  async getFollowers(userId: UserId): Promise<User[]> {
-    return await APIHandler.makeRequest({ endpoint: `/users` });
-  }
-
-  async getFollowings(userId: UserId): Promise<User[]> {
-    return await APIHandler.makeRequest({ endpoint: `/users?id=1` });
+  async getFollowings(id: UserId): Promise<User[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/user/${id}/following`,
+      token: token
+    });  
   }
   
-  async getLikedGames(userId: UserId): Promise<Game[]> {
-    return await APIHandler.makeRequest({ endpoint: `/games` });
+  async getLikedGames(id: UserId): Promise<Game[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/user/${id}/games`,
+      token: token
+    });
   }
 
-  async getPosts(userId: UserId): Promise<Post[]> {
-    return await APIHandler.makeRequest({ endpoint: `/posts?userId=${userId}` })
+  async getPosts(id: UserId): Promise<Post[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/user/${id}/posts`,
+      token: token
+    });  
   }
   
-  async getReviews(userId: UserId): Promise<Review[]> {
-    return await APIHandler.makeRequest({ endpoint: `/reviews?userId=${userId}` })
+  async getReviews(id: UserId): Promise<Review[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/user/${id}/reviews`,
+      token: token
+    });  
   }
 }

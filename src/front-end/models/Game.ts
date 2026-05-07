@@ -14,8 +14,6 @@ export type Game = {
   platforms: string[]
   likesCount: number;
   reviewsCount: number,
-  averageIgdbScore: number;
-  averageSteamgramScore: number;
 };
 
 export type GameCreationRequest = {

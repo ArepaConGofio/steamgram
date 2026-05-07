@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!usernameValidation.isValid) return usernameValidation;
     const emailValidation = ValidationService.validateEmail(credentials.email);
     if (!emailValidation.isValid) return emailValidation;
-    const passwordValidation = ValidationService.validatePassword(credentials.password, credentials.repeatedPassword);
+    const passwordValidation = ValidationService.validatePassword(credentials.password);
     if (!passwordValidation.isValid) return passwordValidation;
 
     const authAPI = new AuthAPIHandler();

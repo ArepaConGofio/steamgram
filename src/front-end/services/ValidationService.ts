@@ -31,7 +31,7 @@ export class ValidationService  {
         return { isValid: true }
     }
 
-    static validatePassword(password: string, repeatedPassword: string): ValidationResult {
+    static validatePassword(password: string): ValidationResult {
         const MIN_PASSWORD_LENGTH = 8;
         const SPECIAL_CHARACTERS = "!@#$&?¿¡€";
     
@@ -46,9 +46,6 @@ export class ValidationService  {
         }
         if (!password.match(`[${SPECIAL_CHARACTERS}]`)) {
             return { isValid: false, message: "The password must be contain one of this characters: " + SPECIAL_CHARACTERS }
-        }
-        if (repeatedPassword != password) {
-            return { isValid: false, message: "The repeated password must be equal! "}
         }
         return { isValid: true }
     }

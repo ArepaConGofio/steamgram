@@ -1,42 +1,77 @@
+import { AuthContext } from "@/context/AuthContext";
 import { Game, GameId } from "@/models/Game";
 import { Post } from "@/models/Post";
-import { Review, ReviewId } from "@/models/Review";
-import { APIHandler } from "./APIHandler";
+import { Review, ReviewCreationRequest, ReviewId } from "@/models/Review";
+import { useContext } from "react";
+import { APIHandler, HttpMethods } from "./APIHandler";
 import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
 export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
 
-  async getAllGames(limit?: number): Promise<Game[]> {
-    return await APIHandler.makeRequest({ endpoint: `/games` });
+  async getAllGames(): Promise<Game[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/game`,
+      token: token
+    });
   }
   
   async getGameDetails(gameId: GameId): Promise<Game | undefined> {
-    const games = await APIHandler.makeRequest({ endpoint: `/games?id=${gameId}` })
-    const game = games[0];
-    if (game == undefined || game == null) {
+    const game = await APIHandler.makeRequest({ endpoint: `/game/${gameId}` })
+    if (!game) {
       throw new Error("ERROR: Game not found")
     }
     return game;
   }
 
-  async searchGamesByTitle(title: string, limit?: number): Promise<Game[]> {
-    return await APIHandler.makeRequest({ endpoint: `/games?name:contains=${title}` })
+  async searchGamesByTitle(title: string): Promise<Game[]> {
+    const { token } = useContext(AuthContext);
+    return await APIHandler.makeRequest({ 
+      endpoint: `/game/findByTitle/${title}?pageSize=10`,
+      token: token,
+    })
   }
 
-  reviewGame(review: Review): Promise<Review> {
-    throw new Error("Method not implemented.");
+  async reviewGame(review: ReviewCreationRequest): Promise<Review> {
+    const { token } = useContext(AuthContext)
+    const response = await APIHandler.makeRequest({
+      endpoint: "/review",
+      method: HttpMethods.POST,
+      body: {
+        idUser: review.userId,
+        idGame: review.gameId,
+        title: review.title,
+        description: review.description,
+        rating: review.rating
+      },
+      token: token
+    });
+    return response;
   }
 
-  deleteReview(reviewId: ReviewId): Promise<boolean> {
-    throw new Error("Method not implemented.");
+  async deleteReview(reviewId: ReviewId): Promise<boolean> {
+    const { token } = useContext(AuthContext);
+    await APIHandler.makeRequest({
+      endpoint: `/review/${reviewId}`,
+      method: HttpMethods.DELETE,
+      token: token
+    });
+    return true;
   }
   
   async getGameReviews(gameId: GameId): Promise<Review[]> {
-    return await APIHandler.makeRequest({ endpoint: `/reviews?gameId=${gameId}` })
+    const { token } = useContext(AuthContext);
+    return APIHandler.makeRequest({
+      endpoint: `/game/reviews/${gameId}`,
+      token: token
+    })
   }
 
   async getGamePosts(gameId: GameId): Promise<Post[]> {
-    return await APIHandler.makeRequest({ endpoint: `/posts?gameId=${gameId}` })
-  }
-  
+    const { token } = useContext(AuthContext);
+    return APIHandler.makeRequest({
+      endpoint: `/game/posts/${gameId}`,
+      token: token
+    })  
+  } 
 }

@@ -1,6 +1,6 @@
-import { Comment } from "@/models/Comment";
 import {
   LikePostResponse,
+  LikeRequest,
   Post,
   PostCreationRequest,
   PostId
@@ -13,13 +13,6 @@ export interface IPostsAPIHandler {
    * @param limit - Max query results.
    */
   getAllPosts(limit?: number): Promise<Post[]>;
-
-  /**
-   * Get all post comments. The query can be limited.
-   * @param postId - Post identifier.
-   * @param limit - Max query results.
-   */
-  getComments(postId: PostId, limit?: number): Promise<Comment[]>;
 
   /**
    * Create a new post.
@@ -36,9 +29,14 @@ export interface IPostsAPIHandler {
   deletePost(userId: UserId, postId: PostId): Promise<boolean>;
 
   /**
-   * Like/dislike a post as user.
-   * @param userId - User requesting.
-   * @param postId - Post to like/dislike.
+   * Like a post as user.
+   * @param like - Like request with user and post identification
    */
-  likePost(userId: UserId, postId: PostId): Promise<LikePostResponse>;
+  likePost(like: LikeRequest): Promise<LikePostResponse>;
+
+  /**
+   * Dislike a post as user.
+   * @param likeId - Like identificator.
+   */
+  dislikePost(likeId: number): Promise<boolean>
 }

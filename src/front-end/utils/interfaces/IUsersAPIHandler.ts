@@ -4,17 +4,15 @@ import { Review } from "@/models/Review";
 import { User, UserDetails, UserId } from "@/models/User";
 
 export interface IUsersAPIHandler {
-  /**
-   * Search users by username. The query can be limited.
-   * @param username - Username
-   */
-  searchUserByUsername(username: string): Promise<User[]>;
+
 
   /**
-   * Search user by nickname (the public name). The query can be limited.
-   * @param nickname - User public name.
+   * Get user list by username and nickname for explorer.
+   * @param username - Username.
+   * @param nickname - Nickname.
    */
-  searchUserByNickname(nickname: string): Promise<User[]>;
+  searchUserByNames(username: string, nickname: string): Promise<User[]> 
+
 
   /**
    * Get user details by username.

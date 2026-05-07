@@ -18,7 +18,11 @@ export default function RegisterContainer() {
   const goToLogin = () => router.navigate("/login");
 
   const submit = async () => {
-    const result = await register({ username, nickname, password, email, repeatedPassword }) as ValidationResult;
+    if (password != repeatedPassword) {
+      Alert.alert("Error", "The repeated password must be equal!");
+      return;
+    }
+    const result = await register({ username, nickname, password, email }) as ValidationResult;
     if (!result.isValid) {
       Alert.alert("Error", result.message);
       return;

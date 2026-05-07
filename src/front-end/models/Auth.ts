@@ -20,5 +20,4 @@ export type LoginRequest = {
 export type RegisterRequest = LoginRequest & {
     email: string;
     nickname: string;
-    repeatedPassword: string
 }
