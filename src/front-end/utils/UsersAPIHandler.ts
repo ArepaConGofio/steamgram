@@ -31,10 +31,10 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
 
   async editUser(changes: UserEditRequest): Promise<void> {
     await APIHandler.makeRequest({
-      endpoint: `/user/edit/`,
+      endpoint: "/user/edit",
       method: HttpMethods.POST,
-      body: { id: changes.id, name: changes.name, avatarUrl: changes.avatarUrl },
-      token: true
+      token: true,
+      body: changes
     })
   }
 

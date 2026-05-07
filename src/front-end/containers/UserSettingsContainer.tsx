@@ -11,7 +11,7 @@ export default function UserSettingContainer() {
     const navigation = useNavigation();
     const userAPI = new UsersAPIHandler();
     const authAPI = new AuthAPIHandler();
-    const { user, editUser, logout } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     const [nickname, _setNickname] = useState<string | undefined>(user?.nickname);
     const [avatar, _setAvatar] = useState<string | undefined>(user?.avatarUrl);
 
@@ -19,8 +19,15 @@ export default function UserSettingContainer() {
     const setAvatar = (avatar: string) => _setAvatar(avatar);
 
     const saveChanges = async () => {
-        if (!user) return;
-        await userAPI.editUser({ id: user.id, name: nickname, avatarUrl: avatar })
+        if (!user) {
+            return;
+        }
+        await userAPI.editUser({
+            id: user.id,
+            name: nickname,
+            avatarUrl: avatar
+        });
+        Alert.alert("Saved data", "The changes was saved successfully!");
     }
 
     const askForDelete = () => {
