@@ -104,7 +104,7 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
         User user = findById(id);
         return user.getFollowers();
     }
-    
+
     @Transactional
     public UserResponse editUser(UserEditRequest request) {
         User user = userRepository.findById(request.getId()).orElse(null);
