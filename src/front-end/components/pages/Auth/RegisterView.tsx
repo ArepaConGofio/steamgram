@@ -80,6 +80,7 @@ export default function RegisterView({ getters, setters, callbacks }: Props) {
           placeholder="The password must be minimum 8 characters..."
           returnKeyType="next"
           onSubmitEditing={() => { input5ref.current?.focus() }} 
+          secureTextEntry
           submitBehavior="submit"/>
 
         <Text style={styles.inputLabel}>Repeat password*</Text>
@@ -89,6 +90,7 @@ export default function RegisterView({ getters, setters, callbacks }: Props) {
           value={getters.repeatedPassword}
           onChangeText={setters.setRepeatedPassword}
           placeholder="Repeat the password!"
+          secureTextEntry
           returnKeyType="done"
           onSubmitEditing={callbacks.submit} />
 

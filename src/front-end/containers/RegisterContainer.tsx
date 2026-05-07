@@ -27,7 +27,8 @@ export default function RegisterContainer() {
       Alert.alert("Error", result.message);
       return;
     }
-    Alert.alert("Welcome!", "You are registered successfully :D")
+    Alert.alert("Welcome!", "You was registered successfully :D")
+    router.replace("/");
   }
 
   return (

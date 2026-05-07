@@ -49,7 +49,8 @@ export default function LoginView({ getters, setters, callbacks }: Props) {
           onChangeText={setters.setPassword}
           placeholder="Insert your password..."
           returnKeyType="done"
-          onSubmitEditing={callbacks.submit} />
+          onSubmitEditing={callbacks.submit} 
+          secureTextEntry/>
 
         <TouchableOpacity
           style={authFormStyles.formSubmit}

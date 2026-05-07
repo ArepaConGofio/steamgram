@@ -27,13 +27,17 @@ export class APIHandler {
   static async makeRequest(requestData: RequestData) {
     const requestMethod = requestData.method ? requestData.method : HttpMethods.GET;
     const requestUrl = Constants.API_URL + requestData.endpoint
-    try {
-      const response = await fetch(requestUrl, {
+    const options = {
         method: requestMethod.toString(),
         headers: this.generateHeaders(requestData.token),
         body: JSON.stringify(requestData.body),
-      });
-      return await response.json();
+    }
+    try {
+      const response = await fetch(requestUrl, options);
+      console.log(response)
+      if (response.ok) {
+        return await response.json();
+      }
     } catch (error) {
       const errorMsg = `ERROR: Something wrong happend while trying to fetch data in ${requestUrl}`;
       console.error(errorMsg, error);

@@ -1,4 +1,3 @@
-import { AuthAPIHandler } from "@/utils/AuthAPIHandler";
 
 export type ValidationResult = {
     isValid: boolean;
@@ -6,16 +5,18 @@ export type ValidationResult = {
 }
 
 export class ValidationService  {
-    static async isUsernameAvailable(username: string): Promise<ValidationResult> {
+    static async validateUsername(username: string): Promise<ValidationResult> {
         if (username.length == 0) {
             return { isValid: false, message: "The username is required!" };
         }
 
+        /* BACKEND API: Don't work yet 
         const authAPI = new AuthAPIHandler();
         const isAvailable = await authAPI.checkUsernameAvailability(username);
         if (!isAvailable) {
             return { isValid: false, message: "The username is not available." };
         }
+        */
         return { isValid: true };
     }
 

@@ -1,16 +1,11 @@
 import { User } from "./User";
 
-export type LoginResponse = {
+export type AuthResponse = {
     isValid: boolean;
+    message?: string;
     token?: string;
     user?: User;
 };
-
-export type RegisterResponse = {
-    isValid: boolean;
-    token?: string;
-    user?: User
-}
 
 export type LoginRequest = {
     username: string;

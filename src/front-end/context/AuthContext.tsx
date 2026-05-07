@@ -25,19 +25,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const login = useCallback(async (credentials: LoginRequest) => {
-    const authAPI = new AuthAPIHandler();
-    const response = await authAPI.login(credentials);
-    if (!response.isValid || !response.token || !response.user ) {
-      return { isValid: false, message: "Something wrong happend trying login... Try again later." };
+    if (credentials.username.length == 0 || credentials.password.length == 0) {
+      return { isValid: false, message: "The credentials are required!" }
     }
 
+    const authAPI = new AuthAPIHandler();
+    const response = await authAPI.login(credentials);
+    if (!response.isValid || !response.token ) {
+      return { isValid: false, message: "Something wrong happend trying login: " + response.message };
+    }
     setToken(response.token);
-    setUser(response.user);
     return { isValid: true, token: response.token };
   }, []);
 
   const register = useCallback(async (credentials: RegisterRequest) => {
-    const usernameValidation = await ValidationService.isUsernameAvailable(credentials.username);
+    const usernameValidation = await ValidationService.validateUsername(credentials.username);
     if (!usernameValidation.isValid) return usernameValidation;
     const emailValidation = ValidationService.validateEmail(credentials.email);
     if (!emailValidation.isValid) return emailValidation;
@@ -45,9 +47,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!passwordValidation.isValid) return passwordValidation;
 
     const authAPI = new AuthAPIHandler();
-    const registerResponse = await authAPI.register(credentials);
-    if (!registerResponse.isValid) {
-      return { isValid: false, message: "Something wrong happend trying to register. Please, try again later..." }
+    const response = await authAPI.register(credentials);
+    if (!response.isValid) {
+      return { isValid: false, message: "Something wrong happend trying to register: " + response.message }
     }
     return await login({ username: credentials.username, password: credentials.password });
   }, []);
