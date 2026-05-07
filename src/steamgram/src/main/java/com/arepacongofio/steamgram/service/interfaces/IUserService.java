@@ -88,4 +88,11 @@ public interface IUserService extends IGenericService<User, Integer> {
      */
     public List<User> getUserFollowers(Integer id);
 
+    /**
+     * Get user by nickname;
+     * 
+     * @param nickname User's nickname.
+     * @return User
+     */
+    public User getUserByNickname(String nickname);
 }

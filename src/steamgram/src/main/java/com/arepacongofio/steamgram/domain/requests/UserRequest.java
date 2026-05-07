@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public class UserRequest {
     
-    @NotBlank
     String name;
 
     @NotBlank
