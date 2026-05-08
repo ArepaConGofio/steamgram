@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
-import com.arepacongofio.steamgram.domain.responses.GameResponse;
+import com.arepacongofio.steamgram.domain.responses.GameDetailsResponse;
 import com.arepacongofio.steamgram.domain.responses.PostResponse;
 import com.arepacongofio.steamgram.domain.responses.ReviewResponse;
 import com.arepacongofio.steamgram.domain.responses.UserResponse;
-import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.domain.requests.UserEditRequest;
 import com.arepacongofio.steamgram.domain.requests.UserFindRequest;
 import com.arepacongofio.steamgram.domain.requests.UserRequest;
@@ -139,8 +137,8 @@ public class UserController implements IController<UserResponse, UserRequest, In
 
     @GetMapping("/games/{id}")
     @Operation(summary = "Get user games", description = "Get user games by Id")
-    public ResponseEntity<List<GameResponse>> getUserGamesById(@Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(gameMapper.toResponseList(userService.getUserGames(id)));
+    public ResponseEntity<List<GameDetailsResponse>> getUserGamesById(@Valid @PathVariable Integer id) {
+        return ResponseEntity.ok(gameMapper.toDetailsResponseList(userService.getUserGames(id)));
     }
 
     @GetMapping("/posts/{id}")

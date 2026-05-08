@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "developer")
-public class Developer{
+public class Developer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -25,30 +25,31 @@ public class Developer{
     @ManyToOne
     @JoinColumn(name = "developer_users")
     List<User> users;
-    
+
     @Column(name = "name")
     String name;
 
     @ManyToOne
     @JoinColumn(name = "developer_posts")
-    List <Post> posts;
-    
+    List<Post> posts;
+
     @ManyToOne
     @JoinColumn(name = "developer_followers")
-    List <User> followers;
+    List<User> followers;
 
     @ManyToOne
     @JoinColumn(name = "developer_games")
-    List <Game> developedGames;
-    
+    List<Game> developedGames;
+
     /**
-     * Empty constructor 
+     * Empty constructor
      */
     public Developer() {
     }
 
     /**
      * Constructor only with the id for search
+     * 
      * @param id from Developer
      */
     public Developer(Integer id) {
@@ -56,9 +57,19 @@ public class Developer{
     }
 
     /**
+     * Basic constructor with just name.
+     * 
+     * @param name - Developer name.
+     */
+    public Developer(String name) {
+        this.name = name;
+    }
+
+    /**
      * Basic constructor
-     * @param users from Developer
-     * @param name from Developer
+     * 
+     * @param users    from Developer
+     * @param name     from Developer
      * @param password from Developer
      */
     public Developer(List<User> users, String name, String password) {
@@ -67,12 +78,13 @@ public class Developer{
     }
 
     /**
-     * Constructor with posts,followers and delveloped games
-     * @param users from Developer
-     * @param name from Developer
-     * @param password from Developer
-     * @param posts from Developer
-     * @param followers from Developer
+     * Constructor with posts,followers and developed games
+     * 
+     * @param users          from Developer
+     * @param name           from Developer
+     * @param password       from Developer
+     * @param posts          from Developer
+     * @param followers      from Developer
      * @param developedGames from Developer
      */
     public Developer(List<User> users, String name, String password, List<Post> posts, List<User> followers,
@@ -86,15 +98,17 @@ public class Developer{
 
     /**
      * Complete constructor from Developer
-     * @param id from Developer
-     * @param users from Developer
-     * @param name from Developer
-     * @param password from Developer
-     * @param posts from Developer
-     * @param followers from Developer
+     * 
+     * @param id             from Developer
+     * @param users          from Developer
+     * @param name           from Developer
+     * @param password       from Developer
+     * @param posts          from Developer
+     * @param followers      from Developer
      * @param developedGames from Developer
      */
-    public Developer(Integer id, List<User> users, String name, String password, List<Post> posts, List<User> followers, List<Game> developedGames) {
+    public Developer(Integer id, List<User> users, String name, String password, List<Post> posts, List<User> followers,
+            List<Game> developedGames) {
         this.id = id;
         this.users = users;
         this.name = name;
@@ -170,13 +184,13 @@ public class Developer{
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", users='" + getUsers() + "'" +
-            ", name='" + getName() + "'" +
-            ", posts='" + getPosts() + "'" +
-            ", followers='" + getFollowers() + "'" +
-            ", developedGames='" + getDevelopedGames() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", users='" + getUsers() + "'" +
+                ", name='" + getName() + "'" +
+                ", posts='" + getPosts() + "'" +
+                ", followers='" + getFollowers() + "'" +
+                ", developedGames='" + getDevelopedGames() + "'" +
+                "}";
     }
-    
+
 }

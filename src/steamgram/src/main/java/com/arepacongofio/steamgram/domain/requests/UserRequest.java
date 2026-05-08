@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class UserRequest {
-    
+
     String name;
 
     @NotBlank
@@ -16,6 +16,17 @@ public class UserRequest {
 
     @NotBlank
     String password;
+
+    public UserRequest() {
+    }
+
+    public UserRequest(String name, @NotBlank String nickname, @NotBlank @Email String email,
+            @NotBlank String password) {
+        this.name = name;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getName() {
         return name;

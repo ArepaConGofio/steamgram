@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class GameGeneralResponse {
+public class GameDetailsResponse {
     
     @NotNull
     Integer id;

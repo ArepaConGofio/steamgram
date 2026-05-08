@@ -22,9 +22,10 @@ import com.arepacongofio.steamgram.repository.UserJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
+import jakarta.annotation.PostConstruct;
+
 /**
- * Servicio de usuarios. Donde se gestionan las operaciones 
- * básicas sobre los usuarios.
+ * Users service. Manage basic operation with user entities.
  * 
  * @author strSalazar.
  */
@@ -38,6 +39,18 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
     public UserServiceImpl(JpaRepository<User, Integer> userJpaRepository, PasswordEncoder passwordEncoder) {
         super(userJpaRepository);
         this.passwordEncoder = passwordEncoder;
+    }
+
+    /**
+     * Insert initial data to app demo.
+     */
+    @PostConstruct
+    public void loadSeedData() {
+        createUser(new UserRequest(null, "admin", "admin@mail.com", "admin"));
+        createUser(new UserRequest(null, "jesus", "jesus@mail.com", "jesus"));
+        createUser(new UserRequest(null, "salas", "salas@mail.com", "salas"));
+        createUser(new UserRequest(null, "user", "user@mail.com", "user"));
+        createUser(new UserRequest("iLoveSteam", "gabe", "gabe@mail.com", "gabe"));
     }
 
     @Autowired

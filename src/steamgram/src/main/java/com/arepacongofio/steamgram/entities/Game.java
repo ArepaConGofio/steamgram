@@ -21,6 +21,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "game")
 public class Game {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -55,9 +56,9 @@ public class Game {
     List<String> screenshots;
 
     @ElementCollection
-    @CollectionTable(name = "game_plataforms", joinColumns = @JoinColumn(name = "game_id"))
-    @Column(name = "plataform")
-    List<String> plataforms;
+    @CollectionTable(name = "game_platforms", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "platform")
+    List<String> platforms;
 
     /**
      * Empty constructor
@@ -85,7 +86,7 @@ public class Game {
      * @param genre       from Game
      */
     public Game(Integer idIgdb, String title, String description, String banner, Developer developer,
-            List<String> genre, List<String> screenshots, List<String> plataforms) {
+            List<String> genre, List<String> screenshots, List<String> platforms) {
         this.idIgdb = idIgdb;
         this.title = title;
         this.description = description;
@@ -93,7 +94,7 @@ public class Game {
         this.developer = developer;
         this.genres = genre;
         this.screenshots = screenshots;
-        this.plataforms = plataforms;
+        this.platforms = platforms;
     }
 
     /**
@@ -108,7 +109,7 @@ public class Game {
      * @param genre       from Game
      */
     public Game(Integer id, Integer idIgdb, String title, String description, String banner, Developer developer,
-            List<String> genre, List<String> screenshots, List<String> plataforms) {
+            List<String> genre, List<String> screenshots, List<String> platforms) {
         this.id = id;
         this.idIgdb = idIgdb;
         this.title = title;
@@ -117,7 +118,7 @@ public class Game {
         this.developer = developer;
         this.genres = genre;
         this.screenshots = screenshots;
-        this.plataforms = plataforms;
+        this.platforms = platforms;
     }
 
     public Integer getId() {
@@ -126,6 +127,39 @@ public class Game {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    
+    public Integer getIdIgdb() {
+        return idIgdb;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public List<String> getScreenshots() {
+        return screenshots;
+    }
+
+    public List<String> getPlatforms() {
+        return platforms;
+    }
+
+    public void setIdIgdb(Integer idIgdb) {
+        this.idIgdb = idIgdb;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setScreenshots(List<String> screenshots) {
+        this.screenshots = screenshots;
+    }
+
+    public void setPlatforms(List<String> platforms) {
+        this.platforms = platforms;
     }
 
     public String getTitle() {
@@ -195,5 +229,4 @@ public class Game {
                 ", genre='" + getGenres() + "'" +
                 "}";
     }
-
 }
