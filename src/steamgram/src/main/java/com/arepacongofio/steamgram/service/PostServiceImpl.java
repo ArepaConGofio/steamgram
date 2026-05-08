@@ -1,6 +1,8 @@
 package com.arepacongofio.steamgram.service;
 
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.arepacongofio.steamgram.entities.Post;
@@ -15,6 +17,14 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
     
     public PostServiceImpl(PostJpaRepository postRepository) {
         super(postRepository);
+    }
+
+    @Override
+    public Post save(Post entity) {
+        if (entity.getId() == null) {
+            entity.setPublicationDate(LocalDateTime.now());
+        }
+        return super.save(entity);
     }
     
 }

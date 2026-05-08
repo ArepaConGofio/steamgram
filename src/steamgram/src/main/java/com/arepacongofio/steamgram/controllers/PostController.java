@@ -1,5 +1,6 @@
 package com.arepacongofio.steamgram.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.requests.PostRequest;
 import com.arepacongofio.steamgram.domain.responses.PostResponse;
+import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.mappers.PostMapper;
 import com.arepacongofio.steamgram.service.interfaces.IPostService;
 
@@ -73,7 +75,8 @@ public class PostController implements IController<PostResponse, PostRequest, In
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     public ResponseEntity<PostResponse> save(@Valid @RequestBody PostRequest postRequest) {
-        return ResponseEntity.ok(postMapper.toResponse(postService.save(postMapper.toEntity(postRequest))));
+        Post entity = postMapper.toEntity(postRequest);
+        return ResponseEntity.ok(postMapper.toResponse(postService.save(entity)));
     }
 
     @Override

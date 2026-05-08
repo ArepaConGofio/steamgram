@@ -16,8 +16,6 @@ public class PostRequest {
 
     String description;
 
-    String attachment;
-
     public Integer getIdUser() {
         return idUser;
     }
@@ -48,14 +46,6 @@ public class PostRequest {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
     }
 
 }

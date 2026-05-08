@@ -9,22 +9,26 @@ public class PostResponse {
     Integer id;
 
     @NotNull
-    Integer idUser;
+    Integer userId;
 
     @NotNull
-    Integer idGame;
+    Integer gameId;
 
     @NotBlank
-    String nicknameUser;
-    
+    String author;
+
     @NotBlank
     String gameTitle;
 
     @NotBlank
     String title;
-    
+
     String description;
-    
+
+    Integer likesCount;
+
+    String creationDate;
+
     public Integer getId() {
         return id;
     }
@@ -33,20 +37,36 @@ public class PostResponse {
         this.id = id;
     }
 
-    public Integer getIdUser() {
-        return idUser;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getIdGame() {
-        return idGame;
+    public Integer getGameId() {
+        return gameId;
     }
 
-    public void setIdGame(Integer idGame) {
-        this.idGame = idGame;
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
+    }
+
+    public void setGameTitle(String gameTitle) {
+        this.gameTitle = gameTitle;
     }
 
     public String getTitle() {
@@ -65,20 +85,20 @@ public class PostResponse {
         this.description = description;
     }
 
-    public String getNicknameUser() {
-        return nicknameUser;
+    public Integer getLikesCount() {
+        return likesCount;
     }
 
-    public void setNicknameUser(String nicknameUser) {
-        this.nicknameUser = nicknameUser;
+    public void setLikesCount(Integer likesCount) {
+        this.likesCount = likesCount;
     }
 
-    public String getGameTitle() {
-        return gameTitle;
+    public String getCreationDate() {
+        return creationDate;
     }
 
-    public void setGameTitle(String gameTitle) {
-        this.gameTitle = gameTitle;
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
 }

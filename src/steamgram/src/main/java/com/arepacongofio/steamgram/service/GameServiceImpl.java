@@ -2,6 +2,7 @@ package com.arepacongofio.steamgram.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.repository.GameJpaRepository;
+import com.arepacongofio.steamgram.repository.PostJpaRepository;
+import com.arepacongofio.steamgram.repository.ReviewJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
@@ -20,12 +23,19 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class GameServiceImpl extends AbstractService<Game, Integer> implements IGameService {
 
-    GameJpaRepository gameRepository;
-    IDeveloperService devsService;
+    private GameJpaRepository gameRepository;
+    private PostJpaRepository postRepository;
+    private ReviewJpaRepository reviewRepository;
+    private IDeveloperService devsService;
 
-    public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService) {
+    @Autowired
+    public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService,
+            ReviewJpaRepository reviewJpaRepository, PostJpaRepository postJpaRepository) {
         super(gameRepository);
+        this.gameRepository = gameRepository;
         this.devsService = developerService;
+        this.postRepository = postJpaRepository;
+        this.reviewRepository = reviewJpaRepository;
     }
 
     @PostConstruct
@@ -64,36 +74,31 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
                 List.of("Windows", "Playstation 5", "Xbox Series X|S")));
     }
 
-    @Override
     public List<Game> findIgdbGamesByTitle(Pageable pageable, String title) {
         return gameRepository.findByTitleIgnoreCaseContaining(pageable, title);
     }
 
-    @Override
     public Game getGameByIgdbId(String igdbId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getGameByIgdbId'");
     }
 
-    @Override
     public List<Post> getGamePosts(Pageable pageable, Integer id) {
-        Game game = gameRepository.findById(id).orElse(null);
-        if (game != null) {
-            return gameRepository.getGamePosts(pageable, game);
+        Game game = findById(id);
+        if (game == null) {
+            return List.of();
         }
-        return List.of();
+        return postRepository.findByGame(pageable, game);
     }
 
-    @Override
     public List<Review> getGameReviews(Pageable pageable, Integer id) {
-        Game game = gameRepository.findById(id).orElse(null);
-        if (game != null) {
-            return gameRepository.getGameReviews(pageable, game);
+        Game game = findById(id);
+        if (game == null) {
+            return List.of();
         }
-        return List.of();
+        return reviewRepository.findByGame(pageable, game);
     }
 
-    @Override
     public Game saveGameIntoProfile(SaveGameRequest request) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveGameIntoProfile'");

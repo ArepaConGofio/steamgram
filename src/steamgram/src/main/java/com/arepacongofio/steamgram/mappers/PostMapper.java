@@ -23,10 +23,12 @@ public interface PostMapper {
     @Mapping(target = "game", source = "idGame")
     Post toEntity(PostRequest post);
 
-    @Mapping(target = "idUser", source = "user.id")
-    @Mapping(target = "idGame", source = "game.id")
-    @Mapping(target = "nicknameUser", source = "user.nickname")
+    @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "gameId", source = "game.id")
+    @Mapping(target = "author", source = "user.nickname")
     @Mapping(target = "gameTitle", source = "game.title")
+    @Mapping(target = "likesCount", expression = "java(post.getLikes() != null ? post.getLikes().size() : 0)")
+    @Mapping(target = "creationDate", expression = "java(post.getPublicationDate().toString())")
     PostResponse toResponse(Post post);
 
     List<PostResponse> toResponseList(List<Post> posts);

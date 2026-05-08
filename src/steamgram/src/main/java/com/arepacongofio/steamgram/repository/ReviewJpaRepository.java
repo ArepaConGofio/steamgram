@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.arepacongofio.steamgram.entities.Game;
-import com.arepacongofio.steamgram.entities.Post;
+import com.arepacongofio.steamgram.entities.Review;
 
 @Repository
-public interface PostJpaRepository extends JpaRepository<Post,Integer> {
-    List<Post> findByGame(Pageable pageable, Game game);
+public interface ReviewJpaRepository extends JpaRepository<Review, Integer> {
+    List<Review> findByGame(Pageable pageable, Game game);
 }

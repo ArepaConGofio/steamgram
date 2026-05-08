@@ -44,4 +44,8 @@ public abstract class AbstractService<T, K> implements IGenericService<T, K> {
         return true;
     }
 
+    public JpaRepository<T, K> getRepo() {
+        return repo;
+    }
+
 }

@@ -17,10 +17,12 @@ import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
 import com.arepacongofio.steamgram.domain.requests.SaveGameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameDetailsResponse;
+import com.arepacongofio.steamgram.domain.responses.PostResponse;
+import com.arepacongofio.steamgram.domain.responses.ReviewResponse;
 import com.arepacongofio.steamgram.entities.Game;
-import com.arepacongofio.steamgram.entities.Post;
-import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.mappers.GameMapper;
+import com.arepacongofio.steamgram.mappers.PostMapper;
+import com.arepacongofio.steamgram.mappers.ReviewMapper;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,10 +38,14 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
 
     private final IGameService gameService;
     private final GameMapper gameMapper;
+    private final PostMapper postMapper;
+    private final ReviewMapper reviewMapper;
 
-    public GameController(IGameService gameService, GameMapper gameMapper) {
+    public GameController(IGameService gameService, GameMapper gameMapper, PostMapper postMapper, ReviewMapper reviewMapper) {
         this.gameService = gameService;
         this.gameMapper = gameMapper;
+        this.postMapper = postMapper;
+        this.reviewMapper = reviewMapper;
     }
 
     @Override
@@ -70,7 +76,7 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
         return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 
-    @Override
+    @Override 
     @PostMapping
     @Operation(summary = "Save a Game", description = "Save a Game")
     @ApiResponses(value = {
@@ -103,9 +109,9 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
             @ApiResponse(responseCode = "404", description = "Game not found"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<Post>> getGamePosts(@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int pageSize, @Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(gameService.getGamePosts(PageRequest.of(page, pageSize), id));
+    public ResponseEntity<List<PostResponse>> getGamePosts(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int pageSize, @PathVariable Integer id) {
+        return ResponseEntity.ok(postMapper.toResponseList(gameService.getGamePosts(PageRequest.of(page, pageSize), id)));
     }
 
     @GetMapping("reviews/{id}")
@@ -115,9 +121,9 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
             @ApiResponse(responseCode = "404", description = "Game not found"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<Review>> getGameReviews(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<List<ReviewResponse>> getGameReviews(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int pageSize, @Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(gameService.getGameReviews(PageRequest.of(page, pageSize), id));
+        return ResponseEntity.ok(reviewMapper.toResponseList(gameService.getGameReviews(PageRequest.of(page, pageSize), id)));
     }
 
     @GetMapping("/findByTitle/{title}")

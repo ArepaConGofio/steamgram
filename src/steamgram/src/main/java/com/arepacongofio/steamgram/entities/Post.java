@@ -70,7 +70,6 @@ public class Post {
      * @param idGame      from Post
      * @param title       from Post
      * @param description from Post
-     * @param attachment  from Post
      */
     public Post(User user, Game game, String title, String description) {
         this.user = user;
