@@ -1,12 +1,8 @@
 package com.arepacongofio.steamgram.domain.requests;
 
-import jakarta.validation.constraints.NotBlank;
 
 public class UserEditRequest {
     Integer id;
-    
-    @NotBlank
-    String nickname;
 
     String name;
 
@@ -18,14 +14,6 @@ public class UserEditRequest {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getName() {

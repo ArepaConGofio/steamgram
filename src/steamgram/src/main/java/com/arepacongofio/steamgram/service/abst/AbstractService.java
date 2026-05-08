@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.arepacongofio.steamgram.service.interfaces.generic.IGenericService;
 
-public class AbstractService<T, K> implements IGenericService<T, K> {
+public abstract class AbstractService<T, K> implements IGenericService<T, K> {
 
     JpaRepository<T, K> repo;
 

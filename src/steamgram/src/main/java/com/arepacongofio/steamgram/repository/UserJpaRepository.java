@@ -1,6 +1,7 @@
 package com.arepacongofio.steamgram.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,7 @@ public interface UserJpaRepository extends JpaRepository<User, Integer> {
      * @param nickname del usuario
      * @return User
      */
-    User findByNickname(String nickname);
+    Optional<User> findByNickname(String nickname);
     
     /**
      * Busca usuarios por nombre y nickname
@@ -25,7 +26,7 @@ public interface UserJpaRepository extends JpaRepository<User, Integer> {
      * @param nickname
      * @return List<User>
      */
-    List<User> findUserByNameAndNickname(Pageable pageable,String name, String nickname);
+    List<User> findByNameAndNickname(Pageable pageable,String name, String nickname);
 
     /**
      * Comprueba si existe un usuario por su email
@@ -35,9 +36,9 @@ public interface UserJpaRepository extends JpaRepository<User, Integer> {
     boolean existsByEmail(String email);
     
     /**
-     * comprueba si existe un usuario por su email
+     * comprueba si existe un usuario por su nickname
      * @param nickname del usuario
      * @return true/false
      */
-    boolean existsByNickname( String nickname);
+    boolean existsByNickname(String nickname);
 }

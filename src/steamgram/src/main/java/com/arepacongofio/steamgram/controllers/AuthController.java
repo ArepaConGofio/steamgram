@@ -10,6 +10,8 @@ import com.arepacongofio.steamgram.domain.requests.LoginRequest;
 import com.arepacongofio.steamgram.domain.requests.UserRequest;
 import com.arepacongofio.steamgram.domain.responses.LoginResponse;
 import com.arepacongofio.steamgram.domain.responses.UserResponse;
+import com.arepacongofio.steamgram.entities.User;
+import com.arepacongofio.steamgram.mappers.UserMapper;
 import com.arepacongofio.steamgram.securization.config.JwtService;
 import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
@@ -27,33 +29,41 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final IUserService userService;
+    private final UserMapper userMapper;
 
     public AuthController(AuthenticationManager authenticationManager,
-                          JwtService jwtService,
-                          IUserService userService) {
+            JwtService jwtService,
+            IUserService userService,
+            UserMapper userMapper) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @PostMapping("/login")
     @Operation(summary = "Login", description = "Returns a JWT token")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Login successful"),
-            @ApiResponse(responseCode = "403", description = "Forbidden")
+            @ApiResponse(responseCode = "200", description = "Login successful"),
+            @ApiResponse(responseCode = "401", description = "Invalid body"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
     })
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest req) {
+        User user = userService.getUserByNickname(req.getUsername());
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword()));
         String token = jwtService.generateToken(auth);
-        return ResponseEntity.ok(new LoginResponse(token));
+        return ResponseEntity.ok(new LoginResponse(token, userMapper.toResponse(user)));
     }
 
     @PostMapping("/register")
     @Operation(summary = "Register", description = "Creates a new user and returns their data")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "401", description = "Invalid body"),
             @ApiResponse(responseCode = "409", description = "User already exists")
     })
     public ResponseEntity<UserResponse> register(@Valid @RequestBody UserRequest req) {

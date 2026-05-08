@@ -45,7 +45,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
 
-    @Column(name = "avatar_url", nullable = true)
+    @Column(name = "avatar_url", nullable = true, length = 500)
     String avatarUrl;
 
     @ManyToMany
