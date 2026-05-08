@@ -23,7 +23,7 @@ export default function NewReviewForm({ gameId }: Props) {
       Alert.alert("Warning", "The content is required")
       return;
     }
-    Alert.alert("Uploading review", `You are uploading a review for ${currentGame?.name} with a score of ${rating} stars. Do you want to continue?`, [
+    Alert.alert("Uploading review", `You are uploading a review for ${currentGame?.title} with a score of ${rating} stars. Do you want to continue?`, [
       { text: "Sure!", onPress: () => sendReview() },
       { text: "Nah" }
     ])
@@ -34,7 +34,7 @@ export default function NewReviewForm({ gameId }: Props) {
     const review: ReviewCreationRequest = {
       author: user?.username,
       gameId: gameId,
-      gameTitle: currentGame?.name,
+      gameTitle: currentGame?.title,
       rating: rating,
       title: title,
       userId: user.id,
@@ -73,8 +73,8 @@ export default function NewReviewForm({ gameId }: Props) {
 
             <View style={styles.modalHeader}>
               <View style={styles.itemContainer}>
-                <Image src={currentGame?.coverUrl} height={50} width={50} style={styles.gameCover} />
-                <Text style={styles.itemLabel}>{currentGame?.name}</Text>
+                <Image src={currentGame?.banner} height={50} width={50} style={styles.gameCover} />
+                <Text style={styles.itemLabel}>{currentGame?.title}</Text>
               </View>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <MaterialIcons name="close" size={20} />

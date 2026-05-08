@@ -49,9 +49,9 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
         <View style={styles.container}>
             <ScrollView>
                 <View style={styles.header}>
-                    <Image source={{ uri: game.coverUrl }} style={[styles.cover, { height: coverSize, width: coverSize }]} />
+                    <Image source={{ uri: game.banner }} style={[styles.cover, { height: coverSize, width: coverSize }]} />
                     <View style={[styles.headerSubcontainer, { width: coverSize * 2 }]}>
-                        <Text style={styles.title}>{game.name}</Text>
+                        <Text style={styles.title}>{game.title}</Text>
                         <Text style={styles.developerLabel}>By {game.developerName}</Text>
                     </View>
                 </View>

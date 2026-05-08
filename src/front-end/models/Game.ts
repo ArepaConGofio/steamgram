@@ -2,17 +2,15 @@ export type GameId = number;
 
 export type Game = {
   id: GameId;
-  steamId?: string;
-  igdbId?: string;
-  developerId?: number
-  developerName?: string;
-  name: string;
-  coverUrl?: string;
-  screenshots: string[];
+  idIgdb: number;
+  developerId: number
+  developerName: string;
+  title: string;
   description?: string;
+  banner?: string;
   genres: string[];
   platforms: string[]
-  likesCount: number;
+  screenshots: string[];
   reviewsCount: number,
 };
 

@@ -14,7 +14,7 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
   }
   
   async getGameDetails(gameId: GameId): Promise<Game | undefined> {
-    const game = await APIHandler.makeRequest({ endpoint: `/game/${gameId}` })
+    const game = await APIHandler.makeRequest({ endpoint: `/game/${gameId}`, token: true })
     if (!game) {
       throw new Error("ERROR: Game not found")
     }

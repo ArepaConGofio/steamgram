@@ -26,8 +26,8 @@ export default function GameDetailsContainer({ game }: Props) {
     }
 
     useEffect(() => {
-        navigation.setOptions({ title: game.name, headerRight: generateRightHeaderButton });
-    }, [navigation, game.name])
+        navigation.setOptions({ title: game.title, headerRight: generateRightHeaderButton });
+    }, [navigation, game.title])
 
     useEffect(() => {
         let query;

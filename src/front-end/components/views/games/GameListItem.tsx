@@ -11,9 +11,9 @@ export default function GameListItem({ game }: Props) {
 
     return (
         <TouchableOpacity style={styles.container} onPress={() => router.navigate(`/(app)/games/${game.id}`)}>
-            <Image width={75} height={100} src={game.coverUrl} style={styles.cover}/>
+            <Image width={75} height={100} src={game.banner} style={styles.cover}/>
             <View style={styles.subcontainer}>
-                <Text style={styles.gameTitle}>{game.name}</Text>
+                <Text style={styles.gameTitle}>{game.title}</Text>
                 <Text style={styles.gameDeveloper}>By {game.developerName}</Text>
             </View>
         </TouchableOpacity>

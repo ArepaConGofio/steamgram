@@ -81,7 +81,7 @@
             "developerId": "953",
             "developerName": "Arrowhead Game Studios",
             "name": "Helldivers 2",
-            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/coabbf.webp",
+            "banner": "https://images.igdb.com/igdb/image/upload/t_cover_big/coabbf.webp",
             "screenshots": [],
             "description": "The Galaxy’s Last Line of Offence. Enlist in the Helldivers and join the fight for freedom across a hostile galaxy in a fast, frantic, and ferocious third-person shooter.",
             "genres": [
@@ -105,7 +105,7 @@
             "developerId": "62954",
             "developerName": "Coldblood",
             "name": "Neverway",
-            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9nlq.webp",
+            "banner": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9nlq.webp",
             "screenshots": [
                 "https://images.igdb.com/igdb/image/upload/t_720p/scw8ep.webp",
                 "https://images.igdb.com/igdb/image/upload/t_720p/scw8eq.webp",
@@ -136,7 +136,7 @@
             "developerId": "1432",
             "developerName": "Playground Games",
             "name": "Forza Horizon 5",
-            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3ofx.webp",
+            "banner": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3ofx.webp",
             "screenshots": [
                 "https://images.igdb.com/igdb/image/upload/t_720p/scahho.webp"
             ],
@@ -162,7 +162,7 @@
             "developerId": "28376",
             "developerName": "Nikita Kryukov",
             "name": "Milk Inside a Bag of Milk Inside a Bag of Milk",
-            "coverUrl": "https://images.igdb.com/igdb/image/upload/t_cover_big/co66n4.webp",
+            "banner": "https://images.igdb.com/igdb/image/upload/t_cover_big/co66n4.webp",
             "screenshots": [
                 "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5u.webp",
                 "https://images.igdb.com/igdb/image/upload/t_720p/sc8m5v.webp",

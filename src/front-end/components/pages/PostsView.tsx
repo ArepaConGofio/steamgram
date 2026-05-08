@@ -19,11 +19,11 @@ export default function PostsView({ data, games, filter, filterSetter }: Props) 
                     { alignItems: "center", width: 125, padding: 10 },
                     filter == item && { backgroundColor: "lightgray" }
                     ]}>
-                    <Image src={item.coverUrl} width={100} height={100} style={{
+                    <Image src={item.banner} width={100} height={100} style={{
                         backgroundColor: "gray",
                         borderRadius: 25,
                     }}/>
-                    <Text style={{ fontSize: 15, textAlign: "center" }} numberOfLines={2}>{item.name}</Text>
+                    <Text style={{ fontSize: 15, textAlign: "center" }} numberOfLines={2}>{item.title}</Text>
                 </View>
             </TouchableOpacity>
         )

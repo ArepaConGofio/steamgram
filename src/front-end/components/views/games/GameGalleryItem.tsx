@@ -13,8 +13,8 @@ export default function GameGalleryItem({ game }: Props) {
     return (
         <TouchableOpacity onPress={() => router.push(`/(app)/games/${game.id}`)}>
             <View style={[styles.container, {width: width}]} >
-                <Image src={game.coverUrl} alt={game.id + " cover"} width={75} height={100} style={styles.image} />
-                <Text style={styles.title}>{game.name}</Text>
+                <Image src={game.banner} alt={game.id + " cover"} width={75} height={100} style={styles.image} />
+                <Text style={styles.title}>{game.title}</Text>
             </View>
         </TouchableOpacity>
     )

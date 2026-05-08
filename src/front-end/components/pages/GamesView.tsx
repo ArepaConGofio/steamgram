@@ -16,7 +16,7 @@ export default function GamesView({ games }: Props) {
     return (
         <View style={styles.container}>
             <FlatList key={"games"}
-            data={games.sort((a, b) => a.name.localeCompare(b.name))} 
+            data={games.sort((a, b) => a.title.localeCompare(b.title))} 
             renderItem={({item}) => <GameGalleryItem game={item}/>} 
             keyExtractor={item => item.id.toString()}
             numColumns={3}

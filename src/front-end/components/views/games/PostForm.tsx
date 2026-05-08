@@ -40,7 +40,7 @@ export default function PostForm({ game, buttonComponent }: Props) {
       Alert.alert("Warning", "The content is required")
       return;
     }
-    Alert.alert("Posting", `You are posting about ${game.name}. Do you want to continue?`, [
+    Alert.alert("Posting", `You are posting about ${game.title}. Do you want to continue?`, [
       { text: "Yeah", onPress: sendPost },
       { text: "Nope" }
     ])
@@ -58,8 +58,8 @@ export default function PostForm({ game, buttonComponent }: Props) {
 
             <View style={styles.modalHeader}>
               <View style={styles.itemContainer}>
-                <Image src={game.coverUrl} height={50} width={50} style={styles.gameCover} />
-                <Text style={styles.itemLabel}>{game.name}</Text>
+                <Image src={game.banner} height={50} width={50} style={styles.gameCover} />
+                <Text style={styles.itemLabel}>{game.title}</Text>
               </View>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <MaterialIcons name="close" size={20} />
