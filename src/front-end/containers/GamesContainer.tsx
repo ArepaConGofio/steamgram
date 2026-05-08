@@ -6,5 +6,7 @@ type Props = {
 }
 
 export default function GamesContainer({ games }: Props) {
+    
+
     return <GamesView games={games}/>
 }

@@ -22,6 +22,7 @@ export default function GameDetailsContainer({ game }: Props) {
     }
 
     const toggleTab = (tab: ContentTabs) => {
+        setData([]);
         setContentTab(tab == "reviews" ? "posts" : "reviews");
     }
 

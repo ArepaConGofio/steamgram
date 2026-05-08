@@ -3,7 +3,7 @@ import { Post } from "@/models/Post";
 import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Markdown from 'react-native-markdown-display';
 
@@ -15,30 +15,39 @@ export default function PostItem({ post }: Props) {
     const router = useRouter();
     const api = new PostsAPIHandler();
     const { user } = useContext(AuthContext);
+    const [isVisible, setVisible] = useState(true)
 
     const onAuthorPress = () => router.navigate(`/(app)/users/${post.author}`);
     const onGamePress = () => router.navigate(`/(app)/games/${post.gameId}`);
 
-    const onDeletePress = () => {
-        // TODO: Implement post deleting logic
-        if (!user) return;
-        Alert.alert("Deleting post")
-        /*
-        api.deletePost(user?.id, post.id)
-        .then(value => Alert.alert(value ? "Post deleted" : "Error deleting post"))
-        .catch(reason => Alert.alert("Error", reason))
-        */
+    const onDeletePress = async () => {
+        Alert.alert("Are you sure?", "Do you want to delete this post?", [
+            { text: "No" },
+            { text: "Yes", onPress: deletePost }
+        ])
     };
 
+    const deletePost = () => {
+        if (!user) return;
+        
+        api.deletePost(post.id)
+        .then(_ => {
+            Alert.alert("Post deleted", "The post was deleted successfully")
+            setVisible(false)
+        })
+        .catch(console.error)
+    }
+
+    const description = JSON.parse(post.description).replace(/\\n/g, "\n");
+
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { display: isVisible ? "flex" : "none" }]}>
             <View style={styles.header}>
                 <View style={styles.headerLeft}>
                     <TouchableOpacity onPress={onAuthorPress}>
                         <Text style={styles.authorLabel}>@{post.author}</Text>
                     </TouchableOpacity>
-                    {/* TODO: Implement post creation date */}
-                    <Text style={{ color: "gray" }}>{post.creationDate ? post.creationDate : "01-01-2000"}</Text>
+                    <Text style={{ color: "gray" }}>{post.creationDate.split("T")[0]}</Text>
                 </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={onGamePress}>
@@ -48,7 +57,7 @@ export default function PostItem({ post }: Props) {
             </View>
             <Text style={styles.title}>{post.title}</Text>
             
-            <Markdown style={markdownStyle}>{post.description}</Markdown>
+            <Markdown style={markdownStyle}>{description}</Markdown>
 
             <View style={styles.bottomContainer}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -27,7 +27,10 @@ export default function PostForm({ game, buttonComponent }: Props) {
   const sendPost = () => {
     if (user == null) return;
     var json = JSON.stringify(description);
-    api.createPost({ gameId: game.id, title: title, userId: user.id, description: json })
+    api.createPost({ idGame: game.id, title: title, idUser: user.id, description: json })
+      .then(_ => {
+        setModalVisible(false)
+      })
       .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
   }
 

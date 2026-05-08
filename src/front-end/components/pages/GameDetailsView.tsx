@@ -22,7 +22,6 @@ const GENRE_COLORS = [
 ];
 
 export default function GameDetailsView({ game, content, contentData, goToTab }: Props) {
-
     const SCREEN_WIDTH = useWindowDimensions().width;
     let screenshotsWidth = SCREEN_WIDTH;
     let screenshotsStyle: ImageStyle = { borderRadius: 20 }
@@ -36,7 +35,7 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
     const generateDataList = () => {
         return <FlatList data={contentData}
             renderItem={({ item, index }) => content == "posts"
-                ? <PostItem post={item as Post} />
+                ? <PostItem post={item as Post}/>
                 : <ReviewItem review={item as Review} />
             }
             contentContainerStyle={{ marginVertical: 25 }}
@@ -79,7 +78,8 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     </Pressable>
                 </View>
                 <View style={styles.tabView}>
-                    {content == "posts" ? <PostForm game={game} buttonComponent={
+                    {content == "posts" ? <PostForm game={game} 
+                    buttonComponent={
                         (
                             <View style={styles.createPostButton}>
                                 <MaterialIcons name="add" size={20} />

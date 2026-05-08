@@ -5,10 +5,10 @@ export type ReviewId = number;
 
 export type Review = {
     id: ReviewId;
-    gameId: GameId;
-    gameTitle: string;
-    userId: UserId;
-    author: string;
+    idGame: GameId;
+    gameName: string;
+    idUser: UserId;
+    nicknameUser: string;
     title: string;
     description?: string;
     rating: number;

@@ -22,7 +22,6 @@ export class APIHandler {
     headers.set("Content-Type", "application/json");
     if (withToken) {
       const token = await SecureStore.getItemAsync("token");
-      console.log(token)
       headers.set("Authorization", token ? `Bearer ${token}` : "");
     }
     return headers;
@@ -40,7 +39,12 @@ export class APIHandler {
       const response = await fetch(requestUrl, options);
       console.log(response.ok, response.status, response.url)
       if (response.ok) {
-        return await response.json();
+        try {
+          return await response.json();
+        } catch (error) {
+          console.log("Response is not json parseable");
+          return;
+        }
       }
       console.error(response)
     } catch (error) {

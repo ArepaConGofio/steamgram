@@ -33,8 +33,8 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
       endpoint: "/review",
       method: HttpMethods.POST,
       body: {
-        idUser: review.userId,
-        idGame: review.gameId,
+        idUser: review.idUser,
+        idGame: review.idGame,
         title: review.title,
         description: review.description,
         rating: review.rating
@@ -54,16 +54,18 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
   }
   
   async getGameReviews(gameId: GameId): Promise<Review[]> {
-    return APIHandler.makeRequest({
+    return await APIHandler.makeRequest({
       endpoint: `/game/reviews/${gameId}`,
       token: true
     })
   }
 
   async getGamePosts(gameId: GameId): Promise<Post[]> {
-    return APIHandler.makeRequest({
+    const response = await APIHandler.makeRequest({
       endpoint: `/game/posts/${gameId}`,
       token: true
     })  
+    console.log(response)
+    return response
   } 
 }

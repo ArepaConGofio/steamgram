@@ -24,7 +24,8 @@ export class PostsAPIHandler extends APIHandler implements IPostsAPIHandler {
   async deletePost(postId: PostId): Promise<boolean> {
     await APIHandler.makeRequest({
       endpoint: `/post/${postId}`,
-      method: HttpMethods.DELETE
+      method: HttpMethods.DELETE,
+      token: true
     })
     return true;
   }

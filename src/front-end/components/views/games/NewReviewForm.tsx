@@ -1,10 +1,12 @@
 import { AuthContext } from "@/context/AuthContext";
 import { Game, GameId } from "@/models/Game";
-import { ReviewCreationRequest } from "@/models/Review";
+import { Review, ReviewCreationRequest } from "@/models/Review";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
+import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
 import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import ReviewItem from "../users/ReviewItem";
 
 type Props = {
   gameId: GameId
@@ -14,6 +16,8 @@ export default function NewReviewForm({ gameId }: Props) {
   const { user } = useContext(AuthContext); 
   const [modalVisible, setModalVisible] = useState(false);
   const [currentGame, setCurrentGame] = useState<Game>();
+  const [canReview, setCanReview] = useState(true);
+  const [existentReview, setExistentReview] = useState<Review>();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState(3);
@@ -24,7 +28,7 @@ export default function NewReviewForm({ gameId }: Props) {
       return;
     }
     Alert.alert("Uploading review", `You are uploading a review for ${currentGame?.title} with a score of ${rating} stars. Do you want to continue?`, [
-      { text: "Sure!", onPress: () => sendReview() },
+      { text: "Sure!", onPress: sendReview },
       { text: "Nah" }
     ])
   }
@@ -32,16 +36,21 @@ export default function NewReviewForm({ gameId }: Props) {
   const sendReview = () => {
     if (user == null || currentGame == null) return;
     const review: ReviewCreationRequest = {
-      author: user?.username,
-      gameId: gameId,
-      gameTitle: currentGame?.title,
+      nicknameUser: user?.username,
+      idGame: gameId,
+      gameName: currentGame?.title,
       rating: rating,
       title: title,
-      userId: user.id,
+      idUser: user.id,
       description: description
     }
-    console.log(review);
-    // TODO: Backend request to upload review.
+    const api = new GamesAPIHandler();
+    api.reviewGame(review)
+    .then(_ => {
+      Alert.alert("Review created!", "You created the review successfully :D")
+      setModalVisible(false);
+    })
+    .catch(console.error)
   }
 
   const generateStarButtons = () => {
@@ -56,10 +65,35 @@ export default function NewReviewForm({ gameId }: Props) {
 
   useEffect(() => {
     const gameApi = new GamesAPIHandler();
+    const userApi = new UsersAPIHandler();
+    if (!user) return;
     gameApi.getGameDetails(gameId)
-      .then(value => setCurrentGame(value))
+      .then(value => {
+        setCurrentGame(value)
+        userApi.getReviews(user?.id)
+        .then(value => {
+          const existentReview = value.find(r => r.idGame == gameId)
+          if (existentReview) {
+            setCanReview(false);
+            setExistentReview(existentReview)
+          }
+      })
+        .catch(console.error)
+      })
       .catch(reason => Alert.alert("Error", reason))
   }, [gameId])
+
+  if (!canReview && existentReview) {
+    return (
+      <View style={{ padding: 10, borderBlockColor: "green", borderWidth: 2, borderRadius: 20 }}>
+        <Text style={{ textAlign: "center", padding: 5, fontSize: 16}}>Your review!</Text>
+        <ReviewItem review={existentReview} onDelete={() => {
+          setCanReview(true);
+          setExistentReview(undefined);
+        }} />
+      </View>
+    )
+  }
 
   return (
     <View>

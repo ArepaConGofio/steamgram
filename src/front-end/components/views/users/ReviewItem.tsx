@@ -3,18 +3,20 @@ import { Review } from "@/models/Review";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
     review: Review;
     isOnProfile?: boolean
+    onDelete?: () => void;
 }
 
-export default function ReviewItem({ review, isOnProfile }: Props) {
+export default function ReviewItem({ review, isOnProfile, onDelete }: Props) {
     const router = useRouter();
     const api = new GamesAPIHandler();
     const { user } = useContext(AuthContext);
+    const [isVisible, setVisible] = useState(true);
 
     function generateRatingStars(rating: number) {
         return [1,2,3,4,5].map(value => (
@@ -23,28 +25,37 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
     }
 
     const onDeletePress = () => {
-        // TODO: Implement review deleting logic
-        Alert.alert("Deleting review")
-        /*
+        Alert.alert("Are you sure?", "Do you want to delete this review?", [
+            { text: "No" },
+            { text: "Yes", onPress: deleteReview }
+        ])
+    }
+
+    const deleteReview = () => {
         api.deleteReview(review.id)
-        .then(value => Alert.alert(value ? "Review deleted" : "Error deleting review"))
-        .catch(reason => Alert.alert("Error", reason))
-        */
+        .then(_ => {
+            Alert.alert("Review deleted", "The review was deleted successfully")
+            setVisible(false);
+            if (onDelete) {
+                onDelete()
+            }
+        })
+        .catch(console.error)
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { display: isVisible ? "flex" : "none" }]}>
             <View style={styles.header}>
                 {isOnProfile 
                 ? 
-                    <Text style={styles.mainLabel}>{review.gameTitle}</Text>
+                    <Text style={styles.mainLabel}>{review.gameName}</Text>
                 : 
                     <View>
-                        <TouchableOpacity onPress={() => router.navigate(`/(app)/users/${review.author}`)}>
-                            <Text style={styles.mainLabel}>@{review.author}</Text>
+                        <TouchableOpacity onPress={() => router.navigate(`/(app)/users/${review.nicknameUser}`)}>
+                            <Text style={styles.mainLabel}>@{review.nicknameUser}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => router.navigate(`/(app)/games/${review.gameId}`)}>
-                            <Text style={styles.gameSubtitleLabel}>{review.gameTitle}</Text>
+                        <TouchableOpacity onPress={() => router.navigate(`/(app)/games/${review.idGame}`)}>
+                            <Text style={styles.gameSubtitleLabel}>{review.gameName}</Text>
                         </TouchableOpacity>
                     </View>
                 }
@@ -56,7 +67,7 @@ export default function ReviewItem({ review, isOnProfile }: Props) {
                 <View style={styles.starsContainer}>
                     {generateRatingStars(review.rating)}
                 </View>
-                <TouchableOpacity onPress={onDeletePress} style={{ display: review.userId == user?.id ? "flex" : "none" }}>
+                <TouchableOpacity onPress={onDeletePress} style={{ display: review.idUser == user?.id ? "flex" : "none" }}>
                     <MaterialIcons name="delete" size={24}/>
                 </TouchableOpacity>
             </View>

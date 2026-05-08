@@ -24,8 +24,8 @@ export type LikeRequest = {
 }
 
 export type PostCreationRequest = {
-    userId: number;
-    gameId: number;
+    idUser: number;
+    idGame: number;
     title: string;
     description?: string;
 }
