@@ -18,6 +18,8 @@ public interface GameJpaRepository extends JpaRepository<Game,Integer>{
     
     public List<Game> findByTitleIgnoreCaseContaining(Pageable pageable, String title);
 
+    public java.util.Optional<Game> findByIdIgdb(Integer idIgdb);
+
     @Query("SELECT p FROM Post p WHERE p.game = :game")
     public List<Post> getGamePosts(Pageable pageable, @Param("game") Game game);
 

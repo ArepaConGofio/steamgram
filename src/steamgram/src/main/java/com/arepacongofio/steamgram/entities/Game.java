@@ -3,6 +3,8 @@ package com.arepacongofio.steamgram.entities;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.Type;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -32,7 +34,7 @@ public class Game {
     @Column(name = "title")
     String title;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "text")
     String description;
 
     @Column(name = "banner", nullable = true)
@@ -73,6 +75,21 @@ public class Game {
      */
     public Game(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * Constructor for show IGDB search results.
+     * 
+     * @param idIgdb    - IGDB Identification.
+     * @param title     - Game title.
+     * @param banner    - Game cover.
+     * @param developer - Game developer.
+     */
+    public Game(Integer idIgdb, String title, String banner, Developer developer) {
+        this.idIgdb = idIgdb;
+        this.title = title;
+        this.banner = banner;
+        this.developer = developer;
     }
 
     /**
@@ -129,7 +146,6 @@ public class Game {
         this.id = id;
     }
 
-    
     public Integer getIdIgdb() {
         return idIgdb;
     }
