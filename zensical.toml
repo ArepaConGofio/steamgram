@@ -37,10 +37,7 @@ nav = [
         "about/how.md",
         "about/license.md"
     ]},
-    { "Instalación y uso" = [
-        "get_started/requirements.md",
-        "get_started/installation.md"
-    ]},
+    { "Instalación y uso" = "get_started/installation.md" },
     { "Arquitectura y diseño" = [
         "design/auth-flow.md",
         "design/front-structure.md",
