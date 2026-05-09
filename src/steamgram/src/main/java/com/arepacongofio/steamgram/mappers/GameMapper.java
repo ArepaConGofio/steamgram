@@ -8,7 +8,6 @@ import org.mapstruct.Mapping;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameCreationResponse;
 import com.arepacongofio.steamgram.domain.responses.GameDetailsResponse;
-import com.arepacongofio.steamgram.domain.responses.GameResponse;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 
