@@ -10,35 +10,23 @@ import com.arepacongofio.steamgram.entities.Developer;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.entities.Review;
+import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.repository.GameJpaRepository;
+import com.arepacongofio.steamgram.repository.UserJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
 
 import jakarta.annotation.PostConstruct;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
-import com.api.igdb.apicalypse.APICalypse;
-import com.api.igdb.request.IGDBWrapper;
-import com.api.igdb.request.TwitchAuthenticator;
-import com.api.igdb.utils.TwitchToken;
-import com.api.igdb.request.ProtoRequestKt;
-import com.api.igdb.utils.ImageBuilderKt;
-import com.api.igdb.utils.ImageSize;
-import com.api.igdb.utils.ImageType;
-import com.api.igdb.exceptions.RequestException;
 
 @Service
 public class GameServiceImpl extends AbstractService<Game, Integer> implements IGameService {
 
     GameJpaRepository gameRepository;
     IDeveloperService devsService;
+    UserJpaRepository userJpaRepository;
 
     @Value("${twitch.client-id}")
     private String twitchClientId;
@@ -46,9 +34,10 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
     @Value("${twitch.client-secret}")
     private String twitchClientSecret;
 
-    public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService) {
+    public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService, UserJpaRepository userJpaRepository) {
         super(gameRepository);
         this.devsService = developerService;
+        this.userJpaRepository = userJpaRepository;
     }
 
     @PostConstruct
@@ -94,85 +83,7 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
 
     @Override
     public Game getGameByIgdbId(String igdbId) {
-        Integer id = null;
-        try {
-            id = Integer.parseInt(igdbId);
-        } catch (NumberFormatException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid IGDB ID format");
-        }
-
-        // Check local database first
-        Optional<Game> localGame = gameRepository.findByIdIgdb(id);
-        if (localGame.isPresent()) {
-            return localGame.get();
-        }
-
-        // Authenticate with Twitch
-        try {
-            TwitchAuthenticator tAuth = TwitchAuthenticator.INSTANCE;
-            TwitchToken token = tAuth.requestTwitchToken(twitchClientId, twitchClientSecret);
-            
-            IGDBWrapper wrapper = IGDBWrapper.INSTANCE;
-            wrapper.setCredentials(twitchClientId, token.getAccess_token());
-
-            APICalypse apicalypse = new APICalypse()
-                    .fields("id, name, summary, cover.image_id, genres.name, screenshots.image_id, platforms.name, involved_companies.developer, involved_companies.company.name")
-                    .where("id = " + id);
-
-            List<proto.Game> games = ProtoRequestKt.games(wrapper, apicalypse);
-            if (games.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game not found in IGDB");
-            }
-
-            proto.Game igdbGame = games.get(0);
-            
-            String coverUrl = igdbGame.hasCover() 
-                    ? ImageBuilderKt.imageBuilder(igdbGame.getCover().getImageId(), ImageSize.COVER_BIG, ImageType.WEBP) 
-                    : null;
-                    
-            List<String> genres = igdbGame.getGenresList().stream()
-                    .map(g -> g.getName())
-                    .collect(Collectors.toList());
-                    
-            List<String> screenshots = igdbGame.getScreenshotsList().stream()
-                    .map(s -> ImageBuilderKt.imageBuilder(s.getImageId(), ImageSize.SCREENSHOT_HUGE, ImageType.WEBP))
-                    .collect(Collectors.toList());
-                    
-            List<String> platforms = igdbGame.getPlatformsList().stream()
-                    .map(p -> p.getName())
-                    .collect(Collectors.toList());
-
-            Developer developer = null;
-            for (proto.InvolvedCompany ic : igdbGame.getInvolvedCompaniesList()) {
-                if (ic.getDeveloper()) {
-                    String devName = ic.getCompany().getName();
-                    developer = devsService.findAll(Pageable.unpaged()).stream()
-                            .filter(d -> d.getName() != null && d.getName().equals(devName))
-                            .findFirst()
-                            .orElse(null);
-                    if (developer == null) {
-                        developer = devsService.save(new Developer(devName));
-                    }
-                    break;
-                }
-            }
-
-            Game newGame = new Game(
-                    (int) igdbGame.getId(), 
-                    igdbGame.getName(), 
-                    igdbGame.getSummary(), 
-                    coverUrl, 
-                    developer, 
-                    genres, 
-                    screenshots, 
-                    platforms
-            );
-
-            return save(newGame);
-
-        } catch (RequestException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error communicating with IGDB API");
-        }
+        throw new UnsupportedOperationException("Unimplemented method 'saveGameIntoProfile'");
     }
 
     @Override
@@ -195,8 +106,22 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
 
     @Override
     public Game saveGameIntoProfile(SaveGameRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveGameIntoProfile'");
+        User user = userJpaRepository.findById(request.getUserId()).orElse(null);
+        Game game = gameRepository.findById(request.getGameId()).orElse(null);
+
+        if (user == null || game == null) {
+            return null;
+        }
+
+        if (user.getGames().contains(game)) {
+            user.getGames().remove(game);
+        } else {
+            user.getGames().add(game);
+        }
+
+        userJpaRepository.save(user);
+
+        return game;
     }
 
 }
