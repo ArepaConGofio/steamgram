@@ -38,7 +38,13 @@ export default function PostItem({ post }: Props) {
         .catch(console.error)
     }
 
-    const description = JSON.parse(post.description).replace(/\\n/g, "\n");
+    let description;
+    try {
+        description = JSON.parse(post.description)
+    } catch (error) {
+        description = post.description
+    }
+    description.replace(/\\n/g, "\n");
 
     return (
         <View style={[styles.container, { display: isVisible ? "flex" : "none" }]}>
@@ -47,7 +53,7 @@ export default function PostItem({ post }: Props) {
                     <TouchableOpacity onPress={onAuthorPress}>
                         <Text style={styles.authorLabel}>@{post.author}</Text>
                     </TouchableOpacity>
-                    <Text style={{ color: "gray" }}>{post.creationDate.split("T")[0]}</Text>
+                    <Text style={{ color: "gray" }}>{post.creationDate && post.creationDate.split("T")[0]}</Text>
                 </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={onGamePress}>

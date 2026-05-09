@@ -46,7 +46,7 @@ export class APIHandler {
           return;
         }
       }
-      console.error(response)
+      console.warn(response)
     } catch (error) {
       const errorMsg = `ERROR: Something wrong happend while trying to fetch data in ${requestUrl}`;
       console.error(errorMsg, error);

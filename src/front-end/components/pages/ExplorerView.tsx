@@ -26,7 +26,7 @@ export default function ExplorerView({ query, setQuery, onSearch, data, setType,
     const generateDataList = () => {
         return <FlatList data={data}
             renderItem={({ item }) => searchType == "games"
-                ? <GameListItem game={item as Game} />
+                ? <GameListItem game={item as Game} inExplorer />
                 : <UserListItem user={item as User} />
             }
             ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
