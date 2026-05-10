@@ -1,6 +1,7 @@
 import { Game, GameId, GameSearchResponse } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review, ReviewCreationRequest, ReviewId } from "@/models/Review";
+import { UserId } from "@/models/User";
 import { APIHandler, HttpMethods } from "./APIHandler";
 import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
@@ -76,7 +77,16 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
       endpoint: `/game/posts/${gameId}`,
       token: true
     })  
-    console.log(response)
     return response
   } 
+
+  async saveGameIntoLibrary(gameId: GameId, userId: UserId): Promise<boolean> {
+    const response = await APIHandler.makeRequest({
+      endpoint: `/game/save`,
+      body: { gameId, userId },
+      token: true,
+      method: HttpMethods.POST
+    })
+    return response != null;
+  }
 }

@@ -1,6 +1,7 @@
 import { Game, GameId, GameSearchResponse } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review, ReviewId } from "@/models/Review";
+import { UserId } from "@/models/User";
 
 export interface IGamesAPIHandler {
   /**
@@ -27,5 +28,7 @@ export interface IGamesAPIHandler {
 
   getGameReviews(gameId: GameId): Promise<Review[]>;
 
-  getGamePosts(gameId: GameId): Promise<Post[]>
+  getGamePosts(gameId: GameId): Promise<Post[]>;
+
+  saveGameIntoLibrary(gameId: GameId, userId: UserId): Promise<boolean>;
 }
