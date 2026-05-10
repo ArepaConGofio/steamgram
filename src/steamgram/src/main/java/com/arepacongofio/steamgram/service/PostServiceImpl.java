@@ -23,6 +23,7 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
     
     public PostServiceImpl(PostJpaRepository postRepository, UserJpaRepository userJpaRepository, LikeJpaRepository likeJpaRepository) {
         super(postRepository);
+        this.postRepository = postRepository;
         this.userJpaRepository = userJpaRepository;
         this.likeJpaRepository = likeJpaRepository;
     }
