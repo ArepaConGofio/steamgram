@@ -24,11 +24,6 @@ import com.arepacongofio.steamgram.service.interfaces.IUserService;
 
 import jakarta.annotation.PostConstruct;
 
-/**
- * Users service. Manage basic operation with user entities.
- * 
- * @author strSalazar.
- */
 @Service
 public class UserServiceImpl extends AbstractService<User, Integer> implements IUserService {
 

@@ -14,6 +14,11 @@ import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.service.interfaces.generic.IGenericService;
 
+/**
+ * Users service. Manage basic operation with user entities.
+ * 
+ * @author strSalazar.
+ */
 public interface IUserService extends IGenericService<User, Integer> {
 
     /**
@@ -38,7 +43,7 @@ public interface IUserService extends IGenericService<User, Integer> {
      * @param nickname Nickname to search for
      * @return List<UserResponse>
      */
-    public List<UserResponse> findUserByName(Pageable pageable,UserFindRequest request);
+    public List<UserResponse> findUserByName(Pageable pageable, UserFindRequest request);
 
     /**
      * Check if user exists by nickname
@@ -59,7 +64,7 @@ public interface IUserService extends IGenericService<User, Integer> {
     /**
      * Get user's posts
      * 
-     * @param id User to get posts from
+     * @param id user to get posts from
      * @return List<Post>
      */
     public List<Post> getUserPosts(Integer id);
@@ -67,7 +72,7 @@ public interface IUserService extends IGenericService<User, Integer> {
     /**
      * Get user's reviews
      * 
-     * @param id User to get reviews from
+     * @param id user to get reviews from
      * @return List<Review>
      */
     public List<Review> getUserReviews(Integer id);
@@ -75,7 +80,7 @@ public interface IUserService extends IGenericService<User, Integer> {
     /**
      * Get user's follows
      * 
-     * @param id User to get follows from
+     * @param id user to get follows from
      * @return List<User>
      */
     public List<User> getUserFollows(Integer id);
@@ -83,15 +88,15 @@ public interface IUserService extends IGenericService<User, Integer> {
     /**
      * Get user's followers
      * 
-     * @param id User to get followers from
+     * @param id user to get followers from
      * @return List<User>
      */
     public List<User> getUserFollowers(Integer id);
 
     /**
-     * Get user by nickname;
+     * Get user by nickname
      * 
-     * @param nickname User's nickname.
+     * @param nickname user's nickname
      * @return User
      */
     public User getUserByNickname(String nickname);

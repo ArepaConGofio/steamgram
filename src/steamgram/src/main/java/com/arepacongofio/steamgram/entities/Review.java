@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 
 /**
  * Class review
+ * 
+ * @author strSalazar
  */
 @Entity
 @Table(name = "review")
