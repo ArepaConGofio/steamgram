@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
 import com.arepacongofio.steamgram.domain.requests.GameRequest;
+import com.arepacongofio.steamgram.domain.requests.GameSearchRequest;
 import com.arepacongofio.steamgram.domain.requests.SaveGameRequest;
 import com.arepacongofio.steamgram.domain.responses.GameDetailsResponse;
+import com.arepacongofio.steamgram.domain.responses.GameResponse;
 import com.arepacongofio.steamgram.domain.responses.PostResponse;
 import com.arepacongofio.steamgram.domain.responses.ReviewResponse;
 import com.arepacongofio.steamgram.entities.Game;
@@ -126,16 +128,15 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
         return ResponseEntity.ok(reviewMapper.toResponseList(gameService.getGameReviews(PageRequest.of(page, pageSize), id)));
     }
 
-    @GetMapping("/findByTitle/{title}")
-    @Operation(summary = "Find game by title", description = "Find game by title")
+    @PostMapping("/search")
+    @Operation(summary = "Search game by title", description = "Search game by title")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Games listed successfully"),
             @ApiResponse(responseCode = "404", description = "Game not found"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<Game>> findGameByTitle(@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int pageSize, @Valid @PathVariable String title) {
-        return ResponseEntity.ok(gameService.findIgdbGamesByTitle(PageRequest.of(page, pageSize), title));
+    public ResponseEntity<List<GameResponse>> searchGameByTitle(@RequestBody GameSearchRequest request) {
+        return ResponseEntity.ok(gameMapper.toResponseList(gameService.findIgdbGamesByTitle(request.getTitle())));
     }
 
     @GetMapping("/igdb/{id}")
@@ -145,7 +146,7 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
             @ApiResponse(responseCode = "404", description = "Game not found"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<GameDetailsResponse> getByIgdbId(@Valid @PathVariable String id) {
+    public ResponseEntity<GameDetailsResponse> getByIgdbId(@PathVariable String id) {
         com.arepacongofio.steamgram.entities.Game game = gameService.getGameByIgdbId(id);
         if (game == null) {
             return ResponseEntity.notFound().build();
@@ -153,7 +154,7 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
         return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 
-    @PostMapping("/save/")
+    @PostMapping("/save")
     @Operation(summary = "Save a game into personal library", description = "Save/release a game into/from personal library")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Game saved successfully"),
@@ -161,6 +162,10 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     public ResponseEntity<GameDetailsResponse> toggleSaveGame(@Valid @RequestBody SaveGameRequest request) {
-        return ResponseEntity.ok(gameMapper.toDetailsResponse(gameService.saveGameIntoProfile(request)));
+        Game game = gameService.saveGameIntoProfile(request);
+        if (game == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 }

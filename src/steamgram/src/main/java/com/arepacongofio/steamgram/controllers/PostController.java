@@ -1,6 +1,5 @@
 package com.arepacongofio.steamgram.controllers;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arepacongofio.steamgram.controllers.interfaces.IController;
+import com.arepacongofio.steamgram.domain.requests.LikeCreateRequest;
 import com.arepacongofio.steamgram.domain.requests.PostRequest;
+import com.arepacongofio.steamgram.domain.responses.LikePostResponse;
 import com.arepacongofio.steamgram.domain.responses.PostResponse;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.mappers.PostMapper;
@@ -77,6 +78,21 @@ public class PostController implements IController<PostResponse, PostRequest, In
     public ResponseEntity<PostResponse> save(@Valid @RequestBody PostRequest postRequest) {
         Post entity = postMapper.toEntity(postRequest);
         return ResponseEntity.ok(postMapper.toResponse(postService.save(entity)));
+    }
+
+    @PostMapping("/like")
+    @Operation(summary = "Toggle a like on a Post", description = "Like a post if it doesn't have a like from the user, if it has one, it removes it")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Like toggled successfully"),
+            @ApiResponse(responseCode = "404", description = "Post or user not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<LikePostResponse> toggleLike(@Valid @RequestBody LikeCreateRequest request) {
+        LikePostResponse response = postService.toggleLike(request);
+        if(response == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(response);
     }
 
     @Override

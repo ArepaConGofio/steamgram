@@ -15,11 +15,10 @@ public interface IGameService extends IGenericService<Game, Integer> {
     /**
      * Find games in IGDB by title
      * 
-     * @param Pageable - Page request
      * @param title    of the game
      * @return List<Game>
      */
-    public List<Game> findIgdbGamesByTitle(Pageable pageable, String title);
+    public List<Game> findIgdbGamesByTitle(String title);
 
     /**
      * Get game by IGDB id
