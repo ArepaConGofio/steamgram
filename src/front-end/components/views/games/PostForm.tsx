@@ -7,10 +7,11 @@ import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, Vie
 
 type Props = {
   game: Game;
-  buttonComponent: ReactNode
+  buttonComponent: ReactNode;
+  onPublish?: () => void;
 }
 
-export default function PostForm({ game, buttonComponent }: Props) {
+export default function PostForm({ game, buttonComponent, onPublish }: Props) {
   const api = new PostsAPIHandler();
   const { user } = useContext(AuthContext)
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,18 +25,24 @@ export default function PostForm({ game, buttonComponent }: Props) {
     setImageUrl("");
   }
 
-  const sendPost = () => {
-    if (user == null) return;
+  const sendPost = async () => {
+    if (!user) return;
     var json = JSON.stringify(description);
-    api.createPost({ idGame: game.id, title: title, idUser: user.id, description: json })
-      .then(_ => {
+    try {
+      const response = await api.createPost({ idGame: game.id, title: title, idUser: user.id, description: json })
+      if (response) {
         setModalVisible(false)
-      })
-      .catch(reason => console.error("ERROR: Something bad happen trying create the post", reason));
+        if (onPublish) {
+          onPublish()
+        }
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const askForSend = () => {
-    if (user == null) {
+    if (!user) {
       console.error("ERROR: The user is null while trying send the post");
       return;
     }

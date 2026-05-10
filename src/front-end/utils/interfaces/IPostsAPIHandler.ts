@@ -1,5 +1,4 @@
 import {
-  LikePostResponse,
   LikeRequest,
   Post,
   PostCreationRequest,
@@ -32,11 +31,5 @@ export interface IPostsAPIHandler {
    * Like a post as user.
    * @param like - Like request with user and post identification
    */
-  likePost(like: LikeRequest): Promise<LikePostResponse>;
-
-  /**
-   * Dislike a post as user.
-   * @param likeId - Like identificator.
-   */
-  dislikePost(likeId: number): Promise<boolean>
+  likePost(like: LikeRequest): Promise<boolean>;
 }

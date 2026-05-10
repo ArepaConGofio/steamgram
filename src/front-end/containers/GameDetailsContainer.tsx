@@ -32,16 +32,7 @@ export default function GameDetailsContainer({ game }: Props) {
         }
     }
 
-    const toggleTab = (tab: ContentTabs) => {
-        setData([]);
-        setContentTab(tab == "reviews" ? "posts" : "reviews");
-    }
-
-    useEffect(() => {
-        navigation.setOptions({ title: game.title });
-    }, [navigation, game.title])
-
-    useEffect(() => {
+    const fetchData = () => {
         let query;
         switch (contentTab) {
             case "reviews":
@@ -53,6 +44,19 @@ export default function GameDetailsContainer({ game }: Props) {
         }
         query(game.id)
         .then(value => setData(value))
+    }
+
+    const toggleTab = (tab: ContentTabs) => {
+        setData([]);
+        setContentTab(tab == "reviews" ? "posts" : "reviews");
+    }
+
+    useEffect(() => {
+        navigation.setOptions({ title: game.title });
+    }, [navigation, game.title])
+
+    useEffect(() => {
+        fetchData();
     }, [contentTab])
 
     useEffect(() => {
@@ -65,5 +69,5 @@ export default function GameDetailsContainer({ game }: Props) {
         .catch(console.error)
     }, [user, isSaved])
 
-    return <GameDetailsView game={game} content={contentTab} goToTab={toggleTab} contentData={data} isSaved={isSaved} onSavePress={onSavePress}/>
+    return <GameDetailsView game={game} content={contentTab} goToTab={toggleTab} contentData={data} isSaved={isSaved} onSavePress={onSavePress} updateData={fetchData}/>
 }
