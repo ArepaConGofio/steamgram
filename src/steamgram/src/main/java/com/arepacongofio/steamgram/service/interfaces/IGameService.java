@@ -10,6 +10,11 @@ import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.service.interfaces.generic.IGenericService;
 
+/**
+ * Game service. Manage basic operation with game entities.
+ * 
+ * @author strSalazar.
+ */
 public interface IGameService extends IGenericService<Game, Integer> {
 
     /**
@@ -23,7 +28,7 @@ public interface IGameService extends IGenericService<Game, Integer> {
     /**
      * Get game by IGDB id
      * 
-     * @param igdbId of the game
+     * @param igdbId of the game in IGDB
      * @return Game
      */
     public Game getGameByIgdbId(String igdbId);
@@ -31,8 +36,8 @@ public interface IGameService extends IGenericService<Game, Integer> {
     /**
      * Get game posts
      * 
-     * @param Pageable - Page request
-     * @param id     to get Posts
+     * @param Pageable
+     * @param id       to get Posts
      * @return List<Post>
      */
     public List<Post> getGamePosts(Pageable pageable, Integer id);
@@ -41,7 +46,7 @@ public interface IGameService extends IGenericService<Game, Integer> {
      * Get game reviews
      * 
      * @param pageable
-     * @param id     to get Reviews
+     * @param id       to get Reviews
      * @return List<Review>
      */
     public List<Review> getGameReviews(Pageable pageable, Integer id);
@@ -49,7 +54,7 @@ public interface IGameService extends IGenericService<Game, Integer> {
     /**
      * Save game into profile
      * 
-     * @param request to save game
+     * @param request game to save
      * @return Game
      */
     public Game saveGameIntoProfile(SaveGameRequest request);

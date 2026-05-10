@@ -17,6 +17,8 @@ import jakarta.persistence.Table;
 
 /**
  * Class Game
+ * 
+ * @author strSalazar
  */
 @Entity
 @Table(name = "game")

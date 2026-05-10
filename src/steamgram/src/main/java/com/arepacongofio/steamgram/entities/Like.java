@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 
 /**
  * Class like
+ * 
+ * @author strSalazar
  */
 @Entity
 @Table(name = "likes")

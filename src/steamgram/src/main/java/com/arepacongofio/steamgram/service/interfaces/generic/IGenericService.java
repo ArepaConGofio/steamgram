@@ -4,47 +4,49 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+/**
+ * Generic service interface. Basic operations for entities.
+ * 
+ * @author strSalazar
+ */
 public interface IGenericService<T, K> {
 
     /**
-     * Devuelve todas las entities almacenadas.
+     * Find all the entities
      * 
-     * @return lista con todas las entities
+     * @return List<T>
      */
     List<T> findAll(Pageable pageable);
 
     /**
-     * Metodo que indica si existe una entity con el id dado.
+     * Method that indicates if an entity with the given id exists
      * 
-     * @param id identificador unico de la entity
-     * @return true si existe una entity con ese id, false en caso contrario
+     * @param id id from the entity
+     * @return true/false
      */
     boolean existsById(K id);
 
     /**
-     * Metodo que busca una entity por su id.
+     * Method that find an entity by its id
      * 
-     * @param id identificador unico de la entity
-     * @return la entity encontrada, o null si no existe
+     * @param id id from the entity
+     * @return the entity found, or null if it doesn't exist
      */
     T findById(K id);
 
     /**
-     * Inserta o actualiza una entity.
-     * - Si la entity no tiene id, la implementacion debe generarlo.
-     * - Si la entity ya existe, se actualiza.
+     * Method that inserts or updates an entity
      * 
-     * @param entity a guardar
-     * @return la entity guardada, incluida la informacion final
-     *         (por ejemplo el id asignado)
+     * @param entity to save
+     * @return the entity saved
      */
     T save(T entity);
 
     /**
-     * Elimina la entity con el id indicado.
+     * Method that deletes an entity by its id
      * 
-     * @param id identificador unico de la entity
-     * @return true si se borro la entity, false si no existia
+     * @param id id from the entity
+     * @return true/false
      */
     boolean deleteById(K id);
 }

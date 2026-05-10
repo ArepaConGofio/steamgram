@@ -20,6 +20,8 @@ import jakarta.validation.constraints.Email;
 
 /**
  * Class User
+ * 
+ * @author strSalazar
  */
 @Entity
 @Table(name = "users")
