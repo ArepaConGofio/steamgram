@@ -14,15 +14,11 @@ public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "games", ignore = true)
-    @Mapping(target = "followers", ignore = true)
-    @Mapping(target = "follows", ignore = true)
     @Mapping(target = "reviews", ignore = true)
     @Mapping(target = "posts", ignore = true)
     User toEntity(UserRequest user);
 
     @Mapping(source = "games", target = "gamesCount")
-    @Mapping(source = "followers", target = "followersCount")
-    @Mapping(source = "follows", target = "followingCount")
     @Mapping(source = "reviews", target = "reviewsCount")
     @Mapping(source = "posts", target = "postsCount")
     @Mapping(target = "avatarUrl", ignore = true)

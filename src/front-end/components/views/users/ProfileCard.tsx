@@ -31,19 +31,13 @@ export default function ProfileCard({ username, nickname, avatarUrl }: Props) {
           @{username}
         </Text>
         <View style={styles.actionsContainer}>
-          {user.username === username ? (
+          {user.username === username && (
             <IconButton
               label="Settings"
               icon={() => <MaterialIcons name="settings" size={20} />}
               callback={() => router.navigate(`/(app)/users/${user.username}/edit`)}
             />
-          ) : (
-            <IconButton
-              label="Follow"
-              icon={() => <MaterialIcons name="person" size={20}/>}
-              callback={() => alert("Following person")}
-            />
-          )}
+          ) }
         </View>
       </View>
     </View>

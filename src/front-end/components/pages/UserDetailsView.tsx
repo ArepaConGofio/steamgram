@@ -1,10 +1,9 @@
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import StaticErrorAlert from "@/components/ui/StaticAlert";
-import { ContentItems } from "@/containers/UserDetailsContainer";
 import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
-import { ProfileContentType, User, UserDetails } from "@/models/User";
+import { ContentType, UserDetails } from "@/models/User";
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,14 +12,13 @@ import PostItem from "../views/users/PostItem";
 import ProfileCard from "../views/users/ProfileCard";
 import ReviewItem from "../views/users/ReviewItem";
 import Stats from "../views/users/Stats";
-import UserListItem from "../views/users/UserListItem";
 
 type Props = {
     user: UserDetails,
-    selectContentTab: Dispatch<SetStateAction<ProfileContentType>>;
-    contentTab: ProfileContentType,
+    selectContentTab: Dispatch<SetStateAction<ContentType>>;
+    contentTab: ContentType,
     isLoading: boolean
-    data: ContentItems
+    data: unknown[]
 }
 
 export default function UserDetailsView({ user, contentTab, selectContentTab, isLoading, data }: Props) {
@@ -31,7 +29,7 @@ export default function UserDetailsView({ user, contentTab, selectContentTab, is
      * @param data - Items a generar.
      * @returns Un FlatList con los elementos a mostrar. 
      */
-    function buildDataComponents(data: ContentItems) {
+    function buildDataComponents(data: unknown[]) {
         if (!data) return <StaticErrorAlert message={`Error trying to get ${contentTab.toLowerCase()} items.`} />
         switch (contentTab) {
             case "Games":
@@ -44,17 +42,6 @@ export default function UserDetailsView({ user, contentTab, selectContentTab, is
                         fontSize: 16
                     }}>No games available</Text>}
                     keyExtractor={item => item.id.toString()} />
-            case "Followers":
-            case "Following":
-                return <FlatList key={"users"}
-                    data={data as User[]}
-                    renderItem={({ item }) => <UserListItem user={item} />}
-                    keyExtractor={item => item.id.toString()}
-                    ListEmptyComponent={() => <Text style={{
-                        textAlign: "center",
-                        fontSize: 16
-                    }}>No users available</Text>}
-                    ItemSeparatorComponent={_ => <View style={{ margin: 10 }} />} />
             case "Posts":
                 return <FlatList key={"posts"}
                     data={data as Post[]}
@@ -90,8 +77,6 @@ export default function UserDetailsView({ user, contentTab, selectContentTab, is
                 gamesCount={user.gamesCount}
                 postsCount={user.postsCount}
                 reviewsCount={user.reviewsCount}
-                followersCount={user.followersCount}
-                followingCount={user.followingCount}
             />
             <View style={styles.contentContainer}>
                 {isLoading ? <LoadingIndicator /> : buildDataComponents(data)}

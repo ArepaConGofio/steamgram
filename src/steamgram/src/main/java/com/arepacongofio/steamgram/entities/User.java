@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -50,21 +51,14 @@ public class User {
     @Column(name = "avatar_url", nullable = true, length = 500)
     String avatarUrl;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "user_games", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "game_id"))
     List<Game> games;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE)
     List<Post> posts;
 
-    @ManyToMany
-    @JoinTable(name = "user_follows", joinColumns = @JoinColumn(name = "follower_id"), inverseJoinColumns = @JoinColumn(name = "following_id"))
-    List<User> follows;
-
-    @ManyToMany(mappedBy = "follows")
-    List<User> followers;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE)
     List<Review> reviews;
 
     /**
@@ -93,8 +87,6 @@ public class User {
         this.name = name;
         this.nickname = user;
         this.password = password;
-        this.followers = new ArrayList<>();
-        this.follows = new ArrayList<>();
         this.games = new ArrayList<>();
         this.posts = new ArrayList<>();
     }
@@ -106,17 +98,12 @@ public class User {
      * @param user      from user
      * @param games     from user
      * @param posts     from user
-     * @param follows   from user
-     * @param followers from user
      */
-    public User(String name, String user, List<Game> games, List<Post> posts, List<User> follows,
-            List<User> followers) {
+    public User(String name, String user, List<Game> games, List<Post> posts) {
         this.name = name;
         this.nickname = user;
         this.games = games;
         this.posts = posts;
-        this.follows = follows;
-        this.followers = followers;
     }
 
     /**
@@ -128,19 +115,14 @@ public class User {
      * @param password  from user
      * @param games     from user
      * @param posts     from user
-     * @param follows   from user
-     * @param followers from user
      */
-    public User(Integer id, String name, String user, String password, List<Game> games, List<Post> posts,
-            List<User> follows, List<User> followers) {
+    public User(Integer id, String name, String user, String password, List<Game> games, List<Post> posts) {
         this.id = id;
         this.name = name;
         this.nickname = user;
         this.password = password;
         this.games = games;
         this.posts = posts;
-        this.follows = follows;
-        this.followers = followers;
     }
 
     /**
@@ -193,22 +175,6 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
-    }
-
-    public List<User> getFollows() {
-        return this.follows;
-    }
-
-    public void setFollows(List<User> follows) {
-        this.follows = follows;
-    }
-
-    public List<User> getFollowers() {
-        return this.followers;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
     }
 
     public String getEmail() {
@@ -267,8 +233,6 @@ public class User {
                 ", user='" + getNickname() + "'" +
                 ", games='" + getGames() + "'" +
                 ", posts='" + getPosts() + "'" +
-                ", follows='" + getFollows() + "'" +
-                ", followers='" + getFollowers() + "'" +
                 "}";
     }
 

@@ -153,18 +153,6 @@ public class UserController implements IController<UserResponse, UserRequest, In
         return ResponseEntity.ok(reviewMapper.toResponseList(userService.getUserReviews(id)));
     }
 
-    @GetMapping("/followers/{id}")
-    @Operation(summary = "Get user followers", description = "Get user followers by Id")
-    public ResponseEntity<List<UserResponse>> getUserFollowersById(@Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(userMapper.toResponseList(userService.getUserFollowers(id)));
-    }
-
-    @GetMapping("/following/{id}")
-    @Operation(summary = "Get user following", description = "Get user following by Id")
-    public ResponseEntity<List<UserResponse>> getUserFollowingById(@Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(userMapper.toResponseList(userService.getUserFollows(id)));
-    }
-
     @GetMapping("/check/{username}")
     @Operation(summary = "Check username availability", description = "Check if username already exists in database")
     public ResponseEntity<Boolean> checkUsernameAvailability(@Valid @PathVariable String username) {

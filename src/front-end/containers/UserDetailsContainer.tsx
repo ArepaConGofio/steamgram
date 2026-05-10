@@ -1,8 +1,5 @@
 import UserDetailsView from "@/components/pages/UserDetailsView";
-import { Game } from "@/models/Game";
-import { Post } from "@/models/Post";
-import { Review } from "@/models/Review";
-import { ProfileContentType, User, UserDetails } from "@/models/User";
+import { ContentType, UserDetails } from "@/models/User";
 import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
 import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
@@ -11,12 +8,10 @@ type Props = {
     user: UserDetails
 }
 
-export type ContentItems = Game[] | User[] | Post[] | Review[] | null;
-
 export default function UserDetailsContainer({ user }: Props) {
     const navigation = useNavigation();
-    const [currentTab, setCurrentTab] = useState<ProfileContentType>("Games");
-    const [content, setContent] = useState<ContentItems>(null);
+    const [currentTab, setCurrentTab] = useState<ContentType>("Games");
+    const [content, setContent] = useState<unknown[]>([]);
     const [isLoading, setLoading] = useState(true);
 
     async function loadDataFromCategory() {
@@ -25,12 +20,6 @@ export default function UserDetailsContainer({ user }: Props) {
         switch (currentTab) {
             case "Games":
                 query = api.getLikedGames(user.id);
-                break;
-            case "Followers":
-                query = api.getFollowers(user.id);
-                break;
-            case "Following":
-                query = api.getFollowings(user.id);
                 break;
             case "Posts":
                 query = api.getPosts(user.id);
@@ -48,14 +37,12 @@ export default function UserDetailsContainer({ user }: Props) {
 
     useEffect(() => {
         setLoading(true);
-        setContent(null);
+        setContent([]);
         loadDataFromCategory()
-        .then(value => {
-            setContent(value);
-        })
+        .then(setContent)
         .catch(reason => {
             console.error(reason);
-            setContent(null);
+            setContent([]);
         })
         .finally(() => setLoading(false));
     }, [currentTab])

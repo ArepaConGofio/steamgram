@@ -98,22 +98,6 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
         return user.getReviews();
     }
 
-    public List<User> getUserFollows(Integer id) {
-        if (id == null || !existsById(id)) {
-            return List.of();
-        }
-        User user = findById(id);
-        return user.getFollows();
-    }
-
-    public List<User> getUserFollowers(Integer id) {
-        if (id == null || !existsById(id)) {
-            return List.of();
-        }
-        User user = findById(id);
-        return user.getFollowers();
-    }
-
     @Transactional
     public UserResponse editUser(UserEditRequest request) {
         User user = userRepository.findById(request.getId()).orElse(null);

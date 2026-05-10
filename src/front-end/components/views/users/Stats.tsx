@@ -22,18 +22,14 @@ type Props = {
     currentTab: ProfileContentType,
     gamesCount: number,
     postsCount: number,
-    reviewsCount: number,
-    followingCount: number,
-    followersCount: number
+    reviewsCount: number
 }
 
-export default function Stats({ selectContent, currentTab, gamesCount, postsCount, reviewsCount, followersCount, followingCount }: Props) {
+export default function Stats({ selectContent, currentTab, gamesCount, postsCount, reviewsCount }: Props) {
     const stats = [
         { name: "Games", count: gamesCount, onSelect: () => selectContent("Games") },
         { name: "Posts", count: postsCount, onSelect: () => selectContent("Posts") },
         { name: "Reviews", count: reviewsCount, onSelect: () => selectContent("Reviews") },
-        { name: "Following", count: followingCount, onSelect: () => selectContent("Following") },
-        { name: "Followers", count: followersCount, onSelect: () => selectContent("Followers") },
     ];
 
     return (

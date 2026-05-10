@@ -21,8 +21,6 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
       nickname: user.name,
       email: user.email,
       avatarUrl: user.avatarUrl,
-      followersCount: user.followersCount,
-      followingCount: user.followingCount,
       gamesCount: user.gamesCount,
       postsCount: user.postsCount,
       reviewsCount: user.reviewsCount,
@@ -42,20 +40,6 @@ export class UsersAPIHandler extends APIHandler implements IUsersAPIHandler {
     return await APIHandler.makeRequest({
       endpoint: `/user/find`,
       body: { username, nickname },
-      token: true
-    });
-  }
-
-  async getFollowers(id: UserId): Promise<User[]> {
-    return await APIHandler.makeRequest({
-      endpoint: `/user/followers/${id}`,
-      token: true
-    });
-  }
-
-  async getFollowings(id: UserId): Promise<User[]> {
-    return await APIHandler.makeRequest({
-      endpoint: `/user/following/${id}`,
       token: true
     });
   }

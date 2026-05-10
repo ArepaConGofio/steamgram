@@ -8,8 +8,6 @@ public class UserResponse {
     String avatarUrl;
     String nickname;
     int gamesCount;
-    int followersCount;
-    int followingCount;
     int reviewsCount;
     int postsCount;
 
@@ -59,22 +57,6 @@ public class UserResponse {
 
     public void setGamesCount(int gamesCount) {
         this.gamesCount = gamesCount;
-    }
-
-    public int getFollowersCount() {
-        return followersCount;
-    }
-
-    public void setFollowersCount(int followersCount) {
-        this.followersCount = followersCount;
-    }
-
-    public int getFollowingCount() {
-        return followingCount;
-    }
-
-    public void setFollowingCount(int followingCount) {
-        this.followingCount = followingCount;
     }
 
     public int getReviewsCount() {

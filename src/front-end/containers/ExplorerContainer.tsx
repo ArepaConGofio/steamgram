@@ -1,45 +1,24 @@
 import ExplorerView from "@/components/pages/ExplorerView";
-import { GameSearchResponse } from "@/models/Game";
-import { User } from "@/models/User";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
-import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
 import { useEffect, useState } from "react";
-import { Alert } from "react-native";
 
 export type SearchType = "users" | "games";
 
 export default function ExplorerContainer() {
     const [query, setQuery] = useState("");
-    const [queryType, setQueryType] = useState<SearchType>("games");
-    const [result, setResult] = useState<GameSearchResponse[] | User[]>([]);
+    const [result, setResult] = useState<unknown[]>([]);
 
     const gamesApi = new GamesAPIHandler();
-    const usersApi = new UsersAPIHandler();
 
     const setSearchText = (text: string) => {
         setQuery(text);
     }
 
-    const setSearchType = (type: SearchType) => {
-        setQueryType(type);
-    }
-
     const search = () => {
         setResult([]);
-
-        if (queryType == "games") {
-            gamesApi.searchGamesByTitle(query)
-                .then(result => setResult(result))
-                .catch(reason => Alert.alert("Error", reason))
-        } else {
-            usersApi.searchUserByUsername(query)
-                .then(result => setResult(...[result]))
-                .catch(reason => Alert.alert("Error", reason))
-            usersApi.searchUserByNickname(query)
-                .then(result => setResult(...[result]))
-                .catch(reason => Alert.alert("Error", reason))
-
-        }
+        gamesApi.searchGamesByTitle(query)
+            .then(setResult)
+            .catch(console.error)
     }
 
     useEffect(() => {
@@ -53,9 +32,5 @@ export default function ExplorerContainer() {
         }
     }, [query]);
 
-    useEffect(() => {
-        setResult([]);
-    }, [queryType]);
-
-    return <ExplorerView query={query} setQuery={setSearchText} onSearch={search} data={result} setType={setSearchType} searchType={queryType} />
+    return <ExplorerView query={query} setQuery={setSearchText} onSearch={search} data={result} />
 }

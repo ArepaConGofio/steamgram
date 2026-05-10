@@ -78,22 +78,6 @@ public interface IUserService extends IGenericService<User, Integer> {
     public List<Review> getUserReviews(Integer id);
 
     /**
-     * Get user's follows
-     * 
-     * @param id user to get follows from
-     * @return List<User>
-     */
-    public List<User> getUserFollows(Integer id);
-
-    /**
-     * Get user's followers
-     * 
-     * @param id user to get followers from
-     * @return List<User>
-     */
-    public List<User> getUserFollowers(Integer id);
-
-    /**
      * Get user by nickname
      * 
      * @param nickname user's nickname

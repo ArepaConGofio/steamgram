@@ -19,19 +19,7 @@ export interface IUsersAPIHandler {
    * @param username - Username.
    */
   getUserDetailsByUsername(username: string): Promise<UserDetails>;
-
-  /**
-   * Get user followers. The query can be limited.
-   * @param userId - User identifier.
-   */
-  getFollowers(userId: UserId): Promise<User[]>;
-
-  /**
-   * Get user followings. The query can be limited.
-   * @param userId - User identifier.
-   */
-  getFollowings(userId: UserId): Promise<User[]>;
-
+  
   /**
    * Get user game list. The query can be limited.
    * @param userId - User identifier.
