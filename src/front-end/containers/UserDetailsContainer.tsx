@@ -48,6 +48,7 @@ export default function UserDetailsContainer({ user }: Props) {
 
     useEffect(() => {
         setLoading(true);
+        setContent(null);
         loadDataFromCategory()
         .then(value => {
             setContent(value);

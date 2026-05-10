@@ -1,5 +1,5 @@
 import ExplorerView from "@/components/pages/ExplorerView";
-import { Game } from "@/models/Game";
+import { GameSearchResponse } from "@/models/Game";
 import { User } from "@/models/User";
 import { GamesAPIHandler } from "@/utils/GamesAPIHandler";
 import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
@@ -11,7 +11,7 @@ export type SearchType = "users" | "games";
 export default function ExplorerContainer() {
     const [query, setQuery] = useState("");
     const [queryType, setQueryType] = useState<SearchType>("games");
-    const [result, setResult] = useState<Game[] | User[]>([]);
+    const [result, setResult] = useState<GameSearchResponse[] | User[]>([]);
 
     const gamesApi = new GamesAPIHandler();
     const usersApi = new UsersAPIHandler();

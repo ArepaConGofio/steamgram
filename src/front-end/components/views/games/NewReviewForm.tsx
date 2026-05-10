@@ -9,10 +9,11 @@ import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, Vie
 import ReviewItem from "../users/ReviewItem";
 
 type Props = {
-  gameId: GameId
+  gameId: GameId;
+  onPublish?: () => void;
 }
 
-export default function NewReviewForm({ gameId }: Props) {
+export default function NewReviewForm({ gameId, onPublish }: Props) {
   const { user } = useContext(AuthContext); 
   const [modalVisible, setModalVisible] = useState(false);
   const [currentGame, setCurrentGame] = useState<Game>();
@@ -49,6 +50,9 @@ export default function NewReviewForm({ gameId }: Props) {
     .then(_ => {
       Alert.alert("Review created!", "You created the review successfully :D")
       setModalVisible(false);
+      if (onPublish) {
+        onPublish()
+      }
     })
     .catch(console.error)
   }
@@ -75,7 +79,8 @@ export default function NewReviewForm({ gameId }: Props) {
           const existentReview = value.find(r => r.idGame == gameId)
           if (existentReview) {
             setCanReview(false);
-            setExistentReview(existentReview)
+            setExistentReview(existentReview);
+            
           }
       })
         .catch(console.error)

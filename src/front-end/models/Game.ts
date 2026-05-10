@@ -14,6 +14,14 @@ export type Game = {
   reviewsCount: number,
 };
 
+export type GameSearchResponse = {
+  idGame?: number;
+  idIgdb: number;
+  developerName: string;
+  title: string;
+  banner?: string;
+}
+
 export type GameCreationRequest = {
   developerId: number;
   name: string;

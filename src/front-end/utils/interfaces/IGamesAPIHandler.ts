@@ -1,6 +1,7 @@
-import { Game, GameId } from "@/models/Game";
+import { Game, GameId, GameSearchResponse } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review, ReviewId } from "@/models/Review";
+import { UserId } from "@/models/User";
 
 export interface IGamesAPIHandler {
   /**
@@ -18,9 +19,8 @@ export interface IGamesAPIHandler {
   /**
    * Search games by title. The query can be limited.
    * @param title - Game title.
-   * @param limit - Max query results.
    */
-  searchGamesByTitle(title: string, limit?: number): Promise<Game[]>;
+  searchGamesByTitle(title: string): Promise<GameSearchResponse[]>;
 
   reviewGame(review: Review): Promise<Review>;
 
@@ -28,5 +28,7 @@ export interface IGamesAPIHandler {
 
   getGameReviews(gameId: GameId): Promise<Review[]>;
 
-  getGamePosts(gameId: GameId): Promise<Post[]>
+  getGamePosts(gameId: GameId): Promise<Post[]>;
+
+  saveGameIntoLibrary(gameId: GameId, userId: UserId): Promise<boolean>;
 }

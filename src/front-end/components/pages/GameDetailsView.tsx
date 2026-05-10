@@ -3,7 +3,7 @@ import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review } from "@/models/Review";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FlatList, Image, ImageStyle, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { FlatList, Image, ImageStyle, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import ImageCarousel from "../ui/ImageCarousel";
 import NewReviewForm from "../views/games/NewReviewForm";
 import PostForm from "../views/games/PostForm";
@@ -15,13 +15,16 @@ type Props = {
     content: ContentTabs;
     contentData: unknown[];
     goToTab: (tab: ContentTabs) => void;
+    isSaved: boolean
+    onSavePress: () => void;
+    updateData: () => void;
 }
 
 const GENRE_COLORS = [
     "#F5A1C3", "#A2BDF4", "#43ca8b", "#FAD062", "#fa9b64"
 ];
 
-export default function GameDetailsView({ game, content, contentData, goToTab }: Props) {
+export default function GameDetailsView({ game, content, contentData, goToTab, isSaved, onSavePress, updateData }: Props) {
     const SCREEN_WIDTH = useWindowDimensions().width;
     let screenshotsWidth = SCREEN_WIDTH;
     let screenshotsStyle: ImageStyle = { borderRadius: 20 }
@@ -35,8 +38,8 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
     const generateDataList = () => {
         return <FlatList data={contentData}
             renderItem={({ item, index }) => content == "posts"
-                ? <PostItem post={item as Post}/>
-                : <ReviewItem review={item as Review} />
+                ? <PostItem post={item as Post} onDelete={updateData} onLike={updateData}/>
+                : <ReviewItem review={item as Review} onDelete={updateData} />
             }
             contentContainerStyle={{ marginVertical: 25 }}
             ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
@@ -52,6 +55,14 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     <View style={[styles.headerSubcontainer, { width: coverSize * 2 }]}>
                         <Text style={styles.title}>{game.title}</Text>
                         <Text style={styles.developerLabel}>By {game.developerName}</Text>
+                        <TouchableOpacity onPress={onSavePress} style={{ justifyContent: "flex-end", alignItems: "flex-start" }}>
+                            <View style={{
+                                padding: 5, paddingHorizontal: 10, borderBlockColor: "black", borderWidth: 1, borderRadius: 10, flexDirection: "row", alignItems: "center", columnGap: 10
+                            }}>
+                                <MaterialIcons name={isSaved ? "close" : "save"} size={24} />
+                                <Text>{isSaved ? "Remover" : "Guardar"}</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <Text style={styles.description}>{game.description}</Text>
@@ -78,15 +89,15 @@ export default function GameDetailsView({ game, content, contentData, goToTab }:
                     </Pressable>
                 </View>
                 <View style={styles.tabView}>
-                    {content == "posts" ? <PostForm game={game} 
-                    buttonComponent={
-                        (
-                            <View style={styles.createPostButton}>
-                                <MaterialIcons name="add" size={20} />
-                                <Text>Publish a new post!</Text>
-                            </View>
-                        )
-                    } /> : <NewReviewForm gameId={game.id} />}
+                    {content == "posts" ? <PostForm game={game} onPublish={updateData}
+                        buttonComponent={
+                            (
+                                <View style={styles.createPostButton}>
+                                    <MaterialIcons name="add" size={20} />
+                                    <Text>Publish a new post!</Text>
+                                </View>
+                            )
+                        } /> : <NewReviewForm gameId={game.id} onPublish={updateData} />}
                     {generateDataList()}
                 </View>
             </ScrollView>
@@ -104,7 +115,8 @@ const styles = StyleSheet.create({
     },
     headerSubcontainer: {
         paddingHorizontal: 15,
-        paddingTop: 10
+        paddingTop: 10,
+        justifyContent: "space-between"
     },
     title: {
         fontSize: 24,

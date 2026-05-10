@@ -1,6 +1,7 @@
-import { Game, GameId } from "@/models/Game";
+import { Game, GameId, GameSearchResponse } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { Review, ReviewCreationRequest, ReviewId } from "@/models/Review";
+import { UserId } from "@/models/User";
 import { APIHandler, HttpMethods } from "./APIHandler";
 import { IGamesAPIHandler } from "./interfaces/IGamesAPIHandler";
 
@@ -21,11 +22,22 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
     return game;
   }
 
-  async searchGamesByTitle(title: string): Promise<Game[]> {
-    return await APIHandler.makeRequest({ 
-      endpoint: `/game/findByTitle/${title}?pageSize=10`,
+  async getGameDetailsByIgdb(idIgdb: number): Promise<Game | undefined> {
+    const game = await APIHandler.makeRequest({ endpoint: `/game/igdb/${idIgdb}`, token: true })
+    if (!game) {
+      throw new Error("ERROR: Game not found")
+    }
+    return game;
+  }
+
+  async searchGamesByTitle(title: string): Promise<GameSearchResponse[]> {
+    const response = await APIHandler.makeRequest({ 
+      endpoint: `/game/search`,
+      method: HttpMethods.POST,
       token: true,
+      body: { "title": title }
     })
+    return response;
   }
 
   async reviewGame(review: ReviewCreationRequest): Promise<Review> {
@@ -65,7 +77,16 @@ export class GamesAPIHandler extends APIHandler implements IGamesAPIHandler {
       endpoint: `/game/posts/${gameId}`,
       token: true
     })  
-    console.log(response)
     return response
   } 
+
+  async saveGameIntoLibrary(gameId: GameId, userId: UserId): Promise<boolean> {
+    const response = await APIHandler.makeRequest({
+      endpoint: `/game/save`,
+      body: { gameId, userId },
+      token: true,
+      method: HttpMethods.POST
+    })
+    return response != null;
+  }
 }

@@ -5,7 +5,8 @@ import { Game } from "@/models/Game";
 import { Post } from "@/models/Post";
 import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
 import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
-import { useContext, useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import { useContext, useState } from "react";
 
 export default function CommunityPage() {
   const { user } = useContext(AuthContext);
@@ -14,7 +15,7 @@ export default function CommunityPage() {
   const [isLoadingPosts, setLoadingPosts] = useState(true);
   const [isLoadingGames, setLoadingGames] = useState(true);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const api = new PostsAPIHandler();
     api.getAllPosts()
       .then(setPosts)
@@ -27,7 +28,7 @@ export default function CommunityPage() {
       .then(setGames)
       .catch(console.error)
       .finally(() => setLoadingGames(false))
-  }, [])
+  });
 
   if (isLoadingPosts || isLoadingGames) return <LoadingIndicator category="Posts" />
 

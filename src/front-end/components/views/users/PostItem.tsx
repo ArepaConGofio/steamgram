@@ -9,13 +9,17 @@ import Markdown from 'react-native-markdown-display';
 
 type Props = {
     post: Post;
+    onDelete?: () => void;
+    onLike?: () => void;
 }
 
-export default function PostItem({ post }: Props) {
+export default function PostItem({ post, onDelete, onLike }: Props) {
     const router = useRouter();
     const api = new PostsAPIHandler();
     const { user } = useContext(AuthContext);
     const [isVisible, setVisible] = useState(true)
+    const [isLiked, setLiked] = useState(false)
+    const [likes, setLikes] = useState(post.likesCount)
 
     const onAuthorPress = () => router.navigate(`/(app)/users/${post.author}`);
     const onGamePress = () => router.navigate(`/(app)/games/${post.gameId}`);
@@ -27,18 +31,38 @@ export default function PostItem({ post }: Props) {
         ])
     };
 
+    const onLikePress = async () => {
+        if (!user) return;
+        try {
+            const liked = await api.likePost({ idPost: post.id, idUser: user?.id });
+            setLiked(liked);
+            setLikes(liked ? post.likesCount + 1 : post.likesCount);
+            if (onLike) onLike();
+        } catch (error) {
+            console.error(error);
+        }   
+    }
+
     const deletePost = () => {
         if (!user) return;
         
         api.deletePost(post.id)
         .then(_ => {
             Alert.alert("Post deleted", "The post was deleted successfully")
-            setVisible(false)
+            if (onDelete) {
+                onDelete()
+            }
         })
         .catch(console.error)
     }
 
-    const description = JSON.parse(post.description).replace(/\\n/g, "\n");
+    let description;
+    try {
+        description = JSON.parse(post.description)
+    } catch (error) {
+        description = post.description
+    }
+    description.replace(/\\n/g, "\n");
 
     return (
         <View style={[styles.container, { display: isVisible ? "flex" : "none" }]}>
@@ -47,7 +71,7 @@ export default function PostItem({ post }: Props) {
                     <TouchableOpacity onPress={onAuthorPress}>
                         <Text style={styles.authorLabel}>@{post.author}</Text>
                     </TouchableOpacity>
-                    <Text style={{ color: "gray" }}>{post.creationDate.split("T")[0]}</Text>
+                    <Text style={{ color: "gray" }}>{post.creationDate && post.creationDate.split("T")[0]}</Text>
                 </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={onGamePress}>
@@ -60,10 +84,10 @@ export default function PostItem({ post }: Props) {
             <Markdown style={markdownStyle}>{description}</Markdown>
 
             <View style={styles.bottomContainer}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <MaterialCommunityIcons name="heart" size={24}/>
-                    <Text style={styles.likeCountLabel}>{post.likesCount}</Text>
-                </View>
+                <TouchableOpacity onPress={onLikePress} style={{ flexDirection: "row", alignItems: "center" }}>
+                    <MaterialCommunityIcons name="heart" size={24} color={isLiked ? "red" : "black"}/>
+                    <Text style={styles.likeCountLabel}>{likes}</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={onDeletePress} style={{ display: post.userId == user?.id ? "flex" : "none" }}>
                     <MaterialIcons name="delete" size={24}/>
                 </TouchableOpacity>
