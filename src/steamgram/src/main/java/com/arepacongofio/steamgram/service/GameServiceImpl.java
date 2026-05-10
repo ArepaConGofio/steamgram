@@ -3,7 +3,6 @@ package com.arepacongofio.steamgram.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,6 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
     @Value("${twitch.client-secret}")
     private String twitchClientSecret;
 
-    @Autowired
     public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService,
             ReviewJpaRepository reviewJpaRepository, PostJpaRepository postJpaRepository, UserJpaRepository userJpaRepository) {
         super(gameRepository);
