@@ -36,6 +36,7 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
 
     public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService, UserJpaRepository userJpaRepository) {
         super(gameRepository);
+        this.gameRepository = gameRepository;
         this.devsService = developerService;
         this.userJpaRepository = userJpaRepository;
     }
