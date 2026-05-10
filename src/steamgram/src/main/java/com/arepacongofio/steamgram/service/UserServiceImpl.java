@@ -1,5 +1,7 @@
 package com.arepacongofio.steamgram.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,8 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
     private UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(JpaRepository<User, Integer> userJpaRepository, PasswordEncoder passwordEncoder, UserJpaRepository userRepository) {
+    public UserServiceImpl(JpaRepository<User, Integer> userJpaRepository, PasswordEncoder passwordEncoder,
+            UserJpaRepository userRepository) {
         super(userJpaRepository);
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -71,11 +74,15 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
     }
 
     public List<Game> getUserGames(Integer id) {
-        User user = findById(id);
         if (id == null || !existsById(id)) {
             return List.of();
         }
-        return user.getGames();
+        User user = findById(id);
+        if (user.getGames() == null) {
+            return List.of();
+        }
+        List<Game> games = new ArrayList<>(user.getGames());
+        return reverseList(games);
     }
 
     public User getUserByNickname(String nickname) {
@@ -87,7 +94,8 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
             return List.of();
         }
         User user = findById(id);
-        return user.getPosts();
+        List<Post> posts = new ArrayList<>(user.getPosts());
+        return reverseList(posts);
     }
 
     public List<Review> getUserReviews(Integer id) {
@@ -95,7 +103,8 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
             return List.of();
         }
         User user = findById(id);
-        return user.getReviews();
+        List<Review> reviews = new ArrayList<>(user.getReviews());
+        return reverseList(reviews);
     }
 
     @Transactional
@@ -119,5 +128,17 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
 
     public Boolean existsByNickname(String nickname) {
         return userRepository.existsByNickname(nickname);
+    }
+
+    /**
+     * Reverse a list.
+     * @param list
+     * @param <T>
+     * @return List reversed
+     */
+    private <T> List<T> reverseList(List<T> list) {
+        List<T> newList = new ArrayList<>(list);
+        Collections.reverse(newList);
+        return newList;
     }
 }
