@@ -1,6 +1,7 @@
 package com.arepacongofio.steamgram.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,7 @@ public interface GameJpaRepository extends JpaRepository<Game,Integer>{
     
     public List<Game> findByTitleIgnoreCaseContaining(Pageable pageable, String title);
 
-    public java.util.Optional<Game> findByIdIgdb(Integer idIgdb);
+    public Optional<Game> findByIdIgdb(Integer idIgdb);
 
     @Query("SELECT p FROM Post p WHERE p.game = :game")
     public List<Post> getGamePosts(Pageable pageable, @Param("game") Game game);

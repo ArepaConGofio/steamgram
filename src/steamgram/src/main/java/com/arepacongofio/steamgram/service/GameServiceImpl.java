@@ -3,20 +3,31 @@ package com.arepacongofio.steamgram.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.api.igdb.apicalypse.APICalypse;
+import com.api.igdb.exceptions.RequestException;
+import com.api.igdb.request.IGDBWrapper;
+import com.api.igdb.request.ProtoRequestKt;
+import com.api.igdb.request.TwitchAuthenticator;
+import com.api.igdb.utils.ImageBuilderKt;
+import com.api.igdb.utils.ImageSize;
+import com.api.igdb.utils.ImageType;
+import com.api.igdb.utils.TwitchToken;
 import com.arepacongofio.steamgram.domain.requests.SaveGameRequest;
 import com.arepacongofio.steamgram.entities.Developer;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.entities.Review;
+import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.repository.GameJpaRepository;
 import com.arepacongofio.steamgram.repository.PostJpaRepository;
 import com.arepacongofio.steamgram.repository.ReviewJpaRepository;
+import com.arepacongofio.steamgram.repository.UserJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 import com.arepacongofio.steamgram.service.interfaces.IDeveloperService;
 import com.arepacongofio.steamgram.service.interfaces.IGameService;
@@ -24,29 +35,16 @@ import com.arepacongofio.steamgram.service.interfaces.IGameService;
 import jakarta.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
-import com.api.igdb.apicalypse.APICalypse;
-import com.api.igdb.request.IGDBWrapper;
-import com.api.igdb.request.TwitchAuthenticator;
-import com.api.igdb.utils.TwitchToken;
-import com.api.igdb.request.ProtoRequestKt;
-import com.api.igdb.utils.ImageBuilderKt;
-import com.api.igdb.utils.ImageSize;
-import com.api.igdb.utils.ImageType;
-import com.api.igdb.exceptions.RequestException;
 
 @Service
 public class GameServiceImpl extends AbstractService<Game, Integer> implements IGameService {
-
-    private final Logger logger = LoggerFactory.getLogger(GameServiceImpl.class);
 
     private GameJpaRepository gameRepository;
     private PostJpaRepository postRepository;
     private ReviewJpaRepository reviewRepository;
     private IDeveloperService devsService;
     private TwitchToken twitchToken;
+    private UserJpaRepository userJpaRepository;
 
     @Value("${twitch.client-id}")
     private String twitchClientId;
@@ -56,12 +54,13 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
 
     @Autowired
     public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService,
-            ReviewJpaRepository reviewJpaRepository, PostJpaRepository postJpaRepository) {
+            ReviewJpaRepository reviewJpaRepository, PostJpaRepository postJpaRepository, UserJpaRepository userJpaRepository) {
         super(gameRepository);
         this.gameRepository = gameRepository;
         this.devsService = developerService;
         this.postRepository = postJpaRepository;
         this.reviewRepository = reviewJpaRepository;
+        this.userJpaRepository = userJpaRepository;
     }
 
     @PostConstruct
@@ -198,8 +197,6 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
             return save(newGame);
 
         } catch (RequestException e) {
-            logger.info("ERROR");
-            logger.info(String.valueOf(e.getStatusCode()));
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                     "Something happend fetching data on IGDB API");
         }
@@ -222,8 +219,22 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
     }
 
     public Game saveGameIntoProfile(SaveGameRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveGameIntoProfile'");
+        User user = userJpaRepository.findById(request.getUserId()).orElse(null);
+        Game game = gameRepository.findById(request.getGameId()).orElse(null);
+
+        if (user == null || game == null) {
+            return null;
+        }
+
+        if (user.getGames().contains(game)) {
+            user.getGames().remove(game);
+        } else {
+            user.getGames().add(game);
+        }
+
+        userJpaRepository.save(user);
+
+        return game;
     }
 
 }

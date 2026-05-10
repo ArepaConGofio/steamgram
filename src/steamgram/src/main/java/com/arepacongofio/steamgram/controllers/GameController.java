@@ -162,6 +162,10 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     public ResponseEntity<GameDetailsResponse> toggleSaveGame(@Valid @RequestBody SaveGameRequest request) {
-        return ResponseEntity.ok(gameMapper.toDetailsResponse(gameService.saveGameIntoProfile(request)));
+        Game game = gameService.saveGameIntoProfile(request);
+        if (game == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 }
