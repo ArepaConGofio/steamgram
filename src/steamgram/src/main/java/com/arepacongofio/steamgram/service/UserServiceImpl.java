@@ -31,7 +31,8 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements I
     private UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(JpaRepository<User, Integer> userJpaRepository, PasswordEncoder passwordEncoder, UserJpaRepository userRepository) {
+    public UserServiceImpl(JpaRepository<User, Integer> userJpaRepository, PasswordEncoder passwordEncoder,
+            UserJpaRepository userRepository) {
         super(userJpaRepository);
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
