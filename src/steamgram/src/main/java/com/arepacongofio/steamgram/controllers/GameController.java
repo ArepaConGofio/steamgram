@@ -154,7 +154,7 @@ public class GameController implements IController<GameDetailsResponse, GameRequ
         return ResponseEntity.ok(gameMapper.toDetailsResponse(game));
     }
 
-    @PostMapping("/save/")
+    @PostMapping("/save")
     @Operation(summary = "Save a game into personal library", description = "Save/release a game into/from personal library")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Game saved successfully"),

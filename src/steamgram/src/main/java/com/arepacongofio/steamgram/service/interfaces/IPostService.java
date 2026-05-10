@@ -1,6 +1,7 @@
 package com.arepacongofio.steamgram.service.interfaces;
 
 import com.arepacongofio.steamgram.domain.requests.LikeCreateRequest;
+import com.arepacongofio.steamgram.domain.responses.LikePostResponse;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.service.interfaces.generic.IGenericService;
 
@@ -11,7 +12,7 @@ public interface IPostService extends IGenericService<Post, Integer> {
      * @param request with the id of the user and the post
      * @return Post
      */
-    public Post toggleLike(LikeCreateRequest request);
+    public LikePostResponse toggleLike(LikeCreateRequest request);
 
 
 }

@@ -3,9 +3,11 @@ package com.arepacongofio.steamgram.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arepacongofio.steamgram.domain.requests.LikeCreateRequest;
+import com.arepacongofio.steamgram.domain.responses.LikePostResponse;
 import com.arepacongofio.steamgram.entities.Post;
 import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.entities.Like;
@@ -14,6 +16,7 @@ import com.arepacongofio.steamgram.repository.UserJpaRepository;
 import com.arepacongofio.steamgram.repository.LikeJpaRepository;
 import com.arepacongofio.steamgram.service.abst.AbstractService;
 import com.arepacongofio.steamgram.service.interfaces.IPostService;
+
 import java.util.Optional;
 
 @Service
@@ -23,14 +26,15 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
     UserJpaRepository userJpaRepository;
     LikeJpaRepository likeJpaRepository;
     
+    @Autowired
     public PostServiceImpl(PostJpaRepository postRepository, UserJpaRepository userJpaRepository, LikeJpaRepository likeJpaRepository) {
         super(postRepository);
         this.userJpaRepository = userJpaRepository;
         this.likeJpaRepository = likeJpaRepository;
-    }
+        this.postRepository = postRepository;
+    }    
 
-    @Override
-    public Post toggleLike(LikeCreateRequest request) {
+    public LikePostResponse toggleLike(LikeCreateRequest request) {
         User user = userJpaRepository.findById(request.getIdUser()).orElse(null);
             
         Post post = postRepository.findById(request.getIdPost()).orElse(null);
@@ -39,10 +43,11 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
             return null;
         }
         
-        Optional<Like> existLike = likeJpaRepository.findByUserAndPost(user, post);
+        Optional<Like> likeOptional = likeJpaRepository.findByUserAndPost(user, post);
+        boolean likeExists = likeOptional.isPresent();
         
-        if (existLike.isPresent()) {
-            Like like = existLike.get();
+        if (likeExists) {
+            Like like = likeOptional.get();
             likeJpaRepository.delete(like);
             post.getLikes().remove(like);
         } else {
@@ -50,8 +55,7 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
             likeJpaRepository.save(newLike);
             post.getLikes().add(newLike);
         }
-        
-        return post;
+        return new LikePostResponse(post.getId(), user.getId(), likeExists);
     }
 
     @Override
