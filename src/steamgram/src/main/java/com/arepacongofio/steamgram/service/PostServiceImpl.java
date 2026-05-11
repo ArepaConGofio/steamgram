@@ -3,7 +3,6 @@ package com.arepacongofio.steamgram.service;
 
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arepacongofio.steamgram.domain.requests.LikeCreateRequest;
@@ -26,7 +25,6 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
     UserJpaRepository userJpaRepository;
     LikeJpaRepository likeJpaRepository;
     
-    @Autowired
     public PostServiceImpl(PostJpaRepository postRepository, UserJpaRepository userJpaRepository, LikeJpaRepository likeJpaRepository) {
         super(postRepository);
         this.postRepository = postRepository;
