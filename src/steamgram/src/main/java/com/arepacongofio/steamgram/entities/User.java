@@ -48,7 +48,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
 
-    @Column(name = "avatar_url", nullable = true, length = 500)
+    @Column(name = "avatar_url", nullable = true, columnDefinition = "text")
     String avatarUrl;
 
     @ManyToMany(cascade = CascadeType.DETACH)

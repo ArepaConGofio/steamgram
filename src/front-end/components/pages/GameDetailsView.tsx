@@ -59,7 +59,7 @@ export default function GameDetailsView({ game, content, contentData, goToTab, i
                             <View style={{
                                 padding: 5, paddingHorizontal: 10, borderBlockColor: "black", borderWidth: 1, borderRadius: 10, flexDirection: "row", alignItems: "center", columnGap: 10
                             }}>
-                                <MaterialIcons name={isSaved ? "close" : "save"} size={24} />
+                                <MaterialIcons name={isSaved ? "close" : "add"} size={24} />
                                 <Text>{isSaved ? "Remover" : "Guardar"}</Text>
                             </View>
                         </TouchableOpacity>

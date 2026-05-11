@@ -39,7 +39,7 @@ public class Post {
     @Column(name = "title")
     String title;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "text")
     String description;
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.REMOVE, orphanRemoval = true)

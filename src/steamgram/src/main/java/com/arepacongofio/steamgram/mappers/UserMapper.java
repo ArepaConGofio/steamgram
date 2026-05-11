@@ -21,7 +21,6 @@ public interface UserMapper {
     @Mapping(source = "games", target = "gamesCount")
     @Mapping(source = "reviews", target = "reviewsCount")
     @Mapping(source = "posts", target = "postsCount")
-    @Mapping(target = "avatarUrl", ignore = true)
     UserResponse toResponse(User user);
 
     List<UserResponse> toResponseList(List<User> users);

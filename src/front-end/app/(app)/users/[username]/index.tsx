@@ -3,8 +3,8 @@ import StaticErrorAlert from "@/components/ui/StaticAlert";
 import UserDetailsContainer from "@/containers/UserDetailsContainer";
 import { UserDetails } from "@/models/User";
 import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
-import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import { useState } from "react";
 
 export default function UserDetailsPage() {
   const { username } = useLocalSearchParams<{ username: string }>();
@@ -12,13 +12,13 @@ export default function UserDetailsPage() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const api = new UsersAPIHandler();
     api.getUserDetailsByUsername(username)
       .then(value => setData(value))
       .catch(reason => setError(reason.message))
       .finally(() => setLoading(false));
-  }, []);
+  });
 
   if (isLoading) return <LoadingIndicator category="Profile" />
 

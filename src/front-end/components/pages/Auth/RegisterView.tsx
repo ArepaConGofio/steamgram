@@ -11,7 +11,7 @@ type RegisterGetters = {
 };
 
 type RegisterSetters = {
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setUsername: (username: string) => void;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   setRepeatedPassword: React.Dispatch<React.SetStateAction<string>>;

@@ -37,12 +37,12 @@ export class APIHandler {
     }
     try {
       const response = await fetch(requestUrl, options);
-      console.log(response.ok, response.status, response.url)
+      console.log(requestMethod.toUpperCase(), response.status, response.url)
       if (response.ok) {
         try {
           return await response.json();
         } catch (error) {
-          console.log("Response is not json parseable");
+          console.warn("Response is not json parseable");
           return;
         }
       }
