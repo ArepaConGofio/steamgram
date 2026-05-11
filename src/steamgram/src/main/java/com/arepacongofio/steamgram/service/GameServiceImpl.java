@@ -52,7 +52,8 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
     private String twitchClientSecret;
 
     public GameServiceImpl(GameJpaRepository gameRepository, IDeveloperService developerService,
-            ReviewJpaRepository reviewJpaRepository, PostJpaRepository postJpaRepository, UserJpaRepository userJpaRepository) {
+            ReviewJpaRepository reviewJpaRepository, PostJpaRepository postJpaRepository,
+            UserJpaRepository userJpaRepository) {
         super(gameRepository);
         this.gameRepository = gameRepository;
         this.devsService = developerService;
@@ -118,10 +119,8 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
                         .filter(d -> d.getName() != null && d.getName().equals(devName))
                         .findFirst()
                         .orElse(null);
-                if (developer == null && save) {
-                    developer = devsService.save(new Developer(devName));
-                } else {
-                    developer = new Developer(devName);
+                if (developer == null) {
+                    developer = save ? devsService.save(new Developer(devName)) : new Developer(devName);
                 }
                 break;
             }
@@ -138,8 +137,8 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
     public List<Game> findIgdbGamesByTitle(String title) {
         ArrayList<Game> results = new ArrayList<>();
         APICalypse apicalypse = new APICalypse().search(title)
-        .fields("game.id,game.name,game.involved_companies.developer,game.involved_companies.company.name,game.cover.image_id")
-        .where("game != null & game.version_parent = null & game.game_type.type = \"Main Game\" & game.involved_companies != null" );
+                .fields("game.id,game.name,game.involved_companies.developer,game.involved_companies.company.name,game.cover.image_id")
+                .where("game != null & game.version_parent = null & game.game_type.type = \"Main Game\" & game.involved_companies != null");
         try {
             List<proto.Search> searchResults = ProtoRequestKt.search(getIgdbWrapper(), apicalypse);
             for (proto.Search search : searchResults) {
@@ -167,7 +166,9 @@ public class GameServiceImpl extends AbstractService<Game, Integer> implements I
         if (localGame != null) {
             return localGame;
         }
-        APICalypse apicalypse = new APICalypse().fields("*,genres.*,platforms.*,involved_companies.developer,involved_companies.company.name,cover.image_id,screenshots.*").where("id = " + id);
+        APICalypse apicalypse = new APICalypse().fields(
+                "*,genres.*,platforms.*,involved_companies.developer,involved_companies.company.name,cover.image_id,screenshots.*")
+                .where("id = " + id);
         try {
             List<proto.Game> games = ProtoRequestKt.games(getIgdbWrapper(), apicalypse);
             if (games.isEmpty()) {
