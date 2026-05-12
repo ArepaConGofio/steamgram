@@ -49,12 +49,12 @@ public class PostServiceImpl extends AbstractService<Post,Integer> implements IP
             Like like = likeOptional.get();
             likeJpaRepository.delete(like);
             post.getLikes().remove(like);
-        } else {
-            Like newLike = new Like(user, post);
-            likeJpaRepository.save(newLike);
-            post.getLikes().add(newLike);
-        }
-        return new LikePostResponse(post.getId(), user.getId(), likeExists);
+            return new LikePostResponse(post.getId(), user.getId(), false, post.getLikes().size());
+        } 
+        Like newLike = new Like(user, post);
+        likeJpaRepository.save(newLike);
+        post.getLikes().add(newLike);
+        return new LikePostResponse(post.getId(), user.getId(), true, post.getLikes().size());        
     }
 
     @Override

@@ -1,6 +1,7 @@
 import { AuthContext } from "@/context/AuthContext";
 import { Post } from "@/models/Post";
 import { PostsAPIHandler } from "@/utils/PostsAPIHandler";
+import { UsersAPIHandler } from "@/utils/UsersAPIHandler";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
@@ -16,6 +17,7 @@ type Props = {
 export default function PostItem({ post, onDelete, onLike }: Props) {
     const router = useRouter();
     const api = new PostsAPIHandler();
+    const userApi = new UsersAPIHandler();
     const { user } = useContext(AuthContext);
     const [isVisible, setVisible] = useState(true)
     const [isLiked, setLiked] = useState(false)
@@ -34,9 +36,9 @@ export default function PostItem({ post, onDelete, onLike }: Props) {
     const onLikePress = async () => {
         if (!user) return;
         try {
-            const liked = await api.likePost({ idPost: post.id, idUser: user?.id });
-            setLiked(liked);
-            setLikes(liked ? post.likesCount + 1 : post.likesCount);
+            const response = await api.likePost({ idPost: post.id, idUser: user?.id });
+            setLiked(response.isLiked);
+            setLikes(response.likes);
             if (onLike) onLike();
         } catch (error) {
             console.error(error);
@@ -85,7 +87,7 @@ export default function PostItem({ post, onDelete, onLike }: Props) {
 
             <View style={styles.bottomContainer}>
                 <TouchableOpacity onPress={onLikePress} style={{ flexDirection: "row", alignItems: "center" }}>
-                    <MaterialCommunityIcons name="heart" size={24} color={isLiked ? "red" : "black"}/>
+                    <MaterialCommunityIcons name="heart" size={24}/>
                     <Text style={styles.likeCountLabel}>{likes}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={onDeletePress} style={{ display: post.userId == user?.id ? "flex" : "none" }}>

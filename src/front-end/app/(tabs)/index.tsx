@@ -16,6 +16,8 @@ export default function CommunityPage() {
   const [isLoadingGames, setLoadingGames] = useState(true);
 
   useFocusEffect(() => {
+    setPosts([])
+    setGames([])
     const api = new PostsAPIHandler();
     api.getAllPosts()
       .then(setPosts)

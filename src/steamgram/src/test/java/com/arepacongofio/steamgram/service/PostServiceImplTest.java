@@ -68,7 +68,7 @@ class PostServiceImplTest {
         assertNotNull(response);
         assertEquals(1, response.getIdPost());
         assertEquals(1, response.getIdUser());
-        assertFalse(response.isLiked());
+        assertTrue(response.isLiked());
         
         verify(likeJpaRepository).save(any(Like.class));
         assertEquals(1, post.getLikes().size());
@@ -95,7 +95,7 @@ class PostServiceImplTest {
         assertNotNull(response);
         assertEquals(1, response.getIdPost());
         assertEquals(1, response.getIdUser());
-        assertTrue(response.isLiked());
+        assertFalse(response.isLiked());
         
         verify(likeJpaRepository).delete(like);
         assertEquals(0, post.getLikes().size());

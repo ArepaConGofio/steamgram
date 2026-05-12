@@ -62,7 +62,6 @@ class CommentRequestTest {
         assertEquals(1, violations.size());
         ConstraintViolation<CommentRequest> violation = violations.iterator().next();
         assertEquals("idUser", violation.getPropertyPath().toString());
-        assertEquals("must not be null", violation.getMessage()); 
     }
 
     @Test

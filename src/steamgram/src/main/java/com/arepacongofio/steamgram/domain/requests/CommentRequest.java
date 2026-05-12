@@ -6,6 +6,7 @@ public class CommentRequest {
 
     @NotNull
     Integer idUser;
+    
     @NotNull
     Integer idPost;
 

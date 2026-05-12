@@ -1,4 +1,4 @@
-import { LikeRequest, Post, PostCreationRequest, PostCreationResponse, PostId } from "@/models/Post";
+import { LikePostResponse, LikeRequest, Post, PostCreationRequest, PostCreationResponse, PostId } from "@/models/Post";
 import { APIHandler, HttpMethods } from "./APIHandler";
 import { IPostsAPIHandler } from "./interfaces/IPostsAPIHandler";
 
@@ -31,14 +31,13 @@ export class PostsAPIHandler extends APIHandler implements IPostsAPIHandler {
     return true;
   }
 
-  async likePost(like: LikeRequest): Promise<boolean> {
+  async likePost(like: LikeRequest): Promise<LikePostResponse> {
     const response = await APIHandler.makeRequest({
       endpoint: `/post/like`,
       method: HttpMethods.POST,
       body: like,
       token: true
-    })
-    return response.liked;
+    }) as LikePostResponse;
+    return response;
   }
-
 }
