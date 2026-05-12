@@ -31,7 +31,7 @@ Copyright &copy; 2026 ArepaConGofio
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
     { "Sobre nosotros" = [
-        "about/what.md",
+        "index.md",
         "about/who.md",
         "about/why.md",
         "about/how.md",
