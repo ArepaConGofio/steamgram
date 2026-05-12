@@ -9,7 +9,6 @@ public class DeveloperRequest {
     @NotBlank
     String name;
 
-    @NotBlank
     List<Integer> usersId;
 
     public String getName() {
