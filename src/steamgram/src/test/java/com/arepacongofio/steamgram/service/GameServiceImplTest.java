@@ -3,6 +3,7 @@ package com.arepacongofio.steamgram.service;
 import com.arepacongofio.steamgram.domain.requests.SaveGameRequest;
 import com.arepacongofio.steamgram.entities.Game;
 import com.arepacongofio.steamgram.entities.Post;
+import com.arepacongofio.steamgram.entities.Review;
 import com.arepacongofio.steamgram.entities.User;
 import com.arepacongofio.steamgram.repository.GameJpaRepository;
 import com.arepacongofio.steamgram.repository.PostJpaRepository;
@@ -117,5 +118,44 @@ class GameServiceImplTest {
         assertNotNull(result);
         assertFalse(user.getGames().contains(game));
         verify(userJpaRepository).save(user);
+    }
+
+    @Test
+    void getGameReviewsGameNotFoundTest() {
+        when(gameRepository.findById(1)).thenReturn(Optional.empty());
+        List<Review> reviews = gameService.getGameReviews(PageRequest.of(0, 10), 1);
+        assertTrue(reviews.isEmpty());
+    }
+
+    @Test
+    void getGameReviewsSuccessTest() {
+        Game game = new Game(1);
+        List<Review> mockReviews = List.of(new Review());
+        Pageable pageable = PageRequest.of(0, 10);
+        
+        when(gameRepository.findById(1)).thenReturn(Optional.of(game));
+        when(reviewRepository.findByGame(pageable, game)).thenReturn(mockReviews);
+        
+        List<Review> reviews = gameService.getGameReviews(pageable, 1);
+        
+        assertEquals(1, reviews.size());
+    }
+
+    @Test
+    void getGameByIgdbIdErrorTest() {
+        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> {
+            gameService.getGameByIgdbId("invalid_id");
+        });
+    }
+
+    @Test
+    void getGameByIgdbIdTest() {
+        Game localGame = new Game(1);
+        when(gameRepository.findByIdIgdb(123)).thenReturn(Optional.of(localGame));
+        
+        Game result = gameService.getGameByIgdbId("123");
+        
+        assertNotNull(result);
+        assertEquals(localGame, result);
     }
 }
